@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--application name-->
+    <string name="app_name">GMV3</string>
+
+    <!--bottom navigation-->
+    <string name="title_nav_recent">ARTICULOS</string>
+    <string name="title_nav_category">CLIENTES</string>
+    <string name="title_nav_help">Ayuda</string>
+    <string name="title_nav_profile">PERFIL</string>
+
+    <!--privacy policy-->
+    <string name="privacy_policy_url">https://www.solodroid.net/apps/privacy-policy/ecommerce/</string>
+
+    <!--share text-->
+    <string name="share_app">I Would like to share this E-Commerce Android App with you. Here You Can Download This Application from PlayStore</string>
+    <string name="share_product_section_one">Find</string>
+    <string name="share_product_section_two">with price</string>
+    <string name="share_product_section_three">! Get it now in E-Commerce Android App!</string>
+
+    <!--network-->
+    <string name="no_internet">Por favor, habilitar la conexión a internet antes de usar la app</string>
+
+    <!--title bar-->
+    <string name="title_cart">Carrito</string>
+    <string name="title_checkout">Enviar</string>
+
+    <!--action-->
+    <string name="action_cart">Mi Carrito</string>
+    <string name="action_clear">Limpiar Todo</string>
+    <string name="action_add_client">Clientes</string>
+    <!--menu, cart and order-->
+    <string name="search_query_text">Buscar&#8230;</string>
+    <string name="confirm">Confirmacion</string>
+    <string name="number_order">Cantidad : </string>
+    <string name="clear_all_order">¿Quiere Limpiar todas las Ordenes?</string>
+    <string name="clear_one_order">¿Quiere Limpiar esta orden?</string>
+    <string name="db_exist_alert">¿Quieres eliminar tu pedido anterior?</string>
+    <string name="msg_empty_cart">Tu carrito esta vacío!</string>
+    <string name="msg_no_history">Tu historial de pedidos está vacío!</string>
+    <string name="empty_cart">Whoops, Tu carrito esta vacío</string>
+    <string name="btn_continue_shopping">Seguir comprando</string>
+    <string name="btn_add_to_cart">AÑADIR A CARRO</string>
+    <string name="btn_out_of_stock">AGOTADO</string>
+    <string name="msg_stock_not_enough">El stock no es suficiente</string>
+    <string name="msg_stock_below_0">La cantidad del producto no puede ser 0</string>
+    <string name="msg_success_add_cart">Éxito agregar producto al carrito</string>
+    <string name="btn_checkout">Revisar</string>
+
+    <!--checkout menu-->
+    <string name="checkout_your_name">Vendedor</string>
+    <string name="checkout_email">Código Cliente</string>
+    <string name="checkout_phone_number">Nombre de Cliente</string>
+    <string name="checkout_order_list">Detalle de la orden</string>
+    <string name="checkout_add_comment">Comentario</string>
+    <string name="no_order_menu">No orden</string>
+    <string name="txt_order">Orden :</string>
+    <string name="txt_tax">Impuesto :</string>
+    <string name="txt_total">Total :</string>
+    <string name="txt_shipping">Envio</string>
+    <string name="checkout_fill_form">por favor complete el formulario primero!</string>
+    <string name="checkout_dialog_title">Proceso la Orden</string>
+    <string name="checkout_dialog_msg">¿Estás seguro de que quieres Enviarlo?</string>
+    <string name="checkout_submit_title">Porfavor Espere</string>
+    <string name="checkout_submit_msg">Enviar su Orden&#8230;</string>
+    <string name="checkout_success_title">Enhorabuena</string>
+    <string name="checkout_success_msg">Gracias por ordenar, su pedido será revisado pronto, sera enviados a su telefono una notificaciones cuando el pedido esté listo.</string>
+    <string name="checkout_option_ok">OK</string>
+    <string name="checkout_address">Dirección</string>
+    <string name="checkout_shipping">Orden</string>
+    <string name="title_history">Historial de pedidos</string>
+    <string name="title_profile">Profil de usuario</string>
+    <string name="btn_process_checkout">PROCESAR PEDIDO</string>
+
+    <!--profile preferences-->
+    <string name="pref_group_profile">PERFIL</string>
+    <string name="pref_title_name">Nombre</string>
+    <string name="pref_title_email">Email</string>
+    <string name="pref_title_phone">Numero de Telefono</string>
+    <string name="pref_title_address">Dirección</string>
+    <string name="pref_title_ruta">Ruta</string>
+    <string name="default_your_name">Su Nombre</string>
+    <string name="default_your_email">Su.email@gmail.com</string>
+    <string name="default_your_phone">+50500000000</string>
+    <string name="default_your_address">Su Dirección</string>
+    <string name="default_your_ruta">Seleccine al vendedor que esta trabajando</string>
+    <string name="pref_msg_invalid_name">Nombre no válido</string>
+    <string name="pref_msg_invalid_email">Email no válido</string>
+    <string name="pref_msg_invalid_phone">Telefono no válido</string>
+    <string name="pref_msg_invalid_address">Direccion no válido</string>
+    <string name="pref_msg_invalid_ruta">Ruta no válido</string>
+
+    <!--permission-->
+    <string name="permission_msg">Necesita Permisos</string>
+    <string name="permission_storage">Esta aplicación necesita acceso al almacenamiento para descargar la imagen.</string>
+    <string name="download_success">La imagen ha sido descargada y guardada en la galería.</string>
+    <string name="download_msg">Descargando&#8230;</string>
+    <string name="loading_msg">Por favor espera&#8230;</string>
+
+    <!--dialog choose option-->
+    <string name="dialog_option_yes">Si</string>
+    <string name="dialog_option_no">No</string>
+    <string name="dialog_option_cancel">Cancelar</string>
+    <string name="dialog_option_add">Añadir</string>
+    <string name="dialog_settings">IR ALA CONFIGURACION</string>
+    <string name="msg_exit">Presione nuevamente para salir de la App</string>
+    <string name="txt_items">item(s)</string>
+    <string name="title_img_save">Guardar</string>
+    <string name="title_img_close">Cerrar</string>
+    <string name="msg_copy">Código de compra copiado</string>
+    <string name="failed_fetch_data">¡No se pudieron recuperar los datos! Inténtalo de nuevo.</string>
+    <string name="btn_edit_profile">SALIR</string>
+    <string name="txt_profile_history">Historial de pedidos</string>
+    <string name="txt_profile_rate">Nos califica</string>
+    <string name="txt_profile_privacy">Política de privacidad</string>
+    <string name="txt_total_order">Total de Ordenes</string>
+    <string name="txt_profile_share">Compartir</string>
+    <string name="title_activity_cardcredit">CardcreditActivity</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+        \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+    </string>
+
+    <string name="whops">Whoops!</string>
+    <string name="login_process">Procesando inicio de sesión en su cuenta&#8230;</string>
+
+    <string name="login_failed">Usuario o contraseña no válidos!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="login_disabled">La cuenta ha sido deshabilitada, comuníquese con el administrador para habilitar su cuenta</string>
+    <string name="login_title">Buen Trabajo!</string>
+    <string name="login_success">Inicie sesión correctamente&#8230;</string>
+    <string name="title_please_wait">Por favor espere&#8230;</string>
+    <string name="item_bonificado">Bonificado</string>
+
+
+</resources>

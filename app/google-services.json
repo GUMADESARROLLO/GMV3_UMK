@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "598282410595",
+    "firebase_url": "https://guma-store.firebaseio.com",
+    "project_id": "guma-store",
+    "storage_bucket": "guma-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598282410595:android:864ae992d1f7d17f83b656",
+        "android_client_info": {
+          "package_name": "com.app.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598282410595-9d09q9kne2cmdivv7d408r9u7kv0ht6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ9qI2XkO0gU93s9J5EU12wTC6-taqAWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598282410595-9d09q9kne2cmdivv7d408r9u7kv0ht6q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "598282410595-0oh6v0m48dkp8ilg4pjc0ln765vnsup5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.ecommerce"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
