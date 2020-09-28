@@ -33,7 +33,10 @@ import android.support.v7.widget.Toolbar;
 public class Utils {
 
     Context context;
-
+    public static String theMonth(int month){
+        String[] monthNames = {"ENERO", "FEBRERO", "MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"};
+        return monthNames[month];
+    }
     // constructor
     public Utils(Context context) {
         this.context = context;

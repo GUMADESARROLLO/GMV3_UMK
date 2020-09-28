@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ActivityMyStat">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey_5"
+    android:orientation="vertical">
 
-
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
+        <TextView
+            android:id="@+id/lbl_moth"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/spacing_medium"
+            android:text="ENERO 2020"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/grey_60" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +35,7 @@
             android:paddingTop="@dimen/spacing_large">
 
             <LinearLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -237,61 +250,78 @@
 
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_xmedium"
-        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/search_bar"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_xmlarge"
+            android:layout_height="1dp"
+            android:background="@color/hint" />
 
-            android:clipToPadding="false"
-            app:cardBackgroundColor="@color/grey_soft"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="0dp"
-            app:cardUseCompatPadding="false">
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:layout_marginLeft="@dimen/spacing_mlarge"
+            android:layout_marginRight="@dimen/spacing_mlarge"
+            android:text="METAS POR ARTICULOS"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/grey_60" />
+
+        <RelativeLayout
+            android:id="@+id/rlayresulta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_xmlarge"
-                    android:layout_height="@dimen/spacing_xmlarge"
-                    android:padding="@dimen/spacing_middle"
-                    android:tint="@color/grey_40"
-                    app:srcCompat="@drawable/ic_search" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:tint="@color/grey_20"
+                    app:srcCompat="@drawable/ic_find_in_page" />
 
-                <EditText
-                    android:id="@+id/bt_exp_date"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:hint="Buscar articulo..."
-                    android:imeOptions="actionSearch"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="Sin resultado"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="@color/grey_90"
+                    android:textStyle="bold" />
 
-                    <requestFocus />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:text="Intentelo mas tarde."
+                    android:gravity="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_90" />
 
-                </EditText>
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
             android:scrollbars="none" />
-    </LinearLayout>
-    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout></LinearLayout>

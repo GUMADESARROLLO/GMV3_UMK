@@ -1,16 +1,22 @@
 package com.app.ecommerce.adapters;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.app.ecommerce.Config;
 import com.app.ecommerce.R;
+import com.app.ecommerce.activities.ActivityMyStat;
+import com.app.ecommerce.models.Clients;
 import com.app.ecommerce.models.Venta_Articulos;
 
 
@@ -20,12 +26,14 @@ import java.util.Locale;
 
 public class RecyclerAdapterProductStat extends RecyclerView.Adapter<RecyclerAdapterProductStat.MyViewHolder> implements Filterable {
 
+    private Context context;
     private List<Venta_Articulos> productList;
-
     private List<Venta_Articulos> productListFiltered;
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView product_name, product_sku,product_meta,product_real,articulo_dif;
 
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView product_name, product_sku,product_meta,product_real,articulo_dif,txt_progress;
+        private ProgressBar progressBar;
 
         public MyViewHolder(View view) {
             super(view);
@@ -34,12 +42,15 @@ public class RecyclerAdapterProductStat extends RecyclerView.Adapter<RecyclerAda
             product_meta = view.findViewById(R.id.articulo_meta);
             product_real = view.findViewById(R.id.articulo_real);
             articulo_dif = view.findViewById(R.id.articulo_dif);
+            progressBar = view.findViewById(R.id.id_progressbar_item_metas);
+            txt_progress = view.findViewById(R.id.txt_progress);
 
 
         }
     }
 
-    public RecyclerAdapterProductStat(List<Venta_Articulos> productList) {
+    public RecyclerAdapterProductStat(Context context, List<Venta_Articulos> productList) {
+        this.context = context;
 
         this.productList = productList;
         this.productListFiltered = productList;
@@ -47,15 +58,17 @@ public class RecyclerAdapterProductStat extends RecyclerView.Adapter<RecyclerAda
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_articulos_stat, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_articulos_stat, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
+
         final Venta_Articulos product = productList.get(position);
+
+
 
         double Meta = Double.parseDouble(product.getmMeta_monto());
         double Real = Double.parseDouble(product.getmReal_monto());
@@ -68,11 +81,21 @@ public class RecyclerAdapterProductStat extends RecyclerView.Adapter<RecyclerAda
 
         holder.product_name.setText(product.getmName());
         holder.product_sku.setText(product.getmCodigo());
-        holder.product_meta.setText(txt01);
-        holder.product_real.setText(txt02);
-        holder.articulo_dif.setText(txt03);
+        holder.product_meta.setText(("C$ ").concat(txt01));
+        holder.product_real.setText(("C$ ").concat(txt02));
+        holder.articulo_dif.setText(("C$ ").concat(txt03));
+
+        holder.progressBar.setProgress((int) Double.parseDouble(product.getMcump_monto().replace(",","")));
+        holder.txt_progress.setText(product.getMcump_monto().concat(" %"));
 
 
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return productListFiltered.size();
     }
 
     @Override
@@ -106,10 +129,8 @@ public class RecyclerAdapterProductStat extends RecyclerView.Adapter<RecyclerAda
         };
     }
 
-    @Override
-    public int getItemCount() {
-        return productList.size();
-    }
 
 
 }
+
+

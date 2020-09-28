@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.SQLException;
 import android.os.AsyncTask;
@@ -335,6 +336,19 @@ public class ActivityHistory extends AppCompatActivity {
                 Toast.makeText(ActivityHistory.this, R.string.msg_copy, Toast.LENGTH_SHORT).show();
             }
         });
+
+        ((ImageView) view.findViewById(R.id.img_comment)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(getApplicationContext(), ActivityComentario.class);
+                intent.putExtra("Id_Orden", code.get(position));
+                startActivity(intent);
+            }
+        });
+
+
 
         mBottomSheetDialog = new BottomSheetDialog(this);
         mBottomSheetDialog.setContentView(view);
