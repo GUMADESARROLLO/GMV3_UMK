@@ -46,7 +46,7 @@
     <string name="msg_stock_not_enough">El stock no es suficiente</string>
     <string name="msg_stock_below_0">La cantidad del producto no puede ser 0</string>
     <string name="msg_success_add_cart">Éxito agregar producto al carrito</string>
-    <string name="btn_checkout">Revisar</string>
+    <string name="btn_checkout">Siguiente</string>
 
     <!--checkout menu-->
     <string name="checkout_your_name">Vendedor</string>

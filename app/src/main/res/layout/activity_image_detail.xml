@@ -6,7 +6,7 @@
     android:background="@color/black"
     android:fitsSystemWindows="false">
 
-    <com.app.ecommerce.utilities.TouchImageView
+    <com.app.gmv3.utilities.TouchImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
