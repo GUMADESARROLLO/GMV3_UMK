@@ -46,6 +46,7 @@ import static com.app.gmv3.utilities.Constant.GET_PROFIL_USER;
 public class ProfileWallet extends AppCompatActivity{
     TextView txt_perfil_name_cliente,txt_perfil_disponible,txt_perfil_saldo,txt_perfil_limite;
     TextView txt_perfil_noVencido,txt_perfil_d30,txt_perfil_d60,txt_perfil_d90,txt_perfil_d120,txt_perfil_m120;
+    TextView txt_tele,txt_condicion_pago;
     String code_cliente;
 
     public static ArrayList<String> factura_id = new ArrayList<String>();
@@ -76,6 +77,9 @@ public class ProfileWallet extends AppCompatActivity{
         txt_perfil_saldo        = findViewById(R.id.id_perfil_saldo);
         txt_perfil_limite       = findViewById(R.id.id_perfil_limite);
 
+        txt_tele                = findViewById(R.id.id_tele);
+        txt_condicion_pago      = findViewById(R.id.id_condicion_pago);
+
         txt_perfil_noVencido    = findViewById(R.id.id_perfil_noVencido);
         txt_perfil_d30          = findViewById(R.id.id_perfil_d30);
         txt_perfil_d60          = findViewById(R.id.id_perfil_d60);
@@ -103,16 +107,10 @@ public class ProfileWallet extends AppCompatActivity{
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
                         Intent intent = new Intent(ProfileWallet.this, ShoppingCartSimple.class);
-
                         intent.putExtra("factura_id",factura_id.get(position));
                         intent.putExtra("factura_date",factura_date.get(position));
-
                         startActivity(intent);
-
-
-
                     }
                 }, 400);
             }
@@ -127,6 +125,8 @@ public class ProfileWallet extends AppCompatActivity{
         Intent intent = getIntent();
         code_cliente = intent.getStringExtra("Client_Code");
         txt_perfil_name_cliente.setText(intent.getStringExtra("CLient_name"));
+        txt_tele.setText(intent.getStringExtra("Telefono"));
+        txt_condicion_pago.setText(intent.getStringExtra("Condicion_pago"));
 
         txt_perfil_disponible.setText(("C$ ").concat(intent.getStringExtra("Disponible")));
         txt_perfil_saldo.setText(("C$ ").concat(intent.getStringExtra("Saldo")));

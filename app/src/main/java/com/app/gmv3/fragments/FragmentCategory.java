@@ -173,6 +173,8 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
         Intent intent = new Intent(getActivity(), ProfileWallet.class);
         intent.putExtra("Client_Code", clients.getCLIENTE());
         intent.putExtra("CLient_name", clients.getNOMBRE());
+        intent.putExtra("Telefono", clients.getTELE());
+        intent.putExtra("Condicion_pago", clients.getCONDPA());
 
         intent.putExtra("Limite", clients.getLIMITE());
         intent.putExtra("Saldo", clients.getSALDO());

@@ -9,6 +9,16 @@ public class Clients {
     String LIMITE;
     String SALDO;
     String MOROSO;
+    String TELE;
+    String CONDPA;
+
+    public String getTELE() {
+        return TELE;
+    }
+
+    public String getCONDPA() {
+        return CONDPA;
+    }
 
     public String getMOROSO() {
         return MOROSO;
