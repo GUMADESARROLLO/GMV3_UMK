@@ -592,7 +592,12 @@
                 android:text="FACTURAS PENDIENTES"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/grey_60" />
-
+            <include
+                android:id="@+id/lyt_empty_result"
+                layout="@layout/include_empty_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"

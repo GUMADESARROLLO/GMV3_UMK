@@ -51,10 +51,7 @@ public class RecyclerAdapterNC extends RecyclerView.Adapter<RecyclerAdapterNC.My
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final NotasDeCreadito product = productList.get(position);
 
-
-
         String price = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(product.getSALDO_LOCAL()));
-
         holder.txt_nc.setText(product.getDOCUMENTO());
         holder.txt_nc_saldo.setText(("C$ ").concat(price));
         holder.txt_nc_fecha.setText(product.getFECHA());

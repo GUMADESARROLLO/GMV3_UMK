@@ -6,7 +6,12 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="6dp">
-
+    <include
+        android:id="@+id/lyt_empty_history"
+        layout="@layout/include_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -19,5 +24,6 @@
             android:scrollbars="none" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

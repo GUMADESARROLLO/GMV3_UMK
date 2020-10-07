@@ -44,7 +44,7 @@ public class Activitytresmeses extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Factura_lineas> productList;
     TextView txt_factura_total;
-
+    View lyt_empty_history;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,7 @@ public class Activitytresmeses extends AppCompatActivity {
         Intent intent = getIntent();
         cod_factura = intent.getStringExtra("factura_id");
         name_text = intent.getStringExtra("Name_cliente");
-
+        lyt_empty_history = findViewById(R.id.lyt_empty_result);
         getSupportActionBar().setTitle("Compras Ultimos 3 Meses.");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -108,22 +108,30 @@ public class Activitytresmeses extends AppCompatActivity {
 
                 List<Factura_lineas> items = new Gson().fromJson(response.toString(), new TypeToken<List<Factura_lineas>>() {
                 }.getType());
-
-                double Order_price = 0;
-
-                for (int i = 0; i < items.size(); i++) {
-                    Log.e("INFO", "Error: " + items.get(i).getVENTA());
-                    double Sub_total_price = Double.parseDouble(items.get(i).getVENTA());
-                    Order_price += Sub_total_price;
-
-
-                }
-                String _Order_price = String.format(Locale.ENGLISH, "%1$,.2f", Order_price);
-                txt_factura_total.setText(("C$ ").concat(_Order_price));
-
-
                 productList.clear();
                 productList.addAll(items);
+
+                if (productList.size() > 0) {
+                    lyt_empty_history.setVisibility(View.GONE);
+                    double Order_price = 0;
+
+                    for (int i = 0; i < items.size(); i++) {
+                        Log.e("INFO", "Error: " + items.get(i).getVENTA());
+                        double Sub_total_price = Double.parseDouble(items.get(i).getVENTA());
+                        Order_price += Sub_total_price;
+
+
+                    }
+                    String _Order_price = String.format(Locale.ENGLISH, "%1$,.2f", Order_price);
+                    txt_factura_total.setText(("C$ ").concat(_Order_price));
+                } else {
+                    lyt_empty_history.setVisibility(View.VISIBLE);
+                }
+
+
+
+
+
 
                 // refreshing recycler view
                 mAdapter.notifyDataSetChanged();

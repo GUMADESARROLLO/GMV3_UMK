@@ -53,7 +53,7 @@ public class ProfileWallet extends AppCompatActivity{
     public static ArrayList<String> factura_date = new ArrayList<String>();
     public static ArrayList<String> factura_cant = new ArrayList<String>();
     public static ArrayList<String> factura_monto = new ArrayList<String>();
-
+    View lyt_empty_history;
     RecyclerView recyclerView;
     RecyclerAdapterPerfilLotes recyclerAdaptePerfilFactura;
     List<Facturas_mora> arrayItemLotes;
@@ -71,6 +71,8 @@ public class ProfileWallet extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        lyt_empty_history = findViewById(R.id.lyt_empty_result);
 
         txt_perfil_name_cliente = findViewById(R.id.id_perfil_name_cliente);
         txt_perfil_disponible   = findViewById(R.id.id_perfil_disponible);
@@ -217,27 +219,34 @@ public class ProfileWallet extends AppCompatActivity{
                 List<Moras> items = new Gson().fromJson(response.toString(), new TypeToken<List<Moras>>() {
                 }.getType());
 
-                txt_perfil_noVencido.setText(("C$ ").concat(items.get(0).getNoVencidos()));
-                txt_perfil_d30.setText(("C$ ").concat(items.get(0).getDias30()));
-                txt_perfil_d60.setText(("C$ ").concat(items.get(0).getDias60()));
-                txt_perfil_d90.setText(("C$ ").concat(items.get(0).getDias90()));
-                txt_perfil_d120.setText(("C$ ").concat(items.get(0).getDias120()));
-                txt_perfil_m120.setText(("C$ ").concat(items.get(0).getMas120()));
+                if (items.size() > 0) {
+                    lyt_empty_history.setVisibility(View.GONE);
+                    txt_perfil_noVencido.setText(("C$ ").concat(items.get(0).getNoVencidos()));
+                    txt_perfil_d30.setText(("C$ ").concat(items.get(0).getDias30()));
+                    txt_perfil_d60.setText(("C$ ").concat(items.get(0).getDias60()));
+                    txt_perfil_d90.setText(("C$ ").concat(items.get(0).getDias90()));
+                    txt_perfil_d120.setText(("C$ ").concat(items.get(0).getDias120()));
+                    txt_perfil_m120.setText(("C$ ").concat(items.get(0).getMas120()));
 
 
-                clearData();
-                List<String> data = Arrays.asList(items.get(0).getFACT_PEND().split(","));
+                    clearData();
+                    List<String> data = Arrays.asList(items.get(0).getFACT_PEND().split(","));
 
-                for (int i = 0; i < data.size(); i++) {
+                    for (int i = 0; i < data.size(); i++) {
 
-                    List<String> row = Arrays.asList(data.get(i).split(":"));
-                    factura_id.add(row.get(0));
-                    factura_cant.add(row.get(1));
-                    factura_date.add(row.get(2));
-                    factura_monto.add(row.get(3));
+                        List<String> row = Arrays.asList(data.get(i).split(":"));
+                        factura_id.add(row.get(0));
+                        factura_cant.add(row.get(1));
+                        factura_date.add(row.get(2));
+                        factura_monto.add(row.get(3));
 
+                    }
+                    recyclerView.setAdapter(recyclerAdaptePerfilFactura);
+                } else {
+                    lyt_empty_history.setVisibility(View.VISIBLE);
                 }
-                recyclerView.setAdapter(recyclerAdaptePerfilFactura);
+
+
 
             }
         }, new Response.ErrorListener() {

@@ -51,17 +51,17 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
     private SearchView searchView;
     SwipeRefreshLayout swipeRefreshLayout = null;
     LinearLayout lyt_root;
-
+    View lyt_empty_history;
     SharedPref sharedPref;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recent, container, false);
         setHasOptionsMenu(true);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         sharedPref = new SharedPref(getContext());
-
+        lyt_empty_history = view.findViewById(R.id.lyt_empty_history);
         lyt_root = view.findViewById(R.id.lyt_root);
         if (Config.ENABLE_RTL_MODE) {
             lyt_root.setRotationY(180);
@@ -76,6 +76,12 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 74));
         recyclerView.setAdapter(mAdapter);
+        view.findViewById(R.id.bt_retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchContacts();
+            }
+        });
 
         fetchContacts();
         onRefresh();
@@ -120,6 +126,11 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
                         // adding contacts to contacts list
                         categoryList.clear();
                         categoryList.addAll(items);
+                        if (categoryList.size() > 0) {
+                            lyt_empty_history.setVisibility(View.GONE);
+                        } else {
+                            lyt_empty_history.setVisibility(View.VISIBLE);
+                        }
 
                         // refreshing recycler view
                         mAdapter.notifyDataSetChanged();

@@ -134,6 +134,7 @@
     <string name="title_please_wait">Por favor espere&#8230;</string>
     <string name="item_bonificado">Bonificado</string>
     <string name="action_settings">Configs</string>
+    <string name="RETRY">Intentar de nuevo</string>
 
 
 </resources>

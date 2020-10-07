@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,6 +49,7 @@ public class FragmentRecent extends Fragment implements RecyclerAdapterProduct.C
     private List<Product> productList;
     private RecyclerAdapterProduct mAdapter;
     private SearchView searchView;
+    View lyt_empty_history;
     SwipeRefreshLayout swipeRefreshLayout = null;
     LinearLayout lyt_root;
 
@@ -55,8 +57,9 @@ public class FragmentRecent extends Fragment implements RecyclerAdapterProduct.C
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recent, container, false);
         setHasOptionsMenu(true);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setRefreshing(true);
+        lyt_empty_history = view.findViewById(R.id.lyt_empty_history);
 
         lyt_root = view.findViewById(R.id.lyt_root);
         if (Config.ENABLE_RTL_MODE) {
@@ -72,6 +75,14 @@ public class FragmentRecent extends Fragment implements RecyclerAdapterProduct.C
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+        view.findViewById(R.id.bt_retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchData();
+            }
+        });
+
 
 
 
@@ -118,6 +129,12 @@ public class FragmentRecent extends Fragment implements RecyclerAdapterProduct.C
                         // adding contacts to contacts list
                         productList.clear();
                         productList.addAll(items);
+
+                        if (productList.size() > 0) {
+                            lyt_empty_history.setVisibility(View.GONE);
+                        } else {
+                            lyt_empty_history.setVisibility(View.VISIBLE);
+                        }
 
                         // refreshing recycler view
                         mAdapter.notifyDataSetChanged();

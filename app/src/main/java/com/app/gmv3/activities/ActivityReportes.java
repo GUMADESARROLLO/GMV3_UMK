@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +54,7 @@ public class ActivityReportes extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Reporte_Factura> productList;
     private RecyclerAdapterRptFacturas mAdapter;
-
+    View lyt_empty_history;
     TextView txt_factura_total;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class ActivityReportes extends AppCompatActivity {
         txt_desde = findViewById(R.id.id_desde);
         txt_hasta = findViewById(R.id.id_hasta);
         txt_factura_total = findViewById(R.id.id_factura_total);
-
+        lyt_empty_history = findViewById(R.id.lyt_empty_result);
         sharedPref = new SharedPref(this);
         progressDialog = new ProgressDialog(ActivityReportes.this);
         recyclerView = findViewById(R.id.recycler_view);
@@ -213,10 +214,13 @@ public class ActivityReportes extends AppCompatActivity {
 
                         productList.clear();
                         productList.addAll(items);
+
+                        if (productList.size() > 0) {
+                            lyt_empty_history.setVisibility(View.GONE);
+                        } else {
+                            lyt_empty_history.setVisibility(View.VISIBLE);
+                        }
                         mAdapter.notifyDataSetChanged();
-
-
-
                     progressDialog.dismiss();
                     }
                 }, 2000);

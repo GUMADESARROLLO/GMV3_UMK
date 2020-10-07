@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,8 @@ public class PaymentProfile extends AppCompatActivity {
 
     TextView txt_nc_name_cliente;
     TextView txt_nc_cod_cliente;
+
+    View lyt_empty_history;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class PaymentProfile extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Utils.setSystemBarColor(this);
-
+        lyt_empty_history = findViewById(R.id.lyt_empty_result);
         recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
 
@@ -95,6 +98,12 @@ public class PaymentProfile extends AppCompatActivity {
 
                 productList.clear();
                 productList.addAll(items);
+
+                if (productList.size() > 0) {
+                    lyt_empty_history.setVisibility(View.GONE);
+                } else {
+                    lyt_empty_history.setVisibility(View.VISIBLE);
+                }
 
                 // refreshing recycler view
                 mAdapter.notifyDataSetChanged();
