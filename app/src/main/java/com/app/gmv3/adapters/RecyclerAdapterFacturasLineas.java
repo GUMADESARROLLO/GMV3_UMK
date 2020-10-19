@@ -56,7 +56,7 @@ public class RecyclerAdapterFacturasLineas extends RecyclerView.Adapter<Recycler
 
         holder.product_name.setText(product.getDESCRIPCION());
         holder.product_venta.setText(("C$ ").concat(price));
-        holder.product_cant.setText(product.getCANTIDAD());
+        holder.product_cant.setText(("Qyt: ").concat(product.getCANTIDAD()));
     }
 
     @Override
