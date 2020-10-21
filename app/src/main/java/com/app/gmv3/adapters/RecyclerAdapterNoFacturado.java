@@ -1,7 +1,6 @@
 package com.app.gmv3.adapters;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import com.app.gmv3.R;
 import com.app.gmv3.models.Factura_lineas;
 
 import java.util.List;
-import java.util.Locale;
 
 public class RecyclerAdapterNoFacturado extends RecyclerView.Adapter<RecyclerAdapterNoFacturado.MyViewHolder>  {
 

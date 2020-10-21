@@ -8,9 +8,9 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.v4.widget.NestedScrollView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.core.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -30,7 +30,7 @@ import com.app.gmv3.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 public class Utils {
 
     Context context;

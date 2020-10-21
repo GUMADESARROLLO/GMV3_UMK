@@ -1,6 +1,6 @@
 package com.app.gmv3.activities;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.app.gmv3.R;

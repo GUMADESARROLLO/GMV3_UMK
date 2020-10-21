@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.R;
-import com.app.gmv3.adapters.RecyclerAdapterLast3M;
 import com.app.gmv3.adapters.RecyclerAdapterNoFacturado;
 import com.app.gmv3.models.Factura_lineas;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
@@ -34,9 +33,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import static com.app.gmv3.utilities.Constant.GET_LAST_3M;
 import static com.app.gmv3.utilities.Constant.GET_NO_FACTURADO;
 
 public class ActivityNoFacturado extends AppCompatActivity {
