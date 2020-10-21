@@ -86,8 +86,10 @@ public class FragmentRecent extends Fragment implements RecyclerAdapterProduct.C
 
 
 
+
         fetchData();
         onRefresh();
+
 
         return view;
     }

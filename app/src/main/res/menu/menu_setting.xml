@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="Settings"
-        app:showAsAction="never" />
+    <item android:id="@+id/action_no_facturado"
+        android:title="@string/text_filtro"
+        android:icon="@drawable/ic_attach_money"
+        app:showAsAction="always|collapseActionView" />
+
 </menu>

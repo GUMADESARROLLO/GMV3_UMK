@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.ActivityHistory;
+import com.app.gmv3.activities.ActivityInteligenciaMercado;
 import com.app.gmv3.activities.ActivityMyStat;
 import com.app.gmv3.activities.ActivityReportes;
 import com.app.gmv3.activities.MyApplication;
@@ -95,6 +96,15 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityReportes.class);
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.btn_inteligencia_mercado).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivityInteligenciaMercado.class);
+                intent.putExtra("id_Ruta", sharedPref.getYourName());
+                intent.putExtra("Nombre_ruta", sharedPref.getYourAddress());
                 startActivity(intent);
             }
         });

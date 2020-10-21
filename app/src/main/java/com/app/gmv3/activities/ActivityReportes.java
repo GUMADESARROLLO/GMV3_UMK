@@ -111,7 +111,7 @@ public class ActivityReportes extends AppCompatActivity {
         long date_ship_millis = calendar.getTimeInMillis();
         txt_desde.setText(Utils.getFormattedDateSimple(date_ship_millis));
         txt_hasta.setText(Utils.getFormattedDateSimple(date_ship_millis));
-        requestAction();
+
 
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ProfileWallet.ClickListener() {
@@ -134,7 +134,11 @@ public class ActivityReportes extends AppCompatActivity {
                 }, 400);
             }
         }));
-
+        if (Utils.isNetworkAvailable(this)) {
+            requestAction();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -289,7 +293,7 @@ public class ActivityReportes extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         Utils.changeMenuIconColor(menu, getResources().getColor(android.R.color.white));
         Utils.changeOverflowMenuIconColor(toolbar, getResources().getColor(android.R.color.white));
         return true;

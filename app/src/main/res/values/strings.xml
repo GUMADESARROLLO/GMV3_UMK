@@ -61,6 +61,15 @@
     <string name="txt_shipping">Envio</string>
     <string name="checkout_fill_form">por favor complete el formulario primero!</string>
     <string name="checkout_dialog_title">Proceso la Orden</string>
+    <string name="post_dialog_title">Atención.</string>
+    <string name="post_dialog_msg">¿Estás seguro de que quieres Enviarlo?</string>
+    <string name="post_success_title">Listo!</string>
+    <string name="post_success_msg">Envio exitoso!.</string>
+    <string name="post_submit_title">Enviando...</string>
+    <string name="post_submit_msg">Por Favor, espere.</string>
+
+
+
     <string name="checkout_dialog_msg">¿Estás seguro de que quieres Enviarlo?</string>
     <string name="checkout_submit_title">Porfavor Espere</string>
     <string name="checkout_submit_msg">Enviar su Orden&#8230;</string>
@@ -112,6 +121,7 @@
     <string name="failed_fetch_data">¡No se pudieron recuperar los datos! Inténtalo de nuevo.</string>
     <string name="btn_edit_profile">SALIR</string>
     <string name="txt_profile_history">Historial de pedidos</string>
+    <string name="txt_inteligencia_mercado">Inteligencia de mercado</string>
     <string name="txt_profile_rate">Nos califica</string>
     <string name="txt_profile_privacy">Política de privacidad</string>
     <string name="txt_total_order">Total de Ordenes</string>
@@ -135,6 +145,8 @@
     <string name="item_bonificado">Bonificado</string>
     <string name="action_settings">Configs</string>
     <string name="RETRY">Intentar de nuevo</string>
+    <string name="feedback_name">Asunto:</string>
+    <string name="text_filtro">Filtrar</string>
 
 
 </resources>

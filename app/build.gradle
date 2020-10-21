@@ -15,11 +15,14 @@ repositories {
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+    }
     compileSdkVersion 28
     defaultConfig {
-        applicationId 'com.app.ecommerce'
+        applicationId 'com.app.unimark.gmv3'
 
-        manifestPlaceholders = [onesignal_app_id               : "936fcc79-79d0-4f34-8af6-391a6c6e539f",
+        manifestPlaceholders = [onesignal_app_id               : "d97b7af8-b696-418f-875e-8547e9fe7581",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
 
@@ -36,6 +39,7 @@ android {
     }
     productFlavors {
     }
+    buildToolsVersion '29.0.2'
 }
 
 dependencies {
@@ -57,7 +61,11 @@ dependencies {
     implementation 'com.craftman.cardform:cardform:0.0.2'
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
     implementation 'com.android.support:coordinatorlayout:28.0.0'
-    implementation 'com.wdullaer:materialdatetimepicker:3.2.0'         // date & time picker
+    implementation 'com.wdullaer:materialdatetimepicker:3.2.0'
+
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
 
 }
 

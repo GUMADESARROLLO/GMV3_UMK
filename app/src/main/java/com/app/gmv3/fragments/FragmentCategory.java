@@ -1,10 +1,13 @@
 package com.app.gmv3.fragments;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -53,7 +57,9 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
     LinearLayout lyt_root;
     View lyt_empty_history;
     SharedPref sharedPref;
-
+    private static final String[] ANIMATION_TYPE = new String[]{
+            "Todos","Ver Solo Moroso"
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recent, container, false);
@@ -74,7 +80,6 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 74));
         recyclerView.setAdapter(mAdapter);
         view.findViewById(R.id.bt_retry).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +88,12 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
             }
         });
 
+
+
         fetchContacts();
         onRefresh();
+
+
 
         return view;
     }
@@ -149,7 +158,7 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.search, menu);
+        inflater.inflate(R.menu.search_cliente, menu);
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.search)
@@ -176,6 +185,39 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
         });
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_filtro:
+
+                showSingleChoiceDialog();
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    private void showSingleChoiceDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Ordenar por: ");
+        builder.setCancelable(false);
+        builder.setSingleChoiceItems(ANIMATION_TYPE, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String selected = ANIMATION_TYPE[i];
+                if (selected.equalsIgnoreCase("Todos")) {
+                    mAdapter.getFilter().filter("");
+                } else if (selected.equalsIgnoreCase("Ver Solo Moroso")) {
+                    mAdapter.getFilter().filter("MOROSO");
+                }
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
     }
 
     @Override

@@ -3,8 +3,8 @@ package com.app.gmv3;
 public class Config {
 
     //your admin panel url
-   //public static final String ADMIN_PANEL_URL = "http://192.168.1.139:8448/ecommerce";
-   public static final String ADMIN_PANEL_URL = "http://186.1.32.180:8448/ecommerce";
+   public static final String ADMIN_PANEL_URL = "http://192.168.1.139:8448/gmv3";
+   //public static final String ADMIN_PANEL_URL = "http://186.1.32.180:8448/gmv3";
 
 
 

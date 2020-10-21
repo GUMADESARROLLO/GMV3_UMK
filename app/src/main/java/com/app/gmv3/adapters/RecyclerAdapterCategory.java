@@ -3,11 +3,13 @@ package com.app.gmv3.adapters;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.gmv3.R;
@@ -26,10 +28,12 @@ public class RecyclerAdapterCategory extends RecyclerView.Adapter<RecyclerAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView category_name, product_count,txt_cliente_codigo,txt_cliente_limite,txt_cliente_saldo,txt_cliente_disponible;
         public CardView cardView;
+        public RelativeLayout relativeLayout;
 
 
         public MyViewHolder(View view) {
             super(view);
+            relativeLayout = view.findViewById(R.id.id_lyt_moroso);
             category_name = view.findViewById(R.id.category_name);
             product_count = view.findViewById(R.id.product_count);
             txt_cliente_codigo = view.findViewById(R.id.id_cliente_codigo);
@@ -66,16 +70,10 @@ public class RecyclerAdapterCategory extends RecyclerView.Adapter<RecyclerAdapte
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Clients clients = categoryListFiltered.get(position);
 
-        if (clients.getMOROSO().equals("S")){
-            holder.category_name.setText(clients.getNOMBRE().concat(" [MOROSO]"));
-            //holder.category_name.setTextColor(context.getResources().getColor(R.color.red_light));
-            holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.red_light));;
-        }else{
-            holder.category_name.setText(clients.getNOMBRE());
-            //holder.category_name.setTextColor(context.getResources().getColor(R.color.black));
-            holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.white));;
-        }
+        holder.category_name.setText(clients.getNOMBRE());
 
+        //holder.cardView.setBackgroundColor(context.getResources().getColor(((clients.getMOROSO().equals("S")) ? R.color.red_light : R.color.white)));
+        holder.relativeLayout.setVisibility((clients.getMOROSO().equals("S") ? View.VISIBLE : View.GONE));
         holder.product_count.setText(clients.getDIRECCION());
         holder.txt_cliente_codigo.setText(clients.getCLIENTE());
 
@@ -96,16 +94,20 @@ public class RecyclerAdapterCategory extends RecyclerView.Adapter<RecyclerAdapte
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
+
                 String charString = charSequence.toString();
+
                 if (charString.isEmpty()) {
                     categoryListFiltered = categoryList;
                 } else {
                     List<Clients> filteredList = new ArrayList<>();
+
                     for (Clients row : categoryList) {
                         if (row.getNOMBRE().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
+
                     categoryListFiltered = filteredList;
                 }
 

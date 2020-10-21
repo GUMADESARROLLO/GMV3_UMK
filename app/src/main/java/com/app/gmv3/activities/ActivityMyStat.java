@@ -127,8 +127,14 @@ public class ActivityMyStat extends AppCompatActivity {
 
 
 
-        fetchData(mRuta,mMes,mAnno);
-        onRefresh();
+
+
+        if (Utils.isNetworkAvailable(ActivityMyStat.this)) {
+            fetchData(mRuta,mMes,mAnno);
+            onRefresh();
+        } else {
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+        }
 
         /*new Handler().postDelayed(new Runnable() {
             @Override

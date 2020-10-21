@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.SQLException;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,7 +54,8 @@ public class ActivityCart extends AppCompatActivity {
     String ID;
     double str_tax;
     String str_currency_code;
-    Button btn_checkout, btn_continue;
+    AppCompatButton btn_checkout;
+    Button  btn_continue;
     ArrayList<ArrayList<Object>> data;
     public static ArrayList<String> product_id = new ArrayList<String>();
     public static ArrayList<String> product_name = new ArrayList<String>();
@@ -116,10 +119,10 @@ public class ActivityCart extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL, 86));
+       // recyclerView.addItemDecoration(new MyDividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL, 86));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        lyt_order = (RelativeLayout) findViewById(R.id.lyt_history);
+        lyt_order = findViewById(R.id.lyt_history);
 
         adapterCart = new AdapterCart(this, arrayCart);
         dbhelper = new DBHelper(this);
@@ -159,6 +162,7 @@ public class ActivityCart extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_cart, menu);
+
         return true;
     }
 
@@ -247,10 +251,10 @@ public class ActivityCart extends AppCompatActivity {
         protected void onPostExecute(Void result) {
 
             String _price = String.format(Locale.ENGLISH, "%1$,.2f", total_price);
-            String _tax = String.format(Locale.ENGLISH, "%1$,.2f", str_tax);
+            //String _tax = String.format(Locale.ENGLISH, "%1$,.2f", str_tax);
 
             TextView txt_total_price = findViewById(R.id.txt_total_price);
-            TextView txt_tax = findViewById(R.id.txt_tax);
+            //TextView txt_tax = findViewById(R.id.txt_tax);
 
             /*if (Config.ENABLE_DECIMAL_ROUNDING) {
 
@@ -259,7 +263,7 @@ public class ActivityCart extends AppCompatActivity {
                 txt_tax.setText(getResources().getString(R.string.txt_tax) + " " + str_tax + " %");
             }*/
             txt_total_price.setText(getResources().getString(R.string.txt_total) + " " + _price + " " + str_currency_code);
-            txt_tax.setText(getResources().getString(R.string.txt_tax) + " " + _tax + " %");
+            //txt_tax.setText(getResources().getString(R.string.txt_tax) + " " + _tax + " %");
 
             if (product_id.size() > 0) {
                 lyt_order.setVisibility(View.VISIBLE);

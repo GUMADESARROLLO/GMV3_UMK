@@ -21,6 +21,8 @@ import android.os.StrictMode;
 import android.provider.Settings;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -40,6 +42,7 @@ import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,6 +59,8 @@ import com.app.gmv3.adapters.RecyclerAdapterLotes;
 import com.app.gmv3.models.Lotes;
 import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.MyDividerItemDecoration;
+import com.app.gmv3.utilities.Utils;
+import com.app.gmv3.utilities.ViewAnimation;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -106,6 +111,11 @@ public class ActivityProductDetail extends AppCompatActivity {
     List<Lotes> arrayItemLotes;
 
 
+    private ImageButton bt_toggle_reviews, bt_toggle_warranty, bt_toggle_description;
+    private View lyt_expand_reviews, lyt_expand_warranty, lyt_expand_description;
+    private NestedScrollView nested_scroll_view;
+
+
 
 
 
@@ -134,17 +144,17 @@ public class ActivityProductDetail extends AppCompatActivity {
 
     public void setupToolbar() {
 
-        final Toolbar toolbar = findViewById(R.id.toolbar);
+        /*final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("");
-        }
+        }*/
 
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("");
-        appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout = findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -194,13 +204,74 @@ public class ActivityProductDetail extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL, 0));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerAdapterLotes = new RecyclerAdapterLotes(this, arrayItemLotes);
 
 
+        nested_scroll_view = findViewById(R.id.nested_scroll_view);
+
+        bt_toggle_reviews = findViewById(R.id.bt_toggle_reviews);
+        lyt_expand_reviews =  findViewById(R.id.lyt_expand_reviews);
+        bt_toggle_reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleSection(view, lyt_expand_reviews);
+            }
+        });
+
+        bt_toggle_warranty = findViewById(R.id.bt_toggle_warranty);
+        lyt_expand_warranty = findViewById(R.id.lyt_expand_warranty);
+        bt_toggle_warranty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleSection(view, lyt_expand_warranty);
+            }
+        });
+
+        bt_toggle_description = findViewById(R.id.bt_toggle_description);
+        lyt_expand_description = findViewById(R.id.lyt_expand_description);
+        bt_toggle_description.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleSection(view, lyt_expand_description);
+            }
+        });
+
+        toggleArrow(bt_toggle_description);
+        lyt_expand_description.setVisibility(View.VISIBLE);
+
+        ( findViewById(R.id.btn_cart)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputDialog();
+            }
+        });
+
+
+    }
+    private void toggleSection(View bt, final View lyt) {
+        boolean show = toggleArrow(bt);
+        if (show) {
+            ViewAnimation.expand(lyt, new ViewAnimation.AnimListener() {
+                @Override
+                public void onFinish() {
+                    Utils.nestedScrollTo(nested_scroll_view, lyt);
+                }
+            });
+        } else {
+            ViewAnimation.collapse(lyt);
+        }
     }
 
+    public boolean toggleArrow(View view) {
+        if (view.getRotation() == 0) {
+            view.animate().setDuration(200).rotation(180);
+            return true;
+        } else {
+            view.animate().setDuration(200).rotation(0);
+            return false;
+        }
+    }
     public void displayData() {
         txt_product_name.setText(product_name);
 
@@ -224,7 +295,7 @@ public class ActivityProductDetail extends AppCompatActivity {
         String product_quantity_ = String.format(Locale.ENGLISH, "%1$,.2f", product_quantity);
         txt_product_quantity.setText(product_quantity_ + " " + getString(R.string.txt_items));
 
-        if (product_status.equals("Available")) {
+       /* if (product_status.equals("Available")) {
             btn_cart.setText(R.string.btn_add_to_cart);
             btn_cart.setBackgroundResource(R.color.available);
             btn_cart.setOnClickListener(new View.OnClickListener() {
@@ -237,7 +308,7 @@ public class ActivityProductDetail extends AppCompatActivity {
             btn_cart.setEnabled(false);
             btn_cart.setText(R.string.btn_out_of_stock);
             btn_cart.setBackgroundResource(R.color.sold);
-        }
+        }*/
 
         txt_product_description.setBackgroundColor(Color.parseColor("#ffffff"));
         txt_product_description.setFocusableInTouchMode(false);
@@ -252,7 +323,7 @@ public class ActivityProductDetail extends AppCompatActivity {
 
         String mimeType = "text/html; charset=UTF-8";
         String encoding = "utf-8";
-        String htmlText = product_description;
+        String htmlText = ((product_description.equals("")) ? "Sin Descripcion" : product_description);
 
         String text = "<html><head>"
                 + "<style type=\"text/css\">body{color: #525252;}"
@@ -413,7 +484,7 @@ public class ActivityProductDetail extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_list, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -425,14 +496,14 @@ public class ActivityProductDetail extends AppCompatActivity {
                 break;
 
             case R.id.cart:
-                Intent intent = new Intent(getApplicationContext(), ActivityCart.class);
+              /*  Intent intent = new Intent(getApplicationContext(), ActivityCart.class);
                 intent.putExtra("tax", resp_tax);
                 intent.putExtra("currency_code", resp_currency_code);
-                startActivity(intent);
+                startActivity(intent);*/
                 break;
 
             case R.id.share:
-                requestStoragePermission();
+             //   requestStoragePermission();
                 break;
 
             default:

@@ -15,7 +15,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
-    private static final String TAG = "E-Commerce Android App";
+    private static final String TAG = "GMV3 Android App";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

@@ -1,42 +1,35 @@
 {
   "project_info": {
-    "project_number": "598282410595",
-    "firebase_url": "https://guma-store.firebaseio.com",
-    "project_id": "guma-store",
-    "storage_bucket": "guma-store.appspot.com"
+    "project_number": "267914032173",
+    "firebase_url": "https://gmv3-2020.firebaseio.com",
+    "project_id": "gmv3-2020",
+    "storage_bucket": "gmv3-2020.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:598282410595:android:864ae992d1f7d17f83b656",
+        "mobilesdk_app_id": "1:267914032173:android:0777ad4379fa02a6b4b4a4",
         "android_client_info": {
-          "package_name": "com.app.ecommerce"
+          "package_name": "com.app.unimark.gmv3"
         }
       },
       "oauth_client": [
         {
-          "client_id": "598282410595-9d09q9kne2cmdivv7d408r9u7kv0ht6q.apps.googleusercontent.com",
+          "client_id": "267914032173-qeon3poe4nhimp6tagbndn4vl5t73rc7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBZ9qI2XkO0gU93s9J5EU12wTC6-taqAWM"
+          "current_key": "AIzaSyDxoR3AJhk6kt5ykrhOYr7SZGDL6BycwV0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "598282410595-9d09q9kne2cmdivv7d408r9u7kv0ht6q.apps.googleusercontent.com",
+              "client_id": "267914032173-qeon3poe4nhimp6tagbndn4vl5t73rc7.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "598282410595-0oh6v0m48dkp8ilg4pjc0ln765vnsup5.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.ecommerce"
-              }
             }
           ]
         }

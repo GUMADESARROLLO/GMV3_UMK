@@ -54,28 +54,28 @@ public class NotificationExtenderExample extends NotificationExtenderService {
     private void sendNotification() {
         mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent intent;
+       /* Intent intent;
         if (nid == 0 && !url.equals("false") && !url.trim().isEmpty()) {
             intent = new Intent(this, ActivitySplash.class);
             intent.putExtra("nid", nid);
-            intent.putExtra("external_link", url);
+            intent.putExtra("external_link", url);º
             intent.putExtra("cname", cname);
         } else {
             intent = new Intent(this, ActivitySplash.class);
             intent.putExtra("nid", nid);
             intent.putExtra("external_link", url);
             intent.putExtra("cname", cname);
-        }
+        }*/
 
         NotificationChannel mChannel;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Ecommerce Android App Channel";// The user-visible name of the channel.
+            CharSequence name = "GMV3 Android App Channel";// The user-visible name of the channel.
             int importance = NotificationManager.IMPORTANCE_HIGH;
             mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
             mNotificationManager.createNotificationChannel(mChannel);
         }
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+       // PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_notification_large))
@@ -98,7 +98,7 @@ public class NotificationExtenderExample extends NotificationExtenderService {
             mBuilder.setContentText(Html.fromHtml(message));
         }
 
-        mBuilder.setContentIntent(contentIntent);
+       // mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 

@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.v4.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -57,6 +58,14 @@ public class Utils {
             drawable.mutate();
             drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         }
+    }
+    public static void nestedScrollTo(final NestedScrollView nested, final View targetView) {
+        nested.post(new Runnable() {
+            @Override
+            public void run() {
+                nested.scrollTo(500, targetView.getBottom());
+            }
+        });
     }
     public static String getFormattedDateSimple(Long dateTime) {
         SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -123,7 +132,19 @@ public class Utils {
         }
         return jsonString;
     }
+    public static long timeStringtoMilis(String time) {
+        long milis = 0;
 
+        try {
+            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = sd.parse(time);
+            milis = date.getTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return milis;
+    }
     public static boolean isNetworkAvailable(Activity activity) {
         ConnectivityManager connectivity = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

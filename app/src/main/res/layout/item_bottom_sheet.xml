@@ -26,7 +26,6 @@
             android:id="@+id/sheet_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/order_total"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -48,8 +47,18 @@
             android:textColor="@color/white" />
 
 
-
-
+        <ImageView
+            android:layout_below="@+id/sheet_date"
+            android:id="@+id/img_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/spacing_xlarge"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/ic_comment"
+            android:tint="@color/green" />
 
 
 
@@ -111,26 +120,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="10dp">
 
-
-
-        <ImageView
-            android:id="@+id/img_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:src="@drawable/ic_comment"
-            android:tint="@color/green" />
-
-    </LinearLayout>
 
 </LinearLayout>

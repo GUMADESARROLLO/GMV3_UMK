@@ -19,12 +19,16 @@ public class Constant {
     public static final String GET_DETALLE_FACTURA = BASE_URL + "/api/api.php?get_detalle_factura=";
     public static final String GET_NC = BASE_URL + "/api/api.php?get_nc=";
     public static final String GET_LAST_3M = BASE_URL + "/api/api.php?last_3m=";
+    public static final String GET_NO_FACTURADO = BASE_URL + "/api/api.php?articulos_sin_facturar=";
     public static final String GET_HELP = BASE_URL + "/api/api.php?get_help";
     public static final String GET_TAX_CURRENCY = BASE_URL + "/api/api.php?get_tax_currency";
     public static final String GET_SHIPPING = BASE_URL + "/api/api.php?get_shipping";
 
     public static final String POST_ORDER = BASE_URL + "/api/api.php?post_order";
     public static final String POST_RPT_RUTA = BASE_URL + "/api/api.php?post_rpt_ruta=";
+
+    public static final String POST_REPORT = BASE_URL + "/api/api.php?post_report=";
+    public static final String GET_COMENTARIOS_IM = BASE_URL + "/api/api.php?get_comentarios_im=";
 
 
 

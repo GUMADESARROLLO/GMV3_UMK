@@ -101,7 +101,7 @@
                 android:layout_gravity="center"
                 android:layout_width="230dp"
                 android:layout_height="100dp"
-                app:colorFront="@color/light_green_300"
+                app:colorFront="@color/colorPrimary"
                 app:colorBack="@color/grey_soft"/>
 
             <TextView

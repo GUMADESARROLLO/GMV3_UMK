@@ -53,7 +53,7 @@ public class Activitytresmeses extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
@@ -156,14 +156,26 @@ public class Activitytresmeses extends AppCompatActivity {
         Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+
+            case R.id.action_no_facturado:
+
+                Intent intent = new Intent(Activitytresmeses.this, ActivityNoFacturado.class);
+                intent.putExtra("factura_id",cod_factura);
+
+                startActivity(intent);
+                return true;
+
+            case android.R.id.home:
+                finish();
+
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

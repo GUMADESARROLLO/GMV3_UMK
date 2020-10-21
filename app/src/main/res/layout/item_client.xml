@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_large"
-                    app:cardBackgroundColor="@color/deep_purple_500"
+                    app:cardBackgroundColor="@color/colorAccent"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp"
                     app:cardUseCompatPadding="true">

@@ -57,15 +57,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> {
 
         holder.product_name.setText(ActivityCart.product_name.get(position).concat(" ").concat(ActivityCart.product_bonificado.get(position)));
 
-       /* if (Config.ENABLE_DECIMAL_ROUNDING) {
 
-        } else {
-            double _single_item = ActivityCart.sub_total_price.get(position) / ActivityCart.product_quantity.get(position);
-
-            holder.product_quantity.setText(_single_item + " " + ActivityCart.currency_code.get(position) + " x " + ActivityCart.product_quantity.get(position));
-
-            holder.product_price.setText(ActivityCart.sub_total_price.get(position) + " " + ActivityCart.currency_code.get(position));
-        }*/
 
         double _single_item = ActivityCart.sub_total_price.get(position) / ActivityCart.product_quantity.get(position);
         String single_item_price = String.format(Locale.ENGLISH, "%1$,.2f", _single_item);
