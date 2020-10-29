@@ -95,7 +95,7 @@ public class ActivityCart extends AppCompatActivity {
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbhelper.close();
+                //dbhelper.close();
                Intent intent = new Intent(ActivityCart.this, ActivityClients.class);
                 //Intent intent = new Intent(ActivityCart.this, ActivityCheckout.class);
 

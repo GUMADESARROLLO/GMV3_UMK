@@ -19,18 +19,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.Settings;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import androidx.core.widget.NestedScrollView;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -54,11 +53,15 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
+import com.app.gmv3.adapters.RecyclerAdapterBnfc;
 import com.app.gmv3.adapters.RecyclerAdapterLotes;
 import com.app.gmv3.models.Lotes;
 import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.Utils;
 import com.app.gmv3.utilities.ViewAnimation;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -87,8 +90,8 @@ import static com.app.gmv3.utilities.Constant.GET_TAX_CURRENCY;
 public class ActivityProductDetail extends AppCompatActivity {
 
     String  product_id;
-    TextView txt_product_name, txt_product_price, txt_product_quantity,txt_bonificado;
-    private String product_name, product_image, category_name, product_status, currency_code, product_description,product_bonificado,product_lotes;
+    TextView txt_product_name, txt_product_price, txt_product_quantity,txt_id_producto;
+    private String product_name, product_image, category_name, product_status, currency_code, product_description,product_bonificado,product_lotes,product_und;
     private double product_price;
     private double product_quantity;
     WebView txt_product_description;
@@ -96,24 +99,17 @@ public class ActivityProductDetail extends AppCompatActivity {
     Button btn_cart;
     public static DBHelper dbhelper;
     final Context context = this;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
-    private AppBarLayout appBarLayout;
     double resp_tax;
     String resp_currency_code;
 
     public static ArrayList<String> lote_name = new ArrayList<String>();
     public static ArrayList<String> lote_date = new ArrayList<String>();
     public static ArrayList<String> lote_cant = new ArrayList<String>();
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, rcViewBnfc;
     RecyclerAdapterLotes recyclerAdapterLotes;
+    RecyclerAdapterBnfc rcBonificado;
     List<Lotes> arrayItemLotes;
-
-
-    private ImageButton bt_toggle_reviews, bt_toggle_warranty, bt_toggle_description;
-    private View lyt_expand_reviews, lyt_expand_warranty, lyt_expand_description;
-    private NestedScrollView nested_scroll_view;
-
-
+    List<String> sList;
 
 
 
@@ -142,37 +138,11 @@ public class ActivityProductDetail extends AppCompatActivity {
 
     public void setupToolbar() {
 
-        /*final Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("");
-        }*/
-
-        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("");
-        appBarLayout = findViewById(R.id.appbar);
-        appBarLayout.setExpanded(true);
-
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbarLayout.setTitle(category_name);
-                    isShow = true;
-                } else if (isShow) {
-                    collapsingToolbarLayout.setTitle("");
-                    isShow = false;
-                }
-            }
-        });
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Utils.setSystemBarColor(this);
     }
 
     public void getData() {
@@ -188,57 +158,39 @@ public class ActivityProductDetail extends AppCompatActivity {
         category_name = intent.getStringExtra("category_name");
         product_bonificado = intent.getStringExtra("product_bonificado");
         product_lotes = intent.getStringExtra("product_lotes");
+        product_und = intent.getStringExtra("product_und");
     }
 
     public void initComponent() {
+        txt_id_producto = findViewById(R.id.id_sku_product);;
         txt_product_name = findViewById(R.id.product_name);
         img_product_image = findViewById(R.id.product_image);
         txt_product_price = findViewById(R.id.product_price);
         txt_product_description = findViewById(R.id.product_description);
         txt_product_quantity = findViewById(R.id.product_quantity);
-        txt_bonificado = findViewById(R.id.item_bonificado);
         btn_cart = findViewById(R.id.btn_add_cart);
 
+        sList = Arrays.asList(product_bonificado.split(","));
+
+        final FloatingActionButton fab =  findViewById(R.id.btn_cart);
+
         recyclerView = findViewById(R.id.recycler_view);
+        rcViewBnfc = findViewById(R.id.recycler_bonificado);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerAdapterLotes = new RecyclerAdapterLotes(this, arrayItemLotes);
 
 
-        nested_scroll_view = findViewById(R.id.nested_scroll_view);
 
-        bt_toggle_reviews = findViewById(R.id.bt_toggle_reviews);
-        lyt_expand_reviews =  findViewById(R.id.lyt_expand_reviews);
-        bt_toggle_reviews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleSection(view, lyt_expand_reviews);
-            }
-        });
+        rcViewBnfc.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
+        rcViewBnfc.setItemAnimator(new DefaultItemAnimator());
+        rcBonificado = new RecyclerAdapterBnfc(this, sList);
+        rcViewBnfc.setAdapter(rcBonificado);
 
-        bt_toggle_warranty = findViewById(R.id.bt_toggle_warranty);
-        lyt_expand_warranty = findViewById(R.id.lyt_expand_warranty);
-        bt_toggle_warranty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleSection(view, lyt_expand_warranty);
-            }
-        });
 
-        bt_toggle_description = findViewById(R.id.bt_toggle_description);
-        lyt_expand_description = findViewById(R.id.lyt_expand_description);
-        bt_toggle_description.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleSection(view, lyt_expand_description);
-            }
-        });
-
-        toggleArrow(bt_toggle_description);
-        lyt_expand_description.setVisibility(View.VISIBLE);
-
-        ( findViewById(R.id.btn_cart)).setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 inputDialog();
@@ -246,31 +198,13 @@ public class ActivityProductDetail extends AppCompatActivity {
         });
 
 
-    }
-    private void toggleSection(View bt, final View lyt) {
-        boolean show = toggleArrow(bt);
-        if (show) {
-            ViewAnimation.expand(lyt, new ViewAnimation.AnimListener() {
-                @Override
-                public void onFinish() {
-                    Utils.nestedScrollTo(nested_scroll_view, lyt);
-                }
-            });
-        } else {
-            ViewAnimation.collapse(lyt);
-        }
+
+
     }
 
-    public boolean toggleArrow(View view) {
-        if (view.getRotation() == 0) {
-            view.animate().setDuration(200).rotation(180);
-            return true;
-        } else {
-            view.animate().setDuration(200).rotation(0);
-            return false;
-        }
-    }
     public void displayData() {
+        txt_id_producto.setText(("SKU: ").concat(product_id));
+
         txt_product_name.setText(product_name);
 
         Picasso.with(this)
@@ -283,6 +217,7 @@ public class ActivityProductDetail extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ActivityImageDetail.class);
                 intent.putExtra("image", product_image);
+                intent.putExtra("root", "product");
                 startActivity(intent);
             }
         });
@@ -291,7 +226,7 @@ public class ActivityProductDetail extends AppCompatActivity {
         txt_product_price.setText(price + " " + currency_code);
 
         String product_quantity_ = String.format(Locale.ENGLISH, "%1$,.2f", product_quantity);
-        txt_product_quantity.setText(product_quantity_ + " " + getString(R.string.txt_items));
+        txt_product_quantity.setText(product_quantity_ + " " + product_und);
 
        /* if (product_status.equals("Available")) {
             btn_cart.setText(R.string.btn_add_to_cart);
@@ -342,14 +277,8 @@ public class ActivityProductDetail extends AppCompatActivity {
         } else {
             txt_product_description.loadDataWithBaseURL(null, text, mimeType, encoding, null);
         }
-        txt_bonificado.setText(product_bonificado);
-
 
         getDataFromDatabase();
-
-
-
-
 
     }
 
@@ -392,20 +321,44 @@ public class ActivityProductDetail extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setView(mView);
 
-        final EditText edtQuantity = (EditText) mView.findViewById(R.id.userInputDialog);
-
-        List<String> sList = Arrays.asList(product_bonificado.split(","));
-
-        final Spinner spinner = mView.findViewById(R.id.spinner_bonificado);
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ActivityProductDetail.this, R.layout.spinner_item, sList);
-        myAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner.setAdapter(myAdapter);
+        final EditText edtQuantity  = (EditText) mView.findViewById(R.id.userInputDialog);
+        final EditText edtBonificado = mView.findViewById(R.id.txt_bonificado);
 
         alert.setCancelable(false);
-        int maxLength = 3;
+        int maxLength = 10;
         edtQuantity.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
         edtQuantity.setInputType(InputType.TYPE_CLASS_NUMBER);
+        edtBonificado.setText("0");
+
+        final List<String> row_arr = new ArrayList<>();
+        for (int i = 0; i < sList.size(); i++) row_arr.add(Arrays.asList(sList.get(i).replace("+", ",").split(",")).get(0));
+        edtQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+
+            }
+        });
+
+
+
 
         alert.setPositiveButton(R.string.dialog_option_add, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
@@ -435,7 +388,7 @@ public class ActivityProductDetail extends AppCompatActivity {
 
                         }*/
 
-                        dbhelper.addData(product_id, product_name, quantity, (product_price * quantity), currency_code, product_image,spinner.getSelectedItem().toString());
+                        dbhelper.addData(product_id, product_name, quantity, (product_price * quantity), currency_code, product_image,edtBonificado.getText().toString());
                     }
 
                 } else {
@@ -482,7 +435,7 @@ public class ActivityProductDetail extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -494,15 +447,12 @@ public class ActivityProductDetail extends AppCompatActivity {
                 break;
 
             case R.id.cart:
-              /*  Intent intent = new Intent(getApplicationContext(), ActivityCart.class);
+               Intent intent = new Intent(getApplicationContext(), ActivityCart.class);
                 intent.putExtra("tax", resp_tax);
                 intent.putExtra("currency_code", resp_currency_code);
-                startActivity(intent);*/
+                startActivity(intent);
                 break;
 
-            case R.id.share:
-             //   requestStoragePermission();
-                break;
 
             default:
                 return super.onOptionsItemSelected(menuItem);
@@ -629,7 +579,7 @@ public class ActivityProductDetail extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("image/*");
                 intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
-                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_product_section_one) + " " + product_name + " " + getString(R.string.share_product_section_two) + " " + String.format(Locale.GERMAN, "%1$,.0f", product_price) + " " + currency_code + getString(R.string.share_product_section_three) + "\n" + "https://play.google.com/store/apps/details?id=" + getPackageName());
+                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_product_section_one) + " " + product_name + " " + getString(R.string.share_product_section_two) + " " + String.format(Locale.ENGLISH, "%1$,.0f", product_price) + " " + currency_code + getString(R.string.share_product_section_three) + "\n" + "https://play.google.com/store/apps/details?id=" + getPackageName());
                 startActivity(Intent.createChooser(intent, "Share Image"));
                 pDialog.dismiss();
             } else {

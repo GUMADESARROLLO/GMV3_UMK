@@ -249,7 +249,7 @@ public class ActivityNotificationDetail extends AppCompatActivity {
         });
 
         if (Config.ENABLE_DECIMAL_ROUNDING) {
-            String price = String.format(Locale.GERMAN, "%1$,.0f", product_price);
+            String price = String.format(Locale.ENGLISH, "%1$,.0f", product_price);
             txt_product_price.setText(price + " " + currency_code);
         } else {
             txt_product_price.setText(product_price + " " + currency_code);
@@ -399,9 +399,7 @@ public class ActivityNotificationDetail extends AppCompatActivity {
                 startActivity(intent);
                 break;
 
-            case R.id.share:
-                requestStoragePermission();
-                break;
+
 
             default:
                 return super.onOptionsItemSelected(menuItem);
@@ -528,7 +526,7 @@ public class ActivityNotificationDetail extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("image/*");
                 intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
-                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_product_section_one) + " " + product_name + " " + getString(R.string.share_product_section_two) + " " + String.format(Locale.GERMAN, "%1$,.0f", product_price) + " " + currency_code + getString(R.string.share_product_section_three) + "\n" + "https://play.google.com/store/apps/details?id=" + getPackageName());
+                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_product_section_one) + " " + product_name + " " + getString(R.string.share_product_section_two) + " " + String.format(Locale.ENGLISH, "%1$,.0f", product_price) + " " + currency_code + getString(R.string.share_product_section_three) + "\n" + "https://play.google.com/store/apps/details?id=" + getPackageName());
                 startActivity(Intent.createChooser(intent, "Share Image"));
                 pDialog.dismiss();
             } else {

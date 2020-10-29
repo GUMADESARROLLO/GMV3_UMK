@@ -29,6 +29,8 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> {
         TextView product_name;
         TextView product_quantity;
         TextView product_price;
+        TextView producto_sku;
+        TextView producto_boni;
         ImageView product_image;
 
         public ViewHolder(View view) {
@@ -37,6 +39,8 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> {
             product_quantity = view.findViewById(R.id.product_quantity);
             product_price = view.findViewById(R.id.product_price);
             product_image = view.findViewById(R.id.product_image);
+            producto_sku = view.findViewById(R.id.id_sku);
+            producto_boni = view.findViewById(R.id.id_bonificacion);
         }
 
     }
@@ -55,9 +59,10 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        holder.product_name.setText(ActivityCart.product_name.get(position).concat(" ").concat(ActivityCart.product_bonificado.get(position)));
 
-
+        holder.product_name.setText(ActivityCart.product_name.get(position));
+        holder.producto_sku.setText(ActivityCart.product_id.get(position).concat(" "));
+        holder.producto_boni.setText(ActivityCart.product_bonificado.get(position));
 
         double _single_item = ActivityCart.sub_total_price.get(position) / ActivityCart.product_quantity.get(position);
         String single_item_price = String.format(Locale.ENGLISH, "%1$,.2f", _single_item);

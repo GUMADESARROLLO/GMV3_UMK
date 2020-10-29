@@ -22,10 +22,12 @@
             android:title="@string/pref_title_phone" />
 
         <EditTextPreference
-            android:defaultValue="@string/default_your_address"
-            android:key="@string/pref_title_address"
-            android:summary="@string/default_your_address"
-            android:title="@string/pref_title_address" />
+            android:inputType="textPassword"
+            android:defaultValue="@string/default_your_password"
+            android:key="@string/pref_title_password"
+            android:summary="@string/default_your_password"
+            android:title="@string/pref_title_password" />
+
 
     </PreferenceCategory>
 

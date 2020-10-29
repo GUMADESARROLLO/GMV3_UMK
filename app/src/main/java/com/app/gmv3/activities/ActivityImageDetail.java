@@ -48,7 +48,7 @@ import java.util.List;
 public class ActivityImageDetail extends AppCompatActivity {
 
     TouchImageView product_image;
-    String str_image;
+    String str_image,str_root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +62,12 @@ public class ActivityImageDetail extends AppCompatActivity {
         }
 
         str_image = getIntent().getStringExtra("image");
+        str_root = getIntent().getStringExtra("root");
 
         product_image = findViewById(R.id.image);
 
         Picasso.with(this)
-                .load(Config.ADMIN_PANEL_URL + "/upload/product/" + str_image.replace(" ", "%20"))
+                .load(Config.ADMIN_PANEL_URL + "/upload/"+ str_root +"/" + str_image.replace(" ", "%20"))
                 .placeholder(R.drawable.ic_loading)
                 .into(product_image);
 

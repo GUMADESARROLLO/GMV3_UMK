@@ -162,7 +162,7 @@ public class Activitytresmeses extends AppCompatActivity {
 
             case R.id.action_no_facturado:
 
-                Intent intent = new Intent(Activitytresmeses.this, ActivityNoFacturado.class);
+                Intent intent = new Intent(Activitytresmeses.this, ActivityProductNoFacturado.class);
                 intent.putExtra("factura_id",cod_factura);
 
                 startActivity(intent);

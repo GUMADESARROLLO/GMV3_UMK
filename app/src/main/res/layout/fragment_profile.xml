@@ -30,7 +30,7 @@
                     android:id="@+id/txt_user_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Adams.G"
+                    android:text="F00 - Nombre del vendedor"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
                     android:textColor="@color/grey_80"
                     android:textStyle="bold" />
@@ -39,7 +39,7 @@
                     android:id="@+id/txt_user_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View and edit profile"
+                    android:text="UNBUENCORRE@GMAIL.OM"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/grey_80" />
 
@@ -79,69 +79,6 @@
                 android:text="00000000"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/grey_80" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:background="@color/grey_10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:minHeight="70dp"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large">
-
-            <TextView
-                android:id="@+id/txt_user_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-light"
-                android:text="F00"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_80" />
-
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:background="@color/grey_10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:minHeight="70dp"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large">
-
-            <TextView
-                android:id="@+id/btn_inteligencia_mercado"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/txt_inteligencia_mercado"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_80" />
-
             <View
                 android:layout_width="@dimen/spacing_large"
                 android:layout_height="wrap_content" />
@@ -151,90 +88,7 @@
                 android:layout_height="@dimen/spacing_xmlarge"
                 android:background="@android:color/transparent"
                 android:tint="@color/grey_60"
-                app:srcCompat="@drawable/ic_comment" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:background="@color/grey_10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:minHeight="70dp"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large">
-
-            <TextView
-                android:id="@+id/id_mis_stat"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-light"
-                android:text="Mis Stat"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_80" />
-            <View
-                android:layout_width="@dimen/spacing_large"
-                android:layout_height="wrap_content" />
-
-            <ImageButton
-                android:layout_width="@dimen/spacing_xmlarge"
-                android:layout_height="@dimen/spacing_xmlarge"
-                android:background="@android:color/transparent"
-                android:tint="@color/grey_60"
-                app:srcCompat="@drawable/ic_timeline" />
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:background="@color/grey_10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:minHeight="70dp"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large">
-
-            <TextView
-                android:id="@+id/Reportes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-light"
-                android:text="Reportes"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_80" />
-
-            <View
-                android:layout_width="@dimen/spacing_large"
-                android:layout_height="wrap_content" />
-
-            <ImageButton
-                android:layout_width="@dimen/spacing_xmlarge"
-                android:layout_height="@dimen/spacing_xmlarge"
-                android:background="@android:color/transparent"
-                android:tint="@color/grey_60"
-                app:srcCompat="@drawable/ic_timeline" />
-
+                app:srcCompat="@drawable/ic_phone_android" />
 
         </LinearLayout>
 
@@ -279,6 +133,7 @@
 
         </LinearLayout>
 
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -297,10 +152,178 @@
             android:paddingLeft="@dimen/spacing_large"
             android:paddingRight="@dimen/spacing_large">
 
+            <TextView
+                android:id="@+id/btn_inteligencia_mercado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/txt_inteligencia_mercado"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_80" />
+
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:background="@android:color/transparent"
+                android:tint="@color/grey_60"
+                app:srcCompat="@drawable/ic_feedback" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:minHeight="70dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <TextView
+                android:id="@+id/Reportes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:text="Reporte de Facturación"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_80" />
+
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:background="@android:color/transparent"
+                android:tint="@color/grey_60"
+                app:srcCompat="@drawable/ic_monetization_on" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:minHeight="70dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <TextView
+                android:id="@+id/id_mis_stat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:text="Mis Estadisticas"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_80" />
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:background="@android:color/transparent"
+                android:tint="@color/grey_60"
+                app:srcCompat="@drawable/ic_stat" />
+
+
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:minHeight="70dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <TextView
+                android:id="@+id/txt_user_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:text="Cambiar Contraseña"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_80" />
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:background="@android:color/transparent"
+                android:tint="@color/grey_60"
+                app:srcCompat="@drawable/ic_no_cell" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:minHeight="70dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+
             <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/btn_edit_user"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
@@ -319,7 +342,16 @@
                     android:textStyle="bold" />
 
             </com.balysv.materialripple.MaterialRippleLayout>
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="wrap_content" />
 
+            <ImageButton
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:background="@android:color/transparent"
+                android:tint="@color/grey_60"
+                app:srcCompat="@drawable/ic_login" />
         </LinearLayout>
 
         <View

@@ -17,6 +17,8 @@ import com.app.gmv3.activities.ActivityHistory;
 import com.app.gmv3.activities.ActivityInteligenciaMercado;
 import com.app.gmv3.activities.ActivityMyStat;
 import com.app.gmv3.activities.ActivityReportes;
+import com.app.gmv3.activities.ActivitySettings;
+import com.app.gmv3.activities.Activitytresmeses;
 import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.utilities.SharedPref;
 import com.balysv.materialripple.MaterialRippleLayout;
@@ -108,6 +110,15 @@ public class FragmentProfile extends Fragment {
                 startActivity(intent);
             }
         });
+        view.findViewById(R.id.txt_user_name).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivitySettings.class);
+               /* intent.putExtra("id_Ruta", sharedPref.getYourName());
+                intent.putExtra("Nombre_ruta", sharedPref.getYourAddress());*/
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -116,10 +127,9 @@ public class FragmentProfile extends Fragment {
 
     @Override
     public void onResume() {
-        txt_user_name.setText(sharedPref.getYourName());
         txt_user_email.setText(sharedPref.getYourEmail());
         txt_user_phone.setText(sharedPref.getYourPhone());
-        txt_user_address.setText(sharedPref.getYourAddress());
+        txt_user_address.setText(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
         super.onResume();
     }
 

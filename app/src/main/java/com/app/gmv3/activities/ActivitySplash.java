@@ -7,7 +7,9 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.app.gmv3.BuildConfig;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 
@@ -30,6 +32,9 @@ public class ActivitySplash extends AppCompatActivity {
         }
 
         progressBar = findViewById(R.id.progressBar);
+
+
+        ((TextView) findViewById(R.id.app_version)).setText(BuildConfig.VERSION_NAME);
 
         if (getIntent().hasExtra("nid")) {
             id = getIntent().getLongExtra("nid", 0);

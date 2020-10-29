@@ -1,5 +1,6 @@
 package com.app.gmv3.activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -7,10 +8,22 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.app.gmv3.utilities.Constant;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -19,9 +32,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +45,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,12 +67,18 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.app.gmv3.utilities.Constant.GET_COMENTARIOS_IM;
 import static com.app.gmv3.utilities.Constant.POST_REPORT;
@@ -69,17 +93,19 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
     private SearchView searchView;
     SwipeRefreshLayout swipeRefreshLayout = null;
     private String category_id,category_name;
-    String st_title,st_comment;
+    String st_title,st_comment,Foto_a_enviar ="";
     ProgressDialog progressDialog;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String date = dateFormat.format(Calendar.getInstance().getTime());
     TextView txt_lbl_order_by;
     String OrderBY = "Desc";
     RelativeLayout ryt_empty_history;
-
+    Bitmap  decodedktp;
+    byte[]  imageByteArrayktp;
     private static final String[] ANIMATION_TYPE = new String[]{
             "Mas Recientes", "Mas Antiguos"
     };
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +120,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Inteligencia de Mercado");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -103,6 +129,10 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
         Intent intent = getIntent();
         category_id = intent.getStringExtra("id_Ruta");
         category_name = intent.getStringExtra("Nombre_ruta");
+
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_add_post);
+        dialog.setCancelable(true);
     }
 
 
@@ -266,19 +296,21 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
 
 
     private void showCustomDialog() {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_add_post);
-        dialog.setCancelable(true);
+
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         final String Fecha = (String) DateFormat.format("EEE dd MMM yyyy hh:mm aaa'", Calendar.getInstance().getTime());
+        (dialog.findViewById(R.id.id_lyt_adjunto)).setVisibility(View.GONE);
+        ImageView img = (ImageView) dialog.findViewById(R.id.id_foto_adjunta);
+        img.setImageResource(R.drawable.ic_loading);
 
-        final AppCompatButton bt_submit = (AppCompatButton) dialog.findViewById(R.id.bt_submit);
+        final AppCompatButton bt_submit = dialog.findViewById(R.id.bt_submit);
 
-        final TextView edt_title = (TextView) dialog.findViewById(R.id.edt_title);
-        final TextView et_post = (TextView) dialog.findViewById(R.id.et_post);
+        final TextView edt_title =  dialog.findViewById(R.id.edt_title);
+        final TextView et_post =  dialog.findViewById(R.id.et_post);
+       // final ImageView adjunto = findViewById(R.id.bt_link);
 
         ((TextView) dialog.findViewById(R.id.edt_Nombre)).setText(category_name);
         ((TextView) dialog.findViewById(R.id.edt_ruta)).setText(category_id);
@@ -299,6 +331,13 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        (dialog.findViewById(R.id.bt_link)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImagektp();
             }
         });
 
@@ -333,6 +372,30 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
+    }
+    private void selectImagektp() {
+        if (check_ReadStoragepermission()) {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, 3);
+        }
+    }
+    private boolean check_ReadStoragepermission() {
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            Constant.permission_Read_data);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
+        }
+        return false;
     }
     public void dialogSuccessOrder() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -384,6 +447,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
                 params.put("sndCodigo", category_id);
                 params.put("sndNombre", category_name);
                 params.put("snd_comentario", st_comment);
+                params.put("snd_image", Foto_a_enviar);
                 return params;
             }
 
@@ -391,6 +455,85 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
 
         RequestQueue requestQueue = Volley.newRequestQueue(ActivityInteligenciaMercado.this);
         requestQueue.add(stringRequest);
+    }
+    public String getPath(Uri uri) {
+        String result = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = this.getContentResolver().query(uri, proj, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int column_index = cursor.getColumnIndexOrThrow(proj[0]);
+                result = cursor.getString(column_index);
+            }
+            cursor.close();
+        }
+        if (result == null) {
+            result = "Not found";
+        }
+        return result;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            (dialog.findViewById(R.id.id_lyt_adjunto)).setVisibility(View.VISIBLE);
+
+            Uri selectedImage = data.getData();
+            InputStream imageStream = null;
+            try {
+                imageStream = this.getContentResolver().openInputStream(Objects.requireNonNull(selectedImage));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            final Bitmap imagebitmap = BitmapFactory.decodeStream(imageStream);
+
+            String path = getPath(selectedImage);
+            Matrix matrix = new Matrix();
+            ExifInterface exif;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                try {
+                    exif = new ExifInterface(path);
+                    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+                    switch (orientation) {
+                        case ExifInterface.ORIENTATION_ROTATE_90:
+                            matrix.postRotate(90);
+                            break;
+                        case ExifInterface.ORIENTATION_ROTATE_180:
+                            matrix.postRotate(180);
+                            break;
+                        case ExifInterface.ORIENTATION_ROTATE_270:
+                            matrix.postRotate(270);
+                            break;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            Bitmap rotatedBitmap = Bitmap.createBitmap(imagebitmap, 0, 0, imagebitmap.getWidth(), imagebitmap.getHeight(), matrix, true);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+
+
+
+            ImageView adjunto = dialog.findViewById(R.id.id_foto_adjunta);
+
+
+            adjunto.setImageBitmap(rotatedBitmap);
+            imageByteArrayktp = baos.toByteArray();
+            decodedktp = BitmapFactory.decodeStream(new ByteArrayInputStream(baos.toByteArray()));
+            Foto_a_enviar = getStringImagektp(decodedktp);
+
+        }
+
+    }
+    public String getStringImagektp(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+        imageByteArrayktp = baos.toByteArray();
+        return Base64.encodeToString(imageByteArrayktp, Base64.DEFAULT);
     }
     @Override
     public void onContactSelected(Comentarios comentarios) {

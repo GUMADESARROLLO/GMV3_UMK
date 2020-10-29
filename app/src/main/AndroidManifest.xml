@@ -44,7 +44,7 @@
             android:name="com.app.gmv3.activities.ActivityInteligenciaMercado"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityNoFacturado"
+            android:name="com.app.gmv3.activities.ActivityProductNoFacturado"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityComentario"

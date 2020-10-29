@@ -74,7 +74,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:text="Codigo "
+                            android:text=""
                             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                             android:textColor="@color/grey_40" />
 

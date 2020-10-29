@@ -36,7 +36,7 @@ import java.util.List;
 
 import static com.app.gmv3.utilities.Constant.GET_NO_FACTURADO;
 
-public class ActivityNoFacturado extends AppCompatActivity {
+public class ActivityProductNoFacturado extends AppCompatActivity {
     String cod_factura;
 
     private RecyclerAdapterNoFacturado mAdapter;
@@ -62,7 +62,7 @@ public class ActivityNoFacturado extends AppCompatActivity {
         cod_factura = intent.getStringExtra("factura_id");
 
         lyt_empty_history = findViewById(R.id.lyt_empty_result);
-        getSupportActionBar().setTitle("Articulo No facturado.");
+        getSupportActionBar().setTitle("Articulo Disponible No facturado.");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();

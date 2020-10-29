@@ -48,7 +48,7 @@ public class RecyclerAdapterLotes extends RecyclerView.Adapter<RecyclerAdapterLo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.txt_id_lote.setText(ActivityProductDetail.lote_name.get(position));
-        holder.txt_date_lote.setText(ActivityProductDetail.lote_date.get(position));
+        holder.txt_date_lote.setText(("Exp. ").concat(ActivityProductDetail.lote_date.get(position)));
         holder.txt_cant_lote.setText(ActivityProductDetail.lote_cant.get(position));
 
         Log.e("Error", "onBindViewHolder: " + ActivityProductDetail.lote_name.get(position) );

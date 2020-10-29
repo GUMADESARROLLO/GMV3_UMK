@@ -45,6 +45,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/id_date_lote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lote"
@@ -53,10 +54,10 @@
 
 
             <TextView
-                android:id="@+id/id_date_lote"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10 jan 2018 11:20"
+                android:text=""
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                 android:textColor="@color/grey_40" />
 

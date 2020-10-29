@@ -30,7 +30,7 @@ public class Constant {
     public static final String POST_REPORT = BASE_URL + "/api/api.php?post_report=";
     public static final String GET_COMENTARIOS_IM = BASE_URL + "/api/api.php?get_comentarios_im=";
 
-
+    public static final String POST_UDAPTE_DATOS = BASE_URL + "/api/api.php?post_update_datos";
 
     public static final String NORMAL_LOGIN_URL = BASE_URL + "/api/api.php?post_usuario=";
     public static int GET_SUCCESS_MSG;
@@ -42,5 +42,7 @@ public class Constant {
     public static final String USER_EMAIL = "Correo";
     public static final String SUCCESS = "success";
     public static final String MSG = "msg";
+
+    public static int permission_Read_data = 789;
 
 }

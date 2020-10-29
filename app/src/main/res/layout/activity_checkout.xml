@@ -1,219 +1,346 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/lyt_checkout"
-        android:layout_below="@+id/toolbar"
-        android:fadeScrollbars="true"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/lytContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="6dp"
-            android:paddingTop="18dp"
-            android:paddingRight="6dp"
-            android:paddingBottom="18dp">
+            android:padding="@dimen/spacing_large">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/spacing_large">
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edt_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="F00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    app:fontFamily="sans-serif-medium"
+                    android:gravity="start" />
+                <TextView
+                    android:id="@+id/edt_id_pedido"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ID: F10-SLJGSG"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    app:fontFamily="sans-serif-medium"
+                    android:gravity="end" />
 
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/edt_email"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:orientation="horizontal">
+                    android:gravity="center_vertical"
+                    android:text="00000 - "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_90" />
 
-                    <EditText
-                        android:id="@+id/edt_name"
-                        style="@style/EditText.Flat.Grey.Small"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_round_bg_outline"
-                        android:hint="@string/checkout_your_name"
-                        android:minHeight="@dimen/spacing_xmlarge" />
-
-                    <View
-                        android:layout_width="@dimen/spacing_middle"
-                        android:layout_height="0dp" />
-
-                    <EditText
-                        android:id="@+id/edt_email"
-                        style="@style/EditText.Flat.Grey.Small"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_round_bg_outline"
-                        android:hint="@string/checkout_email"
-                        android:minHeight="@dimen/spacing_xmlarge" />
-
-                </LinearLayout>
-
-                <EditText
+                <TextView
                     android:id="@+id/edt_phone"
-                    style="@style/EditText.Flat.Grey.Small"
-                    android:hint="@string/checkout_phone_number"
-                    android:lines="3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_outline"
-
-                    android:minHeight="@dimen/spacing_xmlarge" />
-
-                <EditText
-
-                    android:id="@+id/edt_address"
-                    style="@style/EditText.Flat.Grey.Small"
-                    android:lines="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_outline"
-                    android:hint="@string/checkout_address"
-                    android:minHeight="@dimen/spacing_xmlarge" />
+                    android:gravity="center_vertical"
+                    android:text="00000000"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey_90"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
 
 
 
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_large">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dirección"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    app:fontFamily="sans-serif-medium" />
+
+            </LinearLayout>
 
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_xmedium"
-                android:layout_marginRight="@dimen/spacing_xmedium"
-                android:gravity="center"
-                android:text="@string/checkout_order_list"
+                android:id="@+id/edt_address"
+                android:text="DIRECCION SUPER LARGA PARA QUE MIRE SUPER GUAY"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/grey_40" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/edt_order_list"
-                    android:layout_margin="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="top|left"
-
-                    android:inputType="textMultiLine"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_outline"
-                    android:minHeight="@dimen/spacing_xmlarge">
-
-                </EditText>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/edt_order_total"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:inputType="text"
-                    android:padding="10dp"
-                    android:textColor="@color/hint">
-
-                </EditText>
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_xmedium"
-                android:layout_marginRight="@dimen/spacing_xmedium"
-                android:gravity="center"
-                android:text="@string/checkout_add_comment"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/grey_40" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/edt_comment"
-                    android:layout_margin="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="top|left"
-
-                    android:inputType="textMultiLine"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_outline"
-                    android:minHeight="@dimen/spacing_xmlarge"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:textColor="@color/grey_90"
+                app:fontFamily="sans-serif-medium" />
 
         </LinearLayout>
 
-    </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/lyt_checkout"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary">
-
-        <com.balysv.materialripple.MaterialRippleLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            app:mrl_rippleAlpha="0.2"
-            app:mrl_rippleColor="@color/ripple_color"
-            app:mrl_rippleHover="true"
-            app:mrl_rippleOverlay="true">
+            android:layout_height="1dp"
+            android:background="@color/grey_10" />
 
-            <Button
-                android:id="@+id/btn_submit_order"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_large">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:text="@string/btn_process_checkout"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        </com.balysv.materialripple.MaterialRippleLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="PRODUCTOS:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    app:fontFamily="sans-serif-medium" />
+                <TextView
+                    android:id="@+id/id_count_items"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0 Item(s)"
+                    android:gravity="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    app:fontFamily="sans-serif-medium" />
 
-    </RelativeLayout>
+            </LinearLayout>
 
-</RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_item_resumen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/appBarLayout"
+                android:scrollbars="horizontal"
+                android:scrollingCache="true" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_large">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="COMENTARIO:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    app:fontFamily="sans-serif-medium" />
+
+                <ImageView
+                    android:id="@+id/id_img_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_comment"
+                     />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/edt_order_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginStart="@dimen/spacing_middle"
+                    android:layout_weight="1"
+                    android:text="@string/lorem_ipsum"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey_90"
+                    app:fontFamily="sans-serif-medium" />
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_large">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SubTotal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/edt_total_precio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00 "
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_90"
+                app:fontFamily="sans-serif-medium" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_large">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="IVA"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/edt_iva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00 "
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_90"
+                app:fontFamily="sans-serif-medium" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_large">
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/edt_order_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$143.50"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_90"
+                app:fontFamily="sans-serif-black" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_10" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xxlarge" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="@drawable/btn_rounded_green"
+            android:paddingLeft="@dimen/spacing_mlarge"
+            android:paddingRight="@dimen/spacing_mlarge"
+            android:text="PROCESAR PEDIDO"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

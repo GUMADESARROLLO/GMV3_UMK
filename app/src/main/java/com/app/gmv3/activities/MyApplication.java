@@ -27,6 +27,7 @@ public class MyApplication extends Application {
         OneSignal.startInit(this)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
+
     }
 
     public static synchronized MyApplication getInstance() {

@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="180dp"
         android:tint="@color/white"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -19,8 +19,23 @@
         android:src="@drawable/logo_stander_full" />
 
 
+
+    <TextView
+
+        android:id="@+id/app_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xlarge"
+        android:text="3.0.1"
+        android:textSize="40sp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textColor="@color/white"
+        app:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal" />
+
+
     <ProgressBar
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

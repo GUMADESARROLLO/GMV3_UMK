@@ -81,29 +81,11 @@
             android:minWidth="0dp"
             android:paddingLeft="@dimen/spacing_large"
             android:paddingRight="@dimen/spacing_large"
-            android:text="ENVIAR" />
+            android:text="GUARDAR" />
 
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/spacing_medium">
 
-        <EditText
-            android:id="@+id/edt_title"
-            style="@style/EditText.Flat.Grey.Small"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:background="@drawable/edit_text_round_bg_outline"
-            android:hint="@string/feedback_name"
-            android:lines="3"
-            android:minHeight="@dimen/spacing_xmlarge" />
-
-
-
-    </LinearLayout>
 
 
     <LinearLayout
@@ -119,46 +101,17 @@
             android:gravity="top"
             android:hint="Escriba algo ..."
             android:padding="@dimen/spacing_large"
-            android:textSize="14dp" />
+            android:textSize="14dp" >
+                <requestFocus/>
+        </EditText>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/id_lyt_adjunto"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/grey_5"
-        android:gravity="start"
-        android:orientation="horizontal">
-
-        <ImageView
-
-            android:layout_marginLeft="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:id="@+id/id_foto_adjunta"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_loading"
-
-            />
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/grey_5"
         android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/bt_link"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/grey_40"
-            app:srcCompat="@drawable/ic_add_photo" />
 
         <ImageButton
             android:layout_width="?attr/actionBarSize"

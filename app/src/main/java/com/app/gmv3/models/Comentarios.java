@@ -5,6 +5,7 @@ public class Comentarios {
     String Contenido;
     String Fecha;
     String Autor;
+    String Imagen;
 
     public String getTitulo() {
         return Titulo;
@@ -20,5 +21,9 @@ public class Comentarios {
 
     public String getAutor() {
         return Autor;
+    }
+
+    public String getImagen() {
+        return Imagen;
     }
 }

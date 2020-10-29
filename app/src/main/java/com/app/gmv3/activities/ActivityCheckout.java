@@ -1,6 +1,7 @@
 package com.app.gmv3.activities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,16 +9,32 @@ import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.app.gmv3.adapters.RecyclerAdapterBnfc;
+import com.app.gmv3.adapters.RecyclerAdapterLstResumen;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.format.DateFormat;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -51,8 +68,8 @@ public class ActivityCheckout extends AppCompatActivity {
 
     RequestQueue requestQueue;
     Button btn_submit_order;
-    EditText edt_name, edt_email, edt_phone, edt_address, edt_order_list, edt_order_total, edt_comment;
-    String str_name, str_email, str_phone, str_address, str_order_list, str_order_total, str_comment;
+    TextView edt_name, edt_email, edt_phone, edt_address, edt_order_list, edt_order_total,edt_iva,edt_total_precio,edt_id_pedido,txt_count;
+    String str_name, str_email, str_phone, str_address, str_order_list, str_order_total, str_comment="";
     String data_order_list = "";
     double str_tax;
     String str_currency_code;
@@ -65,10 +82,9 @@ public class ActivityCheckout extends AppCompatActivity {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String date = dateFormat.format(Calendar.getInstance().getTime());
     SharedPref sharedPref;
-    private Spinner spinner;
-    private ArrayList<String> arrayList;
-    private JSONArray result;
-    String Result;
+
+    RecyclerView rcListaProductos;
+    RecyclerAdapterLstResumen rcLista_Resumen;
 
 
     @Override
@@ -110,8 +126,21 @@ public class ActivityCheckout extends AppCompatActivity {
         edt_phone = findViewById(R.id.edt_phone);
         edt_address = findViewById(R.id.edt_address);
         edt_order_list = findViewById(R.id.edt_order_list);
+
         edt_order_total = findViewById(R.id.edt_order_total);
-        edt_comment = findViewById(R.id.edt_comment);
+        edt_iva = findViewById(R.id.edt_iva);
+        edt_total_precio = findViewById(R.id.edt_total_precio);
+
+        edt_id_pedido = findViewById(R.id.edt_id_pedido);
+        txt_count = findViewById(R.id.id_count_items);
+
+        edt_id_pedido.setText(("ID: ").concat(rand));
+
+        rcListaProductos = findViewById(R.id.recycler_item_resumen);
+        rcListaProductos.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        rcListaProductos.setItemAnimator(new DefaultItemAnimator());
+
+
 
 
         edt_name.setEnabled(false);
@@ -124,6 +153,20 @@ public class ActivityCheckout extends AppCompatActivity {
         getDataFromDatabase();
         submitOrder();
 
+        rcLista_Resumen = new RecyclerAdapterLstResumen(this, data,str_currency_code);
+        rcListaProductos.setAdapter(rcLista_Resumen);
+
+        txt_count.setText(rcLista_Resumen.getItemCount() + " Item(s)");
+
+
+
+        ((ImageView) findViewById(R.id.id_img_comment)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCustomDialog();
+            }
+        });
+
     }
 
 
@@ -135,68 +178,14 @@ public class ActivityCheckout extends AppCompatActivity {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.title_checkout);
+            getSupportActionBar().setTitle("Resumen");
         }
     }
 
 
-    private void getSpinnerData() {
-
-        arrayList = new ArrayList<String>();
-
-        StringRequest stringRequest = new StringRequest(GET_SHIPPING, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(response);
-                    result = jsonObject.getJSONArray("result");
-                    getShipping(result);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
 
 
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-    }
-
-    private void getShipping(JSONArray jsonArray) {
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                JSONObject json = jsonArray.getJSONObject(i);
-                arrayList.add(json.getString("shipping_name"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ActivityCheckout.this, R.layout.spinner_item, arrayList);
-        myAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner.setAdapter(myAdapter);
-    }
-
-    private String setShipping(int position) {
-        String name = "";
-        try {
-            JSONObject json = result.getJSONObject(position);
-            name = json.getString("shipping_name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return name;
-    }
 
     public void submitOrder() {
         btn_submit_order.setOnClickListener(new View.OnClickListener() {
@@ -213,9 +202,8 @@ public class ActivityCheckout extends AppCompatActivity {
         str_email = edt_email.getText().toString();
         str_phone = edt_phone.getText().toString();
         str_address = edt_address.getText().toString();
-        str_order_list = edt_order_list.getText().toString();
+        str_order_list = data_order_list;
         str_order_total = edt_order_total.getText().toString();
-        str_comment = edt_comment.getText().toString();
 
         if (str_name.equalsIgnoreCase("") ||
                 str_email.equalsIgnoreCase("") ||
@@ -320,6 +308,8 @@ public class ActivityCheckout extends AppCompatActivity {
 
         data = dbhelper.getAllData();
 
+
+
         double Order_price = 0;
         double Total_price = 0;
         double tax = 0;
@@ -334,14 +324,14 @@ public class ActivityCheckout extends AppCompatActivity {
 
             double Sub_total_price = Double.parseDouble(row.get(4).toString());
 
-            String _Sub_total_price = String.format(Locale.GERMAN, "%1$,.0f", Sub_total_price);
+            String _Sub_total_price = String.format(Locale.ENGLISH, "%1$,.2f", Sub_total_price);
 
             Order_price += Sub_total_price;
 
             if (Config.ENABLE_DECIMAL_ROUNDING) {
                 data_order_list += (Quantity + " " + "[" + prod_cod + "] - " + Menu_name + " " + Bonificado + " " + _Sub_total_price + " " + str_currency_code + ",\n\n");
             } else {
-                data_order_list += (Quantity + " " + "[" + prod_cod + "] - " + Menu_name + " " + Bonificado + " " + Sub_total_price + " " + str_currency_code + ",\n\n");
+                data_order_list += (Quantity + " " + "[" + prod_cod + "] - " + Menu_name + " " + Bonificado + " " + _Sub_total_price + " " + str_currency_code + ",\n\n");
             }
         }
 
@@ -352,10 +342,11 @@ public class ActivityCheckout extends AppCompatActivity {
         tax = Order_price * (str_tax / 100);
         Total_price = Order_price + tax;
 
-        String price_tax = String.format(Locale.GERMAN, "%1$,.0f", str_tax);
-        String _Order_price = String.format(Locale.GERMAN, "%1$,.0f", Order_price);
-        String _tax = String.format(Locale.GERMAN, "%1$,.0f", tax);
-        String _Total_price = String.format(Locale.GERMAN, "%1$,.0f", Total_price);
+        String price_tax = String.format(Locale.ENGLISH, "%1$,.2f", str_tax);
+        String _Order_price = String.format(Locale.ENGLISH, "%1$,.2f", Order_price);
+        String _tax = String.format(Locale.ENGLISH, "%1$,.2f", tax);
+        String _Total_price = String.format(Locale.ENGLISH, "%1$,.2f", Total_price);
+
 
         if (Config.ENABLE_DECIMAL_ROUNDING) {
             data_order_list += "\n" + getResources().getString(R.string.txt_order) + " " + _Order_price + " " + str_currency_code +
@@ -366,14 +357,16 @@ public class ActivityCheckout extends AppCompatActivity {
             edt_order_total.setText(_Total_price + " " + str_currency_code);
 
         } else {
-            data_order_list += "\n" + getResources().getString(R.string.txt_order) + " " + Order_price + " " + str_currency_code +
+            data_order_list += "\n" + getResources().getString(R.string.txt_order) + " " + _Order_price + " " + str_currency_code +
                     "\n" + getResources().getString(R.string.txt_tax) + " " + str_tax + " % : " + tax + " " + str_currency_code +
-                    "\n" + getResources().getString(R.string.txt_total) + " " + Total_price + " " + str_currency_code;
+                    "\n" + getResources().getString(R.string.txt_total) + " " + _Total_price + " " + str_currency_code;
 
-            edt_order_total.setText(Total_price + " " + str_currency_code);
+            edt_order_total.setText(_Order_price + " " + str_currency_code);
+            edt_iva.setText(str_tax + " " + str_currency_code);
+            edt_total_precio.setText(_Total_price + " " + str_currency_code);
         }
 
-        edt_order_list.setText(data_order_list);
+        edt_order_list.setText(str_comment);
 
     }
 
@@ -406,6 +399,12 @@ public class ActivityCheckout extends AppCompatActivity {
             stringBuilder.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
         return stringBuilder.toString();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_resumen_pedido, menu);
+        return true;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -414,19 +413,77 @@ public class ActivityCheckout extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.btn_add_cliente:
-                startActivity( new Intent(getApplicationContext(), ActivityClients.class));
+            case R.id.id_comment_white:
+                showCustomDialog();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    private void showCustomDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_add_comment);
+        dialog.setCancelable(true);
 
+        final TextView et_post =  dialog.findViewById(R.id.et_post);
+
+        et_post.setText("");
+        et_post.setText(str_comment);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        final String Fecha = (String) DateFormat.format("EEE dd MMM yyyy hh:mm aaa'", Calendar.getInstance().getTime());
+
+        final AppCompatButton bt_submit = dialog.findViewById(R.id.bt_submit);
+
+
+
+        ((TextView) dialog.findViewById(R.id.edt_Nombre)).setText(sharedPref.getYourAddress());
+        ((TextView) dialog.findViewById(R.id.edt_ruta)).setText(sharedPref.getYourName());
+        ((TextView) dialog.findViewById(R.id.lbl_date)).setText(Fecha);
+
+
+        ((EditText) dialog.findViewById(R.id.et_post)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                bt_submit.setEnabled(!s.toString().trim().isEmpty());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
+        bt_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                str_comment = et_post.getText().toString();
+                edt_order_list.setText(str_comment);
+                dialog.dismiss();
+
+            }
+        });
+
+
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
     @Override
     public void onResume() {
         edt_name.setText(sharedPref.getYourName());
-        edt_email.setText(str_email);
+        edt_email.setText(str_email.concat(" - "));
         edt_phone.setText(str_name);
         edt_address.setText(str_address);
 

@@ -52,7 +52,7 @@
     <string name="checkout_your_name">Vendedor</string>
     <string name="checkout_email">Código Cliente</string>
     <string name="checkout_phone_number">Nombre de Cliente</string>
-    <string name="checkout_order_list">Detalle de la orden</string>
+    <string name="checkout_order_list">Resumen</string>
     <string name="checkout_add_comment">Comentario</string>
     <string name="no_order_menu">No orden</string>
     <string name="txt_order">Orden :</string>
@@ -79,7 +79,7 @@
     <string name="checkout_address">Dirección</string>
     <string name="checkout_shipping">Orden</string>
     <string name="title_history">Historial de pedidos</string>
-    <string name="title_profile">Profil de usuario</string>
+    <string name="title_profile">Perfil de usuario</string>
     <string name="btn_process_checkout">PROCESAR PEDIDO</string>
 
     <!--profile preferences-->
@@ -89,9 +89,11 @@
     <string name="pref_title_phone">Numero de Telefono</string>
     <string name="pref_title_address">Dirección</string>
     <string name="pref_title_ruta">Ruta</string>
+    <string name="pref_title_password">Contraseña</string>
     <string name="default_your_name">Su Nombre</string>
     <string name="default_your_email">Su.email@gmail.com</string>
     <string name="default_your_phone">+50500000000</string>
+    <string name="default_your_password">****</string>
     <string name="default_your_address">Su Dirección</string>
     <string name="default_your_ruta">Seleccine al vendedor que esta trabajando</string>
     <string name="pref_msg_invalid_name">Nombre no válido</string>
@@ -99,6 +101,7 @@
     <string name="pref_msg_invalid_phone">Telefono no válido</string>
     <string name="pref_msg_invalid_address">Direccion no válido</string>
     <string name="pref_msg_invalid_ruta">Ruta no válido</string>
+
 
     <!--permission-->
     <string name="permission_msg">Necesita Permisos</string>

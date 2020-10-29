@@ -90,6 +90,15 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="@color/grey_60" />
 
+
+        <ImageView
+            android:id="@+id/id_img_news"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_3" />
+
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

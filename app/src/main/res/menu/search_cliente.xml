@@ -10,7 +10,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/action_filtro"
         android:title="@string/text_filtro"
-        android:icon="@drawable/ic_reoder"
+        android:icon="@drawable/ic_filter_alt"
         app:showAsAction="always|collapseActionView" />
 
 

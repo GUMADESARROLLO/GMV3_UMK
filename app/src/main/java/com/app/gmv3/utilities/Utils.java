@@ -204,6 +204,21 @@ public class Utils {
         }
     }
 
+    public static String getFormated_Date(String date_str) {
+        if (date_str != null && !date_str.trim().equals("")) {
+            SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat newFormat = new SimpleDateFormat("EEE dd MMM yyyy");
+            try {
+                String newStr = newFormat.format(oldFormat.parse(date_str));
+                return newStr;
+            } catch (ParseException e) {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
     public static boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }

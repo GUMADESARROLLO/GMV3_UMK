@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lyt_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:paddingBottom="@dimen/spacing_medium"
     android:clickable="true"
@@ -12,11 +11,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="110dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:layout_marginLeft="@dimen/spacing_medium"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:clipToPadding="true"
@@ -26,17 +24,16 @@
             app:cardUseCompatPadding="false">
 
             <ImageView
-                android:id="@+id/id_moroso_img"
-
+                android:id="@+id/id_image_producto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_person" />
+                android:src="@drawable/ic_loading" />
 
         </androidx.cardview.widget.CardView>
 
         <View
-            android:layout_width="@dimen/spacing_medium"
+            android:layout_width="@dimen/spacing_middle"
             android:layout_height="0dp" />
 
         <LinearLayout
@@ -50,7 +47,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/client_name"
+                    android:id="@+id/edt_producto_nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="5"
@@ -65,27 +62,24 @@
                     android:layout_marginTop="@dimen/spacing_small"
                     android:orientation="horizontal">
 
-
-
                     <TextView
-                        android:id="@+id/client_dir"
+                        android:id="@+id/id_sku"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Boni. "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                        android:textColor="@color/grey_40" />
+
+                    <TextView
+                        android:id="@+id/id_bonificacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:text="00000000"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                         android:textColor="@color/light_blue_400"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/client_moroso"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:layout_marginLeft="@dimen/spacing_xmedium"
-                        android:layout_marginRight="@dimen/spacing_xmedium"
-                        android:gravity="center"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/red"/>
 
                 </LinearLayout>
 
@@ -100,7 +94,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/id_cliente_disponible"
+                        android:id="@+id/product_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="C$ 150,000.00"
@@ -114,23 +108,10 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/id_cliente_saldo"
+                        android:id="@+id/id_cant_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="150,000.00"
-                        android:textColor="@color/grey_40" />
-
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/id_cliente_limite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="150,000.00 "
+                        android:text="150,000.00 [CJA]"
                         android:textColor="@color/grey_40" />
 
                 </LinearLayout>
@@ -146,4 +127,11 @@
             android:background="@color/grey_5" />
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:background="@color/grey_10" />
 </LinearLayout>

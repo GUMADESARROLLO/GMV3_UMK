@@ -21,23 +21,33 @@
         android:id="@+id/userInputDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
 
 
 
 
     <TextView
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bonificado:"
+        android:text="Bonificado"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Spinner
-
-        android:layout_marginTop="10dp"
-        android:id="@+id/spinner_bonificado"
+    <EditText
+        android:id="@+id/txt_bonificado"
+        android:layout_marginTop="8dp"
+        android:enabled="false"
+        android:background="@drawable/edit_text_round_bg_outline"
+        style="@style/EditText.Flat.Grey.Small"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+
 
 </LinearLayout>

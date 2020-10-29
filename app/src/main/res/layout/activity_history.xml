@@ -30,6 +30,8 @@
             android:scrollbars="vertical"
             android:scrollingCache="true" />
 
+
+
         <include
             android:id="@+id/lyt_empty_history"
             layout="@layout/include_empty_history"

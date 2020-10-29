@@ -5,6 +5,8 @@
     <color name="colorPrimaryDark">#003044</color>
     <color name="colorPrimary">#006690</color>
     <color name="colorAccent">#009cdd</color>
+    <color name="overlay_dark_30">#4D000000</color>
+    <color name="overlay_dark_40">#66000000</color>
 
     <!--other color-->
     <color name="txt_price_color">#0AAC3A</color>

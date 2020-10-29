@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.gmv3.Config;
@@ -28,7 +30,7 @@ public class RecyclerAdapterClients extends RecyclerView.Adapter<RecyclerAdapter
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView cliente_Nombre, cliente_direccion,cliente_disponible,cliente_saldo,cliente_limite,cliente_moroso;
-        public CardView cardView;
+        public ImageView ly;
         public MyViewHolder(View view) {
             super(view);
             cliente_Nombre = view.findViewById(R.id.client_name);
@@ -37,7 +39,7 @@ public class RecyclerAdapterClients extends RecyclerView.Adapter<RecyclerAdapter
             cliente_saldo = view.findViewById(R.id.id_cliente_saldo);
             cliente_limite = view.findViewById(R.id.id_cliente_limite);
             cliente_moroso = view.findViewById(R.id.client_moroso);
-            cardView = view.findViewById(R.id.id_element_cardview);
+            ly = view.findViewById(R.id.id_moroso_img);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -65,20 +67,20 @@ public class RecyclerAdapterClients extends RecyclerView.Adapter<RecyclerAdapter
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         Clients clients = ClientListFiltered.get(position);
+        holder.cliente_Nombre.setText(clients.getCLIENTE() + " - " + clients.getNOMBRE());
         if (clients.getMOROSO().equals("S")){
-            holder.cliente_Nombre.setText(clients.getCLIENTE() + " - " + clients.getNOMBRE().concat(" [MOROSO]"));
-
-            holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.red_light));;
+           // holder.ly.setBackgroundColor(context.getResources().getColor(R.color.red_light));;
+            holder.ly.setImageDrawable(context.getResources().getDrawable(R.drawable.img_person_morosa));
         }else{
-            holder.cliente_Nombre.setText(clients.getCLIENTE() + " - " + clients.getNOMBRE());
-            holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.white));;
+
+            holder.ly.setImageDrawable(context.getResources().getDrawable(R.drawable.img_person));
         }
         holder.cliente_direccion.setText(clients.getDIRECCION());
 
         if (Config.ENABLE_DECIMAL_ROUNDING) {
-            String p1 = String.format(Locale.GERMAN, "%1$,.0f", clients.getDIPONIBLE());
-            String p2 = String.format(Locale.GERMAN, "%1$,.0f", clients.getSALDO());
-            String p3 = String.format(Locale.GERMAN, "%1$,.0f", clients.getLIMITE());
+            String p1 = String.format(Locale.ENGLISH, "%1$,.0f", clients.getDIPONIBLE());
+            String p2 = String.format(Locale.ENGLISH, "%1$,.0f", clients.getSALDO());
+            String p3 = String.format(Locale.ENGLISH, "%1$,.0f", clients.getLIMITE());
 
             holder.cliente_disponible.setText("C$ " + p1);
             holder.cliente_saldo.setText("C$ " + p2);
