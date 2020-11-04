@@ -320,12 +320,36 @@ public class ActivityHistory extends AppCompatActivity {
             mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
 
+        String[] data_order_list    = order_list.get(position).split("],");
+        int cLineas                 = data_order_list.length -1;
+        String str_detalles_linea = "";
+
+        for (int i = 0; i < cLineas; i++) {
+
+            String[] Lineas_detalles    = data_order_list[i].split(";");
+
+            String Quantity     = Lineas_detalles[0].replace("[","");
+            String prod_cod    = Lineas_detalles[1];
+            String Menu_name     = Lineas_detalles[2];
+            String Bonificado   = Lineas_detalles[3];
+            String _Sub_total_price   = Lineas_detalles[4];
+
+            str_detalles_linea += (Quantity + " [ " + prod_cod + " ] " + Menu_name + " " + Bonificado + " " + _Sub_total_price  + "\n\n");
+
+        }
+
+        str_detalles_linea += data_order_list[cLineas].replace(";","").replace("[","").replace("]","");
+
         final View view = getLayoutInflater().inflate(R.layout.item_bottom_sheet, null);
         ((TextView) view.findViewById(R.id.id_cliente_pedido)).setText(name_cliente.get(position));
         ((TextView) view.findViewById(R.id.sheet_code)).setText(code.get(position));
         ((TextView) view.findViewById(R.id.sheet_date)).setText(Utils.getFormatedDate(date_time.get(position)));
-        ((TextView) view.findViewById(R.id.sheet_order_list)).setText(order_list.get(position));
+        ((TextView) view.findViewById(R.id.sheet_order_list)).setText(str_detalles_linea);
         ((TextView) view.findViewById(R.id.sheet_order_total)).setText(order_total.get(position));
+
+
+
+
 
         ((ImageView) view.findViewById(R.id.img_copy)).setOnClickListener(new View.OnClickListener() {
             @Override

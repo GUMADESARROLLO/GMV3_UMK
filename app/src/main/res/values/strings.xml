@@ -7,7 +7,7 @@
     <!--bottom navigation-->
     <string name="title_nav_recent">ARTICULOS</string>
     <string name="title_nav_category">CLIENTES</string>
-    <string name="title_nav_help">Ayuda</string>
+    <string name="title_nav_help">AYUDA</string>
     <string name="title_nav_profile">PERFIL</string>
 
     <!--privacy policy-->
@@ -45,7 +45,7 @@
     <string name="btn_out_of_stock">AGOTADO</string>
     <string name="msg_stock_not_enough">El stock no es suficiente</string>
     <string name="msg_stock_below_0">La cantidad del producto no puede ser 0</string>
-    <string name="msg_success_add_cart">Éxito agregar producto al carrito</string>
+    <string name="msg_success_add_cart">Se agrego el producto al carrito</string>
     <string name="btn_checkout">Siguiente</string>
 
     <!--checkout menu-->
@@ -151,5 +151,20 @@
     <string name="feedback_name">Asunto:</string>
     <string name="text_filtro">Filtrar</string>
 
-
+    <string name="b9">9</string>
+    <string name="b8">8</string>
+    <string name="b7">7</string>
+    <string name="b6">6</string>
+    <string name="b5">5</string>
+    <string name="b4">4</string>
+    <string name="b3">3</string>
+    <string name="b2">2</string>
+    <string name="b1">1</string>
+    <string name="b0">0</string>
+    <string name="divide">/</string>
+    <string name="multiply">*</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="ce">ce</string>
+    <string name="equals"></string>
 </resources>

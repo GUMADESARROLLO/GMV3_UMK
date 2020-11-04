@@ -63,7 +63,7 @@ public class ShoppingCartSimple extends AppCompatActivity {
         cod_factura = intent.getStringExtra("factura_id");
         date_factura = intent.getStringExtra("factura_date");
 
-        getSupportActionBar().setTitle(("Nº ").concat(cod_factura).concat(" del ").concat(date_factura));
+        getSupportActionBar().setTitle(("Nº ").concat(cod_factura));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();

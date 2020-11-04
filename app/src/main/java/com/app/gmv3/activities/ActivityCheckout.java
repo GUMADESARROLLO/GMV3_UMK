@@ -28,6 +28,7 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -329,11 +330,13 @@ public class ActivityCheckout extends AppCompatActivity {
             Order_price += Sub_total_price;
 
             if (Config.ENABLE_DECIMAL_ROUNDING) {
-                data_order_list += (Quantity + " " + "[" + prod_cod + "] - " + Menu_name + " " + Bonificado + " " + _Sub_total_price + " " + str_currency_code + ",\n\n");
+                data_order_list += "[" + (Quantity + ";" + prod_cod + ";" + Menu_name + ";" + Bonificado + ";" + _Sub_total_price + " " + str_currency_code + "],");
             } else {
-                data_order_list += (Quantity + " " + "[" + prod_cod + "] - " + Menu_name + " " + Bonificado + " " + _Sub_total_price + " " + str_currency_code + ",\n\n");
+                data_order_list += "[" + (Quantity + ";" + prod_cod + ";" + Menu_name + ";" + Bonificado + ";" + _Sub_total_price + " " + str_currency_code + "],");
             }
         }
+
+
 
         if (data_order_list.equalsIgnoreCase("")) {
             data_order_list += getString(R.string.no_order_menu);
@@ -349,17 +352,17 @@ public class ActivityCheckout extends AppCompatActivity {
 
 
         if (Config.ENABLE_DECIMAL_ROUNDING) {
-            data_order_list += "\n" + getResources().getString(R.string.txt_order) + " " + _Order_price + " " + str_currency_code +
-                    "\n" + getResources().getString(R.string.txt_tax) + " " + price_tax + " % : " + _tax + " " + str_currency_code +
-                    "\n" + getResources().getString(R.string.txt_total) + " " + _Total_price + " " + str_currency_code;
+            data_order_list += "\n[" + getResources().getString(R.string.txt_order) + " " + _Order_price + " " + str_currency_code+";" +
+                    "\n" + getResources().getString(R.string.txt_tax) + " " + price_tax + " % : " + _tax + " " + str_currency_code+";" +
+                    "\n" + getResources().getString(R.string.txt_total) + " " + _Total_price + " " + str_currency_code + "]";
 
 
             edt_order_total.setText(_Total_price + " " + str_currency_code);
 
         } else {
-            data_order_list += "\n" + getResources().getString(R.string.txt_order) + " " + _Order_price + " " + str_currency_code +
-                    "\n" + getResources().getString(R.string.txt_tax) + " " + str_tax + " % : " + tax + " " + str_currency_code +
-                    "\n" + getResources().getString(R.string.txt_total) + " " + _Total_price + " " + str_currency_code;
+            data_order_list += "\n[" + getResources().getString(R.string.txt_order) + " " + _Order_price + " " + str_currency_code +";" +
+                    "\n" + getResources().getString(R.string.txt_tax) + " " + str_tax + " % : " + tax + " " + str_currency_code+";" +
+                    "\n" + getResources().getString(R.string.txt_total) + " " + _Total_price + " " + str_currency_code + "]";
 
             edt_order_total.setText(_Order_price + " " + str_currency_code);
             edt_iva.setText(str_tax + " " + str_currency_code);
@@ -371,13 +374,20 @@ public class ActivityCheckout extends AppCompatActivity {
     }
 
     public void dialogSuccessOrder() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.checkout_success_title);
-        builder.setMessage(R.string.checkout_success_msg);
-        builder.setCancelable(false);
-        builder.setPositiveButton(R.string.checkout_option_ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_info);
+        dialog.setCancelable(true);
 
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+
+        (dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 String strClient = ("[").concat(str_email).concat("] - ").concat(str_phone);
 
                 dbhelper.addDataHistory(rand, str_order_list, str_order_total, date,strClient);
@@ -386,10 +396,12 @@ public class ActivityCheckout extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
+                dialog.dismiss();
             }
         });
-        AlertDialog alert = builder.create();
-        alert.show();
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
     }
 
     private static String getRandomString(final int sizeOfRandomString) {

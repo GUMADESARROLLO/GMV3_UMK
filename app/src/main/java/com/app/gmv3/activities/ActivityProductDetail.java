@@ -3,6 +3,7 @@ package com.app.gmv3.activities;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,32 +18,34 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.Settings;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,9 +61,6 @@ import com.app.gmv3.adapters.RecyclerAdapterLotes;
 import com.app.gmv3.models.Lotes;
 import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.Utils;
-import com.app.gmv3.utilities.ViewAnimation;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -105,12 +105,12 @@ public class ActivityProductDetail extends AppCompatActivity {
     public static ArrayList<String> lote_name = new ArrayList<String>();
     public static ArrayList<String> lote_date = new ArrayList<String>();
     public static ArrayList<String> lote_cant = new ArrayList<String>();
+
     RecyclerView recyclerView, rcViewBnfc;
     RecyclerAdapterLotes recyclerAdapterLotes;
     RecyclerAdapterBnfc rcBonificado;
     List<Lotes> arrayItemLotes;
     List<String> sList;
-
 
 
     @Override
@@ -185,9 +185,100 @@ public class ActivityProductDetail extends AppCompatActivity {
 
 
         rcViewBnfc.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
-        rcViewBnfc.setItemAnimator(new DefaultItemAnimator());
+
         rcBonificado = new RecyclerAdapterBnfc(this, sList);
-        rcViewBnfc.setAdapter(rcBonificado);
+
+        rcViewBnfc.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ClickListener() {
+            @Override
+            public void onClick(View view, final int position) {
+                final String str_bonificado =  sList.get(position);
+                final List<String> row_arr = new ArrayList<>();
+                row_arr.add(Arrays.asList(str_bonificado.replace("+", ",").split(",")).get(0));
+
+
+
+                if (!str_bonificado.equalsIgnoreCase("0")) {
+
+
+
+                    final Dialog dialog = new Dialog(ActivityProductDetail.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                    dialog.setContentView(R.layout.dialog_info);
+                    dialog.setCancelable(true);
+
+                    LinearLayout lyt = dialog.findViewById(R.id.lyt);
+                    TextView txt_title = dialog.findViewById(R.id.title);
+                    TextView txt_msg = dialog.findViewById(R.id.content);
+                    TextView edtQuantity = dialog.findViewById(R.id.id_valor_producto_2);
+                    AppCompatButton AppBtn = dialog.findViewById(R.id.bt_close);
+
+                    txt_title.setText("¿Quiere agreagar un :? ");
+                    txt_msg.setText( str_bonificado);
+
+                    edtQuantity.setVisibility(View.VISIBLE);
+                    double cnt_valor = Double.parseDouble(row_arr.get(0));
+                    double vLinea = (product_price * cnt_valor);
+                    String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                    edtQuantity.setText(_cnt_valor.concat(" ").concat(currency_code));
+
+
+
+                    AppBtn.setText("Confirmar");
+
+                    lyt.setBackgroundColor(context.getResources().getColor(R.color.light_blue_400));;
+
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(dialog.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+
+
+
+                    AppBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            addProducto(row_arr.get(0),str_bonificado);
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+                    dialog.getWindow().setAttributes(lp);
+
+
+                 /*   AlertDialog.Builder builder = new AlertDialog.Builder(ActivityProductDetail.this);
+                    builder.setTitle("Alerta");
+                    builder.setMessage("Confirma que quiere agreagar un: " + str_bonificado);
+                    builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final List<String> row_arr = new ArrayList<>();
+                            row_arr.add(Arrays.asList(str_bonificado.replace("+", ",").split(",")).get(0));
+
+                            addProducto(row_arr.get(0),str_bonificado);
+
+                            dialog.cancel();
+                        }
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();*/
+
+                } else {
+                    Toast.makeText(ActivityProductDetail.this, "NO hay Bonificado que agregar", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        }));
+
+
+
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +291,49 @@ public class ActivityProductDetail extends AppCompatActivity {
 
 
 
+    }
+
+    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final ClickListener clickListener) {
+
+            this.clickListener = clickListener;
+
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rcViewBnfc.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
+    }
+
+    public interface ClickListener {
+        public void onClick(View view, int position);
     }
 
     public void displayData() {
@@ -227,21 +361,6 @@ public class ActivityProductDetail extends AppCompatActivity {
 
         String product_quantity_ = String.format(Locale.ENGLISH, "%1$,.2f", product_quantity);
         txt_product_quantity.setText(product_quantity_ + " " + product_und);
-
-       /* if (product_status.equals("Available")) {
-            btn_cart.setText(R.string.btn_add_to_cart);
-            btn_cart.setBackgroundResource(R.color.available);
-            btn_cart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    inputDialog();
-                }
-            });
-        } else {
-            btn_cart.setEnabled(false);
-            btn_cart.setText(R.string.btn_out_of_stock);
-            btn_cart.setBackgroundResource(R.color.sold);
-        }*/
 
         txt_product_description.setBackgroundColor(Color.parseColor("#ffffff"));
         txt_product_description.setFocusableInTouchMode(false);
@@ -285,6 +404,7 @@ public class ActivityProductDetail extends AppCompatActivity {
     public void getDataFromDatabase() {
 
         clearData();
+
         List<String> data = Arrays.asList(product_lotes.split(","));
 
         for (int i = 0; i < data.size(); i++) {
@@ -294,7 +414,11 @@ public class ActivityProductDetail extends AppCompatActivity {
             lote_date.add(row.get(2));
 
         }
+
+
+
         recyclerView.setAdapter(recyclerAdapterLotes);
+        rcViewBnfc.setAdapter(rcBonificado);
 
     }
 
@@ -316,15 +440,15 @@ public class ActivityProductDetail extends AppCompatActivity {
 
         LayoutInflater layoutInflaterAndroid = LayoutInflater.from(context);
 
-        View mView = layoutInflaterAndroid.inflate(R.layout.input_dialog, null);
+        View mView = layoutInflaterAndroid.inflate(R.layout.input_dialog_calculadora, null);
 
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setView(mView);
 
-        final EditText edtQuantity  = (EditText) mView.findViewById(R.id.userInputDialog);
-        final EditText edtBonificado = mView.findViewById(R.id.txt_bonificado);
+        final TextView edtQuantity  = mView.findViewById(R.id.userInputDialog);
+        final TextView edtBonificado = mView.findViewById(R.id.txt_bonificado);
+        final TextView edtValor  = mView.findViewById(R.id.id_valor_producto);
 
-        alert.setCancelable(false);
         int maxLength = 10;
         edtQuantity.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
         edtQuantity.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -332,20 +456,189 @@ public class ActivityProductDetail extends AppCompatActivity {
 
         final List<String> row_arr = new ArrayList<>();
         for (int i = 0; i < sList.size(); i++) row_arr.add(Arrays.asList(sList.get(i).replace("+", ",").split(",")).get(0));
-        edtQuantity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+
+
+
+
+
+        mView.findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                edtQuantity.setText(edtQuantity.getText().toString().concat("9"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
             }
-
+        });
+        mView.findViewById(R.id.button8).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("8"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
 
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
             }
-
+        });
+        mView.findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("7"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
 
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+        mView.findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("6"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+        mView.findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("5"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+        mView.findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("4"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+        mView.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("3"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+        mView.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("2"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+        mView.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("1"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+        mView.findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText(edtQuantity.getText().toString().concat("0"));
+                int position = row_arr.indexOf(edtQuantity.getText().toString());
+
+                if (position == -1) {
+                    edtBonificado.setText("0");
+                }else{
+                    edtBonificado.setText(sList.get(position));
+                }
+                double cnt_valor = Double.parseDouble(edtQuantity.getText().toString());
+                double vLinea = (product_price * cnt_valor);
+                String _cnt_valor = String.format(Locale.ENGLISH, "%1$,.2f", vLinea);
+                edtValor.setText(_cnt_valor.concat(" ").concat(currency_code));
+            }
+        });
+
+        mView.findViewById(R.id.button_ce).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtQuantity.setText("");
+                edtValor.setText("0.00 NIO");
                 int position = row_arr.indexOf(edtQuantity.getText().toString());
 
                 if (position == -1) {
@@ -354,42 +647,29 @@ public class ActivityProductDetail extends AppCompatActivity {
                     edtBonificado.setText(sList.get(position));
                 }
 
+
+            }
+        });
+        mView.findViewById(R.id.button_equals).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
 
 
 
+
+        alert.setCancelable(false);
+
         alert.setPositiveButton(R.string.dialog_option_add, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String temp = edtQuantity.getText().toString();
-                int quantity = 0;
 
                 if (!temp.equalsIgnoreCase("")) {
 
-                    quantity = Integer.parseInt(temp);
-
-                    if (quantity <= 0) {
-                        Toast.makeText(getApplicationContext(), R.string.msg_stock_below_0, Toast.LENGTH_SHORT).show();
-                    } else if (quantity > product_quantity) {
-                        Toast.makeText(getApplicationContext(), R.string.msg_stock_not_enough, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), R.string.msg_success_add_cart , Toast.LENGTH_SHORT).show();
-
-                        /*
-                        * HAY OCACIONES EN QUE EL CLIENTE FALTURA EL MISMO ARTICULO CON LAS MISMA ESPEFICACIONES
-                        * ESTO CON EL FIN DE APROVECHAR EL BONIFICADO, POR ESO SE BONITE ESTA VALIDACION, DE QUE SI EXISTE YA EL ITEM
-                        * EN EL CARRITO
-                        * */
-
-                       /* if (dbhelper.isDataExist(product_id)) {
-                            dbhelper.updateData(product_id, quantity, (product_price * quantity));
-                        } else {
-
-                        }*/
-
-                        dbhelper.addData(product_id, product_name, quantity, (product_price * quantity), currency_code, product_image,edtBonificado.getText().toString());
-                    }
+                  addProducto(temp,edtBonificado.getText().toString());
 
                 } else {
                     dialog.cancel();
@@ -406,6 +686,39 @@ public class ActivityProductDetail extends AppCompatActivity {
         AlertDialog alertDialog = alert.create();
         alertDialog.show();
 
+    }
+
+
+
+    private void addProducto(String cnt,String Bonificado) {
+
+        int quantity = 0;
+
+        quantity = Integer.parseInt(cnt);
+
+        if (quantity <= 0) {
+            ShowDialog("Alerta",
+                    context.getResources().getString(R.string.msg_stock_below_0),
+                    R.color.red_light);
+        } else if (quantity > product_quantity) {
+            ShowDialog("Alerta",context.getResources().getString(R.string.msg_stock_not_enough),R.color.red_light);
+        } else {
+            ShowDialog("Exito",context.getResources().getString(R.string.msg_success_add_cart),R.color.light_green_400);
+
+            /*
+             * HAY OCACIONES EN QUE EL CLIENTE FALTURA EL MISMO ARTICULO CON LAS MISMA ESPEFICACIONES
+             * ESTO CON EL FIN DE APROVECHAR EL BONIFICADO, POR ESO SE BONITE ESTA VALIDACION, DE QUE SI EXISTE YA EL ITEM
+             * EN EL CARRITO
+             * */
+
+                       /* if (dbhelper.isDataExist(product_id)) {
+                            dbhelper.updateData(product_id, quantity, (product_price * quantity));
+                        } else {
+
+                        }*/
+
+            dbhelper.addData(product_id, product_name, quantity, (product_price * quantity), currency_code, product_image,Bonificado);
+        }
     }
 
     private void makeJsonObjectRequest() {
@@ -594,5 +907,38 @@ public class ActivityProductDetail extends AppCompatActivity {
             }
         }
     }
+
+    public void ShowDialog(String strTitle, String strMsg, int color) {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_info);
+        dialog.setCancelable(true);
+
+        LinearLayout lyt = dialog.findViewById(R.id.lyt);
+        TextView txt_title = dialog.findViewById(R.id.title);
+        TextView txt_msg = dialog.findViewById(R.id.content);
+
+        txt_title.setText(strTitle);
+        txt_msg.setText(strMsg);
+        lyt.setBackgroundColor(context.getResources().getColor(color));;
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+
+        (dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
 
 }

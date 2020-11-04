@@ -259,7 +259,7 @@ public class ActivityCart extends AppCompatActivity {
                 txt_total_price.setText(getResources().getString(R.string.txt_total) + " " + total_price + " " + str_currency_code);
                 txt_tax.setText(getResources().getString(R.string.txt_tax) + " " + str_tax + " %");
             }*/
-            txt_total_price.setText(getResources().getString(R.string.txt_total) + " " + _price + " " + str_currency_code);
+            txt_total_price.setText(_price + " " + str_currency_code);
             //txt_tax.setText(getResources().getString(R.string.txt_tax) + " " + _tax + " %");
 
             if (product_id.size() > 0) {

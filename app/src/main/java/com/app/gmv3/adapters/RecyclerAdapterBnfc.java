@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +17,6 @@ public class RecyclerAdapterBnfc extends RecyclerView.Adapter<RecyclerAdapterBnf
 
     private Context context;
     private List<String> ListBonificado;
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         Button bt_generico;
@@ -26,6 +24,7 @@ public class RecyclerAdapterBnfc extends RecyclerView.Adapter<RecyclerAdapterBnf
         public ViewHolder(View view) {
             super(view);
             bt_generico = view.findViewById(R.id.btn_generic);
+
         }
 
     }
@@ -38,17 +37,23 @@ public class RecyclerAdapterBnfc extends RecyclerView.Adapter<RecyclerAdapterBnf
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bonificado, parent, false);
+
+
+
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.bt_generico.setText(ListBonificado.get(position));
+
     }
 
     @Override
     public int getItemCount() {
         return ListBonificado.size();
     }
+
+
 
 }

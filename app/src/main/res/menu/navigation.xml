@@ -6,10 +6,9 @@
         android:icon="@drawable/ic_nav_recent"
         android:title="@string/title_nav_recent" />
 
-
     <item
         android:id="@+id/nav_category"
-        android:icon="@drawable/ic_user"
+        android:icon="@drawable/ic_nav_category"
         android:title="@string/title_nav_category" />
 
     <item

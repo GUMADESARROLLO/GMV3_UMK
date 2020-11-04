@@ -90,14 +90,6 @@ public class RecyclerAdapterClients extends RecyclerView.Adapter<RecyclerAdapter
             holder.cliente_saldo.setText("C$ " + clients.getSALDO());
             holder.cliente_limite.setText("C$ " + clients.getLIMITE());
         }
-
-
-
-
-
-
-
-
     }
 
     @Override

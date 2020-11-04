@@ -6,6 +6,11 @@ public class Factura_lineas {
     String CANTIDAD;
     String VENTA;
     String FECHA;
+    String IMAGEN;
+
+    public String getIMAGEN() {
+        return IMAGEN;
+    }
 
     public String getARTICULO() {
         return ARTICULO;
