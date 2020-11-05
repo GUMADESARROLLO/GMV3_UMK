@@ -145,7 +145,12 @@ public class ActivityVerificacion extends AppCompatActivity implements
                     public void run() {
                         progressDialog.dismiss();
                         //dialogSuccessOrder();
+                       // ProfileWallet.ImgVerication.setImageResource(R.drawable.verificado);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         finish();
+
                     }
                 }, 2000);
 

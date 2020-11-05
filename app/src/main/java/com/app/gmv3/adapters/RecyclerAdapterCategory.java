@@ -18,6 +18,8 @@ import com.app.gmv3.models.Clients;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RecyclerAdapterCategory extends RecyclerView.Adapter<RecyclerAdapterCategory.MyViewHolder> implements Filterable {
 
     private Context context;
@@ -29,18 +31,20 @@ public class RecyclerAdapterCategory extends RecyclerView.Adapter<RecyclerAdapte
         public TextView category_name, product_count,txt_cliente_codigo,txt_cliente_limite,txt_cliente_saldo,txt_cliente_disponible;
         public CardView cardView;
         public RelativeLayout relativeLayout;
+        public CircleImageView ImgVerication;
 
 
         public MyViewHolder(View view) {
             super(view);
-            relativeLayout = view.findViewById(R.id.id_lyt_moroso);
-            category_name = view.findViewById(R.id.category_name);
-            product_count = view.findViewById(R.id.product_count);
-            txt_cliente_codigo = view.findViewById(R.id.id_cliente_codigo);
-            txt_cliente_limite = view.findViewById(R.id.id_cliente_limite);
-            txt_cliente_saldo = view.findViewById(R.id.id_cliente_saldo);
-            txt_cliente_disponible = view.findViewById(R.id.id_cliente_disponible);
-            cardView = view.findViewById(R.id.id_element_cardview);
+            relativeLayout          = view.findViewById(R.id.id_lyt_moroso);
+            category_name           = view.findViewById(R.id.category_name);
+            product_count           = view.findViewById(R.id.product_count);
+            txt_cliente_codigo      = view.findViewById(R.id.id_cliente_codigo);
+            txt_cliente_limite      = view.findViewById(R.id.id_cliente_limite);
+            txt_cliente_saldo       = view.findViewById(R.id.id_cliente_saldo);
+            txt_cliente_disponible  = view.findViewById(R.id.id_cliente_disponible);
+            cardView                = view.findViewById(R.id.id_element_cardview);
+            ImgVerication           = view.findViewById(R.id.btn_verificacion);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,7 +80,7 @@ public class RecyclerAdapterCategory extends RecyclerView.Adapter<RecyclerAdapte
         holder.relativeLayout.setVisibility((clients.getMOROSO().equals("S") ? View.VISIBLE : View.GONE));
         holder.product_count.setText(clients.getDIRECCION());
         holder.txt_cliente_codigo.setText(clients.getCLIENTE());
-
+        holder.ImgVerication.setVisibility((clients.getVERIFICADO().equals("S") ? View.VISIBLE : View.GONE));
         holder.txt_cliente_limite.setText(("C$ ").concat(clients.getLIMITE()));
         holder.txt_cliente_saldo.setText(("C$ ").concat(clients.getSALDO()));
         holder.txt_cliente_disponible.setText(("C$ ").concat(clients.getDIPONIBLE()));
