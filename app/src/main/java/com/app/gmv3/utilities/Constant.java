@@ -25,6 +25,7 @@ public class Constant {
     public static final String GET_SHIPPING = BASE_URL + "/api/api.php?get_shipping";
 
     public static final String POST_ORDER = BASE_URL + "/api/api.php?post_order";
+    public static final String POST_VERIFICACION = BASE_URL + "/api/api.php?post_verificacion";
     public static final String POST_RPT_RUTA = BASE_URL + "/api/api.php?post_rpt_ruta=";
 
     public static final String POST_REPORT = BASE_URL + "/api/api.php?post_report=";
@@ -44,5 +45,13 @@ public class Constant {
     public static final String MSG = "msg";
 
     public static int permission_Read_data = 789;
+
+    public static final String BROADCAST_ACTION = "broadcast-action";
+    public static final String ACTIVITY_KEY = "activites-key";
+    public static final long ACTIVITY_RECOGNITION_INTERVAL = 0;
+    public static final long UPDATE_INTERVAL = 1000;
+    public static final long UPDATE_FASTEST_INTERVAL = UPDATE_INTERVAL / 2;
+
+
 
 }

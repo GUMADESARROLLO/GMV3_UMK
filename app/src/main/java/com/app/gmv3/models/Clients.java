@@ -11,6 +11,11 @@ public class Clients {
     String MOROSO;
     String TELE;
     String CONDPA;
+    String VERIFICADO;
+
+    public String getVERIFICADO() {
+        return VERIFICADO;
+    }
 
     public String getTELE() {
         return TELE;

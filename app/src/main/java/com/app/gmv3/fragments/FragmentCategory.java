@@ -230,6 +230,7 @@ public class FragmentCategory extends Fragment implements RecyclerAdapterCategor
         intent.putExtra("Limite", clients.getLIMITE());
         intent.putExtra("Saldo", clients.getSALDO());
         intent.putExtra("Disponible", clients.getDIPONIBLE());
+        intent.putExtra("Verificado", clients.getVERIFICADO());
         startActivity(intent);
     }
 

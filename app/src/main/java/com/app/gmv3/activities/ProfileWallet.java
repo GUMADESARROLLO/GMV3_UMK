@@ -39,6 +39,9 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static com.app.gmv3.utilities.Constant.GET_PROFIL_USER;
 
 
@@ -57,6 +60,8 @@ public class ProfileWallet extends AppCompatActivity{
     RecyclerView recyclerView;
     RecyclerAdapterPerfilLotes recyclerAdaptePerfilFactura;
     List<Facturas_mora> arrayItemLotes;
+    CircleImageView ImgVerication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +93,8 @@ public class ProfileWallet extends AppCompatActivity{
         txt_perfil_d90          = findViewById(R.id.id_perfil_d90);
         txt_perfil_d120         = findViewById(R.id.id_perfil_d120);
         txt_perfil_m120         = findViewById(R.id.id_perfil_m120);
+
+        ImgVerication           = findViewById(R.id.id_btn_verificacion);
 
         recyclerView = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -125,14 +132,28 @@ public class ProfileWallet extends AppCompatActivity{
 
 
         Intent intent = getIntent();
+
+
+        String strVerificado = intent.getStringExtra("Verificado");
+
         code_cliente = intent.getStringExtra("Client_Code");
         txt_perfil_name_cliente.setText(intent.getStringExtra("CLient_name"));
         txt_tele.setText(intent.getStringExtra("Telefono"));
         txt_condicion_pago.setText(intent.getStringExtra("Condicion_pago"));
-
         txt_perfil_disponible.setText(("C$ ").concat(intent.getStringExtra("Disponible")));
         txt_perfil_saldo.setText(("C$ ").concat(intent.getStringExtra("Saldo")));
         txt_perfil_limite.setText(("C$ ").concat(intent.getStringExtra("Limite")));
+
+        ImgVerication.setImageDrawable(getApplicationContext().getResources().getDrawable(((strVerificado.equals("S")) ? R.drawable.verificado :R.drawable.noverificado)));
+
+        ImgVerication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileWallet.this, ActivityVerificacion.class);
+                intent.putExtra("Codi_cliente",code_cliente);
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.id_history_last_3m).setOnClickListener(new View.OnClickListener() {
             @Override

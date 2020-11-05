@@ -73,6 +73,7 @@
     <string name="checkout_dialog_msg">¿Estás seguro de que quieres Enviarlo?</string>
     <string name="checkout_submit_title">Porfavor Espere</string>
     <string name="checkout_submit_msg">Enviar su Orden&#8230;</string>
+    <string name="verification_submit_msg">Verificando...</string>
     <string name="checkout_success_title">Enhorabuena</string>
     <string name="checkout_success_msg">Gracias por ordenar, su pedido será revisado pronto, sera enviados a su telefono una notificaciones cuando el pedido esté listo.</string>
     <string name="checkout_option_ok">OK</string>
