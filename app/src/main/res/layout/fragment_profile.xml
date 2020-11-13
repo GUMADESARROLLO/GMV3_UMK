@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:orientation="vertical"
-        android:paddingTop="@dimen/spacing_mxlarge">
+        android:paddingTop="@dimen/spacing_mlarge">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_large" />
+            android:layout_height="@dimen/spacing_middle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,6 +100,7 @@
             android:background="@color/grey_10" />
 
         <LinearLayout
+            android:id="@+id/btn_order_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -111,7 +112,7 @@
             android:paddingRight="@dimen/spacing_large">
 
             <TextView
-                android:id="@+id/btn_order_history"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -142,6 +143,7 @@
             android:background="@color/grey_10" />
 
         <LinearLayout
+            android:id="@+id/btn_inteligencia_mercado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -153,7 +155,6 @@
             android:paddingRight="@dimen/spacing_large">
 
             <TextView
-                android:id="@+id/btn_inteligencia_mercado"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -182,6 +183,7 @@
             android:background="@color/grey_10" />
 
         <LinearLayout
+            android:id="@+id/Reportes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -193,7 +195,7 @@
             android:paddingRight="@dimen/spacing_large">
 
             <TextView
-                android:id="@+id/Reportes"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -224,6 +226,7 @@
             android:background="@color/grey_10" />
 
         <LinearLayout
+            android:id="@+id/id_mis_stat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -235,7 +238,7 @@
             android:paddingRight="@dimen/spacing_large">
 
             <TextView
-                android:id="@+id/id_mis_stat"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -267,6 +270,7 @@
             android:background="@color/grey_10" />
 
         <LinearLayout
+            android:id="@+id/txt_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -278,7 +282,7 @@
             android:paddingRight="@dimen/spacing_large">
 
             <TextView
-                android:id="@+id/txt_user_name"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -296,6 +300,45 @@
                 android:background="@android:color/transparent"
                 android:tint="@color/grey_60"
                 app:srcCompat="@drawable/ic_no_cell" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@color/grey_10" />
+        <LinearLayout
+            android:id="@+id/AboutUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:minHeight="70dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:text="Info. de la aplicación"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_80" />
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:background="@android:color/transparent"
+                android:tint="@color/grey_60"
+                app:srcCompat="@drawable/ic_info" />
 
         </LinearLayout>
 
@@ -327,7 +370,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:padding="10dp"
+
                 app:mrl_rippleAlpha="0.2"
                 app:mrl_rippleColor="@color/ripple_color"
                 app:mrl_rippleHover="true"

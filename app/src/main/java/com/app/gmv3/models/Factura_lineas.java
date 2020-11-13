@@ -7,6 +7,11 @@ public class Factura_lineas {
     String VENTA;
     String FECHA;
     String IMAGEN;
+    String OBSERVACIONES;
+
+    public String getOBSERVACIONES() {
+        return OBSERVACIONES;
+    }
 
     public String getIMAGEN() {
         return IMAGEN;

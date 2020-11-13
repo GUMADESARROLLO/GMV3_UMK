@@ -3,6 +3,7 @@ package com.app.gmv3.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +42,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,6 +65,7 @@ public class ProfileWallet extends AppCompatActivity{
     RecyclerAdapterPerfilLotes recyclerAdaptePerfilFactura;
     List<Facturas_mora> arrayItemLotes;
     CircleImageView ImgVerication;
+    String strVerificado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +139,7 @@ public class ProfileWallet extends AppCompatActivity{
         Intent intent = getIntent();
 
 
-        String strVerificado = intent.getStringExtra("Verificado");
+        strVerificado = intent.getStringExtra("Verificado");
 
         code_cliente = intent.getStringExtra("Client_Code");
         txt_perfil_name_cliente.setText(intent.getStringExtra("CLient_name"));
@@ -144,7 +149,7 @@ public class ProfileWallet extends AppCompatActivity{
         txt_perfil_saldo.setText(("C$ ").concat(intent.getStringExtra("Saldo")));
         txt_perfil_limite.setText(("C$ ").concat(intent.getStringExtra("Limite")));
 
-        ImgVerication.setImageDrawable(getApplicationContext().getResources().getDrawable(((strVerificado.equals("S")) ? R.drawable.verificado :R.drawable.noverificado)));
+        ImgVerication.setImageDrawable(getApplicationContext().getResources().getDrawable(((strVerificado.contains("S;")) ? R.drawable.verificado :R.drawable.noverificado)));
 
         ImgVerication.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,12 +290,46 @@ public class ProfileWallet extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), item.getTitle() + " clicked", Toast.LENGTH_SHORT).show();
+
+
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.item_location:
+                List<String> row = Arrays.asList(strVerificado.split(";"));
+                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f", Double.parseDouble(row.get(1)),Double.parseDouble(row.get(2)));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_perfil_cliente, menu);
+        MenuItem Item_rptVisita = menu.findItem(R.id.item_rpt_visita);
+        MenuItem Item_location = menu.findItem(R.id.item_location);
+
+
+        // show the button when some condition is true
+        if (strVerificado.contains("S;")) {
+           // Item_rptVisita.setVisible(true);
+            Item_location.setVisible(true);
+        }else{
+            //Item_rptVisita.setVisible(false);
+            Item_location.setVisible(false);
+
+        }
+        return true;
     }
 }
 

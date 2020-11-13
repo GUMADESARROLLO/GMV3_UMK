@@ -79,7 +79,7 @@ public class ActivityProductNoFacturado extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterNoFacturado( productList);
+        mAdapter = new RecyclerAdapterNoFacturado( this,productList);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);

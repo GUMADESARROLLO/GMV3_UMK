@@ -88,6 +88,13 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/grey_90" />
 
+            <TextView
+                android:visibility="gone"
+                android:text=""
+                android:id="@+id/id_observacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -103,6 +110,8 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+
 
         <com.balysv.materialripple.MaterialRippleLayout
             style="@style/RippleStyleWhite"
