@@ -1,14 +1,16 @@
 package com.app.gmv3.fragments;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
@@ -16,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -26,11 +29,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.activities.ActivityHelp;
 import com.app.gmv3.activities.MyApplication;
-import com.app.gmv3.adapters.RecyclerAdapterHelp;
-import com.app.gmv3.models.Help;
-import com.app.gmv3.utilities.MyDividerItemDecoration;
+import com.app.gmv3.activities.ProfileWallet;
+import com.app.gmv3.adapters.RecyclerAdapterCategory;
+import com.app.gmv3.models.Clients;
+import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,40 +43,55 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.app.gmv3.utilities.Constant.GET_HELP;
+import static com.app.gmv3.utilities.Constant.GET_CLIENTS;
 
-public class FragmentHelp extends Fragment implements RecyclerAdapterHelp.ContactsAdapterListener {
+public class FragmentClientes extends Fragment implements RecyclerAdapterCategory.ContactsAdapterListener {
 
     private RecyclerView recyclerView;
-    private List<Help> helpList;
-    private RecyclerAdapterHelp mAdapter;
+    private List<Clients> categoryList;
+    private RecyclerAdapterCategory mAdapter;
     private SearchView searchView;
     SwipeRefreshLayout swipeRefreshLayout = null;
     LinearLayout lyt_root;
-
+    View lyt_empty_history;
+    SharedPref sharedPref;
+    private static final String[] ANIMATION_TYPE = new String[]{
+            "Todos","Ver Solo Moroso"
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recent, container, false);
         setHasOptionsMenu(true);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
+        sharedPref = new SharedPref(getContext());
+        lyt_empty_history = view.findViewById(R.id.lyt_empty_history);
         lyt_root = view.findViewById(R.id.lyt_root);
         if (Config.ENABLE_RTL_MODE) {
             lyt_root.setRotationY(180);
         }
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        helpList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterHelp(getActivity(), helpList, this);
+        categoryList = new ArrayList<>();
+        mAdapter = new RecyclerAdapterCategory(getActivity(), categoryList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 0));
         recyclerView.setAdapter(mAdapter);
+        view.findViewById(R.id.bt_retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchContacts();
+            }
+        });
+
+
 
         fetchContacts();
         onRefresh();
+
+
 
         return view;
     }
@@ -82,7 +100,7 @@ public class FragmentHelp extends Fragment implements RecyclerAdapterHelp.Contac
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                helpList.clear();
+                categoryList.clear();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -101,7 +119,7 @@ public class FragmentHelp extends Fragment implements RecyclerAdapterHelp.Contac
     }
 
     private void fetchContacts() {
-        JsonArrayRequest request = new JsonArrayRequest(GET_HELP, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(GET_CLIENTS + sharedPref.getYourName(), new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         if (response == null) {
@@ -109,12 +127,17 @@ public class FragmentHelp extends Fragment implements RecyclerAdapterHelp.Contac
                             return;
                         }
 
-                        List<Help> items = new Gson().fromJson(response.toString(), new TypeToken<List<Help>>() {
+                        List<Clients> items = new Gson().fromJson(response.toString(), new TypeToken<List<Clients>>() {
                         }.getType());
 
                         // adding contacts to contacts list
-                        helpList.clear();
-                        helpList.addAll(items);
+                        categoryList.clear();
+                        categoryList.addAll(items);
+                        if (categoryList.size() > 0) {
+                            lyt_empty_history.setVisibility(View.GONE);
+                        } else {
+                            lyt_empty_history.setVisibility(View.VISIBLE);
+                        }
 
                         // refreshing recycler view
                         mAdapter.notifyDataSetChanged();
@@ -133,11 +156,13 @@ public class FragmentHelp extends Fragment implements RecyclerAdapterHelp.Contac
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.search, menu);
+        inflater.inflate(R.menu.search_cliente, menu);
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView = (SearchView) menu.findItem(R.id.search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getActivity().getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // listening to search query text change
@@ -159,12 +184,53 @@ public class FragmentHelp extends Fragment implements RecyclerAdapterHelp.Contac
 
         super.onCreateOptionsMenu(menu, inflater);
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_filtro:
+
+                showSingleChoiceDialog();
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    private void showSingleChoiceDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Ordenar por: ");
+        builder.setCancelable(false);
+        builder.setSingleChoiceItems(ANIMATION_TYPE, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String selected = ANIMATION_TYPE[i];
+                if (selected.equalsIgnoreCase("Todos")) {
+                    mAdapter.getFilter().filter("");
+                } else if (selected.equalsIgnoreCase("Ver Solo Moroso")) {
+                    mAdapter.getFilter().filter("MOROSO");
+                }
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+    }
 
     @Override
-    public void onContactSelected(Help help) {
-        Intent intent = new Intent(getActivity(), ActivityHelp.class);
-        intent.putExtra("title", help.getTitle());
-        intent.putExtra("content", help.getContent());
+    public void onContactSelected(Clients clients) {
+        //Toast.makeText(getActivity(), "Selected: " + category.getCategory_name(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getActivity(), ProfileWallet.class);
+        intent.putExtra("Client_Code", clients.getCLIENTE());
+        intent.putExtra("CLient_name", clients.getNOMBRE());
+        intent.putExtra("Telefono", clients.getTELE());
+        intent.putExtra("Condicion_pago", clients.getCONDPA());
+
+        intent.putExtra("Limite", clients.getLIMITE());
+        intent.putExtra("Saldo", clients.getSALDO());
+        intent.putExtra("Disponible", clients.getDIPONIBLE());
+        intent.putExtra("Verificado", clients.getVERIFICADO());
         startActivity(intent);
     }
 

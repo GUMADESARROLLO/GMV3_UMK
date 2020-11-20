@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.core.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,7 +18,10 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onesignal.OneSignal;
 
 import java.io.ByteArrayOutputStream;
@@ -49,6 +53,15 @@ public class Utils {
             int flags = view.getSystemUiVisibility();
             flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
             view.setSystemUiVisibility(flags);
+        }
+    }
+    public static void displayImageOriginal(Context ctx, ImageView img, @DrawableRes int drawable) {
+        try {
+            Glide.with(ctx).load(drawable)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(img);
+        } catch (Exception e) {
         }
     }
     public static void changeMenuIconColor(Menu menu, @ColorInt int color) {

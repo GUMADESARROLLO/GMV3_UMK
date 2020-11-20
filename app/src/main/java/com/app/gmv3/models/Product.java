@@ -14,8 +14,13 @@ public class Product {
     private String product_bonificado;
     private String product_lotes;
     private String product_und;
+    private String CALIFICATIVO;
     private double tax;
     private double product_quantity;
+
+    public String getCALIFICATIVO() {
+        return CALIFICATIVO;
+    }
 
     public String getProduct_und() {
         return product_und;

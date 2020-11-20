@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.activities.ShoppingCartSimple;
 import com.app.gmv3.models.Factura_lineas;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;

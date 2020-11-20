@@ -20,4 +20,125 @@
         <item>2021</item>
         <item>2022</item>
     </string-array>
+
+    <string-array name="general_date">
+        <item>05 Dec 2015</item>
+        <item>22 Apr 2013</item>
+        <item>14 Sep 2015</item>
+        <item>11 Feb 2015</item>
+        <item>29 Aug 2014</item>
+        <item>10 Nov 2015</item>
+        <item>23 Jun 2015</item>
+        <item>20 Jul 2015</item>
+        <item>09 Mar 2015</item>
+        <item>01 Jan 2016</item>
+    </string-array>
+    <string-array name="strings_medium">
+        <item>Proin commodo porttitor felis. Integer auctor nulla faucibus tempus. In at viverra tellus.</item>
+        <item>Cras at lobortis velit. In eu turpis euismod dolor feugiat placerat gravida a ante. Duis consequat massa.</item>
+        <item>Praesent eleifend ipsum sapien, vel molestie nibh blandit et. Duis accumsan dignissim velit.</item>
+        <item>Aliquam in risus nibh. Pellentesque lacinia nisi ac est porta, nec eros luctus. Phasellus dictum ornare.</item>
+        <item>In rutrum turpis felis. Ut sodales libero non nibh convallis, ac vehicula tellus laoreet.</item>
+        <item>Etiam faucibus ante tortor, nec eros lacinia ut. Proin facilisis cursus enim, at congue lorem iaculis ut.</item>
+        <item>Duis sodales ligula non scelerisque molestie. In hac habitasse platea dictumst. Donec tempor nibh.</item>
+        <item>Quisque ac ante et purus auctor iaculis at sed erat. Duis vestibulum elit et mollis.</item>
+        <item>Maecenas quis posuere leo. Duis ut tortor vitae nisi commodo dictum. Quisque ac ante et purus auctor.</item>
+        <item>Proin commodo porttitor felis. Integer auctor nulla tincidunt faucibus tempus. In at viverra tellus.</item>
+    </string-array>
+    <string-array name="news_category">
+        <item>Politics</item>
+        <item>Entertainment</item>
+        <item>Science</item>
+        <item>Sport</item>
+        <item>Business</item>
+        <item>Technology</item>
+    </string-array>
+    <string-array name="full_date">
+        <item>Sun, 05 Dec 15, 11:30 AM</item>
+        <item>Mon, 22 Apr 13, 06:12 PM</item>
+        <item>Wed, 14 Sep 15, 09:21 PM</item>
+        <item>Fri, 11 Feb 15, 11:42 PM</item>
+        <item>Thu, 29 Aug 14, 02:30 AM</item>
+        <item>Sat, 10 Nov 15, 07:05 PM</item>
+        <item>Tue, 23 Jun 15, 09:24 AM</item>
+        <item>Wed, 20 Jul 15, 08:35 AM</item>
+        <item>Sun, 09 Mar 15, 12:49 PM</item>
+        <item>Mon, 01 Jan 16, 10:50 PM</item>
+    </string-array>
+    <integer-array name="all_images">
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_3</item>
+        <item>@drawable/image_4</item>
+        <item>@drawable/image_5</item>
+
+        <item>@drawable/image_6</item>
+        <item>@drawable/image_7</item>
+        <item>@drawable/image_8</item>
+        <item>@drawable/image_9</item>
+        <item>@drawable/image_10</item>
+
+        <item>@drawable/image_11</item>
+        <item>@drawable/image_12</item>
+        <item>@drawable/image_13</item>
+        <item>@drawable/image_14</item>
+        <item>@drawable/image_15</item>
+
+        <item>@drawable/image_16</item>
+        <item>@drawable/image_17</item>
+        <item>@drawable/image_18</item>
+        <item>@drawable/image_19</item>
+        <item>@drawable/image_20</item>
+
+        <item>@drawable/image_21</item>
+        <item>@drawable/image_22</item>
+        <item>@drawable/image_23</item>
+        <item>@drawable/image_24</item>
+        <item>@drawable/image_25</item>
+
+        <item>@drawable/image_26</item>
+        <item>@drawable/image_27</item>
+        <item>@drawable/image_28</item>
+        <item>@drawable/image_29</item>
+        <item>@drawable/image_30</item>
+    </integer-array>
+    <integer-array name="sample_images">
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_3</item>
+        <item>@drawable/image_4</item>
+        <item>@drawable/image_5</item>
+
+        <item>@drawable/image_6</item>
+        <item>@drawable/image_7</item>
+        <item>@drawable/image_8</item>
+        <item>@drawable/image_9</item>
+        <item>@drawable/image_10</item>
+
+        <item>@drawable/image_11</item>
+        <item>@drawable/image_12</item>
+        <item>@drawable/image_13</item>
+        <item>@drawable/image_14</item>
+        <item>@drawable/image_15</item>
+    </integer-array>
+
+    <string-array name="sample_images_name">
+        <item>Night Street</item>
+        <item>Architect Desk</item>
+        <item>City Building</item>
+        <item>Computer Keyboard</item>
+        <item>Grunge Window</item>
+
+        <item>Park Bench</item>
+        <item>Table Cocktails</item>
+        <item>Side Park</item>
+        <item>Hanging Clothes</item>
+        <item>Coffee Camera</item>
+
+        <item>Morning Flower</item>
+        <item>Foggy Hill</item>
+        <item>The Backpacker</item>
+        <item>River Forest</item>
+        <item>Mist Mountain</item>
+    </string-array>
 </resources>

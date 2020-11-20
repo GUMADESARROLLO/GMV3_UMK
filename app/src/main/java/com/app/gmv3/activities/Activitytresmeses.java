@@ -86,12 +86,7 @@ public class Activitytresmeses extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-        findViewById(R.id.id_closer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
 
         fetchData();
     }

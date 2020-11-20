@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.models.Product;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -30,8 +32,7 @@ public class RecyclerAdapterProduct extends RecyclerView.Adapter<RecyclerAdapter
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView product_name, product_price,product_cant,product_code;
-        public ImageView product_image;
-
+        public ImageView product_image,product_premiun;
         public MyViewHolder(View view) {
             super(view);
             product_name = view.findViewById(R.id.product_name);
@@ -39,6 +40,7 @@ public class RecyclerAdapterProduct extends RecyclerView.Adapter<RecyclerAdapter
             product_cant = view.findViewById(R.id.id_Cant_item);
             product_code = view.findViewById(R.id.id_cod_articulo);
             product_image = view.findViewById(R.id.category_image);
+            product_premiun = view.findViewById(R.id.img_premiun);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,6 +78,12 @@ public class RecyclerAdapterProduct extends RecyclerView.Adapter<RecyclerAdapter
         holder.product_cant.setText(quantity.concat(" [" + product.getProduct_und().concat("]")));
 
         holder.product_code.setText(product.getProduct_id());
+
+        if (product.getCALIFICATIVO().equals("A")) {
+            holder.product_premiun.setVisibility(View.VISIBLE);
+        } else {
+            holder.product_premiun.setVisibility(View.GONE);
+        }
 
         Transformation transformation = new RoundedTransformationBuilder()
                 .cornerRadiusDp(6)

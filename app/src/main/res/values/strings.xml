@@ -7,7 +7,7 @@
     <!--bottom navigation-->
     <string name="title_nav_recent">ARTICULOS</string>
     <string name="title_nav_category">CLIENTES</string>
-    <string name="title_nav_help">AYUDA</string>
+    <string name="title_nav_help">PROMOCIÓNES</string>
     <string name="title_nav_profile">PERFIL</string>
 
     <!--privacy policy-->
@@ -172,4 +172,6 @@
     <string name="action_commit_factura">Comentario Factura</string>
     <string name="about_text">App oficial de Preventas UNIMARK es basada en la API de Internas de la empresa para una mayor velocidad y seguridad.
                               Este software está bajo politicas de desarrollo Internas de UNIMARK S,A.</string>
+    <string name="title_nav_promo">PROMOS</string>
+    <string name="short_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
 </resources>

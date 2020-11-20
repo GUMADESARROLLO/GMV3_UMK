@@ -1,5 +1,4 @@
 package com.app.gmv3.models;
-
 public class Factura_lineas {
     String ARTICULO;
     String DESCRIPCION;

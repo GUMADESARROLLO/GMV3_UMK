@@ -13,6 +13,7 @@ import com.app.gmv3.activities.ActivityProductDetail;
 import com.app.gmv3.models.Lotes;
 
 import java.util.List;
+import java.util.Locale;
 
 public class RecyclerAdapterLotes extends RecyclerView.Adapter<RecyclerAdapterLotes.ViewHolder> {
 
@@ -49,9 +50,13 @@ public class RecyclerAdapterLotes extends RecyclerView.Adapter<RecyclerAdapterLo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.txt_id_lote.setText(ActivityProductDetail.lote_name.get(position));
         holder.txt_date_lote.setText(("Exp. ").concat(ActivityProductDetail.lote_date.get(position)));
-        holder.txt_cant_lote.setText(ActivityProductDetail.lote_cant.get(position));
 
-        Log.e("Error", "onBindViewHolder: " + ActivityProductDetail.lote_name.get(position) );
+
+
+        String lote_cantidad = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(ActivityProductDetail.lote_cant.get(position)));
+
+        holder.txt_cant_lote.setText(lote_cantidad);
+
 
     }
 

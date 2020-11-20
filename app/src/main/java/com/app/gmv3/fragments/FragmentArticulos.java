@@ -43,7 +43,7 @@ import java.util.List;
 
 import static com.app.gmv3.utilities.Constant.GET_RECENT_PRODUCT;
 
-public class FragmentRecent extends Fragment implements RecyclerAdapterProduct.ContactsAdapterListener {
+public class FragmentArticulos extends Fragment implements RecyclerAdapterProduct.ContactsAdapterListener {
 
     private RecyclerView recyclerView;
     private List<Product> productList;

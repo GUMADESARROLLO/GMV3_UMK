@@ -3,13 +3,18 @@
 
     <item
         android:id="@+id/nav_recent"
-        android:icon="@drawable/ic_nav_recent"
+        android:icon="@drawable/ic_stock"
         android:title="@string/title_nav_recent" />
 
     <item
         android:id="@+id/nav_category"
-        android:icon="@drawable/ic_nav_category"
+        android:icon="@drawable/ic_clients"
         android:title="@string/title_nav_category" />
+    <item
+        android:visible="false"
+        android:id="@+id/nav_promo"
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/title_nav_promo" />
 
     <item
         android:id="@+id/nav_profile"

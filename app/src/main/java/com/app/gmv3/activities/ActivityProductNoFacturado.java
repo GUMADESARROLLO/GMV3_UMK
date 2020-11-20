@@ -1,10 +1,13 @@
 package com.app.gmv3.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.R;
 import com.app.gmv3.adapters.RecyclerAdapterNoFacturado;
-import com.app.gmv3.models.Factura_lineas;
+import com.app.gmv3.models.Product;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.Utils;
 import com.google.gson.Gson;
@@ -36,14 +39,15 @@ import java.util.List;
 
 import static com.app.gmv3.utilities.Constant.GET_NO_FACTURADO;
 
-public class ActivityProductNoFacturado extends AppCompatActivity {
+public class ActivityProductNoFacturado extends AppCompatActivity implements RecyclerAdapterNoFacturado.ContactsAdapterListener {
     String cod_factura;
 
     private RecyclerAdapterNoFacturado mAdapter;
     private RecyclerView recyclerView;
-    private List<Factura_lineas> productList;
+    private List<Product> productList;
     TextView txt_factura_total;
-    View lyt_empty_history;
+
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +65,6 @@ public class ActivityProductNoFacturado extends AppCompatActivity {
 
         cod_factura = intent.getStringExtra("factura_id");
 
-        lyt_empty_history = findViewById(R.id.lyt_empty_result);
         getSupportActionBar().setTitle("Articulo Disponible No facturado.");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -79,19 +82,13 @@ public class ActivityProductNoFacturado extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterNoFacturado( this,productList);
+        mAdapter = new RecyclerAdapterNoFacturado( this,productList,this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-        findViewById(R.id.id_closer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         fetchData();
     }
@@ -106,17 +103,12 @@ public class ActivityProductNoFacturado extends AppCompatActivity {
                     return;
                 }
 
-                List<Factura_lineas> items = new Gson().fromJson(response.toString(), new TypeToken<List<Factura_lineas>>() {
+                List<Product> items = new Gson().fromJson(response.toString(), new TypeToken<List<Product>>() {
                 }.getType());
                 productList.clear();
                 productList.addAll(items);
 
-                if (productList.size() > 0) {
-                    lyt_empty_history.setVisibility(View.GONE);
-                } else {
-                    lyt_empty_history.setVisibility(View.VISIBLE);
-                }
-                // refreshing recycler view
+
                 mAdapter.notifyDataSetChanged();
 
 
@@ -133,26 +125,60 @@ public class ActivityProductNoFacturado extends AppCompatActivity {
         MyApplication.getInstance().addToRequestQueue(request);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
+        getMenuInflater().inflate(R.menu.search_no_facturado, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
-
-
             case android.R.id.home:
                 finish();
-
                 return true;
-
-
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    @Override
+    public void onContactSelected(Product product) {
+        Intent intent = new Intent(getApplicationContext(), ActivityProductDetail.class);
+        intent.putExtra("product_id", product.getProduct_id());
+        intent.putExtra("title", product.getProduct_name());
+        intent.putExtra("image", product.getProduct_image());
+        intent.putExtra("product_price", product.getProduct_price());
+        intent.putExtra("product_description", product.getProduct_description());
+        intent.putExtra("product_quantity", product.getProduct_quantity());
+        intent.putExtra("product_status", product.getProduct_status());
+        intent.putExtra("currency_code", product.getCurrency_code());
+        intent.putExtra("category_name", product.getCategory_name());
+        intent.putExtra("product_bonificado", product.getProduct_bonificado());
+        intent.putExtra("product_lotes", product.getProduct_lotes());
+        intent.putExtra("product_und", product.getProduct_und());
+        startActivity(intent);
     }
 }

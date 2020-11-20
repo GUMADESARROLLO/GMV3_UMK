@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.app.gmv3.BuildConfig;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
+import com.app.gmv3.utilities.updateApplication;
 
 public class ActivitySplash extends AppCompatActivity {
 
@@ -30,6 +31,8 @@ public class ActivitySplash extends AppCompatActivity {
                 getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             }
         }
+
+
 
         progressBar = findViewById(R.id.progressBar);
 

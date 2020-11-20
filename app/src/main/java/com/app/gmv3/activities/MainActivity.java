@@ -8,7 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
-import com.app.gmv3.fragments.FragmentHelp;
+import com.app.gmv3.fragments.FragmentPromos;
+import com.app.gmv3.utilities.updateApplication;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,9 +34,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.fragments.FragmentCategory;
+import com.app.gmv3.fragments.FragmentClientes;
 import com.app.gmv3.fragments.FragmentProfile;
-import com.app.gmv3.fragments.FragmentRecent;
+import com.app.gmv3.fragments.FragmentArticulos;
 import com.app.gmv3.utilities.AppBarLayoutBehavior;
 import com.app.gmv3.utilities.DBHelper;
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             }
         }
-
+        new updateApplication(MainActivity.this).execute();
         AppBarLayout appBarLayout = findViewById(R.id.tab_appbar_layout);
         ((CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams()).setBehavior(new AppBarLayoutBehavior());
 
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_category:
                         viewPager.setCurrentItem(1);
                         return true;
-                    /*case R.id.nav_info:
+                /*    case R.id.nav_promo:
                         viewPager.setCurrentItem(2);
                         return true;*/
                     case R.id.nav_profile:
@@ -125,13 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-               /* if (viewPager.getCurrentItem() == 1) {
-                    toolbar.setTitle(R.string.title_nav_profile);
-                } else {
-                    toolbar.setTitle(R.string.app_name);
-                }*/
-
-                /*if (viewPager.getCurrentItem() == 1) {
+              /*  if (viewPager.getCurrentItem() == 1) {
                     toolbar.setTitle(R.string.title_nav_category);
                 } else if (viewPager.getCurrentItem() == 2) {
                     toolbar.setTitle(R.string.title_nav_help);
@@ -140,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     toolbar.setTitle(R.string.app_name);
                 }*/
-                if (viewPager.getCurrentItem() == 0) {
+               if (viewPager.getCurrentItem() == 0) {
                     toolbar.setTitle(R.string.title_nav_recent);
 
                 } else if (viewPager.getCurrentItem() == 2) {
@@ -193,9 +188,11 @@ public class MainActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    return new FragmentRecent();
+                    return new FragmentArticulos();
                 case 1:
-                    return new FragmentCategory();
+                    return new FragmentClientes();
+               /* case 2:
+                    return new FragmentPromos();*/
                 case 2:
                     return new FragmentProfile();
 
