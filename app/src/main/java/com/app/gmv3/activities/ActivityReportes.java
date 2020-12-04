@@ -26,7 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.gmv3.R;
-import com.app.gmv3.adapters.RecyclerAdapterRptFacturas;
+import com.app.gmv3.adapters.AdapterReporteFacturas;
 import com.app.gmv3.models.Reporte_Factura;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.SharedPref;
@@ -53,7 +53,7 @@ public class ActivityReportes extends AppCompatActivity {
     SharedPref sharedPref;
     private RecyclerView recyclerView;
     private List<Reporte_Factura> productList;
-    private RecyclerAdapterRptFacturas mAdapter;
+    private AdapterReporteFacturas mAdapter;
     View lyt_empty_history;
     TextView txt_factura_total;
     @Override
@@ -71,7 +71,7 @@ public class ActivityReportes extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
 
         productList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterRptFacturas( productList);
+        mAdapter = new AdapterReporteFacturas( productList);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
@@ -114,14 +114,14 @@ public class ActivityReportes extends AppCompatActivity {
 
 
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ProfileWallet.ClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ActivityPerfilCliente.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
 
-                        Intent intent = new Intent(ActivityReportes.this, ShoppingCartSimple.class);
+                        Intent intent = new Intent(ActivityReportes.this, ActivityViewFactura.class);
 
                         intent.putExtra("factura_id",productList.get(position).getFACTURA());
                         intent.putExtra("factura_date",productList.get(position).getFECHA());
@@ -146,9 +146,9 @@ public class ActivityReportes extends AppCompatActivity {
     class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
-        private ProfileWallet.ClickListener clickListener;
+        private ActivityPerfilCliente.ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final ProfileWallet.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final ActivityPerfilCliente.ClickListener clickListener) {
 
             this.clickListener = clickListener;
 

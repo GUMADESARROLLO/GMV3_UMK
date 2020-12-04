@@ -2,6 +2,8 @@ package com.app.gmv3.models;
 
 public class Product {
 
+
+
     private String product_id;
     private String product_name;
     private String category_id;
@@ -15,8 +17,13 @@ public class Product {
     private String product_lotes;
     private String product_und;
     private String CALIFICATIVO;
+    private String ISPROMO;
     private double tax;
     private double product_quantity;
+
+    public String getISPROMO() {
+        return ISPROMO;
+    }
 
     public String getCALIFICATIVO() {
         return CALIFICATIVO;

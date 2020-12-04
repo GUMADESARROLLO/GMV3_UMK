@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.app.gmv3.activities.ActivityMyStat"></activity>
+        <activity android:name="com.app.gmv3.activities.ActivityEstadisticas"></activity>
         <activity
             android:name="com.app.gmv3.activities.CardcreditActivity"
             android:screenOrientation="portrait" />
@@ -34,9 +34,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.app.gmv3.activities.ShoppingCartSimple" />
-        <activity android:name="com.app.gmv3.activities.Activitytresmeses" />
-        <activity android:name="com.app.gmv3.activities.PaymentProfile" />
+        <activity android:name="com.app.gmv3.activities.ActivityViewFactura" />
+        <activity android:name="com.app.gmv3.activities.ActivityUltimos3m" />
+        <activity android:name="com.app.gmv3.activities.ActivityNotaCredito" />
         <activity
             android:name="com.app.gmv3.activities.ActivityReportes"
             android:screenOrientation="portrait" />
@@ -44,19 +44,21 @@
             android:name="com.app.gmv3.activities.ActivityInteligenciaMercado"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.app.gmv3.activities.ActivityDetailsPromo" />
+        <activity
             android:name="com.app.gmv3.activities.ActivityVerificacion"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityProductNoFacturado"
+            android:name="com.app.gmv3.activities.ActivityNoFacturado"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityComentario"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ProfileWallet"
+            android:name="com.app.gmv3.activities.ActivityPerfilCliente"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.Login"
+            android:name="com.app.gmv3.activities.ActivityLogin"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityCart"
@@ -65,7 +67,7 @@
             android:name="com.app.gmv3.activities.ActivityProduct"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityClients"
+            android:name="com.app.gmv3.activities.ActivityCheckOutClientes"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityProductDetail"

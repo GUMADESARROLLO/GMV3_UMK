@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +28,7 @@ import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.ActivityProductDetail;
 import com.app.gmv3.activities.MyApplication;
-import com.app.gmv3.adapters.RecyclerAdapterProduct;
+import com.app.gmv3.adapters.AdapterProduct;
 import com.app.gmv3.models.Product;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.Utils;
@@ -43,11 +42,11 @@ import java.util.List;
 
 import static com.app.gmv3.utilities.Constant.GET_RECENT_PRODUCT;
 
-public class FragmentArticulos extends Fragment implements RecyclerAdapterProduct.ContactsAdapterListener {
+public class FragmentArticulos extends Fragment implements AdapterProduct.ContactsAdapterListener  {
 
     private RecyclerView recyclerView;
     private List<Product> productList;
-    private RecyclerAdapterProduct mAdapter;
+    private AdapterProduct mAdapter;
     private SearchView searchView;
     View lyt_empty_history;
     SwipeRefreshLayout swipeRefreshLayout = null;
@@ -68,7 +67,7 @@ public class FragmentArticulos extends Fragment implements RecyclerAdapterProduc
 
         recyclerView = view.findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterProduct(getActivity(), productList, this);
+        mAdapter = new AdapterProduct(getActivity(), productList, this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);

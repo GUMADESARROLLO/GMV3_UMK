@@ -20,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.app.gmv3.Config;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onesignal.OneSignal;
@@ -55,12 +56,15 @@ public class Utils {
             view.setSystemUiVisibility(flags);
         }
     }
-    public static void displayImageOriginal(Context ctx, ImageView img, @DrawableRes int drawable) {
+    public static void displayImageOriginal(Context ctx, ImageView img, String drawable) {
         try {
-            Glide.with(ctx).load(drawable)
+            Glide.with(ctx).load(Config.ADMIN_PANEL_URL + "/upload/banners/" + drawable)
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(img);
+
+
+
         } catch (Exception e) {
         }
     }
@@ -150,6 +154,19 @@ public class Utils {
 
         try {
             SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = sd.parse(time);
+            milis = date.getTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return milis;
+    }
+    public static long timeStringtoMilis_Factura(String time) {
+        long milis = 0;
+
+        try {
+            SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
             Date date = sd.parse(time);
             milis = date.getTime();
         } catch (Exception e) {

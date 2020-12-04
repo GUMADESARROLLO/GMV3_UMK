@@ -46,7 +46,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +57,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.app.gmv3.adapters.RecyclerAdapterInteligenciaMercado;
+import com.app.gmv3.adapters.AdapterInteligenciaMercado;
 import com.app.gmv3.models.Comentarios;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.Utils;
@@ -85,11 +84,11 @@ import static com.app.gmv3.utilities.Constant.POST_REPORT;
 
 import com.app.gmv3.R;
 
-public class ActivityInteligenciaMercado extends AppCompatActivity implements RecyclerAdapterInteligenciaMercado.ContactsAdapterListener{
+public class ActivityInteligenciaMercado extends AppCompatActivity implements AdapterInteligenciaMercado.ContactsAdapterListener{
 
     private RecyclerView recyclerView;
     private List<Comentarios> productList;
-    private RecyclerAdapterInteligenciaMercado mAdapter;
+    private AdapterInteligenciaMercado mAdapter;
     private SearchView searchView;
     SwipeRefreshLayout swipeRefreshLayout = null;
     private String category_id,category_name;
@@ -147,7 +146,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Re
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterInteligenciaMercado(this, productList, this);
+        mAdapter = new AdapterInteligenciaMercado(this, productList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);

@@ -2,12 +2,17 @@ package com.app.gmv3.models;
 
 public class Moras {
     String NoVencidos;
+    String Vencidos;
     String Dias30;
     String Dias60;
     String Dias90;
     String Dias120;
     String Mas120;
     String FACT_PEND;
+
+    public String getVencido() {
+        return Vencidos;
+    }
 
     public String getNoVencidos() {
         return NoVencidos;

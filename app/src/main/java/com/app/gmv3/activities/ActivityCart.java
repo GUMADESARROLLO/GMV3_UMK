@@ -96,7 +96,7 @@ public class ActivityCart extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //dbhelper.close();
-               Intent intent = new Intent(ActivityCart.this, ActivityClients.class);
+               Intent intent = new Intent(ActivityCart.this, ActivityCheckOutClientes.class);
                 //Intent intent = new Intent(ActivityCart.this, ActivityCheckout.class);
 
 

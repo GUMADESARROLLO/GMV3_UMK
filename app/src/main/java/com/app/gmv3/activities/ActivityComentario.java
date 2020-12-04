@@ -19,7 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.adapters.RecyclerAdapterComentarios;
+import com.app.gmv3.adapters.AdapterComentarios;
 
 import com.app.gmv3.models.Comentario;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
@@ -38,7 +38,7 @@ public class ActivityComentario extends AppCompatActivity  {
 
     private RecyclerView recyclerView;
     private List<Comentario> productList;
-    private RecyclerAdapterComentarios mAdapter;
+    private AdapterComentarios mAdapter;
     private String id_orden;
 
     @Override
@@ -64,7 +64,7 @@ public class ActivityComentario extends AppCompatActivity  {
 
         recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterComentarios(productList);
+        mAdapter = new AdapterComentarios(productList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);

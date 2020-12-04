@@ -10,15 +10,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.app.gmv3.adapters.RecyclerAdapterBnfc;
-import com.app.gmv3.adapters.RecyclerAdapterLstResumen;
+import com.app.gmv3.adapters.AdapterCheckout;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,11 +28,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,10 +46,6 @@ import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.SharedPref;
 import com.onesignal.OneSignal;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,7 +54,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import static com.app.gmv3.utilities.Constant.GET_SHIPPING;
 import static com.app.gmv3.utilities.Constant.POST_ORDER;
 
 public class ActivityCheckout extends AppCompatActivity {
@@ -85,7 +76,7 @@ public class ActivityCheckout extends AppCompatActivity {
     SharedPref sharedPref;
 
     RecyclerView rcListaProductos;
-    RecyclerAdapterLstResumen rcLista_Resumen;
+    AdapterCheckout rcLista_Resumen;
 
 
     @Override
@@ -154,7 +145,7 @@ public class ActivityCheckout extends AppCompatActivity {
         getDataFromDatabase();
         submitOrder();
 
-        rcLista_Resumen = new RecyclerAdapterLstResumen(this, data,str_currency_code);
+        rcLista_Resumen = new AdapterCheckout(this, data,str_currency_code);
         rcListaProductos.setAdapter(rcLista_Resumen);
 
         txt_count.setText(rcLista_Resumen.getItemCount() + " Item(s)");

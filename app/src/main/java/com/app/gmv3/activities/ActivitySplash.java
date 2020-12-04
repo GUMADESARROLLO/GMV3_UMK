@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.app.gmv3.BuildConfig;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.utilities.updateApplication;
 
 public class ActivitySplash extends AppCompatActivity {
 
@@ -53,7 +52,7 @@ public class ActivitySplash extends AppCompatActivity {
                  if (MyApp.getIsLogin()){
                     startActivity(new Intent(getBaseContext(), MainActivity.class));
                   }else{
-                    startActivity(new Intent(getBaseContext(), Login.class));
+                    startActivity(new Intent(getBaseContext(), ActivityLogin.class));
                   }
 
 

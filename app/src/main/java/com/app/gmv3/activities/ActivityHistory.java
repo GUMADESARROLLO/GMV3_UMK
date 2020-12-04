@@ -35,7 +35,7 @@ import android.widget.Toast;
 
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.adapters.RecyclerAdapterHistory;
+import com.app.gmv3.adapters.AdapterHistory;
 import com.app.gmv3.models.History;
 import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.MyDividerItemDecoration;
@@ -50,7 +50,7 @@ public class ActivityHistory extends AppCompatActivity {
     View lyt_empty_history;
     RelativeLayout lyt_history;
     DBHelper dbhelper;
-    RecyclerAdapterHistory recyclerAdapterHistory;
+    AdapterHistory adapterHistory;
     final int CLEAR_ALL_ORDER = 0;
     final int CLEAR_ONE_ORDER = 1;
     int FLAG;
@@ -102,7 +102,7 @@ public class ActivityHistory extends AppCompatActivity {
 
         lyt_history = findViewById(R.id.lyt_history);
 
-        recyclerAdapterHistory = new RecyclerAdapterHistory(this, arrayItemHistory);
+        adapterHistory = new AdapterHistory(this, arrayItemHistory);
         dbhelper = new DBHelper(this);
 
         try {
@@ -228,7 +228,7 @@ public class ActivityHistory extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             if (id.size() > 0) {
                 lyt_history.setVisibility(View.VISIBLE);
-                recyclerView.setAdapter(recyclerAdapterHistory);
+                recyclerView.setAdapter(adapterHistory);
             } else {
                 lyt_empty_history.setVisibility(View.VISIBLE);
             }

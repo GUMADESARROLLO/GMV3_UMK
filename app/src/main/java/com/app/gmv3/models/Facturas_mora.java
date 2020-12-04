@@ -5,6 +5,22 @@ public class Facturas_mora {
     String Saldo;
     String Fecha;
 
+    public Facturas_mora(){
+
+    }
+
+    public void setCodigo(String codigo) {
+        Codigo = codigo;
+    }
+
+    public void setSaldo(String saldo) {
+        Saldo = saldo;
+    }
+
+    public void setFecha(String fecha) {
+        Fecha = fecha;
+    }
+
     public String getCodigo() {
         return Codigo;
     }

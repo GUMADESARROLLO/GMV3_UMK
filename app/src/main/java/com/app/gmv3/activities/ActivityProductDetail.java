@@ -18,7 +18,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.Settings;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +32,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,8 +54,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.adapters.RecyclerAdapterBnfc;
-import com.app.gmv3.adapters.RecyclerAdapterLotes;
+import com.app.gmv3.adapters.AdapterBonificado;
+import com.app.gmv3.adapters.AdapterLotes;
 import com.app.gmv3.models.Lotes;
 import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.Utils;
@@ -107,10 +105,10 @@ public class ActivityProductDetail extends AppCompatActivity {
     public static ArrayList<String> lote_cant = new ArrayList<String>();
 
     RecyclerView recyclerView, rcViewBnfc;
-    RecyclerAdapterLotes recyclerAdapterLotes;
-    RecyclerAdapterBnfc rcBonificado;
+    AdapterLotes adapterLotes;
+    AdapterBonificado rcBonificado;
     List<Lotes> arrayItemLotes;
-    List<String> sList;
+        List<String> sList;
 
 
     @Override
@@ -180,19 +178,20 @@ public class ActivityProductDetail extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerAdapterLotes = new RecyclerAdapterLotes(this, arrayItemLotes);
+        adapterLotes = new AdapterLotes(this, arrayItemLotes);
 
 
 
         rcViewBnfc.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
 
-        rcBonificado = new RecyclerAdapterBnfc(this, sList);
+        rcBonificado = new AdapterBonificado(this, sList);
 
         rcViewBnfc.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
                 final String str_bonificado =  sList.get(position);
                 final List<String> row_arr = new ArrayList<>();
+
                 row_arr.add(Arrays.asList(str_bonificado.replace("+", ",").split(",")).get(0));
 
 
@@ -417,7 +416,7 @@ public class ActivityProductDetail extends AppCompatActivity {
 
 
 
-        recyclerView.setAdapter(recyclerAdapterLotes);
+        recyclerView.setAdapter(adapterLotes);
         rcViewBnfc.setAdapter(rcBonificado);
 
     }

@@ -30,8 +30,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.MyApplication;
-import com.app.gmv3.activities.ProfileWallet;
-import com.app.gmv3.adapters.RecyclerAdapterCategory;
+import com.app.gmv3.activities.ActivityPerfilCliente;
+import com.app.gmv3.adapters.AdapterClientes;
 import com.app.gmv3.models.Clients;
 import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.Utils;
@@ -45,11 +45,11 @@ import java.util.List;
 
 import static com.app.gmv3.utilities.Constant.GET_CLIENTS;
 
-public class FragmentClientes extends Fragment implements RecyclerAdapterCategory.ContactsAdapterListener {
+public class FragmentClientes extends Fragment implements AdapterClientes.ContactsAdapterListener {
 
     private RecyclerView recyclerView;
     private List<Clients> categoryList;
-    private RecyclerAdapterCategory mAdapter;
+    private AdapterClientes mAdapter;
     private SearchView searchView;
     SwipeRefreshLayout swipeRefreshLayout = null;
     LinearLayout lyt_root;
@@ -73,7 +73,7 @@ public class FragmentClientes extends Fragment implements RecyclerAdapterCategor
 
         recyclerView = view.findViewById(R.id.recycler_view);
         categoryList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterCategory(getActivity(), categoryList, this);
+        mAdapter = new AdapterClientes(getActivity(), categoryList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -141,6 +141,7 @@ public class FragmentClientes extends Fragment implements RecyclerAdapterCategor
 
                         // refreshing recycler view
                         mAdapter.notifyDataSetChanged();
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -153,6 +154,8 @@ public class FragmentClientes extends Fragment implements RecyclerAdapterCategor
 
         MyApplication.getInstance().addToRequestQueue(request);
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -194,6 +197,8 @@ public class FragmentClientes extends Fragment implements RecyclerAdapterCategor
                 return true;
 
 
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -221,16 +226,16 @@ public class FragmentClientes extends Fragment implements RecyclerAdapterCategor
     @Override
     public void onContactSelected(Clients clients) {
         //Toast.makeText(getActivity(), "Selected: " + category.getCategory_name(), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getActivity(), ProfileWallet.class);
+        Intent intent = new Intent(getActivity(), ActivityPerfilCliente.class);
         intent.putExtra("Client_Code", clients.getCLIENTE());
         intent.putExtra("CLient_name", clients.getNOMBRE());
         intent.putExtra("Telefono", clients.getTELE());
         intent.putExtra("Condicion_pago", clients.getCONDPA());
-
         intent.putExtra("Limite", clients.getLIMITE());
         intent.putExtra("Saldo", clients.getSALDO());
         intent.putExtra("Disponible", clients.getDIPONIBLE());
         intent.putExtra("Verificado", clients.getVERIFICADO());
+        intent.putExtra("pin", clients.getPIN());
         startActivity(intent);
     }
 

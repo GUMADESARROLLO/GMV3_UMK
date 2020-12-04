@@ -12,6 +12,11 @@ public class Clients {
     String TELE;
     String CONDPA;
     String VERIFICADO;
+    String PIN;
+
+    public String getPIN() {
+        return PIN;
+    }
 
     public String getVERIFICADO() {
         return VERIFICADO;

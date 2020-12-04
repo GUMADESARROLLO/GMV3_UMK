@@ -1,9 +1,9 @@
 package com.app.gmv3.fragments;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,54 +19,48 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.R;
+import com.app.gmv3.activities.ActivityDetailsPromo;
+import com.app.gmv3.activities.ActivityImageDetail;
+import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.adapters.AdapterImageSlider;
 import com.app.gmv3.adapters.AdapterListNews;
-import com.app.gmv3.adapters.AdapterSnapGeneric;
-import com.app.gmv3.adapters.DataGenerator;
-import com.app.gmv3.models.Image;
-import com.app.gmv3.models.News;
-import com.app.gmv3.utilities.StartSnapHelper;
+import com.app.gmv3.models.Banner;
+import com.app.gmv3.utilities.Utils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+import static com.app.gmv3.utilities.Constant.GET_BANNER;
+import static com.app.gmv3.utilities.Constant.GET_NEWS;
 
 
 public class FragmentPromos extends Fragment {
     View view;
     private Runnable runnable = null;
     private Handler handler = new Handler();
-    private ViewPager viewPager;
+
     private RecyclerView recyclerViewNews;
     private AdapterListNews mAdapter;
-    private AdapterImageSlider adapterImageSlider;
+
+    private List<Banner> bannerList;
+    private List<Banner> NewsList;
+
+    private ViewPager viewPager;
     private LinearLayout layout_dots;
-    private static int[] array_image_place = {
-            R.drawable.image_12,
-            R.drawable.image_13,
-            R.drawable.image_14,
-            R.drawable.image_15,
-            R.drawable.image_8,
-    };
-
-    private static String[] array_title_place = {
-            "Dui fringilla ornare finibus, orci odio",
-            "Mauris sagittis non elit quis fermentum",
-            "Mauris ultricies augue sit amet est sollicitudin",
-            "Suspendisse ornare est ac auctor pulvinar",
-            "Vivamus laoreet aliquam ipsum eget pretium",
-    };
-
-    private static String[] array_brief_place = {
-            "Foggy Hill",
-            "The Backpacker",
-            "River Forest",
-            "Mist Mountain",
-            "Side Park",
-    };
-
+    private AdapterImageSlider adapterImageSlider;
+    RelativeLayout ryt_empty_history;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_promos, container, false);
@@ -77,36 +72,55 @@ public class FragmentPromos extends Fragment {
     }
 
     private void initComponent() {
-        layout_dots = (LinearLayout) view.findViewById(R.id.layout_dots);
-        viewPager = (ViewPager) view.findViewById(R.id.pager);
-        adapterImageSlider = new AdapterImageSlider(getActivity(), new ArrayList<Image>());
 
 
+        bannerList = new ArrayList<>();
+        NewsList = new ArrayList<>();
 
-        recyclerViewNews = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerViewNews = view.findViewById(R.id.recyclerView);
         recyclerViewNews.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewNews.setHasFixedSize(true);
+        ryt_empty_history = (RelativeLayout) view.findViewById(R.id.id_no_feed);
 
 
-
-        List<News> items = DataGenerator.getNewsData(getActivity(), 10);
-        mAdapter = new AdapterListNews(getContext(), items, R.layout.item_news_light);
+        mAdapter = new AdapterListNews(getContext(), NewsList, R.layout.item_news_light);
         recyclerViewNews.setAdapter(mAdapter);
 
-        final List<Image> items2 = new ArrayList<>();
-        for (int i = 0; i < array_image_place.length; i++) {
-            Image obj = new Image();
-            obj.image = array_image_place[i];
-            obj.imageDrw = getResources().getDrawable(obj.image);
-            obj.name = array_title_place[i];
-            obj.brief = array_brief_place[i];
-            items2.add(obj);
-        }
+        layout_dots = view.findViewById(R.id.layout_dots);
+        viewPager =  view.findViewById(R.id.pager);
+        adapterImageSlider = new AdapterImageSlider(getActivity(), bannerList);
 
-        adapterImageSlider.setItems(items2);
-        viewPager.setAdapter(adapterImageSlider);
-        viewPager.setCurrentItem(0);
-        addBottomDots(layout_dots, adapterImageSlider.getCount(), 0);
+        mAdapter.setOnItemClickListener(new AdapterListNews.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, Banner obj, int position) {
+                Intent intent = new Intent(getActivity(), ActivityDetailsPromo.class);
+                intent.putExtra("Promo_descripcion", obj.getBanner_description());
+                intent.putExtra("promo_imagen", obj.getBanner_image());
+                startActivity(intent);
+            }
+
+
+        });
+
+        adapterImageSlider.setOnItemClickListener(new AdapterImageSlider.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, Banner obj, int position) {
+
+
+                Intent intent = new Intent(getActivity(), ActivityImageDetail.class);
+                intent.putExtra("image", obj.getBanner_image());
+                intent.putExtra("root", "banners");
+                startActivity(intent);
+            }
+
+
+        });
+
+
+        fetchData();
+        onRefresh();
+
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int pos, float positionOffset, int positionOffsetPixels) {
@@ -122,7 +136,8 @@ public class FragmentPromos extends Fragment {
             }
         });
 
-        startAutoSlider(adapterImageSlider.getCount());
+
+
 
     }
     private void addBottomDots(LinearLayout layout_dots, int size, int current) {
@@ -136,13 +151,13 @@ public class FragmentPromos extends Fragment {
             params.setMargins(10, 0, 10, 0);
             dots[i].setLayoutParams(params);
             dots[i].setImageResource(R.drawable.shape_circle_outline);
-            dots[i].setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey_40), PorterDuff.Mode.SRC_ATOP);
+            dots[i].setColorFilter(ContextCompat.getColor(getContext(), R.color.grey_soft), PorterDuff.Mode.SRC_ATOP);
             layout_dots.addView(dots[i]);
         }
 
         if (dots.length > 0) {
             dots[current].setImageResource(R.drawable.shape_circle);
-            dots[current].setColorFilter(ContextCompat.getColor(getActivity(), R.color.grey_40), PorterDuff.Mode.SRC_ATOP);
+            dots[current].setColorFilter(ContextCompat.getColor(getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         }
     }
     private void startAutoSlider(final int count) {
@@ -153,36 +168,88 @@ public class FragmentPromos extends Fragment {
                 pos = pos + 1;
                 if (pos >= count) pos = 0;
                 viewPager.setCurrentItem(pos);
-                handler.postDelayed(runnable, 3000);
+                handler.postDelayed(runnable, 7000);
             }
         };
-        handler.postDelayed(runnable, 3000);
+        handler.postDelayed(runnable, 6000);
     }
+    private void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    fetchData();
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+                }
 
-    private void bottomProgressDots(int max, int current_index) {
-        if (current_index < 0 || current_index > max - 1) return;
-        LinearLayout dotsLayout = view.findViewById(R.id.layoutDots);
-        ImageView[] dots = new ImageView[max];
-
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new ImageView(getContext());
-            int width_height = 12;
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(width_height, width_height));
-            params.setMargins(5, 5, 5, 5);
-            dots[i].setLayoutParams(params);
-            dots[i].setImageResource(R.drawable.shape_circle);
-            dots[i].setColorFilter(getResources().getColor(R.color.grey_20), PorterDuff.Mode.SRC_IN);
-            dotsLayout.addView(dots[i]);
-        }
-
-        if (dots.length > 0) {
-            dots[current_index].setImageResource(R.drawable.shape_circle);
-            dots[current_index].setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-        }
+            }
+        }, 1500);
     }
+    private void fetchData() {
+        JsonArrayRequest rqBanner = new JsonArrayRequest(GET_BANNER, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response == null) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.failed_fetch_data), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                 List<Banner> items = new Gson().fromJson(response.toString(), new TypeToken<List<Banner>>() {
+                }.getType());
+
+                bannerList.clear();
+                bannerList.addAll(items);
+
+                adapterImageSlider.setItems(bannerList);
+                viewPager.setAdapter(adapterImageSlider);
+                viewPager.setCurrentItem(0);
+                addBottomDots(layout_dots, adapterImageSlider.getCount(), 0);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("INFO", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        startAutoSlider(adapterImageSlider.getCount());
+        MyApplication.getInstance().addToRequestQueue(rqBanner);
 
 
+
+
+        JsonArrayRequest rqNews = new JsonArrayRequest(GET_NEWS, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response == null) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.failed_fetch_data), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                List<Banner> items = new Gson().fromJson(response.toString(), new TypeToken<List<Banner>>() {
+                }.getType());
+
+                NewsList.clear();
+                NewsList.addAll(items);
+
+                if (NewsList.size() > 0 ){
+                    ryt_empty_history.setVisibility(View.GONE);
+                }else{
+                    ryt_empty_history.setVisibility(View.VISIBLE);
+                }
+
+                mAdapter.notifyDataSetChanged();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("INFO", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyApplication.getInstance().addToRequestQueue(rqNews);
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.search, menu);

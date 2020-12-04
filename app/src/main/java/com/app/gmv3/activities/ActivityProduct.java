@@ -24,7 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.adapters.RecyclerAdapterProduct;
+import com.app.gmv3.adapters.AdapterProduct;
 import com.app.gmv3.models.Product;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.Utils;
@@ -38,11 +38,11 @@ import java.util.List;
 
 import static com.app.gmv3.utilities.Constant.GET_CATEGORY_DETAIL;
 
-public class ActivityProduct extends AppCompatActivity implements RecyclerAdapterProduct.ContactsAdapterListener {
+public class ActivityProduct extends AppCompatActivity implements AdapterProduct.ContactsAdapterListener {
 
     private RecyclerView recyclerView;
     private List<Product> productList;
-    private RecyclerAdapterProduct mAdapter;
+    private AdapterProduct mAdapter;
     private SearchView searchView;
     SwipeRefreshLayout swipeRefreshLayout = null;
     private String category_id, category_name;
@@ -72,7 +72,7 @@ public class ActivityProduct extends AppCompatActivity implements RecyclerAdapte
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
-        mAdapter = new RecyclerAdapterProduct(this, productList, this);
+        mAdapter = new AdapterProduct(this, productList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);

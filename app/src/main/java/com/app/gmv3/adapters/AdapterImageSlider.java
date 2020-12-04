@@ -8,33 +8,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.app.gmv3.R;
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.app.gmv3.models.Image;
+import com.app.gmv3.models.Banner;
 import com.app.gmv3.utilities.Utils;
 import com.balysv.materialripple.MaterialRippleLayout;
 
 import java.util.List;
-import com.app.gmv3.R;
 
 public class AdapterImageSlider extends PagerAdapter {
 
     private Activity act;
-    private List<Image> items;
+    private List<Banner> items;
 
-    private AdapterImageSlider.OnItemClickListener onItemClickListener;
+    private OnItemClickListener mOnItemClickListener;
 
-    private interface OnItemClickListener {
-        void onItemClick(View view, Image obj);
+    public interface OnItemClickListener {
+        void onItemClick(View view, Banner obj, int position);
     }
 
-    public void setOnItemClickListener(AdapterImageSlider.OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mOnItemClickListener = mItemClickListener;
     }
 
     // constructor
-    public AdapterImageSlider(Activity activity, List<Image> items) {
+    public AdapterImageSlider(Activity activity, List<Banner> items) {
         this.act = activity;
         this.items = items;
     }
@@ -44,11 +45,11 @@ public class AdapterImageSlider extends PagerAdapter {
         return this.items.size();
     }
 
-    public Image getItem(int pos) {
+    public Banner getItem(int pos) {
         return items.get(pos);
     }
 
-    public void setItems(List<Image> items) {
+    public void setItems(List<Banner> items) {
         this.items = items;
         notifyDataSetChanged();
     }
@@ -59,24 +60,27 @@ public class AdapterImageSlider extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        final Image o = items.get(position);
+    public Object instantiateItem(ViewGroup container, final int position) {
+        final Banner o = items.get(position);
         LayoutInflater inflater = (LayoutInflater) act.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.item_slider_image, container, false);
 
-        ImageView image = (ImageView) v.findViewById(R.id.image);
-        MaterialRippleLayout lyt_parent = (MaterialRippleLayout) v.findViewById(R.id.lyt_parent);
-        Utils.displayImageOriginal(act, image, o.image);
+        ImageView image =  v.findViewById(R.id.image);
+        MaterialRippleLayout lyt_parent = v.findViewById(R.id.lyt_parent);
+
+        Utils.displayImageOriginal(act, image, o.getBanner_image());
+
+
         lyt_parent.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(final View v) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(v, o);
-                }
+            public void onClick(View view) {
+                if (mOnItemClickListener == null) return;
+                mOnItemClickListener.onItemClick(view, items.get(position), position);
             }
         });
 
         ((ViewPager) container).addView(v);
+
 
         return v;
     }

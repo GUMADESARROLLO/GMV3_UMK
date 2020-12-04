@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,10 +20,9 @@ import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.ActivityHistory;
 import com.app.gmv3.activities.ActivityInteligenciaMercado;
-import com.app.gmv3.activities.ActivityMyStat;
+import com.app.gmv3.activities.ActivityEstadisticas;
 import com.app.gmv3.activities.ActivityReportes;
 import com.app.gmv3.activities.ActivitySettings;
-import com.app.gmv3.activities.Activitytresmeses;
 import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.utilities.SharedPref;
 import com.balysv.materialripple.MaterialRippleLayout;
@@ -94,7 +90,7 @@ public class FragmentProfile extends Fragment {
         view.findViewById(R.id.id_mis_stat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ActivityMyStat.class);
+                Intent intent = new Intent(getActivity(), ActivityEstadisticas.class);
                 startActivity(intent);
             }
         });

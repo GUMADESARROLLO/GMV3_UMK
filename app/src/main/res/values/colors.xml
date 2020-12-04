@@ -5,9 +5,10 @@
     <color name="colorPrimaryDark">#003044</color>
     <color name="colorPrimary">#006690</color>
     <color name="colorAccent">#009cdd</color>
+    <color name="blue_50">#E3F2FD</color>
     <color name="overlay_dark_30">#4D000000</color>
     <color name="overlay_dark_40">#66000000</color>
-
+    <color name="overlay_light_30">#4DFFFFFF</color>
     <!--other color-->
     <color name="txt_price_color">#0AAC3A</color>
     <color name="ripple_color">#dfdfdf</color>

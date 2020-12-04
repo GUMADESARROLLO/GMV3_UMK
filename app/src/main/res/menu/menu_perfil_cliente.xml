@@ -10,6 +10,12 @@
         android:title="@string/action_reporte_visita"
         app:showAsAction="always" />
     <item
+        android:id="@+id/item_pin"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:icon="@drawable/ic_pin"
+        android:title="@string/action_push_pin"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/item_location"
         android:icon="@drawable/ic_location_on"
         android:title="@string/action_reporte_visita"
