@@ -222,7 +222,13 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
+            <include
+                android:visibility="invisible"
+                android:id="@+id/lytUpdateProduct"
+                layout="@layout/include_update_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -2,6 +2,7 @@ package com.app.gmv3.utilities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -21,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.app.gmv3.Config;
+import com.app.gmv3.activities.ActivityImageDetail;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onesignal.OneSignal;
@@ -68,6 +70,21 @@ public class Utils {
         } catch (Exception e) {
         }
     }
+
+    public static void displayImageOriginal_product(final Context ctx, ImageView img, final String drawable) {
+        try {
+            Glide.with(ctx).load(Config.ADMIN_PANEL_URL + "/upload/product/" + drawable)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(img);
+
+
+
+
+        } catch (Exception e) {
+        }
+    }
+
     public static void changeMenuIconColor(Menu menu, @ColorInt int color) {
         for (int i = 0; i < menu.size(); i++) {
             Drawable drawable = menu.getItem(i).getIcon();

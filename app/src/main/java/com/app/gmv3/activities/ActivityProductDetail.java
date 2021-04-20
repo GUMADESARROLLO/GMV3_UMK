@@ -99,7 +99,7 @@ public class ActivityProductDetail extends AppCompatActivity {
     final Context context = this;
     double resp_tax;
     String resp_currency_code;
-
+    AppCompatButton btn_checkout;
     public static ArrayList<String> lote_name = new ArrayList<String>();
     public static ArrayList<String> lote_date = new ArrayList<String>();
     public static ArrayList<String> lote_cant = new ArrayList<String>();
@@ -180,7 +180,26 @@ public class ActivityProductDetail extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapterLotes = new AdapterLotes(this, arrayItemLotes);
 
+        btn_checkout = findViewById(R.id.btn_checkout);
+        btn_checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(ActivityProductDetail.this, ActivityActualizarProducto.class);
+                intent.putExtra("producto_sku", product_id);
+                intent.putExtra("producto_name", product_name);
+                intent.putExtra("producto_precio", product_price);
+                intent.putExtra("producto_exiten", product_quantity);
+                intent.putExtra("product_image", product_image);
+                intent.putExtra("producto_descri", product_description);
+                intent.putExtra("currency_code", currency_code);
+                intent.putExtra("product_und", product_und);
+                intent.putExtra("product_image", product_image);
 
+
+
+               startActivity(intent);
+            }
+        });
 
         rcViewBnfc.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
 
@@ -189,6 +208,7 @@ public class ActivityProductDetail extends AppCompatActivity {
         rcViewBnfc.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
+
                 final String str_bonificado =  sList.get(position);
                 final List<String> row_arr = new ArrayList<>();
 

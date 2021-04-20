@@ -30,7 +30,7 @@ import org.json.JSONObject;
 public class ActivityLogin extends AppCompatActivity implements Validator.ValidationListener{
 
     private View parent_view;
-    String strEmail, strPassword,strId, strNombre,IdCompany,strMessage,strDevice;
+    String strEmail, strPassword,strId, strNombre,IdCompany,strMessage;
     String strFullName,strTelefono,strUserEmail;
     @Required(order = 1)
     TextInputEditText Usuario;;
@@ -191,6 +191,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
                             strFullName = objJson.getString(Constant.USER_FULL_NAME);
                             strTelefono = objJson.getString(Constant.USER_TELEFONO);
                             strUserEmail = objJson.getString(Constant.USER_EMAIL);
+
                             //strImage = objJson.getString("normal");
 
                         }

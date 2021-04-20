@@ -25,6 +25,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.ActivityActualizarProducto"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.app.gmv3.activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">

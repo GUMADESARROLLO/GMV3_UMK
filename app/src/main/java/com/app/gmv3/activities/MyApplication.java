@@ -73,6 +73,7 @@ public class MyApplication extends Application {
         return false;
     }
     public void saveLogin(String user_id, String user_name,String strFullName,String strTelefono, String strUserEmail) {
+
       /*  preferences = this.getSharedPreferences(prefName, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("user_id", user_id);

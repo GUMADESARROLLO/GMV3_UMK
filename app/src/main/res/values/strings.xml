@@ -100,6 +100,7 @@
     <string name="pref_title_address">Dirección</string>
     <string name="pref_title_ruta">Ruta</string>
     <string name="pref_title_password">Contraseña</string>
+    <string name="pref_Type">Tipo</string>
     <string name="default_your_name">Su Nombre</string>
     <string name="default_your_email">Su.email@gmail.com</string>
     <string name="default_your_phone">+50500000000</string>

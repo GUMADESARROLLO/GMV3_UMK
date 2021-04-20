@@ -55,4 +55,12 @@ public class SharedPref {
         return default_prefence.getString(str(R.string.pref_title_address), str(R.string.default_your_address));
     }
 
+    public void setType(String name) {
+        default_prefence.edit().putString(str(R.string.pref_Type), name).apply();
+    }
+
+    public String getType() {
+        return default_prefence.getString(str(R.string.pref_Type), str(R.string.default_your_address));
+    }
+
 }

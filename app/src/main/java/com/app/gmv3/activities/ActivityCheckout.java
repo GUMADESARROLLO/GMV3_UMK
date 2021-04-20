@@ -271,6 +271,7 @@ public class ActivityCheckout extends AppCompatActivity {
                 params.put("date", date);
                 params.put("server_url", Config.ADMIN_PANEL_URL);
 
+
                 return params;
             }
 
