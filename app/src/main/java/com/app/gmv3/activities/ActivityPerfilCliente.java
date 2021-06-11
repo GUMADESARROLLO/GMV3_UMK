@@ -191,6 +191,16 @@ public class ActivityPerfilCliente extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.id_search_lotes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivitySearchLotes.class);
+
+                intent.putExtra("factura_id",code_cliente);
+                startActivity(intent);
+            }
+        });
         fetchData();
 
     }

@@ -49,7 +49,6 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.txt_purchase_code.setText(ActivityHistory.name_cliente.get(position));
-        Log.e("Error", "onBindViewHolder: " + ActivityHistory.date_time.get(position) );
         holder.txt_order_date.setText(Utils.getFormatedDateSimple(ActivityHistory.date_time.get(position)));
         holder.txt_order_total.setText(ActivityHistory.order_total.get(position));
 

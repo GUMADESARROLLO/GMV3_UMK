@@ -55,6 +55,9 @@
             android:name="com.app.gmv3.activities.ActivityNoFacturado"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.ActivitySearchLotes"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.app.gmv3.activities.ActivityComentario"
             android:screenOrientation="portrait" />
         <activity

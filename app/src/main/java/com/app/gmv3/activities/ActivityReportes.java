@@ -74,9 +74,6 @@ public class ActivityReportes extends AppCompatActivity {
         mAdapter = new AdapterReporteFacturas( productList);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
 

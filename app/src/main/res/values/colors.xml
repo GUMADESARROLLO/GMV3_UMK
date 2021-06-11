@@ -12,6 +12,8 @@
     <!--other color-->
     <color name="txt_price_color">#0AAC3A</color>
     <color name="ripple_color">#dfdfdf</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="green_A200">#69F0AE</color>
     <color name="light_green_400">#9CCC65</color>
     <color name="green">#0ecf48</color>
     <color name="black">#000000</color>
@@ -49,4 +51,7 @@
 
     <color name="btnColorOperation">#DFDFDF</color>
     <color name="btnBackgroundColor">#222222</color>
+
+
+    <color name="overlay_dark_20">#33000000</color>
 </resources>

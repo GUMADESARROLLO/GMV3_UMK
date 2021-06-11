@@ -97,9 +97,6 @@ public class ActivityHistory extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL, 0));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         lyt_history = findViewById(R.id.lyt_history);
 
         adapterHistory = new AdapterHistory(this, arrayItemHistory);

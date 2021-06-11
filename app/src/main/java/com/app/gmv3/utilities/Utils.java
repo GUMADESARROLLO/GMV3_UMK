@@ -140,6 +140,14 @@ public class Utils {
         }
 
     }
+    public static void setSystemBarColor_Search(Activity act, @ColorRes int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = act.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(act.getResources().getColor(color));
+        }
+    }
     public static String getJSONString(String url) {
         String jsonString = null;
         HttpURLConnection linkConnection = null;

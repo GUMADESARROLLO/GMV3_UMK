@@ -40,6 +40,11 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
+    <style name="TextAppearance.Medium.Bold" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
     <!--style for ripple library-->
     <style name="RippleStyleWhite">
         <item name="mrl_rippleOverlay">true</item>

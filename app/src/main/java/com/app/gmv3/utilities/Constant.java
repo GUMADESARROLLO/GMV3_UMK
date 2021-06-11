@@ -13,6 +13,7 @@ public class Constant {
     public static final String GET_CATEGORY = BASE_URL + "/api/api.php?get_category";
     public static final String GET_CATEGORY_DETAIL = BASE_URL + "/api/api.php?category_id=";
     public static final String GET_CLIENTS = BASE_URL + "/api/api.php?clients_id=";
+    public static final String GET_HISTORY_LOTE = BASE_URL + "/api/api.php?get_history_lotes=";
     public static final String GET_STAT = BASE_URL + "/api/api.php?get_stat_ruta=";
     public static final String GET_STAT_RECUP = BASE_URL + "/api/api.php?stat_recup=";
     public static final String GET_STAT_ARTI = BASE_URL + "/api/api.php?get_stat_articulo=";

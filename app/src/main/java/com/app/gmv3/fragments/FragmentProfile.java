@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.app.gmv3.activities.ActivityHistory;
 import com.app.gmv3.activities.ActivityInteligenciaMercado;
 import com.app.gmv3.activities.ActivityEstadisticas;
 import com.app.gmv3.activities.ActivityReportes;
+import com.app.gmv3.activities.ActivitySearchLotes;
 import com.app.gmv3.activities.ActivitySettings;
 import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.utilities.SharedPref;
@@ -33,7 +35,7 @@ public class FragmentProfile extends Fragment {
     TextView txt_user_email;
     TextView txt_user_phone;
     TextView txt_user_address;
-    MaterialRippleLayout btn_edit_user;
+    LinearLayout btn_edit_user;
     LinearLayout lyt_root;
     MyApplication MyApp;
 
@@ -78,6 +80,7 @@ public class FragmentProfile extends Fragment {
 
             }
         });
+
 
         view.findViewById(R.id.btn_order_history).setOnClickListener(new View.OnClickListener() {
             @Override
