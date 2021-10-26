@@ -43,7 +43,14 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-
+                <ImageButton
+                android:id="@+id/id_search_lotes"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_margin="@dimen/spacing_middle"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/available"
+                app:srcCompat="@drawable/ic_search" />
 
 
 
@@ -74,84 +81,19 @@
                         app:civ_border="true"
                         app:civ_shadow="true" />
                 </RelativeLayout>
-
+                <ImageButton
+                    android:id="@+id/id_history_last_3m"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_margin="@dimen/spacing_middle"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/available"
+                    app:srcCompat="@drawable/ic_history" />
 
 
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/spacing_large"
-                android:paddingTop="@dimen/spacing_large">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/id_history_nc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_medium"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:tint="@color/available"
-                        app:srcCompat="@drawable/ic_attach_money" />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-
-
-                    <ImageButton
-                        android:id="@+id/id_history_last_3m"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_medium"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:tint="@color/available"
-                        app:srcCompat="@drawable/ic_history" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/id_search_lotes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_medium"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:tint="@color/available"
-                        app:srcCompat="@drawable/ic_stock" />
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <TextView
                 android:gravity="center"
@@ -308,8 +250,80 @@
 
             </LinearLayout>
 
-        </LinearLayout>
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_xxlarge"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/spacing_large"
+                    android:paddingRight="@dimen/spacing_large">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:tint="@color/deep_purple_500"
+                        app:srcCompat="@drawable/ic_monetization_on" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_weight="1"
+                        android:text="uWalltet"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_80"
+                        app:fontFamily="sans-serif-medium" />
+
+                    <RelativeLayout
+                        android:layout_width="130dp"
+                        android:layout_height="20dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:tint="@color/deep_purple_500"
+                            app:srcCompat="@drawable/shape_round_corner" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="C$ 5,000.00"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@android:color/white" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_5" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -317,15 +331,59 @@
             android:paddingLeft="@dimen/spacing_medium"
             android:paddingRight="@dimen/spacing_medium">
 
-            <TextView
+            <LinearLayout
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:layout_marginLeft="@dimen/spacing_mlarge"
-                android:layout_marginRight="@dimen/spacing_mlarge"
-                android:text="SALDOS EN MORA"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="@color/grey_60" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/spacing_mlarge"
+                    android:layout_marginRight="@dimen/spacing_mlarge"
+                    android:text="SALDOS EN MORA"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/grey_60" />
+
+
+                <LinearLayout
+                    android:id="@+id/id_history_nc"
+
+                    android:gravity="end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Notas de crédito"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/black"
+                        app:fontFamily="sans-serif-medium" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_arrow_right"
+                        app:tint="@color/grey_40" />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
