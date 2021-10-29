@@ -3,12 +3,38 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_perfil_cliente.xml" value="0.5" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxhdpi/ic_info.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxxhdpi/ic_monetization_on.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/dotted_line_red.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/ic_check_circle.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/ic_payments_24.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/outline_price_check_24.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_cart.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_checkout_vineta.xml" value="0.5" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_history.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_history_vineta.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_perfil_cliente.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_vinneta.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_vineta.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_info.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/fragment_profile.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/include_cart_total.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/include_empty_cart.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_clientes.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_clients.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_factura_lineas.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_factura_mora.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_history.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_history_vineta.xml" value="0.33" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_nc.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_news_horizontal.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_product.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_producto_resumen.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_voucher.xml" value="0.5" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

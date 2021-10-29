@@ -14,6 +14,7 @@ public class Constant {
     public static final String GET_CATEGORY_DETAIL = BASE_URL + "/api/api.php?category_id=";
     public static final String GET_CLIENTS = BASE_URL + "/api/api.php?clients_id=";
     public static final String GET_HISTORY_LOTE = BASE_URL + "/api/api.php?get_history_lotes=";
+
     public static final String GET_STAT = BASE_URL + "/api/api.php?get_stat_ruta=";
     public static final String GET_STAT_RECUP = BASE_URL + "/api/api.php?stat_recup=";
     public static final String GET_STAT_ARTI = BASE_URL + "/api/api.php?get_stat_articulo=";
@@ -56,6 +57,12 @@ public class Constant {
     public static final long ACTIVITY_RECOGNITION_INTERVAL = 0;
     public static final long UPDATE_INTERVAL = 1000;
     public static final long UPDATE_FASTEST_INTERVAL = UPDATE_INTERVAL / 2;
+
+    //RUTAS QUE TIENE QUE VER CON LAS VIÑETAS
+    public static final String GET_VINETA = BASE_URL + "/api/api.php?get_vineta=";
+    public static final String POST_ORDER_VINETA = BASE_URL + "/api/api.php?post_order_vineta";
+    public static final String GET_LIQUIDACION_VINETA = BASE_URL + "/api/api.php?get_liquidacion_vineta=";
+    public static final String DEL_ORDER_VINETA = BASE_URL + "/api/api.php?del_order_vineta";
 
 
 

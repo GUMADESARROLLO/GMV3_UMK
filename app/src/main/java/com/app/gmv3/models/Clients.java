@@ -13,6 +13,7 @@ public class Clients {
     String CONDPA;
     String VERIFICADO;
     String PIN;
+    String vineta;
 
     public String getPIN() {
         return PIN;
@@ -56,5 +57,9 @@ public class Clients {
 
     public String getDIRECCION() {
         return DIRECCION;
+    }
+
+    public String getVineta() {
+        return vineta;
     }
 }

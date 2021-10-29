@@ -44,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.app.gmv3.utilities.Constant.GET_TAX_CURRENCY;
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             }
         }
-        new updateApplication(MainActivity.this).execute();
+        //new updateApplication(MainActivity.this).execute();
         AppBarLayout appBarLayout = findViewById(R.id.tab_appbar_layout);
         ((CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams()).setBehavior(new AppBarLayoutBehavior());
 
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 //        if (dbhelper.isPreviousDataExist()) {
 //            showAlertDialog();
 //        }
+        ArrayList<ArrayList<Object>>  data = dbhelper.getAllData();
 
         makeJsonObjectRequest();
 

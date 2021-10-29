@@ -51,6 +51,8 @@
     <string name="msg_empty_cart">Tu carrito esta vacío!</string>
     <string name="msg_no_history">Tu historial de pedidos está vacío!</string>
     <string name="empty_cart">Whoops, Tu carrito esta vacío</string>
+    <string name="empty_cart_vine">Whoops, Tu Solicitud esta vacía.</string>
+    <string name="btn_continue_vine">Agregar</string>
     <string name="btn_continue_shopping">Seguir comprando</string>
     <string name="btn_add_to_cart">AÑADIR A CARRO</string>
     <string name="btn_out_of_stock">AGOTADO</string>
@@ -82,7 +84,7 @@
 
 
     <string name="checkout_dialog_msg">¿Estás seguro de que quieres Enviarlo?</string>
-    <string name="checkout_submit_title">Porfavor Espere</string>
+    <string name="checkout_submit_title">Por favor Espere</string>
     <string name="checkout_submit_msg">Enviar su Orden&#8230;</string>
     <string name="verification_submit_msg">Verificando...</string>
     <string name="checkout_success_title">Enhorabuena</string>
@@ -137,6 +139,7 @@
     <string name="failed_fetch_data">¡No se pudieron recuperar los datos! Inténtalo de nuevo.</string>
     <string name="btn_edit_profile">SALIR</string>
     <string name="txt_profile_history">Historial de pedidos</string>
+    <string name="txt_profile_history_vineta">Historial de recibos Viñetas</string>
     <string name="txt_inteligencia_mercado">Inteligencia de mercado</string>
     <string name="txt_profile_rate">Nos califica</string>
     <string name="txt_profile_privacy">Política de privacidad</string>

@@ -236,6 +236,9 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
         intent.putExtra("Disponible", clients.getDIPONIBLE());
         intent.putExtra("Verificado", clients.getVERIFICADO());
         intent.putExtra("pin", clients.getPIN());
+        intent.putExtra("Direccion", clients.getDIRECCION());
+        intent.putExtra("vineta_saldo", clients.getVineta());
+        intent.putExtra("moroso", clients.getMOROSO());
         startActivity(intent);
     }
 

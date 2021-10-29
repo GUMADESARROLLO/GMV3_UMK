@@ -47,6 +47,9 @@
             android:name="com.app.gmv3.activities.ActivityInteligenciaMercado"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.app.gmv3.activities.ActivityHistoryVineta"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.app.gmv3.activities.ActivityDetailsPromo" />
         <activity
             android:name="com.app.gmv3.activities.ActivityVerificacion"
@@ -56,6 +59,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ActivitySearchLotes"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ActivityVineta"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityComentario"
@@ -70,16 +76,22 @@
             android:name="com.app.gmv3.activities.ActivityCart"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityProduct"
+            android:name="com.app.gmv3.activities.ActivityCartVineta"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityCheckOutClientes"
+            android:name="com.app.gmv3.activities.ActivityProduct"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityProductDetail"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityCheckout"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.app.gmv3.activities.ActivityCheckoutVineta"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.app.gmv3.activities.ActivityCheckOutClientes"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.app.gmv3.activities.ActivityHistory"

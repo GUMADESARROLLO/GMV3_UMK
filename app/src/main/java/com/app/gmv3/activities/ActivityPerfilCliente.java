@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,8 +60,8 @@ import static com.app.gmv3.utilities.Constant.PUSH_PIN;
 public class ActivityPerfilCliente extends AppCompatActivity{
     TextView txt_perfil_name_cliente,txt_perfil_disponible,txt_perfil_saldo,txt_perfil_limite;
     TextView txt_perfil_noVencido,txt_perfil_d30,txt_perfil_d60,txt_perfil_d90,txt_perfil_d120,txt_perfil_m120;
-    TextView txt_tele,txt_condicion_pago;
-    String code_cliente;
+    TextView txt_tele,txt_condicion_pago,txt_saldo_vineta;
+    String code_cliente,str_moroso;
 
     public static ArrayList<String> factura_id = new ArrayList<String>();
     public static ArrayList<String> factura_date = new ArrayList<String>();
@@ -71,7 +72,9 @@ public class ActivityPerfilCliente extends AppCompatActivity{
     AdapterPerfilLotes recyclerAdaptePerfilFactura;
     List<Facturas_mora> arrayItemLotes;
     CircleImageView ImgVerication;
-    String strVerificado,strPin;
+    String strVerificado,strPin,strDireccion;
+
+    CardView cardView ;
 
     private Menu menu_pin;
 
@@ -106,8 +109,13 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         txt_perfil_d90          = findViewById(R.id.id_perfil_d90);
         txt_perfil_d120         = findViewById(R.id.id_perfil_d120);
         txt_perfil_m120         = findViewById(R.id.id_perfil_m120);
+        txt_saldo_vineta         = findViewById(R.id.id_saldo_vineta);
+
+
 
         ImgVerication           = findViewById(R.id.id_btn_verificacion);
+
+        cardView                = findViewById(R.id.id_card_vinneta);
 
         recyclerView = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -149,14 +157,18 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
         strVerificado = intent.getStringExtra("Verificado");
         strPin = intent.getStringExtra("pin");
+        strDireccion =  intent.getStringExtra("Direccion");
 
         code_cliente = intent.getStringExtra("Client_Code");
+        str_moroso = intent.getStringExtra("moroso");
         txt_perfil_name_cliente.setText(intent.getStringExtra("CLient_name"));
         txt_tele.setText(intent.getStringExtra("Telefono"));
         txt_condicion_pago.setText(intent.getStringExtra("Condicion_pago"));
         txt_perfil_disponible.setText(("C$ ").concat(intent.getStringExtra("Disponible")));
         txt_perfil_saldo.setText(("C$ ").concat(intent.getStringExtra("Saldo")));
         txt_perfil_limite.setText(("C$ ").concat(intent.getStringExtra("Limite")));
+
+        txt_saldo_vineta.setText(("C$ ").concat(intent.getStringExtra("vineta_saldo")));
 
         ImgVerication.setImageDrawable(getApplicationContext().getResources().getDrawable(((strVerificado.contains("S;")) ? R.drawable.verificado :R.drawable.noverificado)));
 
@@ -196,11 +208,26 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityPerfilCliente.this, ActivitySearchLotes.class);
-
                 intent.putExtra("factura_id",code_cliente);
                 startActivity(intent);
             }
         });
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (str_moroso.equals("S")){
+                    Toast.makeText(getApplicationContext(), "Cliente en Morosidad", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(ActivityPerfilCliente.this, ActivityVineta.class);
+                    intent.putExtra("cod_cliente",code_cliente);
+                    intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
+                    intent.putExtra("cliente_direcc",strDireccion );
+                    startActivity(intent);
+                }
+            }
+        });
+
         fetchData();
 
     }

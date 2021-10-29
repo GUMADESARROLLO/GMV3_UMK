@@ -20,6 +20,7 @@ import com.app.gmv3.BuildConfig;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.ActivityHistory;
+import com.app.gmv3.activities.ActivityHistoryVineta;
 import com.app.gmv3.activities.ActivityInteligenciaMercado;
 import com.app.gmv3.activities.ActivityEstadisticas;
 import com.app.gmv3.activities.ActivityReportes;
@@ -126,6 +127,16 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 showDialogAbout();
+            }
+        });
+
+        view.findViewById(R.id.btn_vineta_history).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivityHistoryVineta.class);
+                intent.putExtra("id_Ruta", sharedPref.getYourName());
+                intent.putExtra("Nombre_ruta", sharedPref.getYourAddress());
+                startActivity(intent);
             }
         });
 

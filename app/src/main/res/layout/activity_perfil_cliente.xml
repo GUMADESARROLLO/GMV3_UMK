@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_large"
-                app:cardBackgroundColor="@color/colorAccent"
+                app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="2dp"
                 app:cardUseCompatPadding="true">
@@ -253,6 +253,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/id_card_vinneta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@android:color/white"
@@ -281,7 +282,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@color/transparent"
-                        android:tint="@color/deep_purple_500"
+                        android:tint="@color/colorPrimary"
                         app:srcCompat="@drawable/ic_monetization_on" />
 
                     <TextView
@@ -290,7 +291,7 @@
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginRight="@dimen/spacing_large"
                         android:layout_weight="1"
-                        android:text="uWalltet"
+                        android:text="Viñeta"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/grey_80"
                         app:fontFamily="sans-serif-medium" />
@@ -302,20 +303,22 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:tint="@color/deep_purple_500"
+                            android:tint="@color/colorPrimary"
                             app:srcCompat="@drawable/shape_round_corner" />
 
                         <TextView
+                            android:id="@+id/id_saldo_vineta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:text="C$ 5,000.00"
+                            android:text="C$ 150"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@android:color/white" />
 
                     </RelativeLayout>
 
                 </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"

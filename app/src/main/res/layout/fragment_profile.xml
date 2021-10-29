@@ -168,6 +168,57 @@
                     android:background="@color/grey_5" />
 
                 <LinearLayout
+                    android:id="@+id/btn_vineta_history"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_large">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_order_history"
+                        app:tint="@color/blue_600" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_profile_history_vineta"
+                        android:textAppearance="@style/TextAppearance.Medium.Bold"
+                        android:textSize="14sp" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_arrow_right"
+                        app:tint="@color/grey_40" />
+
+
+
+                </LinearLayout>
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/spacing_large"
+                    android:background="@color/grey_5" />
+
+                <LinearLayout
                     android:id="@+id/Reportes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

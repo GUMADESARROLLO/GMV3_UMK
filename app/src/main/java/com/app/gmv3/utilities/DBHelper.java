@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     private final static String DB_NAME = "gmv3_db";
-    public final static int DB_VERSION = 1;
+    public final static int DB_VERSION = 4;
     public static SQLiteDatabase db;
     private final Context context;
     private String DB_PATH;
@@ -31,6 +31,18 @@ public class DBHelper extends SQLiteOpenHelper {
     private final String CURRENCY_CODE = "currency_code";
     private final String PRODUCT_IMAGE = "product_image";
     private final String PRODUCT_BONIFICADO = "product_bonificado";
+
+    private final String TABLE_VINNE = "tbl_vinne";
+    private final String FACTURA = "factura";
+    private final String COD_PRODUCT = "cod_product";
+    private final String DESCRIPCION = "descripcion";
+    private final String CODE_VINNE = "code_vinne";
+    private final String CANT_VINNE = "cant_vinne";
+    private final String VALOR_UND_VINNE = "valor_und_vinne";
+    private final String VALOR_TOT_VINNE = "valor_tot_vinne";
+    private final String FACTURA_LINEA = "linea";
+    private final String TABLE_ID = "id";
+    private final String COD_CLIENTE = "cliente";
 
     private final String TABLE_HISTORY = "tbl_history";
     private final String HISTORY_ID = "id";
@@ -100,6 +112,37 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public ArrayList<ArrayList<Object>> getAllDataVinete(String id) {
+        ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
+        Cursor cursor = null;
+        try {
+            cursor = db.query(TABLE_VINNE, new String[]{FACTURA, COD_PRODUCT,DESCRIPCION, CODE_VINNE, CANT_VINNE, VALOR_UND_VINNE,VALOR_TOT_VINNE,TABLE_ID,FACTURA_LINEA},
+                    COD_CLIENTE + "=?" , new String[]{id}, null, null, null);
+            cursor.moveToFirst();
+            if (!cursor.isAfterLast()) {
+                do {
+                    ArrayList<Object> dataList = new ArrayList<Object>();
+                    dataList.add(cursor.getString(0));
+                    dataList.add(cursor.getString(1));
+                    dataList.add(cursor.getString(2));
+                    dataList.add(cursor.getString(3));
+                    dataList.add(cursor.getString(4));
+                    dataList.add(cursor.getString(5));
+                    dataList.add(cursor.getString(6));
+                    dataList.add(cursor.getString(7));
+                    dataList.add(cursor.getString(8));
+                    dataArrays.add(dataList);
+                }
+                while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("DB Error", e.toString());
+            e.printStackTrace();
+        }
+        return dataArrays;
     }
 
     public ArrayList<ArrayList<Object>> getAllData() {
@@ -230,6 +273,25 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void addVineta(String factura, int quantity, String cod_vine,String valor_unidad, double total, int id,String IDLinea,String Cliente) {
+        ContentValues values = new ContentValues();
+        values.put(FACTURA, factura);
+        values.put(CODE_VINNE, cod_vine);
+        values.put(CANT_VINNE, quantity);
+        values.put(VALOR_UND_VINNE, valor_unidad);
+        values.put(VALOR_TOT_VINNE, total);
+        values.put(FACTURA_LINEA, IDLinea);
+        values.put(TABLE_ID, id);
+        values.put(COD_CLIENTE, Cliente);
+
+        try {
+            db.insert(TABLE_VINNE, null, values);
+        } catch (Exception e) {
+            Log.e("DB ERROR", e.toString());
+            e.printStackTrace();
+        }
+    }
+
     public void addDataHistory(String code, String order_list, String order_total, String date_time,String name_client) {
         ContentValues values = new ContentValues();
         values.put(CODE, code);
@@ -254,6 +316,14 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
+    public void deleteDataVineta(String Linea,String Cliente) {
+        try {
+            db.delete(TABLE_VINNE,TABLE_ID +"=? AND "+COD_CLIENTE+"=?",new String[]{Linea,Cliente});
+        } catch (Exception e) {
+            Log.e("DB ERROR", e.toString());
+            e.printStackTrace();
+        }
+    }
 
     public void deleteDataHistory(long id) {
         try {
@@ -267,6 +337,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteAllData() {
         try {
             db.delete(TABLE_CART, null, null);
+        } catch (Exception e) {
+            Log.e("DB ERROR", e.toString());
+            e.printStackTrace();
+        }
+    }
+    public void deleteAllDataVineta(String id) {
+        try {
+            db.delete(TABLE_VINNE, COD_CLIENTE + "=?", new String[]{id});
         } catch (Exception e) {
             Log.e("DB ERROR", e.toString());
             e.printStackTrace();
