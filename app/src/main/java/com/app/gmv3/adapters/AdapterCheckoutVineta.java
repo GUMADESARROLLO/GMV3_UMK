@@ -65,10 +65,11 @@ public class AdapterCheckoutVineta extends RecyclerView.Adapter<AdapterCheckoutV
 
         double Sub_total_price = Double.parseDouble(Valor_total);
         String _Sub_total_price = String.format(Locale.ENGLISH, "%1$,.2f", Sub_total_price);
+        String _Valor_und = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Valor_und));
 
         holder.txt_nombre.setText(Cod_Vineta);
         holder.txt_sku.setText("Fact. " + Factura.concat(" "));
-        holder.txt_boni.setText("Unit. C$ " + Valor_und );
+        holder.txt_boni.setText("Unit. C$ " + _Valor_und );
         holder.txt_precio_linea.setText(Cant_Vineta);
         holder.txt_cantidad.setText(" C$ " + _Sub_total_price);
 
@@ -80,7 +81,7 @@ public class AdapterCheckoutVineta extends RecyclerView.Adapter<AdapterCheckoutV
                 .build();
 
         Picasso.with(context)
-                .load(R.drawable.stonks)
+                .load(R.drawable.money)
                 .placeholder(R.drawable.ic_loading)
                 .resize(250, 250)
                 .centerCrop()

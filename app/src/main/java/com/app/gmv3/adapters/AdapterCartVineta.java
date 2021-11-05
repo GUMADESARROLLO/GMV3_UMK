@@ -63,10 +63,14 @@ public class AdapterCartVineta extends RecyclerView.Adapter<AdapterCartVineta.Vi
 
         holder.producto_sku.setText("Fact. " + ActivityCartVineta.vineta_factura.get(position).concat(" "));
 
-        holder.producto_boni.setText(" Unit. C$ " + ActivityCartVineta.vineta_und_valor.get(position) );
+
+        double dbl_und_total = ActivityCartVineta.vineta_und_valor.get(position);
+        String _dbl_und_total = String.format(Locale.ENGLISH, "%1$,.2f", dbl_und_total);
+
+        holder.producto_boni.setText(" Unit. C$ " + _dbl_und_total );
 
         double _single_item = ActivityCartVineta.sub_total_price.get(position) ;
-        String single_item_price = String.format(Locale.ENGLISH, "%1$,.0f", _single_item);
+        String single_item_price = String.format(Locale.ENGLISH, "%1$,.2f", _single_item);
         holder.product_quantity.setText("C$ " + single_item_price);
 
         double subtotal = ActivityCartVineta.vineta_cant.get(position) ;
@@ -80,7 +84,7 @@ public class AdapterCartVineta extends RecyclerView.Adapter<AdapterCartVineta.Vi
                 .build();
 
         Picasso.with(context)
-                .load(R.drawable.stonks)
+                .load(R.drawable.money)
                 .placeholder(R.drawable.ic_loading)
                 .resize(250, 250)
                 .centerCrop()

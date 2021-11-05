@@ -60,7 +60,7 @@ public class ActivityCartVineta extends AppCompatActivity {
     public static ArrayList<String> vineta_descripcion = new ArrayList<String>();
     public static ArrayList<String> vineta_code = new ArrayList<String>();
     public static ArrayList<Integer> vineta_cant = new ArrayList<Integer>();
-    public static ArrayList<String> vineta_und_valor = new ArrayList<String>();
+    public static ArrayList<Integer> vineta_und_valor = new ArrayList<Integer>();
 
     public static ArrayList<Integer> sub_total_price = new ArrayList<Integer>();
     List<Cart> arrayCart;
@@ -89,7 +89,7 @@ public class ActivityCartVineta extends AppCompatActivity {
         if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.title_cart);
+            getSupportActionBar().setTitle("Viñetas");
         }
 
         txt_no_item_message = findViewById(R.id.no_item_message);
@@ -188,7 +188,7 @@ public class ActivityCartVineta extends AppCompatActivity {
                 if (vineta_factura.size() > 0) {
                     showClearDialog(CLEAR_ALL_ORDER, "1111");
                 } else {
-                    Snackbar.make(view, R.string.msg_empty_cart, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Lista vacío", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
 
@@ -204,10 +204,10 @@ public class ActivityCartVineta extends AppCompatActivity {
         builder.setTitle(R.string.confirm);
         switch (FLAG) {
             case 0:
-                builder.setMessage(getString(R.string.clear_all_order));
+                builder.setMessage("¿Quiere Limpiar toda la lista?");
                 break;
             case 1:
-                builder.setMessage(getString(R.string.clear_one_order));
+                builder.setMessage("¿Quiere Limpiar esta lista?");
                 break;
         }
         builder.setCancelable(false);
@@ -292,7 +292,7 @@ public class ActivityCartVineta extends AppCompatActivity {
 
             vineta_code.add(row.get(3).toString());
             vineta_cant.add(Integer.parseInt(row.get(4).toString()));
-            vineta_und_valor.add(row.get(5).toString());
+            vineta_und_valor.add(Integer.parseInt(row.get(5).toString()));
 
             sub_total_price.add(Integer.parseInt(row.get(6).toString()));
 
