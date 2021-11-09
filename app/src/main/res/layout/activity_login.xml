@@ -18,12 +18,12 @@
         android:padding="@dimen/spacing_mlarge">
 
         <ImageView
-            android:layout_width="90dp"
+            android:layout_width="wrap_content"
             android:layout_height="90dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/spacing_mlarge"
             android:layout_marginTop="@dimen/spacing_large"
-            android:src="@drawable/logo_stander_full"
+            android:src="@drawable/logo_umk"
             android:tint="@android:color/white" />
 
         <androidx.cardview.widget.CardView
@@ -46,7 +46,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/spacing_xlarge"
                     android:layout_marginTop="@dimen/spacing_middle"
-                    android:text="GMV 3.0"
+                    android:text="Gestor Movil de Venta"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
@@ -142,7 +142,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:text="2020"
+                        android:text="2021"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold" />

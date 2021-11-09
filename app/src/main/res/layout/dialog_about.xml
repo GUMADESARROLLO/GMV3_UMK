@@ -50,16 +50,16 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="80dp"
                     android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/logo_stander_full" />
+                    app:srcCompat="@drawable/logo_umk" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_middle"
-                    android:text="@string/app_name"
+                    android:text="Gestor Movil de venta"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/grey_90"
                     android:textStyle="bold" />
@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_small"
-                    android:text="Version 2.0"
+                    android:text="Version 3.5"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/grey_40" />
 
