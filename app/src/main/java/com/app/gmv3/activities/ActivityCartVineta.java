@@ -105,6 +105,7 @@ public class ActivityCartVineta extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         lyt_empty_cart = findViewById(R.id.lyt_empty_history);
         btn_checkout = findViewById(R.id.btn_checkout);
+        btn_checkout.setText("RESUMEN");
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
