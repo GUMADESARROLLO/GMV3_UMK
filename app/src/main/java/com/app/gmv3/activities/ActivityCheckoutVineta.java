@@ -213,6 +213,7 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
                 str_cod_recibo.equalsIgnoreCase("0000") ||
                 str_name_cliente.equalsIgnoreCase("") ||
                 str_address.equalsIgnoreCase("") ||
+                str_comment.equalsIgnoreCase("") ||
                 str_order_list.equalsIgnoreCase("")) {
             Snackbar.make(view, R.string.checkout_fill_form, Snackbar.LENGTH_SHORT).show();
         } else {
@@ -224,12 +225,6 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     requestAction();
-                    //new sendData().execute();
-
-                    /*Intent intent = new Intent(ActivityCheckout.this, CardcreditActivity.class);
-                    intent.putExtra("tax", str_tax);
-                    intent.putExtra("currency_code", str_currency_code);
-                    startActivity(intent);*/
                 }
             });
             builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);

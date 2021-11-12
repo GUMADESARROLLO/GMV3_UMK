@@ -216,15 +216,11 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (str_moroso.equals("S")){
-                    Toast.makeText(getApplicationContext(), "Cliente en Morosidad", Toast.LENGTH_SHORT).show();
-                }else{
-                    Intent intent = new Intent(ActivityPerfilCliente.this, ActivityVineta.class);
-                    intent.putExtra("cod_cliente",code_cliente);
-                    intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
-                    intent.putExtra("cliente_direcc",strDireccion );
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityVineta.class);
+                intent.putExtra("cod_cliente",code_cliente);
+                intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
+                intent.putExtra("cliente_direcc",strDireccion );
+                startActivity(intent);
             }
         });
 
