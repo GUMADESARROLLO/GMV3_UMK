@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.gmv3">
+    package="com.app.gmv3" >
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
     <application
-        android:name="com.app.gmv3.activities.MyApplication"
+        android:name=".activities.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo_standar"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name="com.app.gmv3.activities.ActivityEstadisticas"></activity>
+        android:usesCleartextTraffic="true" >
+
         <activity
-            android:name="com.app.gmv3.activities.CardcreditActivity"
+            android:name=".activities.CardcreditActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivitySplash"
+            android:name=".activities.ActivitySplash"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,34 +36,39 @@
             android:name=".activities.ActivityActualizarProducto"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.app.gmv3.activities.ActivityViewFactura" />
-        <activity android:name="com.app.gmv3.activities.ActivityUltimos3m" />
-        <activity android:name="com.app.gmv3.activities.ActivityNotaCredito" />
+        <activity android:name=".activities.ActivityViewFactura" />
+        <activity android:name=".activities.ActivityUltimos3m" />
+        <activity android:name=".activities.ActivityNotaCredito" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityReportes"
+            android:name=".activities.ActivityReportes"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityInteligenciaMercado"
+            android:name=".activities.ActivityInteligenciaMercado"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityHistoryVineta"
+            android:name=".activities.ActivityRecibosAdjuntos"
+            android:screenOrientation="portrait"  />
+        <activity
+            android:name=".activities.ActivityHistoryVineta"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityDetailsPromo" />
+            android:name=".activities.ActivityHistoryRecibos"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.ActivityDetailsPromo" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityVerificacion"
+            android:name=".activities.ActivityVerificacion"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityNoFacturado"
+            android:name=".activities.ActivityNoFacturado"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ActivitySearchLotes"
@@ -64,78 +77,75 @@
             android:name=".activities.ActivityVineta"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityComentario"
+            android:name=".activities.ActivityComentario"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityPerfilCliente"
+            android:name=".activities.ActivityPerfilCliente"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityLogin"
+            android:name=".activities.ActivityLogin"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityCart"
+            android:name=".activities.ActivityCart"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityCartVineta"
+            android:name=".activities.ActivityCartVineta"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityProduct"
+            android:name=".activities.ActivityCartReciboColector"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityProductDetail"
+            android:name=".activities.ActivityProduct"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityCheckout"
+            android:name=".activities.ActivityProductDetail"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityCheckoutVineta"
+            android:name=".activities.ActivityCheckout"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityCheckOutClientes"
+            android:name=".activities.ActivityCheckoutVineta"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityHistory"
+            android:name=".activities.ActivityCheckoutRecibos"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityHelp"
+            android:name=".activities.ActivityCheckOutClientes"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityImageDetail"
+            android:name=".activities.ActivityHistory"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivityNotificationDetail"
+            android:name=".activities.ActivityHelp"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.app.gmv3.activities.ActivitySettings"
+            android:name=".activities.ActivityImageDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ActivityNotificationDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ActivitySettings"
             android:screenOrientation="portrait"
             android:theme="@style/Pref" /> <!-- fcm -->
-        <service android:name="com.app.gmv3.notification.MyFirebaseMessagingService">
+        <service android:name=".notification.MyFirebaseMessagingService" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="com.app.gmv3.notification.MyFirebaseInstanceIdService">
+        <service android:name=".notification.MyFirebaseInstanceIdService" >
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name="com.app.gmv3.notification.NotificationExtenderExample"
+            android:name=".notification.NotificationExtenderExample"
             android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE">
+            android:permission="android.permission.BIND_JOB_SERVICE" >
             <intent-filter>
                 <action android:name="com.onesignal.NotificationExtender" />
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
 </manifest>

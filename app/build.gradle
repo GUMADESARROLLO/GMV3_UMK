@@ -18,19 +18,21 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
+
+
     compileSdkVersion 30
     defaultConfig {
         applicationId 'com.app.unimark.gmv3'
 
-        manifestPlaceholders = [onesignal_app_id               : "d97b7af8-b696-418f-875e-8547e9fe7581",
+        manifestPlaceholders = [onesignal_app_id               : "8c930eb0-918b-4226-a78f-ee8b14ca341f",
 
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
 
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 16
-        versionName '3.5.12'
+        versionCode 17
+        versionName '3.5.15'
     }
     buildTypes {
         release {

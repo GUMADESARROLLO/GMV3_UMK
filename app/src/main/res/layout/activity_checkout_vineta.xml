@@ -20,16 +20,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="RECIBO DE PAGO DE VIÑETA"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/black"
-                    app:fontFamily="sans-serif-medium"
-                    android:gravity="center" />
+                    app:fontFamily="sans-serif-medium" />
+
+                <TextView
+
+                    android:id="@+id/id_fecha_vineta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0000/00/00"
+                    android:textSize="16sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/red"
+                    app:fontFamily="sans-serif-black" />
+
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_marginTop="@dimen/spacing_large"

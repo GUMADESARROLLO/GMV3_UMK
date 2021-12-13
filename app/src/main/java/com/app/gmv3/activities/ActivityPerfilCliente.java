@@ -131,22 +131,6 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             window.setStatusBarColor(this.getResources().getColor(R.color.grey_5));
         }
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ClickListener() {
-            @Override
-            public void onClick(View view, final int position) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(ActivityPerfilCliente.this, ActivityViewFactura.class);
-                        intent.putExtra("factura_id",factura_id.get(position));
-                        intent.putExtra("factura_date",factura_date.get(position));
-                        startActivity(intent);
-                    }
-                }, 400);
-            }
-        }));
-
-
         Utils.setSystemBarLight(this);
 
 
@@ -155,8 +139,8 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         Intent intent = getIntent();
 
 
-        strVerificado = intent.getStringExtra("Verificado");
-        strPin = intent.getStringExtra("pin");
+        strVerificado   = intent.getStringExtra("Verificado");
+        strPin          = intent.getStringExtra("pin");
         strDireccion =  intent.getStringExtra("Direccion");
 
         code_cliente = intent.getStringExtra("Client_Code");
@@ -181,6 +165,22 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             }
         });
 
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ClickListener() {
+            @Override
+            public void onClick(View view, final int position) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(ActivityPerfilCliente.this, ActivityViewFactura.class);
+                        intent.putExtra("factura_id",factura_id.get(position));
+                        intent.putExtra("factura_date",factura_date.get(position));
+                        intent.putExtra("cod_cliente",code_cliente);
+                        startActivity(intent);
+                    }
+                }, 400);
+            }
+        }));
+
         findViewById(R.id.id_history_last_3m).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +200,17 @@ public class ActivityPerfilCliente extends AppCompatActivity{
                 intent.putExtra("factura_id",code_cliente);
                 intent.putExtra("Name_cliente",txt_perfil_name_cliente.getText());
 
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.lyt_recibo_colector).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityCartReciboColector.class);
+                intent.putExtra("cod_cliente",code_cliente);
+                intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
+                intent.putExtra("cliente_direcc",strDireccion );
                 startActivity(intent);
             }
         });

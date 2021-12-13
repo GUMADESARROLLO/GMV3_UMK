@@ -9,4 +9,10 @@
         android:title="@string/action_commit_factura"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/item_abono"
+        android:icon="@drawable/ic_recibo"
+        android:title="@string/action_recibo"
+        app:showAsAction="always" />
+
 </menu>

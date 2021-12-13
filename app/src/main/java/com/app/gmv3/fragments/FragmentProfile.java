@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,15 +19,14 @@ import com.app.gmv3.BuildConfig;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.ActivityHistory;
+import com.app.gmv3.activities.ActivityHistoryRecibos;
 import com.app.gmv3.activities.ActivityHistoryVineta;
 import com.app.gmv3.activities.ActivityInteligenciaMercado;
 import com.app.gmv3.activities.ActivityEstadisticas;
 import com.app.gmv3.activities.ActivityReportes;
-import com.app.gmv3.activities.ActivitySearchLotes;
 import com.app.gmv3.activities.ActivitySettings;
 import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.utilities.SharedPref;
-import com.balysv.materialripple.MaterialRippleLayout;
 
 public class FragmentProfile extends Fragment {
 
@@ -134,6 +132,16 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityHistoryVineta.class);
+                intent.putExtra("id_Ruta", sharedPref.getYourName());
+                intent.putExtra("Nombre_ruta", sharedPref.getYourAddress());
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.btn_recibos_history).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivityHistoryRecibos.class);
                 intent.putExtra("id_Ruta", sharedPref.getYourName());
                 intent.putExtra("Nombre_ruta", sharedPref.getYourAddress());
                 startActivity(intent);

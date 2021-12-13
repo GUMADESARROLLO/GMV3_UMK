@@ -1,8 +1,11 @@
 package com.app.gmv3.activities;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.SQLException;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +17,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.R;
 import com.app.gmv3.adapters.AdapterFacturasLineas;
 import com.app.gmv3.models.Factura_lineas;
+import com.app.gmv3.models.Vineta;
+import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.Utils;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,6 +36,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,20 +50,28 @@ import java.util.Locale;
 import static com.app.gmv3.utilities.Constant.GET_DETALLE_FACTURA;
 
 public class ActivityViewFactura extends AppCompatActivity {
-    String cod_factura,date_factura;
+    String cod_factura,date_factura,Cod_cliente;
 
     private AdapterFacturasLineas mAdapter;
     private RecyclerView recyclerView;
     private List<Factura_lineas> productList;
     TextView txt_factura_total,txt_observacion_factura;
     final Context context = this;
-
+    public static DBHelper dbhelper;
+    String _Order_price;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart_simple);
+        dbhelper = new DBHelper(this);
+
+        try {
+            dbhelper.openDataBase();
+        } catch (SQLException sqle) {
+            throw sqle;
+        }
         initToolbar();
     }
 
@@ -67,8 +82,9 @@ public class ActivityViewFactura extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        cod_factura = intent.getStringExtra("factura_id");
-        date_factura = intent.getStringExtra("factura_date");
+        cod_factura     = intent.getStringExtra("factura_id");
+        date_factura    = intent.getStringExtra("factura_date");
+        Cod_cliente     = intent.getStringExtra("cod_cliente");
 
         getSupportActionBar().setTitle(("Nº ").concat(cod_factura));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -120,7 +136,7 @@ public class ActivityViewFactura extends AppCompatActivity {
 
                 }
 
-                String _Order_price = String.format(Locale.ENGLISH, "%1$,.2f", Order_price);
+                _Order_price = String.format(Locale.ENGLISH, "%1$,.2f", Order_price);
                 txt_observacion_factura.setText(items.get(0).getOBSERVACIONES());
                 txt_factura_total.setText(("C$ ").concat(_Order_price));
 
@@ -176,10 +192,91 @@ public class ActivityViewFactura extends AppCompatActivity {
                 ShowDialog("Observaciones de la Factura",txt_observacion_factura.getText().toString(),R.color.colorPrimary);
                 break;
 
+            case R.id.item_abono:
+                FormAdd();
+                break;
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+    public void FormAdd() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_add_recibo);
+        dialog.setCancelable(true);
+
+        final EditText edt_nc           = dialog.findViewById(R.id.edt_cantidad_nc);
+        final EditText edt_retencion    = dialog.findViewById(R.id.edt_cantidad_retencion);
+        final EditText edt_descuento    = dialog.findViewById(R.id.edt_cantidad_descuento);
+        final EditText edt_rec_valor    = dialog.findViewById(R.id.edt_cantidad_recibido);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+
+        (dialog.findViewById(R.id.bt_cancel)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        (dialog.findViewById(R.id.bt_add)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edt_nc.getText().toString().equalsIgnoreCase("") &&
+                        edt_retencion.getText().toString().equalsIgnoreCase("") &&
+                        edt_descuento.getText().toString().equalsIgnoreCase("") &&
+                        edt_rec_valor.getText().toString().equalsIgnoreCase("")) {
+
+                    Toast.makeText(getApplicationContext(), "Falta Información", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    saveRecibo(
+                            edt_nc.getText().toString(),
+                            edt_retencion.getText().toString(),
+                            edt_descuento.getText().toString(),
+                            edt_rec_valor.getText().toString()
+                    );
+                    dialog.dismiss();
+                    finish();
+                }
+
+
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+    private void saveRecibo(String NotaCredito,String Retencion,String Descuento,String recValor){
+        ArrayList<ArrayList<Object>> data = dbhelper.getAllDataRecibo(Cod_cliente);
+
+        int id_tabla = (data.size() + 1);
+
+        _Order_price = _Order_price.replace(",","");
+
+        NotaCredito = (NotaCredito.equals(""))  ? "0" : NotaCredito;
+        Retencion   = (Retencion.equals(""))    ? "0" : Retencion;
+        Descuento   = (Descuento.equals(""))    ? "0" : Descuento;
+        recValor    = (Descuento.equals(""))    ? "0" : recValor;
+
+        dbhelper.addRecibo(
+                cod_factura,
+                _Order_price,
+                NotaCredito,
+                Retencion,
+                Descuento,
+                recValor,
+                (Double.parseDouble(_Order_price) - Double.parseDouble(recValor) ),
+                id_tabla,
+                Cod_cliente
+        );
     }
     public void ShowDialog(String strTitle, String strMsg, int color) {
 

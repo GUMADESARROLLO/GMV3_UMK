@@ -3,36 +3,64 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-mdpi/edit_text_round_bg_outline.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxhdpi/ic_delete.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxhdpi/ic_delete_grey.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxhdpi/ic_info.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxhdpi/shape_round_corner.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxhdpi/shape_round_verde.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxxhdpi/ic_comment.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxxhdpi/ic_monetization_on.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-xxxhdpi/ic_recibo.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/dotted_line_red.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/ic_attach.xml" value="0.225" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/ic_check_circle.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/ic_payments_24.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/outline_add_card_20.xml" value="0.3880208333333333" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/outline_add_card_24.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable/outline_price_check_24.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_cart.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_checkout.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_checkout_recibo.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_checkout_vineta.xml" value="0.5" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_history.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_history_vineta.xml" value="0.371875" />
-        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_perfil_cliente.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_location.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_login.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_perfil_cliente.xml" value="0.5" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_recibos_adjuntos.xml" value="0.33" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_rpt_venta.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_shopping_cart_simple.xml" value="0.32155797101449274" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_splash.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_vinneta.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/content_recibos_adjuntos.xml" value="0.20885416666666667" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_post.xml" value="0.22146739130434784" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_recibo.xml" value="0.33" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_vineta.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_info.xml" value="0.371875" />
-        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/fragment_profile.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/fragment_profile.xml" value="0.32155797101449274" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/include_add_attachl.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/include_cart_total.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/include_empty_cart.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_attach_Thumblaine .xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_attach_thumblaine.xml" value="0.75" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_cart.xml" value="0.5" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_cart_recibo.xml" value="0.5" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_client.xml" value="0.25" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_clientes.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_clients.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_factura_lineas.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_factura_mora.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_history.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_history_recibo.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_history_vineta.xml" value="0.33" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_nc.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_news_horizontal.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_perfil_factura_cliente.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_product.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_producto_resumen.xml" value="0.33" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_voucher.xml" value="0.5" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/menu/menu_factura.xml" value="0.371875" />
       </map>
     </option>
   </component>
@@ -41,5 +69,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
   </component>
 </project>

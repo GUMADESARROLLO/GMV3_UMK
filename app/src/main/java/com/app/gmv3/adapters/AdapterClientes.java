@@ -79,7 +79,7 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
 
         holder.category_name.setText(clients.getNOMBRE());
 
-        //holder.cardView.setBackgroundColor(context.getResources().getColor(((clients.getMOROSO().equals("S")) ? R.color.red_light : R.color.white)));
+        holder.cardView.setBackgroundColor(context.getResources().getColor(((clients.getMOROSO().equals("S")) ? R.color.red_light : R.color.white)));
         holder.relativeLayout.setVisibility((clients.getMOROSO().equals("S") ? View.VISIBLE : View.GONE));
         holder.lytPin.setVisibility((clients.getPIN().equals("S") ? View.VISIBLE : View.GONE));
         holder.product_count.setText(clients.getDIRECCION());

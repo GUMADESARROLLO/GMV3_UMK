@@ -64,6 +64,14 @@ public class Constant {
     public static final String GET_LIQUIDACION_VINETA = BASE_URL + "/api/api.php?get_liquidacion_vineta=";
     public static final String DEL_ORDER_VINETA = BASE_URL + "/api/api.php?del_order_vineta";
 
+    //RUTAS QUE TIENE QUE VER CON RECIBOS COLECTOR
+    public static final String POST_ORDER_RECIBO = BASE_URL + "/api/api.php?post_order_recibo";
+    public static final String GET_RECIBOS_COLECTOR = BASE_URL + "/api/api.php?get_recibos_colector=";
+    public static final String GET_RECIBOS_ADJUNTO = BASE_URL + "/api/api.php?get_recibos_adjuntos=";
+    public static final String DEL_RECIBO_COLECTOR = BASE_URL + "/api/api.php?del_recibo_colector";
+    public static final String POST_ADJUNTOS = BASE_URL + "/api/api.php?post_adjunto=";
+
+
 
 
 }

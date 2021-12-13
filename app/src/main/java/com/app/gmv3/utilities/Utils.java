@@ -102,7 +102,11 @@ public class Utils {
         });
     }
     public static String getFormattedDateSimple(Long dateTime) {
-        SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return newFormat.format(new Date(dateTime));
+    }
+    public static String getFormattedDate(Long dateTime) {
+        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy/MM/dd");
         return newFormat.format(new Date(dateTime));
     }
     public static void changeOverflowMenuIconColor(Toolbar toolbar, @ColorInt int color) {
