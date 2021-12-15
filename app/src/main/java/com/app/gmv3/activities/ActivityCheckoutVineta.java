@@ -238,7 +238,7 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
         str_order_list = data_order_list;
         str_order_total = edt_order_total.getText().toString();
 
-        date = txt_Date.getText().toString().concat(date);
+        date = txt_Date.getText().toString();
 
 
         str_cod_recibo = txt_number_recibo.getText().toString();
@@ -246,6 +246,7 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
         if (str_ruta.equalsIgnoreCase("") ||
                 str_cod_cliente.equalsIgnoreCase("") ||
                 str_cod_recibo.equalsIgnoreCase("0000") ||
+                date.equalsIgnoreCase("0000/00/00") ||
                 str_name_cliente.equalsIgnoreCase("") ||
                 str_address.equalsIgnoreCase("") ||
                 str_comment.equalsIgnoreCase("") ||

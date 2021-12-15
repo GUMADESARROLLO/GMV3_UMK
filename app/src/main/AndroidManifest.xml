@@ -52,6 +52,9 @@
             android:name=".activities.ActivityReportes"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.ActivityEstadisticas"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.ActivityInteligenciaMercado"
             android:screenOrientation="portrait" />
         <activity

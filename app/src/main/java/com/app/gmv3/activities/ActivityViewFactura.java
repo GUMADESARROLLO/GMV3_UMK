@@ -50,7 +50,7 @@ import java.util.Locale;
 import static com.app.gmv3.utilities.Constant.GET_DETALLE_FACTURA;
 
 public class ActivityViewFactura extends AppCompatActivity {
-    String cod_factura,date_factura,Cod_cliente;
+    String cod_factura,date_factura,Cod_cliente, isRecibo;
 
     private AdapterFacturasLineas mAdapter;
     private RecyclerView recyclerView;
@@ -85,6 +85,7 @@ public class ActivityViewFactura extends AppCompatActivity {
         cod_factura     = intent.getStringExtra("factura_id");
         date_factura    = intent.getStringExtra("factura_date");
         Cod_cliente     = intent.getStringExtra("cod_cliente");
+        isRecibo        = intent.getStringExtra("isRecibo");
 
         getSupportActionBar().setTitle(("Nº ").concat(cod_factura));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -170,13 +171,13 @@ public class ActivityViewFactura extends AppCompatActivity {
         inflater.inflate(R.menu.menu_factura, menu);
         Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
 
-        /*MenuItem Item_observacion = menu.findItem(R.id.item_commit_factura);
+        MenuItem add_recibo = menu.findItem(R.id.item_abono);
 
-        if (txt_observacion_factura.getText()=="") {
-            Item_observacion.setVisible(false);
+        if (isRecibo.equals("S")) {
+            add_recibo.setVisible(true);
         }else{
-            Item_observacion.setVisible(true);
-        }*/
+            add_recibo.setVisible(false);
+        }
 
         return true;
     }
@@ -264,7 +265,7 @@ public class ActivityViewFactura extends AppCompatActivity {
         NotaCredito = (NotaCredito.equals(""))  ? "0" : NotaCredito;
         Retencion   = (Retencion.equals(""))    ? "0" : Retencion;
         Descuento   = (Descuento.equals(""))    ? "0" : Descuento;
-        recValor    = (Descuento.equals(""))    ? "0" : recValor;
+        recValor    = (recValor.equals(""))    ? "0" : recValor;
 
         dbhelper.addRecibo(
                 cod_factura,

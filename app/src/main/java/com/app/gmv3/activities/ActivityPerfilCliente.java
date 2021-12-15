@@ -175,6 +175,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
                         intent.putExtra("factura_id",factura_id.get(position));
                         intent.putExtra("factura_date",factura_date.get(position));
                         intent.putExtra("cod_cliente",code_cliente);
+                        intent.putExtra("isRecibo","S");
                         startActivity(intent);
                     }
                 }, 400);

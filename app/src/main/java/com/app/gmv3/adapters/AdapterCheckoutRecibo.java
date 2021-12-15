@@ -56,7 +56,7 @@ public class AdapterCheckoutRecibo extends RecyclerView.Adapter<AdapterCheckoutR
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart_recibo, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recibo_resumen, parent, false);
         return new ViewHolder(itemView);
     }
 
