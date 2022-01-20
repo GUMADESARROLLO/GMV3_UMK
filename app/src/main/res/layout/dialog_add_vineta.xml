@@ -55,7 +55,7 @@
             android:background="@drawable/edit_text_round_bg_outline"
             android:hint="@string/feedback_name"
             android:lines="3"
-            android:maxLength="4"
+            android:maxLength="5"
             android:minHeight="@dimen/spacing_xmlarge">
             <requestFocus />
         </EditText>

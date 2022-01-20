@@ -147,7 +147,7 @@ public class ActivitySearchLotes extends AppCompatActivity {
 
                         intent.putExtra("factura_id",loteLista.get(position).getmFactura());
                         intent.putExtra("factura_date",loteLista.get(position).getmDia());
-
+                        intent.putExtra("isRecibo","N");
                         startActivity(intent);
 
 

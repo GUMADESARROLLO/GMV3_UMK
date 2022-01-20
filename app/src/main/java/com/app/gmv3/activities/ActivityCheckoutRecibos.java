@@ -74,7 +74,7 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
     RecyclerView rcListaProductos;
     AdapterCheckoutRecibo rcLista_Resumen;
 
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,8 +89,6 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
 
         sharedPref = new SharedPref(this);
 
-
-
         setupToolbar();
         //getSpinnerData();
         getTaxCurrency();
@@ -102,43 +100,31 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
             throw sqle;
         }
         txt_recibo = findViewById(R.id.id_text_recibo);
-        // Creating Volley newRequestQueue
         requestQueue = Volley.newRequestQueue(ActivityCheckoutRecibos.this);
         progressDialog = new ProgressDialog(ActivityCheckoutRecibos.this);
-
         btn_submit_order = findViewById(R.id.btn_submit_order);
-
         edt_name = findViewById(R.id.edt_name);
         edt_email = findViewById(R.id.edt_email);
         edt_phone = findViewById(R.id.edt_phone);
         edt_order_list = findViewById(R.id.edt_order_list);
-
         txt_number_recibo = findViewById(R.id.id_text_number_recibo);
-
         edt_order_total = findViewById(R.id.edt_order_total);
         edt_iva = findViewById(R.id.edt_iva);
-
         txt_count = findViewById(R.id.id_count_items);
-
         rcListaProductos = findViewById(R.id.recycler_item_resumen);
         rcListaProductos.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rcListaProductos.setItemAnimator(new DefaultItemAnimator());
-
-
-
 
         edt_name.setEnabled(false);
         edt_email.setEnabled(false);
         edt_phone.setEnabled(false);
         edt_order_list.setEnabled(false);
 
-
         getDataFromDatabase();
         submitOrder();
 
         rcLista_Resumen = new AdapterCheckoutRecibo(this, data);
         rcListaProductos.setAdapter(rcLista_Resumen);
-
         txt_count.setText(rcLista_Resumen.getItemCount() + " Item(s)");
 
 
@@ -181,7 +167,7 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
                     }
                 }
         );
-        //set dark light
+
         datePicker.setThemeDark(false);
         datePicker.setAccentColor(getResources().getColor(R.color.colorPrimary));
         datePicker.show(getFragmentManager(), "Datepickerdialog");
@@ -197,11 +183,6 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
             getSupportActionBar().setTitle("Resumen");
         }
     }
-
-
-
-
-
 
     public void submitOrder() {
         btn_submit_order.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +206,7 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
         if (str_ruta.equalsIgnoreCase("") ||
                 str_cod_cliente.equalsIgnoreCase("") ||
                 str_cod_recibo.equalsIgnoreCase("00000") ||
-                str_fecha_recibo.equalsIgnoreCase("00/00/0000") ||
+                str_fecha_recibo.equalsIgnoreCase("0000/00/00") ||
                 str_name_cliente.equalsIgnoreCase("") ||
                 str_address.equalsIgnoreCase("") ||
                 str_comment.equalsIgnoreCase("") ||
@@ -268,8 +249,7 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
                 }, 2000);
 
             }
-        },
-                new Response.ErrorListener() {
+        },      new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
@@ -320,9 +300,8 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
         double tax = 0;
 
         for (int i = 0; i < data.size(); i++) {
+
             ArrayList<Object> row = data.get(i);
-
-
             String Factura          = row.get(0).toString();
             String Valor_Factura    = row.get(1).toString();
             String NOta_Credito     = row.get(2).toString();
@@ -397,7 +376,7 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
 
                     int len01 = String.valueOf(txtVal).length();
 
-                    str_cod_recibo=  ("0000").substring(0,(4 - len01)).concat(String.valueOf(txtVal));
+                    str_cod_recibo=  ("00000").substring(0,(5 - len01)).concat(String.valueOf(txtVal));
 
                     txt_recibo.setText(str_cod_recibo);
                     dialog.dismiss();
