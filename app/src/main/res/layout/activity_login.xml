@@ -23,7 +23,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/spacing_mlarge"
             android:layout_marginTop="@dimen/spacing_large"
-            android:src="@drawable/logo_umk"
+            android:src="@drawable/log_unimark"
             android:tint="@android:color/white" />
 
         <androidx.cardview.widget.CardView

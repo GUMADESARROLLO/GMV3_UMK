@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/coupon1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/spacing_middle"
+    android:paddingEnd="@dimen/spacing_middle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spacing_medium" />
+    <LinearLayout
+        android:id="@+id/lyt_Factura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_factura_default"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/spacing_middle"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingEnd="@dimen/spacing_middle"
+        android:paddingBottom="@dimen/spacing_large">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/factura_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/spacing_middle"
+                android:paddingTop="@dimen/spacing_medium"
+                android:paddingEnd="@dimen/spacing_middle"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:text="00000000"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:fontFamily="sans-serif-medium"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/factura_vence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_factura_historico_fecha_vence"
+                android:paddingStart="@dimen/spacing_middle"
+                android:paddingTop="@dimen/spacing_medium"
+                android:paddingEnd="@dimen/spacing_middle"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:text="Ven. 00/00/0000"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/white"
+                app:fontFamily="sans-serif-medium" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_large" />
+
+        <TextView
+            android:id="@+id/factura_cliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/medium_lorem_ipsum"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="@color/grey_40" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_middle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/factura_monto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_dotted_selector_grey"
+                android:clickable="true"
+                android:paddingStart="@dimen/spacing_mlarge"
+                android:paddingTop="@dimen/spacing_middle"
+                android:paddingEnd="@dimen/spacing_mlarge"
+                android:paddingBottom="@dimen/spacing_middle"
+                android:text="C$ 0.00"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/green_500" />
+
+            <TextView
+                android:id="@+id/factura_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingStart="@dimen/spacing_mlarge"
+                android:paddingTop="@dimen/spacing_middle"
+                android:paddingEnd="@dimen/spacing_mlarge"
+                android:paddingBottom="@dimen/spacing_middle"
+                android:text="00/00/0000"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/grey_40" />
+            <TextView
+                android:id="@+id/factura_activo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingStart="@dimen/spacing_mlarge"
+                android:paddingTop="@dimen/spacing_middle"
+                android:paddingEnd="@dimen/spacing_mlarge"
+                android:paddingBottom="@dimen/spacing_middle"
+                android:text="empy"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/grey_40" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spacing_medium" />
+</LinearLayout>

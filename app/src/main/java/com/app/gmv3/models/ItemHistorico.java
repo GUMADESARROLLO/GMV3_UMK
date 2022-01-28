@@ -5,6 +5,7 @@ public class ItemHistorico {
     String mId;
 
     String mRecibo;
+    String mRuta;
     String mCod_Cliente;
     String mName_Cliente;
     String mFecha;
@@ -21,6 +22,10 @@ public class ItemHistorico {
 
     public String getmRecibo() {
         return mRecibo;
+    }
+
+    public String getmRuta() {
+        return mRuta;
     }
 
     public String getmCod_Cliente() {

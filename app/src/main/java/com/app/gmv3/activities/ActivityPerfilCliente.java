@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -63,20 +64,26 @@ public class ActivityPerfilCliente extends AppCompatActivity{
     TextView txt_tele,txt_condicion_pago,txt_saldo_vineta;
     String code_cliente,str_moroso;
 
-    public static ArrayList<String> factura_id = new ArrayList<String>();
+    /*public static ArrayList<String> factura_id = new ArrayList<String>();
     public static ArrayList<String> factura_date = new ArrayList<String>();
     public static ArrayList<String> factura_cant = new ArrayList<String>();
-    public static ArrayList<String> factura_monto = new ArrayList<String>();
+    public static ArrayList<String> factura_monto = new ArrayList<String>();*/
+
     View lyt_empty_history;
     RecyclerView recyclerView;
-    AdapterPerfilLotes recyclerAdaptePerfilFactura;
-    List<Facturas_mora> arrayItemLotes;
+    AdapterPerfilLotes myAdapter;
+    //List<Facturas_mora> arrayItemLotes;
     CircleImageView ImgVerication;
     String strVerificado,strPin,strDireccion;
 
     CardView cardView ;
 
     private Menu menu_pin;
+
+    List<Facturas_mora> listMora = new ArrayList<>();
+    private ActionModeCallback actionModeCallback;
+    private ActionMode actionMode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +129,31 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new MyDividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL, 0));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerAdaptePerfilFactura = new AdapterPerfilLotes(this, arrayItemLotes);
+
+        myAdapter = new AdapterPerfilLotes(this, listMora);
+        recyclerView.setAdapter(myAdapter);
+
+        myAdapter.setOnClickListener(new AdapterPerfilLotes.OnClickListener() {
+            @Override
+            public void onItemClick(View view, Facturas_mora obj, int pos) {
+                if (myAdapter.getSelectedItemCount() > 0) {
+                    enableActionMode(pos);
+                } else {
+                    Facturas_mora Factura = myAdapter.getItem(pos);
+                    Intent intent = new Intent(ActivityPerfilCliente.this, ActivityViewFactura.class);
+                    intent.putExtra("factura_id",Factura.Codigo);
+                    intent.putExtra("factura_date",Factura.Fecha);
+                    intent.putExtra("cod_cliente",code_cliente);
+                    intent.putExtra("isRecibo","S");
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onItemLongClick(View view, Facturas_mora Factura, int pos) {
+                enableActionMode(pos);
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
@@ -130,23 +161,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.grey_5));
         }
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ClickListener() {
-            @Override
-            public void onClick(View view, final int position) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(ActivityPerfilCliente.this, ActivityViewFactura.class);
-                        intent.putExtra("factura_id",factura_id.get(position));
-                        intent.putExtra("factura_date",factura_date.get(position));
-                        startActivity(intent);
-                    }
-                }, 400);
-            }
-        }));
-
-
+        actionModeCallback = new ActionModeCallback();
         Utils.setSystemBarLight(this);
 
 
@@ -155,13 +170,16 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         Intent intent = getIntent();
 
 
-        strVerificado = intent.getStringExtra("Verificado");
-        strPin = intent.getStringExtra("pin");
+
+
+        strVerificado   = intent.getStringExtra("Verificado");
+        strPin          = intent.getStringExtra("pin");
         strDireccion =  intent.getStringExtra("Direccion");
 
         code_cliente = intent.getStringExtra("Client_Code");
         str_moroso = intent.getStringExtra("moroso");
-        txt_perfil_name_cliente.setText(intent.getStringExtra("CLient_name"));
+        String Nombre_Cliente = code_cliente.concat(" - ").concat(intent.getStringExtra("CLient_name"));
+        txt_perfil_name_cliente.setText(Nombre_Cliente);
         txt_tele.setText(intent.getStringExtra("Telefono"));
         txt_condicion_pago.setText(intent.getStringExtra("Condicion_pago"));
         txt_perfil_disponible.setText(("C$ ").concat(intent.getStringExtra("Disponible")));
@@ -181,11 +199,30 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             }
         });
 
+
+
+       /* recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),  new ClickListener() {
+            @Override
+            public void onClick(View view, final int position) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(ActivityPerfilCliente.this, ActivityViewFactura.class);
+                        intent.putExtra("factura_id",factura_id.get(position));
+                        intent.putExtra("factura_date",factura_date.get(position));
+                        intent.putExtra("cod_cliente",code_cliente);
+                        intent.putExtra("isRecibo","S");
+                        startActivity(intent);
+                    }
+                }, 400);
+            }
+        }));*/
+
         findViewById(R.id.id_history_last_3m).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityUltimos3m.class);
-
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityHistoricoFactura.class);
+                intent.putExtra("cod_cliente",code_cliente);
                 intent.putExtra("factura_id",code_cliente);
                 intent.putExtra("Name_cliente",txt_perfil_name_cliente.getText());
 
@@ -204,6 +241,17 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             }
         });
 
+        findViewById(R.id.lyt_recibo_colector).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityCartReciboColector.class);
+                intent.putExtra("cod_cliente",code_cliente);
+                intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
+                intent.putExtra("cliente_direcc",strDireccion );
+                startActivity(intent);
+            }
+        });
+
         findViewById(R.id.id_search_lotes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,57 +264,74 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (str_moroso.equals("S")){
-                    Toast.makeText(getApplicationContext(), "Cliente en Morosidad", Toast.LENGTH_SHORT).show();
-                }else{
-                    Intent intent = new Intent(ActivityPerfilCliente.this, ActivityVineta.class);
-                    intent.putExtra("cod_cliente",code_cliente);
-                    intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
-                    intent.putExtra("cliente_direcc",strDireccion );
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityVineta.class);
+                intent.putExtra("cod_cliente",code_cliente);
+                intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
+                intent.putExtra("cliente_direcc",strDireccion );
+                startActivity(intent);
             }
         });
 
         fetchData();
 
     }
-    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+    private void enableActionMode(int position) {
+        if (actionMode == null) {
+            actionMode = startSupportActionMode(actionModeCallback);
+        }
+        toggleSelection(position);
+    }
+    private void toggleSelection(int position) {
+        double sub_total_price = 0;
 
-        private GestureDetector gestureDetector;
-        private ClickListener clickListener;
+        myAdapter.toggleSelection(position);
+        int count = myAdapter.getSelectedItemCount();
 
-        public RecyclerTouchListener(Context context, final ClickListener clickListener) {
+        List<Integer> selectedItemPositions = myAdapter.getSelectedItems();
+        for (int i = selectedItemPositions.size() - 1; i >= 0; i--) {
+            sub_total_price += Double.parseDouble(listMora.get(selectedItemPositions.get(i)).Cantidad);
+        }
+        String Total_ = String.format(Locale.ENGLISH, "%1$,.2f", sub_total_price);
 
-            this.clickListener = clickListener;
-
-            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    return true;
-                }
-
-            });
+        if (count == 0) {
+            actionMode.finish();
+        } else {
+            actionMode.setTitle( ("( ").concat(String.valueOf(count)).concat(" ) Total: ").concat(" C$ ").concat(Total_) );
+            actionMode.invalidate();
+        }
+    }
+    private class ActionModeCallback implements ActionMode.Callback {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.menu_save_factura, menu);
+            return true;
         }
 
         @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
-            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildAdapterPosition(child));
-            }
-
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             return false;
         }
 
         @Override
-        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            int id = item.getItemId();
+            if (id == R.id.action_save_colector) {
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityCartReciboColector.class);
+                intent.putExtra("cod_cliente",code_cliente);
+                intent.putExtra("cliente_nombre",txt_perfil_name_cliente.getText());
+                intent.putExtra("cliente_direcc",strDireccion );
+                startActivity(intent);
+                mode.finish();
+                finish();
+                return true;
+            }
+            return false;
         }
 
         @Override
-        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
+        public void onDestroyActionMode(ActionMode mode) {
+            myAdapter.clearSelections();
+            actionMode = null;
         }
     }
 
@@ -274,10 +339,10 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         public void onClick(View view, int position);
     }
     public void clearData() {
-        factura_id.clear();
+       /* factura_id.clear();
         factura_date.clear();
         factura_cant.clear();
-        factura_monto.clear();
+        factura_monto.clear();*/
     }
 
     private void fetchData() {
@@ -307,14 +372,25 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
                     for (int i = 0; i < data.size(); i++) {
 
+                        Facturas_mora obj = new Facturas_mora();
                         List<String> row = Arrays.asList(data.get(i).split(":"));
-                        factura_id.add(row.get(0));
+
+                        obj.Codigo          = row.get(0);
+                        obj.Cantidad        = row.get(1);
+                        obj.Fecha           = row.get(2);
+                        obj.Saldo           = row.get(3);
+                        obj.FacturaCliente  = code_cliente;
+
+                        listMora.add(obj);
+
+                        /*factura_id.add(row.get(0));
                         factura_cant.add(row.get(1));
                         factura_date.add(row.get(2));
-                        factura_monto.add(row.get(3));
+                        factura_monto.add(row.get(3));*/
+
 
                     }
-                    recyclerView.setAdapter(recyclerAdaptePerfilFactura);
+                    recyclerView.setAdapter(myAdapter);
                 } else {
                     lyt_empty_history.setVisibility(View.VISIBLE);
                 }

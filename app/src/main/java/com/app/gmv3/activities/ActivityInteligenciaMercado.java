@@ -479,6 +479,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
             (dialog.findViewById(R.id.id_lyt_adjunto)).setVisibility(View.VISIBLE);
 
             Uri selectedImage = data.getData();
+
             InputStream imageStream = null;
             try {
                 imageStream = this.getContentResolver().openInputStream(Objects.requireNonNull(selectedImage));
@@ -524,6 +525,10 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
             imageByteArrayktp = baos.toByteArray();
             decodedktp = BitmapFactory.decodeStream(new ByteArrayInputStream(baos.toByteArray()));
             Foto_a_enviar = getStringImagektp(decodedktp);
+
+            Log.e("TAG", "onActivityResult: " + imageByteArrayktp.toString() );
+
+
 
         }
 

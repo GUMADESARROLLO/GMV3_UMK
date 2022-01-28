@@ -33,6 +33,7 @@ public class Constant {
     public static final String POST_ORDER = BASE_URL + "/api/api.php?post_order";
     public static final String POST_VERIFICACION = BASE_URL + "/api/api.php?post_verificacion";
     public static final String POST_RPT_RUTA = BASE_URL + "/api/api.php?post_rpt_ruta=";
+    public static final String POST_HISTORICO_FACTURA = BASE_URL + "/api/api.php?post_historico_factura=";
 
     public static final String POST_REPORT = BASE_URL + "/api/api.php?post_report=";
     public static final String GET_COMENTARIOS_IM = BASE_URL + "/api/api.php?get_comentarios_im=";
@@ -63,6 +64,14 @@ public class Constant {
     public static final String POST_ORDER_VINETA = BASE_URL + "/api/api.php?post_order_vineta";
     public static final String GET_LIQUIDACION_VINETA = BASE_URL + "/api/api.php?get_liquidacion_vineta=";
     public static final String DEL_ORDER_VINETA = BASE_URL + "/api/api.php?del_order_vineta";
+
+    //RUTAS QUE TIENE QUE VER CON RECIBOS COLECTOR
+    public static final String POST_ORDER_RECIBO = BASE_URL + "/api/api.php?post_order_recibo";
+    public static final String GET_RECIBOS_COLECTOR = BASE_URL + "/api/api.php?get_recibos_colector=";
+    public static final String GET_RECIBOS_ADJUNTO = BASE_URL + "/api/api.php?get_recibos_adjuntos=";
+    public static final String DEL_RECIBO_COLECTOR = BASE_URL + "/api/api.php?del_recibo_colector";
+    public static final String POST_ADJUNTOS = BASE_URL + "/api/api.php?post_adjunto=";
+
 
 
 

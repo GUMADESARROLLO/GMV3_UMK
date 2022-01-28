@@ -74,6 +74,16 @@
                         android:textColor="@color/light_blue_400"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/id_serie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="SERIE F00  "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                        android:textColor="@color/grey_40" />
+
+
                 </LinearLayout>
 
             </LinearLayout>

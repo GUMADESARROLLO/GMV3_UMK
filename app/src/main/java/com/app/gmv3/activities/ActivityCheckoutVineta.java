@@ -46,8 +46,10 @@ import com.app.gmv3.adapters.AdapterCheckoutVineta;
 import com.app.gmv3.models.Vineta;
 import com.app.gmv3.utilities.DBHelper;
 import com.app.gmv3.utilities.SharedPref;
+import com.app.gmv3.utilities.Utils;
 import com.google.android.material.snackbar.Snackbar;
 import com.onesignal.OneSignal;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,7 +63,7 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
 
     RequestQueue requestQueue;
     Button btn_submit_order;
-    TextView edt_name, edt_email, edt_phone, edt_address, edt_order_list, edt_order_total,edt_iva,txt_count,txt_number_recibo;
+    TextView edt_name, edt_email, edt_phone, edt_address, edt_order_list, edt_order_total,edt_iva,txt_count,txt_number_recibo,txt_Date;
     String str_ruta, str_cod_cliente, str_name_cliente, str_address, str_order_list, str_order_total, str_comment="", str_benific="" ,str_cod_recibo;
     String data_order_list = "";
     double str_tax;
@@ -69,7 +71,7 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
     DBHelper dbhelper;
     ArrayList<ArrayList<Object>> data;
     View view;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat dateFormat = new SimpleDateFormat(" HH:mm:ss");
     String date = dateFormat.format(Calendar.getInstance().getTime());
     SharedPref sharedPref;
 
@@ -126,6 +128,7 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
         rcListaProductos = findViewById(R.id.recycler_item_resumen);
         rcListaProductos.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rcListaProductos.setItemAnimator(new DefaultItemAnimator());
+        txt_Date = findViewById(R.id.id_fecha_vineta);
 
 
 
@@ -167,8 +170,37 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
                 FormAddRecibo();
             }
         });
+        txt_Date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogDatePickerLight();
+            }
+        });
 
     }
+
+    private void dialogDatePickerLight() {
+        //Calendar cur_calender = Calendar.getInstance();
+        DatePickerDialog datePicker = DatePickerDialog.newInstance(
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        long date_ship_millis = calendar.getTimeInMillis();
+                        txt_Date.setText(Utils.getFormattedDate(date_ship_millis));
+
+                    }
+                }
+        );
+        //set dark light
+        datePicker.setThemeDark(false);
+        datePicker.setAccentColor(getResources().getColor(R.color.colorPrimary));
+        datePicker.show(getFragmentManager(), "Datepickerdialog");
+    }
+
 
 
 
@@ -206,13 +238,18 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
         str_order_list = data_order_list;
         str_order_total = edt_order_total.getText().toString();
 
+        date = txt_Date.getText().toString();
+
+
         str_cod_recibo = txt_number_recibo.getText().toString();
 
         if (str_ruta.equalsIgnoreCase("") ||
                 str_cod_cliente.equalsIgnoreCase("") ||
                 str_cod_recibo.equalsIgnoreCase("0000") ||
+                date.equalsIgnoreCase("0000/00/00") ||
                 str_name_cliente.equalsIgnoreCase("") ||
                 str_address.equalsIgnoreCase("") ||
+                str_comment.equalsIgnoreCase("") ||
                 str_order_list.equalsIgnoreCase("")) {
             Snackbar.make(view, R.string.checkout_fill_form, Snackbar.LENGTH_SHORT).show();
         } else {
@@ -224,12 +261,6 @@ public class ActivityCheckoutVineta extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     requestAction();
-                    //new sendData().execute();
-
-                    /*Intent intent = new Intent(ActivityCheckout.this, CardcreditActivity.class);
-                    intent.putExtra("tax", str_tax);
-                    intent.putExtra("currency_code", str_currency_code);
-                    startActivity(intent);*/
                 }
             });
             builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);

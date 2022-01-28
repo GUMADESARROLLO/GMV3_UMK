@@ -9,6 +9,7 @@
     <color name="overlay_dark_30">#4D000000</color>
     <color name="overlay_dark_40">#66000000</color>
     <color name="overlay_light_30">#4DFFFFFF</color>
+
     <!--other color-->
     <color name="txt_price_color">#0AAC3A</color>
     <color name="ripple_color">#dfdfdf</color>
@@ -23,6 +24,10 @@
     <color name="white">#ffffff</color>
     <color name="hint">#767676</color>
     <color name="available">#006690</color>
+
+    <color name="green_100">#C8E6C9</color>
+    <color name="blue_grey_500">#607D8B</color>
+
     <color name="sold">#767676</color>
     <color name="red">#FF0000</color>
     <color name="red_500">#F44336</color>
@@ -46,8 +51,8 @@
     <color name="grey_10">#e6e6e6</color>K
 
     <color name="grey_60">#666666</color>
-
-
+    <color name="blue_grey_700">#455A64</color>
+    <color name="overlay_dark_10">#1A000000</color>
 
     <color name="btnColorOperation">#DFDFDF</color>
     <color name="btnBackgroundColor">#222222</color>

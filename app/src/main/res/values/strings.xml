@@ -82,7 +82,6 @@
     <string name="post_submit_msg">Por Favor, espere.</string>
 
 
-
     <string name="checkout_dialog_msg">¿Estás seguro de que quieres Enviarlo?</string>
     <string name="checkout_submit_title">Por favor Espere</string>
     <string name="checkout_submit_msg">Enviar su Orden&#8230;</string>
@@ -154,6 +153,7 @@
 
     <string name="whops">Whoops!</string>
     <string name="login_process">Procesando inicio de sesión en su cuenta&#8230;</string>
+    <string name="factura_historico_process">Consultando...&#8230;</string>
 
     <string name="login_failed">Usuario o contraseña no válidos!</string>
     <string name="dialog_ok">OK</string>
@@ -190,4 +190,18 @@
     <string name="title_nav_promo">PROMOS</string>
     <string name="short_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="action_push_pin">Fijar</string>
+    <string name="action_recibo">Recibo recibo</string>
+    <string name="txt_editext_nc">Valor N/C</string>
+    <string name="txt_editext_retencion">Retención</string>
+    <string name="txt_editext_descuento">Descuento</string>
+    <string name="txt_editext_recibido">Valor Recibido</string>
+    <string name="title_activity_recibos_adjuntos">RecibosAdjuntos</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

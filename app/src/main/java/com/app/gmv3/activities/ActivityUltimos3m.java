@@ -147,7 +147,7 @@ public class ActivityUltimos3m extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
         return true;
     }

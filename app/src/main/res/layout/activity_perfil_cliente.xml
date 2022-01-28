@@ -70,7 +70,6 @@
                         app:civ_shadow="true" />
 
 
-
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/id_btn_verificacion"
                         android:layout_width="30dp"
@@ -354,34 +353,30 @@
                 <LinearLayout
                     android:id="@+id/id_history_nc"
 
-                    android:gravity="end"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
                     android:background="?attr/selectableItemBackground"
+
                     android:clickable="true"
-                    android:orientation="horizontal">
+                    android:gravity="end">
 
                     <TextView
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text=" Notas de crédito"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/black"
                         app:fontFamily="sans-serif-medium" />
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
+
+
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_arrow_right"
                         app:tint="@color/grey_40" />
-
 
 
                 </LinearLayout>
@@ -724,16 +719,57 @@
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/spacing_middle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:layout_marginLeft="@dimen/spacing_mlarge"
-                android:layout_marginRight="@dimen/spacing_mlarge"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:text="FACTURAS PENDIENTES"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="@color/grey_60" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/spacing_mlarge"
+                    android:layout_marginRight="@dimen/spacing_mlarge"
+                    android:text="FACTURAS PENDIENTES"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/grey_60" />
+
+
+                <LinearLayout
+                    android:id="@+id/lyt_recibo_colector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+
+                    android:clickable="true"
+                    android:gravity="end">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Rec. Colector"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/black"
+                        app:fontFamily="sans-serif-medium" />
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginRight="@dimen/spacing_xmedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_add_card"
+                        android:tint="@color/colorPrimary"
+                        />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <include
                 android:id="@+id/lyt_empty_result"
                 layout="@layout/include_empty_result"

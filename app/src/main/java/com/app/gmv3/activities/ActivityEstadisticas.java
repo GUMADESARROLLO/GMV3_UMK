@@ -159,6 +159,7 @@ public class ActivityEstadisticas extends AppCompatActivity {
                         final FacturasMoras Factura = Lista_Factura_mora.get(position);
                         intent.putExtra("factura_id",Factura.getFactura_id());
                         intent.putExtra("factura_date",Factura.getFactura_date());
+                        intent.putExtra("isRecibo","N");
                         startActivity(intent);
                     }
                 }, 400);

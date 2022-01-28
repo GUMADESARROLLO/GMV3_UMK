@@ -122,7 +122,8 @@ public class ActivityReportes extends AppCompatActivity {
 
                         intent.putExtra("factura_id",productList.get(position).getFACTURA());
                         intent.putExtra("factura_date",productList.get(position).getFECHA());
-
+                        intent.putExtra("cod_cliente",productList.get(position).getCLIENTE());
+                        intent.putExtra("isRecibo","N");
                         startActivity(intent);
 
 

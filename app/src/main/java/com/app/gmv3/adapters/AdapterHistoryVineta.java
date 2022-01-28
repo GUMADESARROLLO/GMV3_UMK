@@ -52,23 +52,24 @@ public class AdapterHistoryVineta extends RecyclerView.Adapter<AdapterHistoryVin
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView product_title, product_date,product_order_list,product_autor, txt_total_order, txt_status,txt_comentario,txt_beneficiarios,txt_coment_anulacion;
+        public TextView product_title, product_date,product_order_list,product_autor, txt_total_order, txt_status,txt_comentario,txt_beneficiarios,txt_coment_anulacion,txt_serie;
         ImageView img_delete_liq;
 
 
         public MyViewHolder(View view) {
             super(view);
 
-            product_title       = (TextView) view.findViewById(R.id.id_title);
-            product_date        = (TextView) view.findViewById(R.id.id_date);
-            product_order_list  = (TextView) view.findViewById(R.id.id_order_list);
-            product_autor       = (TextView) view.findViewById(R.id.id_autor);
-            txt_total_order     = (TextView) view.findViewById(R.id.id_total_order);
-            txt_status          = (TextView) view.findViewById(R.id.id_status);
-            txt_comentario      = (TextView) view.findViewById(R.id.id_comentario);
-            txt_beneficiarios   = (TextView) view.findViewById(R.id.id_beneficiarios);
-            img_delete_liq      = (ImageView) view.findViewById(R.id.id_delete_liq);
-            txt_coment_anulacion= (TextView) view.findViewById(R.id.id_coment_anulacion);
+            product_title       = view.findViewById(R.id.id_title);
+            product_date        = view.findViewById(R.id.id_date);
+            product_order_list  = view.findViewById(R.id.id_order_list);
+            product_autor       = view.findViewById(R.id.id_autor);
+            txt_total_order     = view.findViewById(R.id.id_total_order);
+            txt_status          = view.findViewById(R.id.id_status);
+            txt_comentario      = view.findViewById(R.id.id_comentario);
+            txt_beneficiarios   = view.findViewById(R.id.id_beneficiarios);
+            img_delete_liq      = view.findViewById(R.id.id_delete_liq);
+            txt_coment_anulacion= view.findViewById(R.id.id_coment_anulacion);
+            txt_serie           = view.findViewById(R.id.id_serie);
 
             img_delete_liq.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -201,6 +202,7 @@ public class AdapterHistoryVineta extends RecyclerView.Adapter<AdapterHistoryVin
 
 
         holder.product_title.setText(items.getmName_Cliente());
+        holder.txt_serie.setText((" Serie ").concat(items.getmRuta()));
         holder.product_date.setText(prettyTime.format(new Date(timeAgo)));
         holder.product_order_list.setText(Lineas);
         holder.product_autor.setText(items.getmRecibo());
