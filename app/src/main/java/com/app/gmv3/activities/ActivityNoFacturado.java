@@ -39,7 +39,7 @@ import java.util.List;
 import static com.app.gmv3.utilities.Constant.GET_NO_FACTURADO;
 
 public class ActivityNoFacturado extends AppCompatActivity implements AdapterNoFacturado.ContactsAdapterListener {
-    String cod_factura;
+    String cod_cliente;
 
     private AdapterNoFacturado mAdapter;
     private RecyclerView recyclerView;
@@ -62,7 +62,7 @@ public class ActivityNoFacturado extends AppCompatActivity implements AdapterNoF
 
         Intent intent = getIntent();
 
-        cod_factura = intent.getStringExtra("factura_id");
+        cod_cliente = intent.getStringExtra("cod_cliente");
 
         getSupportActionBar().setTitle("Articulo Disponible No facturado.");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -94,7 +94,7 @@ public class ActivityNoFacturado extends AppCompatActivity implements AdapterNoF
 
 
     private void fetchData() {
-        JsonArrayRequest request = new JsonArrayRequest(GET_NO_FACTURADO + cod_factura, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(GET_NO_FACTURADO + cod_cliente, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if (response == null) {

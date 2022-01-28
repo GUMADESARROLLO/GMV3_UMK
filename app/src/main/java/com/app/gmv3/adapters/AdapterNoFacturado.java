@@ -113,7 +113,7 @@ public class AdapterNoFacturado extends RecyclerView.Adapter<AdapterNoFacturado.
     }
 
 
-    @Override
+   @Override
     public Filter getFilter() {
         return new Filter() {
             @Override
@@ -133,7 +133,7 @@ public class AdapterNoFacturado extends RecyclerView.Adapter<AdapterNoFacturado.
 
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = productListFiltered;
-                return filterResults;
+                 return filterResults;
             }
 
             @Override

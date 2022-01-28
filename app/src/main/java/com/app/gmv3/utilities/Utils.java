@@ -3,6 +3,7 @@ package com.app.gmv3.utilities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -12,6 +13,8 @@ import android.os.Build;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,6 +28,7 @@ import com.app.gmv3.Config;
 import com.app.gmv3.activities.ActivityImageDetail;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.onesignal.OneSignal;
 
 import java.io.ByteArrayOutputStream;
@@ -77,14 +81,9 @@ public class Utils {
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(img);
-
-
-
-
         } catch (Exception e) {
         }
     }
-
     public static void changeMenuIconColor(Menu menu, @ColorInt int color) {
         for (int i = 0; i < menu.size(); i++) {
             Drawable drawable = menu.getItem(i).getIcon();
@@ -93,14 +92,7 @@ public class Utils {
             drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         }
     }
-    public static void nestedScrollTo(final NestedScrollView nested, final View targetView) {
-        nested.post(new Runnable() {
-            @Override
-            public void run() {
-                nested.scrollTo(500, targetView.getBottom());
-            }
-        });
-    }
+
     public static String getFormattedDateSimple(Long dateTime) {
         SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
         return newFormat.format(new Date(dateTime));
@@ -125,6 +117,7 @@ public class Utils {
             window.setStatusBarColor(act.getResources().getColor(color));
         }
     }
+
     public static void setSystemBarColor(Activity act) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = act.getWindow();

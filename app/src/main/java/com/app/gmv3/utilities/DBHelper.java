@@ -450,6 +450,14 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
+    public void deleteOneRecibos(String factura) {
+        try {
+            db.delete(TABLE_RECIBOS, REC_FACTURA + "=?", new String[]{factura});
+        } catch (Exception e) {
+            Log.e("DB ERROR", e.toString());
+            e.printStackTrace();
+        }
+    }
     public void deleteDataRecibos(String Linea,String Cliente) {
         try {
             db.delete(TABLE_RECIBOS,REC_ID +"=? AND "+REC_CLIENTE+"=?",new String[]{Linea,Cliente});

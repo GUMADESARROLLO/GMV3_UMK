@@ -1,9 +1,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_no_facturado"
-        android:title="@string/text_filtro"
-        android:icon="@drawable/ic_attach_money"
-        app:showAsAction="always|collapseActionView" />
+
+
+    <item android:id="@+id/search_historico_factura"
+        android:title="@string/search_query_text"
+        android:icon="@drawable/ic_search_no_facturado"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item android:id="@+id/btnMore"
+        android:icon="@drawable/ic_more_vert"
+        android:title="Mas"
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/action_facturado"
+                android:icon="@drawable/ic_history_black"
+                android:title="Ultm. 3 Meses" />
+
+
+            <item android:id="@+id/action_no_facturado"
+                android:icon="@drawable/ic_inventory"
+                android:title="Art. no Facturados" />
+
+        </menu>
+    </item>
+
+
 
 </menu>

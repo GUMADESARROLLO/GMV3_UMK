@@ -47,6 +47,7 @@
         </activity>
         <activity android:name=".activities.ActivityViewFactura" />
         <activity android:name=".activities.ActivityUltimos3m" />
+        <activity android:name=".activities.ActivityHistoricoFactura" />
         <activity android:name=".activities.ActivityNotaCredito" />
         <activity
             android:name=".activities.ActivityReportes"

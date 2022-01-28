@@ -153,6 +153,7 @@
 
     <string name="whops">Whoops!</string>
     <string name="login_process">Procesando inicio de sesión en su cuenta&#8230;</string>
+    <string name="factura_historico_process">Consultando...&#8230;</string>
 
     <string name="login_failed">Usuario o contraseña no válidos!</string>
     <string name="dialog_ok">OK</string>

@@ -70,7 +70,6 @@
                         app:civ_shadow="true" />
 
 
-
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/id_btn_verificacion"
                         android:layout_width="30dp"
