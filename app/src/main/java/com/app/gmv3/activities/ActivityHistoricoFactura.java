@@ -108,9 +108,11 @@ public class ActivityHistoricoFactura extends AppCompatActivity {
                         Intent intent = new Intent(ActivityHistoricoFactura.this, ActivityViewFactura.class);
                         intent.putExtra("factura_id",productList.get(position).getFACTURA());
                         intent.putExtra("factura_date",productList.get(position).getFECHA());
-                        intent.putExtra("cod_cliente",productList.get(position).getCLIENTE());
+                        intent.putExtra("cod_cliente",cod_cliente);
                         intent.putExtra("isRecibo","S");
                         startActivity(intent);
+
+                        Log.e("TAG_", "initToolbar:" + cod_cliente );
                     }
                 }, 400);
             }

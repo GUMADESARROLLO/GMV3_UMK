@@ -87,6 +87,8 @@ public class ActivityViewFactura extends AppCompatActivity {
         Cod_cliente     = intent.getStringExtra("cod_cliente");
         isRecibo        = intent.getStringExtra("isRecibo");
 
+        Log.e("TAG_", "initToolbar:" + Cod_cliente );
+
         getSupportActionBar().setTitle(("Nº ").concat(cod_factura));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
