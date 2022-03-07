@@ -70,13 +70,13 @@ public class ActivityHistoryRecibos extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout = null;
     private String ruta_id;
 
-    TextView txt_desde;
-    TextView txt_hasta;
+    EditText txt_desde;
+    EditText txt_hasta;
     TextView txt_factura_total;
     TextView txt_count_recibos;
 
     String OrderBY = "Desc";
-    RelativeLayout ryt_empty_history;
+    View ryt_empty_history;
     private static final String[] ANIMATION_TYPE = new String[]{
             "Mas Recientes", "Mas Antiguos"
     };
@@ -98,7 +98,7 @@ public class ActivityHistoryRecibos extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Recibos de Colector");
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Utils.setSystemBarColor(this);
 
@@ -119,7 +119,7 @@ public class ActivityHistoryRecibos extends AppCompatActivity {
         mAdapter                = new AdapterHistoryRecibo(this, productList);
 
         txt_desde               = findViewById(R.id.id_rng_desde);
-        txt_hasta               = findViewById(R.id.id_rng_hasta);
+        txt_hasta               = findViewById(R.id.id_hasta);
         txt_factura_total       = findViewById(R.id.id_recibos_total);
         txt_count_recibos       = findViewById(R.id.id_count_recibos);
 
@@ -130,7 +130,7 @@ public class ActivityHistoryRecibos extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        ryt_empty_history = findViewById(R.id.id_no_feed);
+        ryt_empty_history = findViewById(R.id.lyt_empty_result);
 
 
         txt_desde.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +155,13 @@ public class ActivityHistoryRecibos extends AppCompatActivity {
         txt_hasta.setText(Utils.getFormattedDateSimple(date_ship_millis));
 
 
-        (findViewById(R.id.id_img_search)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.id_img_desde)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Validar();
+            }
+        });
+        (findViewById(R.id.id_rng_hasta)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Validar();
