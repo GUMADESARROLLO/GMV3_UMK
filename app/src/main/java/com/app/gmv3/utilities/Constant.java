@@ -71,7 +71,7 @@ public class Constant {
     public static final String GET_RECIBOS_ADJUNTO = BASE_URL + "/api/api.php?get_recibos_adjuntos=";
     public static final String DEL_RECIBO_COLECTOR = BASE_URL + "/api/api.php?del_recibo_colector";
     public static final String POST_ADJUNTOS = BASE_URL + "/api/api.php?post_adjunto=";
-
+    public static final String POST_ANULAR_RECIBO = BASE_URL + "/api/api.php?recibo_anular=";
 
 
 

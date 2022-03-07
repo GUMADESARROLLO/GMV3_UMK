@@ -2,6 +2,7 @@ package com.app.gmv3.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.gmv3.activities.ActivityImageDetail;
 import com.app.gmv3.models.ItemRecibosAttach;
+import com.app.gmv3.utilities.ImageTransformation;
 import com.squareup.picasso.Picasso;
 import com.app.gmv3.R;
+
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -44,14 +48,25 @@ public class RecibosAdapter extends RecyclerView.Adapter<RecibosAdapter.Attachme
 
         final String userImage = newAttachmentList.get(position).getImageID();
 
+
+        Log.e("TAG_", "onBindViewHolder: " + userImage );
+
         if (userImage.isEmpty()||userImage.equals(null)||userImage.equals("")) {
 
         } else {
-            Picasso.with(mActivity)
+          /*  Picasso.with(mActivity)
                     .load(userImage)
                     .placeholder(R.drawable.logo_round)
                     .fit().centerCrop()
+                    .into(holder.attachedImageId);*/
+
+
+            Picasso.with(mActivity).load(userImage)
+                    .transform(ImageTransformation.getTransformation(holder.attachedImageId))
+                    .error(R.drawable.logo_round)
+                    .placeholder(R.drawable.logo_round)
                     .into(holder.attachedImageId);
+
         }
 
     }

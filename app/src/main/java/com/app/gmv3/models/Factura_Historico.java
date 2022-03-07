@@ -2,7 +2,7 @@ package com.app.gmv3.models;
 
 public class Factura_Historico {
 
-    String FACTURA,FECHA,CLIENTE,MONTO, ACTIVA,PLAZO, VENCE,DVENCIDOS;
+    String FACTURA,FECHA,CLIENTE,MONTO, ACTIVA,PLAZO, VENCE,DVENCIDOS,SALDO;
 
     public String getFACTURA() {
         return FACTURA;
@@ -34,5 +34,9 @@ public class Factura_Historico {
 
     public String getDVENCIDOS() {
         return DVENCIDOS;
+    }
+
+    public String getSALDO() {
+        return SALDO;
     }
 }

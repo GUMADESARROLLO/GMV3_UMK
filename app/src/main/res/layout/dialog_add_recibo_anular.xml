@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_large">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_title_frm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/short_lorem_ipsum"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/grey_90"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:background="@color/grey_10" />
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:background="@color/grey_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="@dimen/spacing_large">
+
+        <EditText
+            android:id="@+id/edt_cantidad_vineta"
+            style="@style/EditText.Flat.Grey.Small"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:inputType="number"
+            android:background="@drawable/edit_text_round_bg_outline"
+            android:hint="@string/feedback_name"
+            android:lines="3"
+            android:maxLength="5"
+            android:minHeight="@dimen/spacing_xmlarge">
+            <requestFocus />
+        </EditText>
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:background="@color/grey_10" />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:id="@+id/id_text_recibo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:text="@string/date_lorem_ipsum"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/grey_80"
+            android:textStyle="bold" />
+
+
+
+
+        <Button
+            android:id="@+id/bt_cancel"
+            style="@style/Button.Accent.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="CANCELAR" />
+
+        <Button
+            android:id="@+id/bt_add"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Anular" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -120,7 +120,7 @@
                 android:paddingTop="@dimen/spacing_middle"
                 android:paddingEnd="@dimen/spacing_mlarge"
                 android:paddingBottom="@dimen/spacing_middle"
-                android:text="empy"
+                android:text="00/00/0000"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 android:textColor="@color/grey_40" />
 

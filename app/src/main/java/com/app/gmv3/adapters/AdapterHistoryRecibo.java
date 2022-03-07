@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,23 +62,25 @@ public class AdapterHistoryRecibo extends RecyclerView.Adapter<AdapterHistoryRec
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView product_title, product_date,product_autor, txt_total_order, txt_status,txt_comentario,txt_coment_anulacion,txt_serie;
         ImageView img_delete_liq,img_adjuntar;
+        public CardView cardView;
 
 
         public MyViewHolder(View view) {
             super(view);
 
-            product_title       = view.findViewById(R.id.id_title);
-            recyclerView        = view.findViewById(R.id.recycler_view);
-            adapterCart         = new AdapterCartRecibo(context,arrayCart);
-            product_date        = view.findViewById(R.id.id_date);
-            product_autor       = view.findViewById(R.id.id_autor);
-            txt_total_order     = view.findViewById(R.id.id_total_order);
-            txt_status          = view.findViewById(R.id.id_status);
-            txt_comentario      = view.findViewById(R.id.id_comentario);
-            img_delete_liq      = view.findViewById(R.id.id_delete_liq);
-            img_adjuntar        = view.findViewById(R.id.id_adjuntar);
-            txt_coment_anulacion= view.findViewById(R.id.id_coment_anulacion);
-            txt_serie           = view.findViewById(R.id.id_serie);
+            product_title           = view.findViewById(R.id.id_title);
+            recyclerView            = view.findViewById(R.id.recycler_view);
+            adapterCart             = new AdapterCartRecibo(context,arrayCart,true);
+            product_date            = view.findViewById(R.id.id_date);
+            product_autor           = view.findViewById(R.id.id_autor);
+            txt_total_order         = view.findViewById(R.id.id_total_order);
+            txt_status              = view.findViewById(R.id.id_status);
+            txt_comentario          = view.findViewById(R.id.id_comentario);
+            img_delete_liq          = view.findViewById(R.id.id_delete_liq);
+            img_adjuntar            = view.findViewById(R.id.id_adjuntar);
+            txt_coment_anulacion    = view.findViewById(R.id.id_coment_anulacion);
+            txt_serie               = view.findViewById(R.id.id_serie);
+            cardView                = view.findViewById(R.id.id_element_cardview);
 
             img_delete_liq.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -159,6 +164,7 @@ public class AdapterHistoryRecibo extends RecyclerView.Adapter<AdapterHistoryRec
         ActivityCartReciboColector.Descuento.clear();
         ActivityCartReciboColector.ValorRecibido.clear();
         ActivityCartReciboColector.Saldo.clear();
+        ActivityCartReciboColector.rec_tipo.clear();
 
     }
     public void dialogSuccessOrder() {
@@ -216,7 +222,7 @@ public class AdapterHistoryRecibo extends RecyclerView.Adapter<AdapterHistoryRec
 
             List<String> sRows = Arrays.asList(sList.get(i).split(";"));
 
-
+            String strTipo = (sRows.size()==9) ? sRows.get(8) : "N/D";
             ActivityCartReciboColector.vineta_factura.add(sRows.get(0).replace("[","").toString());
             ActivityCartReciboColector.fact_valor.add(sRows.get(1).toString());
             ActivityCartReciboColector.NotaCredito.add(Double.parseDouble(sRows.get(2).toString()));
@@ -224,8 +230,7 @@ public class AdapterHistoryRecibo extends RecyclerView.Adapter<AdapterHistoryRec
             ActivityCartReciboColector.Descuento.add(Double.parseDouble(sRows.get(4).toString()));
             ActivityCartReciboColector.ValorRecibido.add(Double.parseDouble(sRows.get(5).toString()));
             ActivityCartReciboColector.Saldo.add(Double.parseDouble(sRows.get(6).toString()));
-
-
+            ActivityCartReciboColector.rec_tipo.add(strTipo);
 
         }
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
@@ -250,6 +255,14 @@ public class AdapterHistoryRecibo extends RecyclerView.Adapter<AdapterHistoryRec
         holder.txt_comentario.setText(items.getmComentario());
         holder.txt_coment_anulacion.setText(items.getmComment_anul());
 
+        if(items.getmStatus().equals("4")){
+            recyclerView.setVisibility(View.GONE);
+            holder.txt_status.setVisibility(View.GONE);
+            holder.txt_coment_anulacion.setVisibility(View.GONE);
+            holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.red_SOFT_light));
+            holder.product_title.setText("ANULADO");
+            holder.img_adjuntar.setVisibility(View.GONE);
+        }
     }
 
     @Override

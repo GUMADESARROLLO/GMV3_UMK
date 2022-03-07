@@ -108,9 +108,13 @@ public class ActivityHistoricoFactura extends AppCompatActivity {
                         Intent intent = new Intent(ActivityHistoricoFactura.this, ActivityViewFactura.class);
                         intent.putExtra("factura_id",productList.get(position).getFACTURA());
                         intent.putExtra("factura_date",productList.get(position).getFECHA());
-                        intent.putExtra("cod_cliente",productList.get(position).getCLIENTE());
+                        intent.putExtra("cod_cliente",cod_cliente);
+                        intent.putExtra("fac_saldo",productList.get(position).getSALDO());
                         intent.putExtra("isRecibo","S");
+                        intent.putExtra("isContado","S");
                         startActivity(intent);
+
+                        Log.e("TAG_", "initToolbar:" + cod_cliente );
                     }
                 }, 400);
             }
@@ -118,7 +122,7 @@ public class ActivityHistoricoFactura extends AppCompatActivity {
 
         if (Utils.isNetworkAvailable(ActivityHistoricoFactura.this)) {
 
-            new ActivityHistoricoFactura.MyTaskLoginNormal().execute(cod_cliente);
+            new MyTaskLoginNormal().execute(cod_cliente);
         }
 
 

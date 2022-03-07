@@ -153,7 +153,8 @@ public class AdapterPerfilLotes extends RecyclerView.Adapter<AdapterPerfilLotes.
                     recValor,
                     (Double.parseDouble(Monto) - Double.parseDouble(recValor) ),
                     id_tabla,
-                    listFacturaMora.get(pos).FacturaCliente
+                    listFacturaMora.get(pos).FacturaCliente,
+                    "Cancelacion"
             );
             selected_items.put(pos, true);
         }

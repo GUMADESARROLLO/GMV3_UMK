@@ -3,6 +3,7 @@ package com.app.gmv3.activities;
 import static com.app.gmv3.utilities.Constant.GET_RECIBOS_COLECTOR;
 import static com.app.gmv3.utilities.Constant.POST_ADJUNTOS;
 import static com.app.gmv3.utilities.Constant.GET_RECIBOS_ADJUNTO;
+import static com.app.gmv3.utilities.Constant.POST_ANULAR_RECIBO;
 
 
 import androidx.appcompat.app.ActionBar;
@@ -26,6 +27,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,8 +64,10 @@ import com.app.gmv3.models.ItemHistorico;
 import com.app.gmv3.models.ItemRecibosAttach;
 import com.app.gmv3.models.ItemsAttach;
 import com.app.gmv3.utilities.Constant;
+import com.app.gmv3.utilities.ImageTransformation;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onesignal.OneSignal;
 
 import org.json.JSONArray;
 
@@ -113,6 +117,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Send();
+
             }
         });
         btn_add_photos.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +208,8 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         return false;
     }
 
+
+
     public void Send(){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityRecibosAdjuntos.this);
@@ -216,7 +223,8 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
                 for(int i = 0 ; i < listaImagenes.size() ; i++) {
                     try {
                         InputStream is = getContentResolver().openInputStream(listaImagenes.get(i));
-                        Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        //Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        Bitmap bitmap = ImageTransformation.getResizedBitmap(BitmapFactory.decodeStream(is), 600);
 
                         String cadena = convertirUriToBase64(bitmap);
 
@@ -235,6 +243,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
 
     }
+
     public String convertirUriToBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
@@ -324,6 +333,9 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
                         System.out.println("PIYUSH NAME IS" + returnCursor.getString(nameIndex));
                         System.out.println("PIYUSH SIZE IS" + Long.toString(returnCursor.getLong(sizeIndex)));
 
+                        Log.e("TAG_", "PIYUSH NAME IS " + returnCursor.getString(nameIndex) );
+                        Log.e("TAG_", "PIYUSH SIZE IS " + Long.toString(returnCursor.getLong(sizeIndex)) );
+
                         ItemRecibosAttach itemRecibosAttach = new ItemRecibosAttach();
                         itemRecibosAttach.setImageName(returnCursor.getString(nameIndex));
                         itemRecibosAttach.setImageID(returnUri.toString());
@@ -346,6 +358,9 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
                     System.out.println("PIYUSH NAME IS" + returnCursor.getString(nameIndex));
                     System.out.println("PIYUSH SIZE IS" + Long.toString(returnCursor.getLong(sizeIndex)));
+
+                    Log.e("TAG_", "PIYUSH NAME IS " + returnCursor.getString(nameIndex) );
+                    Log.e("TAG_", "PIYUSH SIZE IS " + Long.toString(returnCursor.getLong(sizeIndex)) );
 
                     ItemRecibosAttach itemRecibosAttach = new ItemRecibosAttach();
                     itemRecibosAttach.setImageName(returnCursor.getString(nameIndex));

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ public class AdapterCartRecibo extends RecyclerView.Adapter<AdapterCartRecibo.Vi
 
     private Context context;
     private List<Cart> arrayCart;
+    boolean adjuntar = false;
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txt_Factura;
@@ -28,6 +30,9 @@ public class AdapterCartRecibo extends RecyclerView.Adapter<AdapterCartRecibo.Vi
         TextView txt_Descuento;
         TextView txt_ValorRecibido;
         TextView txt_Saldo;
+        RelativeLayout rlyRetencion,rlyDescuento,rlyNotaCredito;
+        int withRly;
+
 
 
         public ViewHolder(View view) {
@@ -39,13 +44,18 @@ public class AdapterCartRecibo extends RecyclerView.Adapter<AdapterCartRecibo.Vi
             txt_Descuento       = view.findViewById(R.id.id_descuento);
             txt_ValorRecibido   = view.findViewById(R.id.id_valor_recibido);
             txt_Saldo           = view.findViewById(R.id.id_saldo);
+            rlyRetencion        = view.findViewById(R.id.rly_retencion);
+            rlyDescuento        = view.findViewById(R.id.rly_descuento);
+            rlyNotaCredito      = view.findViewById(R.id.rly_nota_credito);
+            withRly             = 180;
         }
 
     }
 
-    public AdapterCartRecibo(Context context,List<Cart> arrayCart) {
-        this.context = context;
-        this.arrayCart = arrayCart;
+    public AdapterCartRecibo(Context context,List<Cart> arrayCart, boolean Adjuntar) {
+        this.context        = context;
+        this.arrayCart      = arrayCart;
+        this.adjuntar       = Adjuntar;
     }
 
     @Override
@@ -59,7 +69,7 @@ public class AdapterCartRecibo extends RecyclerView.Adapter<AdapterCartRecibo.Vi
 
         String StrFormat = "%1$,.2f";
 
-        holder.txt_Factura.setText(("Fact. ").concat(ActivityCartReciboColector.vineta_factura.get(position)));
+        holder.txt_Factura.setText(("Fact. ").concat(ActivityCartReciboColector.vineta_factura.get(position)).concat(" [ ").concat(ActivityCartReciboColector.rec_tipo.get(position)).concat(" ] "));
 
         double dbl_und_total = Double.parseDouble(ActivityCartReciboColector.fact_valor.get(position));
         String _dbl_und_total = String.format(Locale.ENGLISH, StrFormat, dbl_und_total);
@@ -86,6 +96,15 @@ public class AdapterCartRecibo extends RecyclerView.Adapter<AdapterCartRecibo.Vi
         holder.txt_Saldo.setText(("C$ ").concat(_saldo));
 
 
+        if (adjuntar){
+            ViewGroup.LayoutParams prm_Retencion    = holder.rlyRetencion.getLayoutParams();
+            ViewGroup.LayoutParams prm_Descuento    = holder.rlyDescuento.getLayoutParams();
+            ViewGroup.LayoutParams prm_NotaCredito  = holder.rlyNotaCredito.getLayoutParams();
+
+            prm_Retencion.width     = holder.withRly;
+            prm_Descuento.width     = holder.withRly;
+            prm_NotaCredito.width   = holder.withRly;
+        }
     }
 
     @Override

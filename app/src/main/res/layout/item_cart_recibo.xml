@@ -120,6 +120,8 @@
                                 android:textColor="@color/light_blue_400"
                                 android:textStyle="bold" />
 
+
+
                         </LinearLayout>
 
 
@@ -159,6 +161,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/rly_retencion"
                         android:layout_width="110dp"
                         android:layout_height="20dp">
 
@@ -200,6 +203,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/rly_descuento"
                         android:layout_width="100dp"
                         android:layout_height="20dp">
 
@@ -238,6 +242,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/rly_nota_credito"
                         android:layout_width="100dp"
                         android:layout_height="20dp">
 

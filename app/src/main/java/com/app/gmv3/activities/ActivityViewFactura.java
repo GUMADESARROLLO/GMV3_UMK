@@ -38,6 +38,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +52,7 @@ import java.util.Locale;
 import static com.app.gmv3.utilities.Constant.GET_DETALLE_FACTURA;
 
 public class ActivityViewFactura extends AppCompatActivity {
-    String cod_factura,date_factura,Cod_cliente, isRecibo;
+    String cod_factura,date_factura,Cod_cliente, isRecibo,isContado;
 
     private AdapterFacturasLineas mAdapter;
     private RecyclerView recyclerView;
@@ -58,7 +60,8 @@ public class ActivityViewFactura extends AppCompatActivity {
     TextView txt_factura_total,txt_observacion_factura;
     final Context context = this;
     public static DBHelper dbhelper;
-    String _Order_price;
+    String _Order_price,Fac_Saldo;
+    String strSelect = "Abono";
 
 
     @Override
@@ -76,7 +79,7 @@ public class ActivityViewFactura extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
@@ -85,7 +88,10 @@ public class ActivityViewFactura extends AppCompatActivity {
         cod_factura     = intent.getStringExtra("factura_id");
         date_factura    = intent.getStringExtra("factura_date");
         Cod_cliente     = intent.getStringExtra("cod_cliente");
+        Fac_Saldo       = intent.getStringExtra("fac_saldo");
         isRecibo        = intent.getStringExtra("isRecibo");
+        isContado       = intent.getStringExtra("isContado");
+
 
         getSupportActionBar().setTitle(("Nº ").concat(cod_factura));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -132,8 +138,6 @@ public class ActivityViewFactura extends AppCompatActivity {
 
                     double Sub_total_price = Double.parseDouble(items.get(i).getVENTA());
                     Order_price += Sub_total_price;
-
-
 
                 }
 
@@ -210,10 +214,30 @@ public class ActivityViewFactura extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_add_recibo);
         dialog.setCancelable(true);
 
-        final EditText edt_nc           = dialog.findViewById(R.id.edt_cantidad_nc);
-        final EditText edt_retencion    = dialog.findViewById(R.id.edt_cantidad_retencion);
-        final EditText edt_descuento    = dialog.findViewById(R.id.edt_cantidad_descuento);
-        final EditText edt_rec_valor    = dialog.findViewById(R.id.edt_cantidad_recibido);
+        final TextView txt_Saldo_actual       = dialog.findViewById(R.id.id_title_frm);
+        final EditText txt_valor_factura      = dialog.findViewById(R.id.edt_cantidad_valor_factura);
+        final EditText edt_nc                 = dialog.findViewById(R.id.edt_cantidad_nc);
+        final EditText edt_retencion          = dialog.findViewById(R.id.edt_cantidad_retencion);
+        final EditText edt_descuento          = dialog.findViewById(R.id.edt_cantidad_descuento);
+        final EditText edt_rec_valor          = dialog.findViewById(R.id.edt_cantidad_recibido);
+        final LinearLayout lly_valor_factura  = dialog.findViewById(R.id.llyValorFactura);
+
+        if (isContado.equals("N") || Double.parseDouble(Fac_Saldo) != 0 ){
+
+            lly_valor_factura.setVisibility(View.GONE);
+            (dialog.findViewById(R.id.rb_contado)).setVisibility(View.GONE);
+
+
+
+        }
+        Fac_Saldo = isContado.equals("N") ? Fac_Saldo.replace(",","") : _Order_price.replace(",","");
+        Log.e("TAG_", "FormAdd: " + Fac_Saldo );
+        txt_valor_factura.setText(Fac_Saldo);
+
+        String lbl = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Fac_Saldo));
+        txt_Saldo_actual.setText(("Saldo Actual: C$ ").concat(lbl));
+
+
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -233,17 +257,24 @@ public class ActivityViewFactura extends AppCompatActivity {
                 if (edt_nc.getText().toString().equalsIgnoreCase("") &&
                         edt_retencion.getText().toString().equalsIgnoreCase("") &&
                         edt_descuento.getText().toString().equalsIgnoreCase("") &&
-                        edt_rec_valor.getText().toString().equalsIgnoreCase("")) {
+                        edt_rec_valor.getText().toString().equalsIgnoreCase("") ) {
 
                     Toast.makeText(getApplicationContext(), "Falta Información", Toast.LENGTH_SHORT).show();
 
                 } else {
+
+                    if (isContado.equals("N") || Double.parseDouble(Fac_Saldo) != 0 ){
+                        Fac_Saldo = txt_valor_factura.getText().toString();
+                    }
+
                     saveRecibo(
                             edt_nc.getText().toString(),
                             edt_retencion.getText().toString(),
                             edt_descuento.getText().toString(),
-                            edt_rec_valor.getText().toString()
+                            edt_rec_valor.getText().toString(),
+                            strSelect
                     );
+
                     dialog.dismiss();
                     finish();
                 }
@@ -255,28 +286,53 @@ public class ActivityViewFactura extends AppCompatActivity {
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
-    private void saveRecibo(String NotaCredito,String Retencion,String Descuento,String recValor){
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.rb_Abono:
+                if (checked)
+                    strSelect ="Abono";
+                    break;
+            case R.id.rb_cancelacion:
+                if (checked)
+                    strSelect ="Cancelacion";
+                    break;
+            case R.id.rb_contado:
+                if (checked)
+                    strSelect ="Contado";
+                break;
+        }
+    }
+
+    private void saveRecibo(String NotaCredito,String Retencion,String Descuento,String recValor,String Tipo){
         ArrayList<ArrayList<Object>> data = dbhelper.getAllDataRecibo(Cod_cliente);
 
         int id_tabla = (data.size() + 1);
 
-        _Order_price = _Order_price.replace(",","");
+        //_Order_price = _Order_price.replace(",","");
+        Fac_Saldo   = Fac_Saldo.replace(",","");
 
         NotaCredito = (NotaCredito.equals(""))  ? "0" : NotaCredito;
         Retencion   = (Retencion.equals(""))    ? "0" : Retencion;
         Descuento   = (Descuento.equals(""))    ? "0" : Descuento;
         recValor    = (recValor.equals(""))    ? "0" : recValor;
 
+        double rec_saldo = (Double.parseDouble(Fac_Saldo) - Double.parseDouble(NotaCredito) - Double.parseDouble(Retencion)- Double.parseDouble(Descuento) - Double.parseDouble(recValor) );
+
         dbhelper.addRecibo(
                 cod_factura,
-                _Order_price,
+                Fac_Saldo,
                 NotaCredito,
                 Retencion,
                 Descuento,
                 recValor,
-                (Double.parseDouble(_Order_price) - Double.parseDouble(recValor) ),
+                rec_saldo,
                 id_tabla,
-                Cod_cliente
+                Cod_cliente,
+                Tipo
         );
     }
     public void ShowDialog(String strTitle, String strMsg, int color) {
