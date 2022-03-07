@@ -67,8 +67,7 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_clientes, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_clientes, parent, false);
 
         return new MyViewHolder(itemView);
     }

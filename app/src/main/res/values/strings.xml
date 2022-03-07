@@ -133,6 +133,7 @@
     <string name="msg_exit">Presione nuevamente para salir de la App</string>
     <string name="txt_items">item(s)</string>
     <string name="title_img_save">Guardar</string>
+    <string name="rc_string_anular">Anular Recibo</string>
     <string name="title_img_close">Cerrar</string>
     <string name="msg_copy">Código de compra copiado</string>
     <string name="failed_fetch_data">¡No se pudieron recuperar los datos! Inténtalo de nuevo.</string>
@@ -188,9 +189,12 @@
     <string name="about_text">App oficial de Preventas UNIMARK es basada en la API de Internas de la empresa para una mayor velocidad y seguridad.
                               Este software está bajo politicas de desarrollo Internas de UNIMARK S,A.</string>
     <string name="title_nav_promo">PROMOS</string>
+    <string name="date_lorem_ipsum">0000/00/00</string>
+
     <string name="short_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="action_push_pin">Fijar</string>
     <string name="action_recibo">Recibo recibo</string>
+    <string name="txt_editext_factura_valor">Valor de Factura</string>
     <string name="txt_editext_nc">Valor N/C</string>
     <string name="txt_editext_retencion">Retención</string>
     <string name="txt_editext_descuento">Descuento</string>

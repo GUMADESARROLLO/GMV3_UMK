@@ -54,15 +54,15 @@ public class ActivityCartReciboColector extends AppCompatActivity {
     AppCompatButton btn_checkout;
     Button  btn_continue;
     ArrayList<ArrayList<Object>> data;
-    public static ArrayList<Double> table_id       = new ArrayList<Double>();
+    public static ArrayList<Double> table_id        = new ArrayList<Double>();
     public static ArrayList<String> vineta_factura  = new ArrayList<String>();
     public static ArrayList<String> fact_valor      = new ArrayList<String>();
     public static ArrayList<Double> NotaCredito     = new ArrayList<Double>();
     public static ArrayList<Double> Retencion       = new ArrayList<Double>();
-    public static ArrayList<Double> Descuento      = new ArrayList<Double>();
-    public static ArrayList<Double> ValorRecibido  = new ArrayList<Double>();
-    public static ArrayList<Double> Saldo          = new ArrayList<Double>();
-
+    public static ArrayList<Double> Descuento       = new ArrayList<Double>();
+    public static ArrayList<Double> ValorRecibido   = new ArrayList<Double>();
+    public static ArrayList<Double> Saldo           = new ArrayList<Double>();
+    public static ArrayList<String> rec_tipo        = new ArrayList<String>();
     public static ArrayList<Double> sub_total_price = new ArrayList<Double>();
     List<Cart> arrayCart;
     View view;
@@ -136,7 +136,7 @@ public class ActivityCartReciboColector extends AppCompatActivity {
 
         lyt_order = findViewById(R.id.lyt_history);
 
-        adapterCart = new AdapterCartRecibo(this,arrayCart);
+        adapterCart = new AdapterCartRecibo(this,arrayCart,true);
         dbhelper = new DBHelper(this);
 
         try {
@@ -251,6 +251,7 @@ public class ActivityCartReciboColector extends AppCompatActivity {
         Saldo.clear();
         sub_total_price.clear();
         table_id.clear();
+        rec_tipo.clear();
     }
 
     public class getDataTask extends AsyncTask<String, Void, Void> {
@@ -304,6 +305,7 @@ public class ActivityCartReciboColector extends AppCompatActivity {
             total_price += Double.parseDouble(row.get(5).toString());
 
             table_id.add(Double.parseDouble(row.get(7).toString()));
+            rec_tipo.add(row.get(9).toString());
 
         }
 

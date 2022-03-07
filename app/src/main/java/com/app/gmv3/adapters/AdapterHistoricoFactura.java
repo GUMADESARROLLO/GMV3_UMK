@@ -74,7 +74,7 @@ public class AdapterHistoricoFactura extends RecyclerView.Adapter<AdapterHistori
 
         Factura_Historico Factura = productList.get(position);
 
-        String txt01 = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Factura.getMONTO()));
+        String txt01 = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Factura.getSALDO()));
 
 
         if (Factura.getPLAZO().equals("1")||Factura.getPLAZO().equals("01")){

@@ -65,7 +65,7 @@ public class AdapterCheckoutRecibo extends RecyclerView.Adapter<AdapterCheckoutR
 
         String StrFormat = "%1$,.2f";
 
-        holder.txt_Factura.setText(("Fact. ").concat(ActivityCartReciboColector.vineta_factura.get(position)));
+        holder.txt_Factura.setText(("Fact. ").concat(ActivityCartReciboColector.vineta_factura.get(position)).concat(" [ ").concat(ActivityCartReciboColector.rec_tipo.get(position)).concat(" ] "));
 
         double dbl_und_total = Double.parseDouble(ActivityCartReciboColector.fact_valor.get(position));
         String _dbl_und_total = String.format(Locale.ENGLISH, StrFormat, dbl_und_total);

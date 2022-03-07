@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -220,7 +221,7 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
             builder.setPositiveButton(getResources().getString(R.string.dialog_option_yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    requestAction();
+                   requestAction();
                 }
             });
             builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);
@@ -239,14 +240,27 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
             @Override
             public void onResponse(final String ServerResponse) {
 
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog.dismiss();
-                        dialogSuccessOrder();
-                    }
-                }, 2000);
+
+                if (ServerResponse.equals("Nuevo")){
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            dialogSuccessOrder();
+                        }
+                    }, 2000);
+
+                }else  if (ServerResponse.equals("Error")){
+                    Toast.makeText(getApplicationContext(), "Ocurrio un Problema, intentelo mas tarde", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+
+                }else  if (ServerResponse.equals("Existe")){
+                    Toast.makeText(getApplicationContext(), "El Numero de Recibo Ya fue Utilizado", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+
 
             }
         },      new Response.ErrorListener() {
@@ -310,13 +324,14 @@ public class ActivityCheckoutRecibos extends AppCompatActivity {
             String Valor_Recibido   = row.get(5).toString();
             String Saldo            = row.get(6).toString();
             String Cliente          = row.get(8).toString();
+            String Tipo             = row.get(9).toString();
 
             double Sub_total_price = Double.parseDouble(Valor_Recibido);
 
 
             Order_price += Sub_total_price;
 
-            data_order_list += "[" + (Factura + ";" + Valor_Factura + ";" + NOta_Credito + ";" + Retencion + ";" + Descuento + ";" + Valor_Recibido + ";" + Saldo + ";" + Cliente  + "],");
+            data_order_list += "[" + (Factura + ";" + Valor_Factura + ";" + NOta_Credito + ";" + Retencion + ";" + Descuento + ";" + Valor_Recibido + ";" + Saldo + ";" + Cliente  + ";" + Tipo  + "],");
         }
 
         if (data_order_list.equalsIgnoreCase("")) {

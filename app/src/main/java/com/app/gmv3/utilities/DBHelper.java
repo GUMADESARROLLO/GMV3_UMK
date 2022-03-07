@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     private final static String DB_NAME         = "gmv3_db";
-    public final static int DB_VERSION          = 5;
+    public final static int DB_VERSION          = 6;
     public static SQLiteDatabase db;
     private final Context context;
     private String DB_PATH;
@@ -62,6 +62,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private final String SALDO                  = "Saldo";
     private final String REC_ID                 = "id";
     private final String REC_CLIENTE            = "cliente";
+    private final String REC_TIPO               = "tipo";
+
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -159,7 +161,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
         Cursor cursor = null;
         try {
-            cursor = db.query(TABLE_RECIBOS, new String[]{REC_FACTURA, VALOR_FACTURA, NOTA_CREDITO,RETENCION, DESCUENTO, REC_VALOR, SALDO,REC_ID,REC_CLIENTE},
+            cursor = db.query(TABLE_RECIBOS, new String[]{REC_FACTURA, VALOR_FACTURA, NOTA_CREDITO,RETENCION, DESCUENTO, REC_VALOR, SALDO,REC_ID,REC_CLIENTE,REC_TIPO},
                     REC_CLIENTE + "=?" , new String[]{id}, null, null, null);
             cursor.moveToFirst();
             if (!cursor.isAfterLast()) {
@@ -174,6 +176,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     dataList.add(cursor.getString(6));
                     dataList.add(cursor.getString(7));
                     dataList.add(cursor.getString(8));
+                    dataList.add(cursor.getString(9));
                     dataArrays.add(dataList);
                 }
                 while (cursor.moveToNext());
@@ -219,7 +222,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
         Cursor cursor = null;
         try {
-            cursor = db.query(TABLE_RECIBOS, new String[]{REC_FACTURA, VALOR_FACTURA, NOTA_CREDITO,RETENCION, DESCUENTO, REC_VALOR, SALDO,REC_ID,REC_CLIENTE},
+            cursor = db.query(TABLE_RECIBOS, new String[]{REC_FACTURA, VALOR_FACTURA, NOTA_CREDITO,RETENCION, DESCUENTO, REC_VALOR, SALDO,REC_ID,REC_CLIENTE,REC_TIPO},
                     null, null, null, null, null);
             cursor.moveToFirst();
             if (!cursor.isAfterLast()) {
@@ -234,6 +237,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     dataList.add(cursor.getString(6));
                     dataList.add(cursor.getString(7));
                     dataList.add(cursor.getString(8));
+                    dataList.add(cursor.getString(9));
                     dataArrays.add(dataList);
                 }
                 while (cursor.moveToNext());
@@ -363,7 +367,7 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
-    public void addRecibo(String factura, String Valor_recibo, String NotaCredito,String Retencion, String Descuento, String Rec_Valor, double Saldo,int ID, String Cliente) {
+    public void addRecibo(String factura, String Valor_recibo, String NotaCredito,String Retencion, String Descuento, String Rec_Valor, double Saldo,int ID, String Cliente,String Tipo) {
         ContentValues values = new ContentValues();
         values.put(REC_FACTURA, factura);
         values.put(VALOR_FACTURA, Valor_recibo);
@@ -374,6 +378,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(SALDO, Saldo);
         values.put(REC_ID, ID);
         values.put(REC_CLIENTE, Cliente);
+        values.put(REC_TIPO,Tipo);
 
         try {
             db.insert(TABLE_RECIBOS, null, values);
