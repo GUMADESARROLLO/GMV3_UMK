@@ -63,4 +63,11 @@ public class SharedPref {
         return default_prefence.getString(str(R.string.pref_Type), str(R.string.default_your_address));
     }
 
+    public String getPathAssigned() {
+        return default_prefence.getString(str(R.string.pref_Path_Assigned), str(R.string.default_path_assigned));
+    }
+    public void setPathAssigned(String path) {
+        default_prefence.edit().putString(str(R.string.pref_Path_Assigned), path).apply();
+    }
+
 }

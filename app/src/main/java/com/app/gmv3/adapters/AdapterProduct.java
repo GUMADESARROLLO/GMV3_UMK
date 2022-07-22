@@ -2,6 +2,8 @@ package com.app.gmv3.adapters;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,7 +34,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView product_name, product_price,product_cant,product_code;
+        public TextView product_name, product_price,product_cant,product_code,product_label_offer;
         public ImageView product_image,product_premiun;
         private LinearLayout lvl_offer;
         public MyViewHolder(View view) {
@@ -42,6 +45,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
             product_code = view.findViewById(R.id.id_cod_articulo);
             product_image = view.findViewById(R.id.category_image);
             product_premiun = view.findViewById(R.id.img_premiun);
+            product_label_offer = view.findViewById(R.id.txt_offer);
             lvl_offer = view.findViewById(R.id.lvl_offer);
 
 
@@ -88,11 +92,20 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
             holder.product_premiun.setVisibility(View.GONE);
         }
 
-        if (product.getISPROMO().equals("S")) {
+
+
+        List<String> sVinneta = Arrays.asList(product.getISPROMO().split(":"));
+
+        //holder.Ruta_asignada.setText(sVinneta.get(1));
+
+        if (sVinneta.get(0).equals("S")) {
             holder.lvl_offer.setVisibility(View.VISIBLE);
+            holder.product_label_offer.setText(sVinneta.get(1));
+
         } else {
             holder.lvl_offer.setVisibility(View.GONE);
         }
+
 
         Transformation transformation = new RoundedTransformationBuilder()
                 .cornerRadiusDp(6)

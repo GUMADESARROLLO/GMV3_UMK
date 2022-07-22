@@ -104,12 +104,16 @@
     <string name="pref_title_ruta">Ruta</string>
     <string name="pref_title_password">Contraseña</string>
     <string name="pref_Type">Tipo</string>
+    <string name="pref_Path_Assigned">PathAssigned</string>
+
     <string name="default_your_name">Su Nombre</string>
     <string name="default_your_email">Su.email@gmail.com</string>
     <string name="default_your_phone">+50500000000</string>
     <string name="default_your_password">****</string>
     <string name="default_your_address">Su Dirección</string>
     <string name="default_your_ruta">Seleccine al vendedor que esta trabajando</string>
+    <string name="default_path_assigned">F00</string>
+
     <string name="pref_msg_invalid_name">Nombre no válido</string>
     <string name="pref_msg_invalid_email">Email no válido</string>
     <string name="pref_msg_invalid_phone">Telefono no válido</string>

@@ -6,7 +6,7 @@ public class Constant {
 
     //API Transactions
     private static final String BASE_URL = Config.ADMIN_PANEL_URL;
-    public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_recent";
+    public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_recent=";
     public static final String GET_BANNER = BASE_URL + "/api/api.php?get_banner";
     public static final String GET_NEWS = BASE_URL + "/api/api.php?get_news";
     public static final String GET_PRODUCT_ID = BASE_URL + "/api/api.php?product_id=";

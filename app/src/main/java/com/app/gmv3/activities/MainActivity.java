@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.app.gmv3.fragments.FragmentPromos;
+import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.updateApplication;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.appbar.AppBarLayout;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     DBHelper dbhelper;
     private long exitTime = 0;
 
+    SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         AppBarLayout appBarLayout = findViewById(R.id.tab_appbar_layout);
         ((CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams()).setBehavior(new AppBarLayoutBehavior());
 
-
+        sharedPref = new SharedPref(this);
 
 
 
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (viewPager.getCurrentItem() == 3) {
                     toolbar.setTitle(R.string.title_nav_profile);
                 } else {
-                    toolbar.setTitle(R.string.app_name);
+                    toolbar.setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
                 }
 
             }

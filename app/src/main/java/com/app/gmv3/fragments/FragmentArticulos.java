@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -19,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -27,10 +31,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.ActivityProductDetail;
+import com.app.gmv3.activities.MainActivity;
 import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.adapters.AdapterProduct;
 import com.app.gmv3.models.Product;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
+import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,6 +44,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.app.gmv3.utilities.Constant.GET_RECENT_PRODUCT;
@@ -46,11 +53,15 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
 
     private RecyclerView recyclerView;
     private List<Product> productList;
+
     private AdapterProduct mAdapter;
     private SearchView searchView;
     View lyt_empty_history;
     SwipeRefreshLayout swipeRefreshLayout = null;
     LinearLayout lyt_root;
+
+    SharedPref sharedPref;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +70,8 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setRefreshing(true);
         lyt_empty_history = view.findViewById(R.id.lyt_empty_history);
+
+        sharedPref = new SharedPref(getContext());
 
         lyt_root = view.findViewById(R.id.lyt_root);
         if (Config.ENABLE_RTL_MODE) {
@@ -75,6 +88,7 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
+
         view.findViewById(R.id.bt_retry).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,9 +96,7 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
             }
         });
 
-
-
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Articulos (  )");
 
         fetchData();
         onRefresh();
@@ -116,7 +128,8 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
     }
 
     private void fetchData() {
-        JsonArrayRequest request = new JsonArrayRequest(GET_RECENT_PRODUCT, new Response.Listener<JSONArray>() {
+        final String[] RutaAsignada = new String[1];
+        JsonArrayRequest request = new JsonArrayRequest(GET_RECENT_PRODUCT + sharedPref.getYourName(), new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         if (response == null) {
@@ -128,10 +141,21 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
                         }.getType());
 
                         // adding contacts to contacts list
+
+
+
                         productList.clear();
                         productList.addAll(items);
 
                         if (productList.size() > 0) {
+                            List<String> sVinneta = Arrays.asList(items.get(0).getISPROMO().split(":"));
+                            RutaAsignada[0] = sVinneta.get(2);
+
+
+                            sharedPref.setPathAssigned(RutaAsignada[0]);
+                            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
+
+
                             lyt_empty_history.setVisibility(View.GONE);
                         } else {
                             lyt_empty_history.setVisibility(View.VISIBLE);
@@ -146,6 +170,7 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
             @Override
             public void onErrorResponse(VolleyError error) {
                 // error in getting json
+
                 Log.e("INFO", "Error: " + error.getMessage());
                 Toast.makeText(getActivity(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
