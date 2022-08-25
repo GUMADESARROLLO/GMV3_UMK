@@ -92,6 +92,9 @@ public class AdapterCartRecibo extends RecyclerView.Adapter<AdapterCartRecibo.Vi
         holder.txt_Descuento.setText(("C$ ").concat(_descuento));
 
         double saldo = ActivityCartReciboColector.Saldo.get(position);
+        if(saldo<=0.05){
+            saldo=0.00;
+        }
         String _saldo = String.format(Locale.ENGLISH, StrFormat, saldo);
         holder.txt_Saldo.setText(("C$ ").concat(_saldo));
 

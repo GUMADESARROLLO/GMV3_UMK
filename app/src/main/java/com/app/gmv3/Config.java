@@ -5,7 +5,7 @@ public class Config {
 
     //public static final String ADMIN_PANEL_URL = "http://192.168.1.139:8448/gmv3";
 
-    public static final String ADMIN_PANEL_URL = "http://186.1.15.166:8448/gmv3";
+    public static final String ADMIN_PANEL_URL = "http://192.168.1.20:80/gmv3_web";
 
     //set false if you want price to be displayed in decimal
     public static final boolean ENABLE_DECIMAL_ROUNDING = false;

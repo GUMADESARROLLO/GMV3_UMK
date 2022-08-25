@@ -321,8 +321,10 @@ public class ActivityViewFactura extends AppCompatActivity {
         recValor    = (recValor.equals(""))    ? "0" : recValor;
 
         double rec_saldo = (Double.parseDouble(Fac_Saldo) - Double.parseDouble(NotaCredito) - Double.parseDouble(Retencion)- Double.parseDouble(Descuento) - Double.parseDouble(recValor) );
-
-        dbhelper.addRecibo(
+         if(rec_saldo<=0.05){
+             rec_saldo=0.00;
+         }
+         dbhelper.addRecibo(
                 cod_factura,
                 Fac_Saldo,
                 NotaCredito,
