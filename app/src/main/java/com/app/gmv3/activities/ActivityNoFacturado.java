@@ -178,6 +178,7 @@ public class ActivityNoFacturado extends AppCompatActivity implements AdapterNoF
         intent.putExtra("product_bonificado", product.getProduct_bonificado());
         intent.putExtra("product_lotes", product.getProduct_lotes());
         intent.putExtra("product_und", product.getProduct_und());
-        startActivity(intent);
+      //  startActivity(intent);
+        //comentario
     }
 }
