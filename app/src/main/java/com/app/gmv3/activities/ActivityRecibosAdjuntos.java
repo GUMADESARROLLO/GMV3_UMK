@@ -1,9 +1,7 @@
 package com.app.gmv3.activities;
 
-import static com.app.gmv3.utilities.Constant.GET_RECIBOS_COLECTOR;
 import static com.app.gmv3.utilities.Constant.POST_ADJUNTOS;
 import static com.app.gmv3.utilities.Constant.GET_RECIBOS_ADJUNTO;
-import static com.app.gmv3.utilities.Constant.POST_ANULAR_RECIBO;
 
 
 import androidx.appcompat.app.ActionBar;
@@ -27,7 +25,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,7 +41,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -60,14 +56,12 @@ import com.android.volley.toolbox.Volley;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.adapters.RecibosAdapter;
-import com.app.gmv3.models.ItemHistorico;
 import com.app.gmv3.models.ItemRecibosAttach;
 import com.app.gmv3.models.ItemsAttach;
 import com.app.gmv3.utilities.Constant;
 import com.app.gmv3.utilities.ImageTransformation;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.onesignal.OneSignal;
 
 import org.json.JSONArray;
 
@@ -220,6 +214,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 listaBase64Imagenes.clear();
+                String[] imagenesr = new String[listaImagenes.size()];
                 for(int i = 0 ; i < listaImagenes.size() ; i++) {
                     try {
                         InputStream is = getContentResolver().openInputStream(listaImagenes.get(i));
@@ -228,14 +223,17 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
                         String cadena = convertirUriToBase64(bitmap);
 
-                        enviarImagenes("nomIma"+i, cadena);
+                        imagenesr[i] = cadena;
+                        //enviarImagenes("nomIma"+i, imagenesr);
 
                         bitmap.recycle();
 
                     } catch (IOException e) { }
 
                 }
+                enviarImagenes(imagenesr);
             }
+
         });
         builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);
         builder.setCancelable(false);
@@ -266,7 +264,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-    public void enviarImagenes(final String nombre, final String cadena) {
+    public void enviarImagenes(final String[] imagenesr) {
 
 
 
@@ -274,9 +272,9 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         progressDialog.setMessage(getString(R.string.post_submit_msg));
         progressDialog.show();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_ADJUNTOS,
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_ADJUNTOS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -300,11 +298,11 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new Hashtable<String, String>();
-                params.put("nom", nombre);
-                params.put("imagenes", cadena);
+                for( int i =0; i<imagenesr.length; i++ ){
+                    params.put("params_", String.valueOf(imagenesr));
+                }
                 params.put("Id_Recibo", _idRecibo);
-
-                return params;
+                return (Map<String, String>) params;
             }
         };
 

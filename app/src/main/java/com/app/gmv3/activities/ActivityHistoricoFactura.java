@@ -292,6 +292,8 @@ public class ActivityHistoricoFactura extends AppCompatActivity {
             case R.id.action_no_facturado:
 
                 Intent intent = new Intent(ActivityHistoricoFactura.this, ActivityNoFacturado.class);
+
+
                 intent.putExtra("cod_cliente",cod_cliente);
 
                 startActivity(intent);

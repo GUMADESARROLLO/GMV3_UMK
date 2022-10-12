@@ -13,7 +13,7 @@ import com.app.gmv3.BuildConfig;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 
-public class ActivitySplash extends AppCompatActivity {
+public class Activitysplash extends AppCompatActivity {
 
     Boolean isCancelled = false;
     private ProgressBar progressBar;

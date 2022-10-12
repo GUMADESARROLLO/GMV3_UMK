@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_checkout_clientes.xml" value="0.10260416666666666" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_checkout_vineta.xml" value="0.25" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_historico_factura.xml" value="0.2" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_history.xml" value="0.10260416666666666" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_no_facturado.xml" value="0.20416666666666666" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_notification_detail.xml" value="0.10260416666666666" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_perfil_cliente.xml" value="0.22" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/activity_recibos_adjuntos.xml" value="0.20416666666666666" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/layout/item_history.xml" value="0.33" />
+        <entry key="..\:/GMV3_UMK/app/src/main/res/menu/menu_setting.xml" value="0.33" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-mdpi/baseline_more_vert_24.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-mdpi/edit_text_round_bg_outline.xml" value="0.3880208333333333" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/drawable-mdpi/ic_fact_check.xml" value="0.3880208333333333" />
