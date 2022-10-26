@@ -39,18 +39,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageButton
-                android:id="@+id/id_search_lotes"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_margin="@dimen/spacing_middle"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/available"
-                app:srcCompat="@drawable/ic_search" />
+
 
 
 
@@ -80,20 +72,54 @@
                         app:civ_border="true"
                         app:civ_shadow="true" />
                 </RelativeLayout>
-                <ImageButton
-                    android:id="@+id/id_history_last_3m"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_margin="@dimen/spacing_middle"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/available"
-                    app:srcCompat="@drawable/ic_history" />
+
+
 
 
             </LinearLayout>
 
 
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/id_search_lotes"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/available"
+                    app:srcCompat="@drawable/ic_search" />
+
+                <View
+                    android:layout_width="@dimen/spacing_xlarge"
+                    android:layout_height="0dp" />
+
+                <ImageButton
+                    android:id="@+id/id_history_last_3m"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/available"
+                    app:srcCompat="@drawable/ic_history" />
+
+                <View
+                    android:layout_width="@dimen/spacing_xlarge"
+                    android:layout_height="0dp" />
+
+                <ImageButton
+                    android:id="@+id/id_plan_crecimiento"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/Dorado"
+                    app:srcCompat="@drawable/ic_premium" />
+
+            </LinearLayout>
             <TextView
                 android:gravity="center"
                 android:id="@+id/id_perfil_name_cliente"
@@ -103,7 +129,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/grey_80"
                 android:textStyle="bold" />
-
             <LinearLayout
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_width="match_parent"

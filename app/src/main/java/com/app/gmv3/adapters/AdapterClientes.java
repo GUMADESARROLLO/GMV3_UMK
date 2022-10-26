@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,13 +32,16 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView category_name, product_count,txt_cliente_codigo,txt_cliente_limite,txt_cliente_saldo,txt_cliente_disponible;
         public CardView cardView;
-        public RelativeLayout relativeLayout;
+        public TextView relativeLayout;
         public CircleImageView ImgVerication;
         public LinearLayout lytPin;
+
+        public ImageView imgPlan;
 
 
         public MyViewHolder(View view) {
             super(view);
+            imgPlan                 = view.findViewById(R.id.id_img_plan);
             relativeLayout          = view.findViewById(R.id.id_lyt_moroso);
             lytPin                  = view.findViewById(R.id.id_lyt_pin);
             category_name           = view.findViewById(R.id.category_name);
@@ -77,8 +81,8 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
         final Clients clients = categoryListFiltered.get(position);
 
         holder.category_name.setText(clients.getNOMBRE());
-
         holder.cardView.setBackgroundColor(context.getResources().getColor(((clients.getMOROSO().equals("S")) ? R.color.red_light : R.color.white)));
+        holder.imgPlan.setVisibility((clients.getPLAN().equals("S") ? View.VISIBLE : View.GONE));
         holder.relativeLayout.setVisibility((clients.getMOROSO().equals("S") ? View.VISIBLE : View.GONE));
         holder.lytPin.setVisibility((clients.getPIN().equals("S") ? View.VISIBLE : View.GONE));
         holder.product_count.setText(clients.getDIRECCION());
