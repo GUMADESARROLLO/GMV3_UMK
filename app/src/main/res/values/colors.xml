@@ -9,7 +9,7 @@
     <color name="overlay_dark_30">#4D000000</color>
     <color name="overlay_dark_40">#66000000</color>
     <color name="overlay_light_30">#4DFFFFFF</color>
-
+    <color name="purple_500">#9C27B0</color>
     <!--other color-->
     <color name="txt_price_color">#0AAC3A</color>
     <color name="ripple_color">#dfdfdf</color>
@@ -47,6 +47,25 @@
     <color name="grey_5">#f2f2f2</color>
     <color name="light_gray">#FAF9F9</color>
     <color name="grey_80">#37474F</color>
+    <color name="Dorado">#FFBF00</color>
+
+    <color name="colorTranfar">#7FFBFAFA</color>
+
+    <color name="orange_50">#FFF3E0</color>
+    <color name="orange_100">#FFE0B2</color>
+    <color name="orange_200">#FFCC80</color>
+    <color name="orange_300">#FFB74D</color>
+    <color name="orange_400">#FFA726</color>
+    <color name="orange_500">#FF9800</color>
+    <color name="orange_600">#FB8C00</color>
+    <color name="orange_700">#F57C00</color>
+    <color name="orange_800">#EF6C00</color>
+    <color name="orange_900">#E65100</color>
+    <color name="orange_A100">#FFD180</color>
+    <color name="orange_A200">#FFAB40</color>
+    <color name="orange_A400">#FF9100</color>
+    <color name="orange_A700">#FF6D00</color>
+
 
     <color name="deep_purple_500">#673AB7</color>
     <color name="grey_10">#e6e6e6</color>K

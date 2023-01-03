@@ -35,6 +35,8 @@ public class Constant {
     public static final String POST_RPT_RUTA = BASE_URL + "/api/api.php?post_rpt_ruta=";
     public static final String POST_HISTORICO_FACTURA = BASE_URL + "/api/api.php?post_historico_factura=";
 
+    public static final String GET_PLAN_CRECIMIENTO = BASE_URL + "/api/api.php?PLAN=";
+
     public static final String POST_REPORT = BASE_URL + "/api/api.php?post_report=";
     public static final String GET_COMENTARIOS_IM = BASE_URL + "/api/api.php?get_comentarios_im=";
 
