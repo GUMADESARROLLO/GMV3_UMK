@@ -25,6 +25,7 @@ import com.app.gmv3.activities.ActivityInteligenciaMercado;
 import com.app.gmv3.activities.ActivityEstadisticas;
 import com.app.gmv3.activities.ActivityReportes;
 import com.app.gmv3.activities.ActivitySettings;
+import com.app.gmv3.activities.ComisionActivity;
 import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.utilities.SharedPref;
 
@@ -93,6 +94,14 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityEstadisticas.class);
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.id_fragment_comisiones).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ComisionActivity.class);
                 startActivity(intent);
             }
         });

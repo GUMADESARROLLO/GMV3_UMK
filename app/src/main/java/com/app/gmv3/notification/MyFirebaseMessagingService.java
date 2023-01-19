@@ -25,7 +25,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Log.e(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
 
         //Calling method to generate notification
-        sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+        //sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
     }
 
     //This method is only generating push notification

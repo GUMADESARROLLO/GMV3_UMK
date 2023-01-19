@@ -3,6 +3,7 @@ package com.app.gmv3.activities;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,9 +25,13 @@ public class MyApplication extends Application {
         super.onCreate();
         mInstance = this;
 
-        OneSignal.startInit(this)
+         OneSignal.startInit(this)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
+
+        String strIdOneSignal = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
+
+        Log.e(TAG, "onCreate: " + strIdOneSignal );
 
     }
 

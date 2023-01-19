@@ -6,34 +6,40 @@ public class Constant {
 
     //API Transactions
     private static final String BASE_URL = Config.ADMIN_PANEL_URL;
-    public static final  String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_recent=";
-    public static final  String GET_BANNER = BASE_URL + "/api/api.php?get_banner";
-    public static final  String GET_NEWS = BASE_URL + "/api/api.php?get_news";
-    public static final  String GET_PRODUCT_ID = BASE_URL + "/api/api.php?product_id=";
-    public static final  String GET_CATEGORY = BASE_URL + "/api/api.php?get_category";
-    public static final  String GET_CATEGORY_DETAIL = BASE_URL + "/api/api.php?category_id=";
-    public static final  String GET_CLIENTS = BASE_URL + "/api/api.php?clients_id=";
-    public static final  String GET_HISTORY_LOTE = BASE_URL + "/api/api.php?get_history_lotes=";
+    private static final String API_COMMISIOENS= Config.API_COMMISIOENS;
 
-    public static final  String GET_STAT = BASE_URL + "/api/api.php?get_stat_ruta=";
-    public static final  String GET_STAT_RECUP = BASE_URL + "/api/api.php?stat_recup=";
-    public static final  String GET_STAT_ARTI = BASE_URL + "/api/api.php?get_stat_articulo=";
-    public static final  String GET_COMENTARIOS = BASE_URL + "/api/api.php?get_comentarios=";
+    public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_recent=";
+    public static final String GET_BANNER = BASE_URL + "/api/api.php?get_banner";
+    public static final String GET_NEWS = BASE_URL + "/api/api.php?get_news";
+    public static final String GET_PRODUCT_ID = BASE_URL + "/api/api.php?product_id=";
+    public static final String GET_CATEGORY = BASE_URL + "/api/api.php?get_category";
+    public static final String GET_CATEGORY_DETAIL = BASE_URL + "/api/api.php?category_id=";
+    public static final String GET_CLIENTS = BASE_URL + "/api/api.php?clients_id=";
+    public static final String GET_HISTORY_LOTE = BASE_URL + "/api/api.php?get_history_lotes=";
 
-    public static final  String GET_PROFIL_USER = BASE_URL + "/api/api.php?get_perfil_user=";
-    public static final  String PUSH_PIN = BASE_URL + "/api/api.php?push_pin=";
-    public static final  String GET_DETALLE_FACTURA = BASE_URL + "/api/api.php?get_detalle_factura=";
-    public static final  String GET_NC = BASE_URL + "/api/api.php?get_nc=";
-    public static final  String GET_LAST_3M = BASE_URL + "/api/api.php?last_3m=";
-    public static final  String GET_NO_FACTURADO = BASE_URL + "/api/api.php?articulos_sin_facturar=";
-    public static final  String GET_HELP = BASE_URL + "/api/api.php?get_help";
-    public static final  String GET_TAX_CURRENCY = BASE_URL + "/api/api.php?get_tax_currency";
-    public static final  String GET_SHIPPING = BASE_URL + "/api/api.php?get_shipping";
+    public static final String GET_STAT = BASE_URL + "/api/api.php?get_stat_ruta=";
+    public static final String GET_STAT_RECUP = BASE_URL + "/api/api.php?stat_recup=";
+    public static final String GET_STAT_ARTI = BASE_URL + "/api/api.php?get_stat_articulo=";
+    public static final String GET_COMENTARIOS = BASE_URL + "/api/api.php?get_comentarios=";
+
+    public static final String GET_PROFIL_USER = BASE_URL + "/api/api.php?get_perfil_user=";
+    public static final String PUSH_PIN = BASE_URL + "/api/api.php?push_pin=";
+    public static final String GET_DETALLE_FACTURA = BASE_URL + "/api/api.php?get_detalle_factura=";
+    public static final String GET_NC = BASE_URL + "/api/api.php?get_nc=";
+    public static final String GET_LAST_3M = BASE_URL + "/api/api.php?last_3m=";
+    public static final String GET_NO_FACTURADO = BASE_URL + "/api/api.php?articulos_sin_facturar=";
+    public static final String GET_HELP = BASE_URL + "/api/api.php?get_help";
+    public static final String GET_TAX_CURRENCY = BASE_URL + "/api/api.php?get_tax_currency";
+    public static final String GET_SHIPPING = BASE_URL + "/api/api.php?get_shipping";
 
     public static final String POST_ORDER = BASE_URL + "/api/api.php?post_order";
     public static final String POST_VERIFICACION = BASE_URL + "/api/api.php?post_verificacion";
     public static final String POST_RPT_RUTA = BASE_URL + "/api/api.php?post_rpt_ruta=";
     public static final String POST_HISTORICO_FACTURA = BASE_URL + "/api/api.php?post_historico_factura=";
+
+    public static final String GET_PLAN_CRECIMIENTO = BASE_URL + "/api/api.php?PLAN=";
+    public static final String GET_COMISION = API_COMMISIOENS + "/api/getcomision/";
+
 
     public static final String POST_REPORT = BASE_URL + "/api/api.php?post_report=";
     public static final String GET_COMENTARIOS_IM = BASE_URL + "/api/api.php?get_comentarios_im=";

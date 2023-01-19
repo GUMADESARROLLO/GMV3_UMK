@@ -2,6 +2,7 @@ package com.app.gmv3.adapters;
 
 import android.content.Context;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,8 @@ public class AdapterPerfilRuta extends RecyclerView.Adapter<AdapterPerfilRuta.Vi
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         final FacturasMoras Factura = Lista_Factura_mora.get(position);
+
+        //Log.e("TAG_ERROR", "ID: " + Factura.getFactura_id() + " Mnt: "+  Factura.getFactura_monto() );
 
         String price = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Factura.getFactura_cant()));
         String Monto = String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Factura.getFactura_monto()));

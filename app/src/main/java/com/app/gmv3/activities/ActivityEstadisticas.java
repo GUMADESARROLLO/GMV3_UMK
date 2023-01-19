@@ -429,7 +429,9 @@ public class ActivityEstadisticas extends AppCompatActivity {
                         tmp.setFactura_cant(row.get(4));
                         tmp.setFactura_date(row.get(5));
                         tmp.setFactura_monto(row.get(6));
-                        Lista_Factura_mora.add(tmp);
+
+                        Log.e("TAG_error", "onResponse: "+ Lista_Factura_mora );
+                        //Lista_Factura_mora.add(tmp);
 
 
 
