@@ -14,6 +14,11 @@ public class Clients {
     String VERIFICADO;
     String PIN;
     String vineta;
+    String PLAN;
+
+    public String getPLAN() {
+        return PLAN;
+    }
 
     public String getPIN() {
         return PIN;

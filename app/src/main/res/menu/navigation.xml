@@ -11,6 +11,7 @@
         android:icon="@drawable/ic_clients"
         android:title="@string/title_nav_category" />
     <item
+        android:visible="false"
         android:id="@+id/nav_promo"
         android:icon="@drawable/ic_campaign"
         android:title="@string/title_nav_promo" />

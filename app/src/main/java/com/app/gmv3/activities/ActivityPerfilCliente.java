@@ -74,7 +74,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
     AdapterPerfilLotes myAdapter;
     //List<Facturas_mora> arrayItemLotes;
     CircleImageView ImgVerication;
-    String strVerificado,strPin,strDireccion;
+    String strVerificado,strPin,strDireccion, StrPlan;
 
     CardView cardView ;
 
@@ -177,10 +177,13 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
         strVerificado   = intent.getStringExtra("Verificado");
         strPin          = intent.getStringExtra("pin");
-        strDireccion =  intent.getStringExtra("Direccion");
+        strDireccion    =  intent.getStringExtra("Direccion");
+
+        StrPlan         = intent.getStringExtra("PLAN");
 
         code_cliente = intent.getStringExtra("Client_Code");
         str_moroso = intent.getStringExtra("moroso");
+
         String Nombre_Cliente = code_cliente.concat(" - ").concat(intent.getStringExtra("CLient_name"));
         txt_perfil_name_cliente.setText(Nombre_Cliente);
         txt_tele.setText(intent.getStringExtra("Telefono"));
@@ -225,6 +228,20 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityPerfilCliente.this, ActivityHistoricoFactura.class);
+                intent.putExtra("cod_cliente",code_cliente);
+                intent.putExtra("factura_id",code_cliente);
+                intent.putExtra("Name_cliente",txt_perfil_name_cliente.getText());
+
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.id_plan_crecimiento).setVisibility((StrPlan.equals("S") ? View.VISIBLE : View.GONE));
+
+        findViewById(R.id.id_plan_crecimiento).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityPlanCrecimiento.class);
                 intent.putExtra("cod_cliente",code_cliente);
                 intent.putExtra("factura_id",code_cliente);
                 intent.putExtra("Name_cliente",txt_perfil_name_cliente.getText());
