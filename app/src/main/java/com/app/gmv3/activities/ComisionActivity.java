@@ -5,7 +5,6 @@ import static com.app.gmv3.utilities.Constant.GET_COMISION;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import com.app.gmv3.utilities.Constant;
 import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.Utils;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -35,11 +33,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.app.gmv3.utilities.Constant.GET_PLAN_CRECIMIENTO;
 public class ComisionActivity extends AppCompatActivity {
     PieChart chart;
     String RUTA;
@@ -101,6 +97,7 @@ public class ComisionActivity extends AppCompatActivity {
 
 
         TabLayout tab_layout = findViewById(R.id.tab_layout);
+
         tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -186,96 +183,90 @@ public class ComisionActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-
-                String strRuta = params[0];
+            String strRuta = params[0];
 
 
-                JsonArrayRequest request = new JsonArrayRequest(GET_COMISION + strRuta, new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (response == null) {
-                            Toast.makeText(getApplicationContext(), R.string.failed_fetch_data, Toast.LENGTH_LONG).show();
-                            return;
-                        }
-
-
-                        try {
-                            if (response != null) {
-
-
-                                JSONObject Listas   = new JSONObject(response.getJSONObject(0).getString("Comision_de_venta"));
-
-                                String str01 = Listas.getString("Lista80");
-                                str01 = str01.substring(1, str01.length() - 1);
-                                String[] LISTA80      = str01.split(",");
-
-                                String str02 = Listas.getString("Lista20");
-                                str02 = str02.substring(1, str02.length() - 1);
-                                String[] LISTA20      = str02.split(",");
-
-                                String str03 = Listas.getString("Total");
-                                str03 = str03.substring(1, str03.length() - 1);
-                                String[] TTLISTA      = str03.split(",");
-
-
-                                String Totales_finales       = response.getJSONObject(0).getString("Totales_finales") ;
-                                Totales_finales              = Totales_finales.substring(1, Totales_finales.length() - 1).replace('"',' ');
-                                String[] TotalesFinales      = Totales_finales.split(",");
-
-                                String Total_Compensacion    = response.getJSONObject(0).getString("Total_Compensacion") ;
-
-                                total_comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Total_Compensacion))));
-                                comision_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
-
-                                SKU_Lista_80        = LISTA80[0];
-                                SKU_Lista_20        = LISTA20[0];
-
-                                TAB_lista80_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[1].substring(1, LISTA80[1].length() - 1))));
-                                TAB_lista20_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[1].substring(1, LISTA20[1].length() - 1))));
-
-                                TAB_lista80_fact    = LISTA80[2].concat(" %");
-                                TAB_lista20_fact    = LISTA20[2].concat(" %");
-
-                                TAB_lista80_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[3].substring(1, LISTA80[3].length() - 1))));
-                                TAB_lista20_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[3].substring(1, LISTA20[3].length() - 1))));
-
-
-                                Comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
-                                ItemFact.setText(TTLISTA[0]);
-
-                                cliente_promedio.setText(TotalesFinales[4].concat(" Prom."));
-                                cliente_meta.setText(TotalesFinales[5].concat(" Meta"));
-                                clientes_faturados.setText(TotalesFinales[6].concat(" Fact."));
-
-                                cliente_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TotalesFinales[2].substring(1, TotalesFinales[2].length() - 1)))));
-                                cliente_prom.setText(TotalesFinales[3].concat(" %"));
-
-
-
-
-                            }
-                        } catch (JSONException e) {
-                            Log.e("TAG_error", "ErrorWAY: " + e.getMessage() );
-                            e.printStackTrace();
-                        }
-
-
+            JsonArrayRequest request = new JsonArrayRequest(GET_COMISION + strRuta, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    if (response == null) {
+                        Toast.makeText(getApplicationContext(), R.string.failed_fetch_data, Toast.LENGTH_LONG).show();
+                        return;
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error in getting json
-                        Log.e("INFO", "Error: " + error.getMessage());
-                        Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                    try {
+                        if (response != null) {
+
+
+                            JSONObject Listas   = new JSONObject(response.getJSONObject(0).getString("Comision_de_venta"));
+
+                            String str01 = Listas.getString("Lista80");
+                            str01 = str01.substring(1, str01.length() - 1);
+                            String[] LISTA80      = str01.split(",");
+
+                            String str02 = Listas.getString("Lista20");
+                            str02 = str02.substring(1, str02.length() - 1);
+                            String[] LISTA20      = str02.split(",");
+
+                            String str03 = Listas.getString("Total");
+                            str03 = str03.substring(1, str03.length() - 1);
+                            String[] TTLISTA      = str03.split(",");
+
+
+                            String Totales_finales       = response.getJSONObject(0).getString("Totales_finales") ;
+                            Totales_finales              = Totales_finales.substring(1, Totales_finales.length() - 1).replace('"',' ');
+                            String[] TotalesFinales      = Totales_finales.split(",");
+
+                            String Total_Compensacion    = response.getJSONObject(0).getString("Total_Compensacion") ;
+
+                            total_comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Total_Compensacion))));
+                            comision_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
+
+                            SKU_Lista_80        = LISTA80[0];
+                            SKU_Lista_20        = LISTA20[0];
+
+                            TAB_lista80_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[1].substring(1, LISTA80[1].length() - 1))));
+                            TAB_lista20_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[1].substring(1, LISTA20[1].length() - 1))));
+
+                            TAB_lista80_fact    = LISTA80[2].concat(" %");
+                            TAB_lista20_fact    = LISTA20[2].concat(" %");
+
+                            TAB_lista80_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[3].substring(1, LISTA80[3].length() - 1))));
+                            TAB_lista20_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[3].substring(1, LISTA20[3].length() - 1))));
+
+
+                            Comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
+                            ItemFact.setText(TTLISTA[0]);
+
+                            cliente_promedio.setText(TotalesFinales[4].concat(" Prom."));
+                            cliente_meta.setText(TotalesFinales[5].concat(" Meta"));
+                            clientes_faturados.setText(TotalesFinales[6].concat(" Fact."));
+
+                            cliente_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TotalesFinales[2].substring(1, TotalesFinales[2].length() - 1)))));
+                            cliente_prom.setText(TotalesFinales[3].concat(" %"));
+
+
+
+
+                        }
+                    } catch (JSONException e) {
+                        Log.e("TAG_error", "ErrorWAY: " + e.getMessage() );
+                        e.printStackTrace();
                     }
-                });
 
-                MyApplication.getInstance().addToRequestQueue(request);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // error in getting json
+                    Log.e("INFO", "Error: " + error.getMessage());
+                    Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            MyApplication.getInstance().addToRequestQueue(request);
 
 
 

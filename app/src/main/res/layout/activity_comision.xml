@@ -73,7 +73,15 @@
                             android:textSize="10dp"
                             android:textStyle="bold" />
 
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            app:srcCompat="@drawable/ic_person" />
+
                     </LinearLayout>
+
+
 
                 </androidx.cardview.widget.CardView>
 
