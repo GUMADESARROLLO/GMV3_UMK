@@ -97,6 +97,7 @@ public class ComisionActivity extends AppCompatActivity {
 
 
         TabLayout tab_layout = findViewById(R.id.tab_layout);
+        tab_layout.getTabAt(0).select();
 
         tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -245,6 +246,11 @@ public class ComisionActivity extends AppCompatActivity {
 
                             cliente_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TotalesFinales[2].substring(1, TotalesFinales[2].length() - 1)))));
                             cliente_prom.setText(TotalesFinales[3].concat(" %"));
+
+                            txtSKUs.setText(SKU_Lista_80);
+                            txtValor.setText(TAB_lista80_valor);
+                            txtFactor.setText(TAB_lista80_fact);
+                            txtComisio.setText(TAB_lista80_comi);
 
 
 
