@@ -24,7 +24,7 @@ android {
     defaultConfig {
         applicationId 'com.app.unimark.gmv3'
 
-        manifestPlaceholders = [onesignal_app_id               : "8c930eb0-918b-4226-a78f-ee8b14ca341f",
+        manifestPlaceholders = [onesignal_app_id               : "c024a830-3ace-4c50-bed5-2ae34212aa8a",
 
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]

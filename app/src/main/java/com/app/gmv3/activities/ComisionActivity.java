@@ -3,13 +3,21 @@ package com.app.gmv3.activities;
 import static com.app.gmv3.utilities.Constant.GET_COMISION;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,15 +34,20 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.google.android.material.tabs.TabLayout;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class ComisionActivity extends AppCompatActivity {
     PieChart chart;
@@ -55,11 +68,15 @@ public class ComisionActivity extends AppCompatActivity {
     TextView clientes_faturados;
     TextView cliente_bono;
     TextView cliente_prom;
+    TextView txt_salario_base;
 
     String SKU_Lista_80,SKU_Lista_20;
     String TAB_lista80_valor,TAB_lista20_valor;
     String TAB_lista80_fact,TAB_lista20_fact;
     String TAB_lista80_comi,TAB_lista20_comi;
+
+    int nMonth;
+    int nYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +84,6 @@ public class ComisionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comision);
         chart = findViewById(R.id.chart1);
         iniComponent();
-
-        showPieChart();
 
         sharedPref = new SharedPref(this);
         RUTA = sharedPref.getYourName();
@@ -79,6 +94,17 @@ public class ComisionActivity extends AppCompatActivity {
         }
     }
     private void iniComponent() {
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        setSupportActionBar(toolbar);
+        sharedPref = new SharedPref(this);
+
+        getSupportActionBar().setTitle(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         cliente_promedio    = findViewById(R.id.id_cliente_promedio);
         cliente_meta        = findViewById(R.id.id_cliente_meta);
@@ -94,6 +120,13 @@ public class ComisionActivity extends AppCompatActivity {
         txtComisio          = findViewById(R.id.id_comision);
         Comision            = findViewById(R.id.Comisiones);
         ItemFact            = findViewById(R.id.ItemFact);
+        txt_salario_base    = findViewById(R.id.id_txt_salario_base);
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+        nYear = calendar.get(Calendar.YEAR);
+        nMonth = calendar.get(Calendar.MONTH) + 1;
+
 
 
         TabLayout tab_layout = findViewById(R.id.tab_layout);
@@ -128,20 +161,29 @@ public class ComisionActivity extends AppCompatActivity {
             }
         });
     }
-    private void showPieChart(){
+    private void showPieChart(String valor){
+
+        int promedio = Math.round(Float.parseFloat(valor));
+
+        Log.e("TAG_error", "showPieChart: "+promedio );
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
         String label = "type";
 
         //initializing data
         Map<String, Integer> typeAmountMap = new HashMap<>();
-        typeAmountMap.put("80%",80);
-        typeAmountMap.put("20%",20);
-
-        //initializing colors for the entries
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#304567"));
-        colors.add(Color.parseColor("#309967"));
+        if ( promedio>= 100 ){
+            typeAmountMap.put(valor.concat("%"),promedio);
+            colors.add(Color.parseColor("#309967"));
+        }else{
+            int vlDiff = 100 - promedio;
+            typeAmountMap.put(valor.concat("%"),promedio);
+            typeAmountMap.put(String.valueOf(vlDiff).concat("%"),vlDiff);
+            colors.add(Color.parseColor("#304567"));
+            colors.add(Color.parseColor("#309967"));
+        }
+
 
         //input data and fit data into pie chart entry
         for(String type: typeAmountMap.keySet()){
@@ -167,6 +209,55 @@ public class ComisionActivity extends AppCompatActivity {
         chart.invalidate();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.item_calendar:
+                dialogDatePickerLight();
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    private void dialogDatePickerLight() {
+        //Calendar cur_calender = Calendar.getInstance();
+        DatePickerDialog datePicker = DatePickerDialog.newInstance(
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        nMonth= monthOfYear + 1 ;
+                        nYear = year;
+
+                        new MyTaskLoginNormal().execute(RUTA);
+                    }
+                }
+        );
+        //set dark light
+        datePicker.setThemeDark(false);
+        datePicker.setAccentColor(getResources().getColor(R.color.colorPrimary));
+        datePicker.show(getFragmentManager(), "Datepickerdialog");
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_comision, menu);
+        return true;
+    }
+
 
     private class MyTaskLoginNormal extends AsyncTask<String, Void, String> {
 
@@ -187,7 +278,7 @@ public class ComisionActivity extends AppCompatActivity {
             String strRuta = params[0];
 
 
-            JsonArrayRequest request = new JsonArrayRequest(GET_COMISION + strRuta, new Response.Listener<JSONArray>() {
+            JsonArrayRequest request = new JsonArrayRequest(GET_COMISION + strRuta.concat("/").concat(String.valueOf(nMonth)).concat("/").concat(String.valueOf(nYear)) , new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     if (response == null) {
@@ -220,6 +311,8 @@ public class ComisionActivity extends AppCompatActivity {
                             String[] TotalesFinales      = Totales_finales.split(",");
 
                             String Total_Compensacion    = response.getJSONObject(0).getString("Total_Compensacion") ;
+                            String Total_Promedio        = response.getJSONObject(0).getString("VntPromedio") ;
+                            String SalarioBasico         = response.getJSONObject(0).getString("Salariobasico") ;
 
                             total_comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Total_Compensacion))));
                             comision_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
@@ -251,6 +344,9 @@ public class ComisionActivity extends AppCompatActivity {
                             txtValor.setText(TAB_lista80_valor);
                             txtFactor.setText(TAB_lista80_fact);
                             txtComisio.setText(TAB_lista80_comi);
+
+                            showPieChart(Total_Promedio);
+                            txt_salario_base.setText(("Salario Garantizado: C$ ").concat(SalarioBasico));
 
 
 
