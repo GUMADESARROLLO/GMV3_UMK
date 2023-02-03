@@ -1,7 +1,9 @@
 package com.app.gmv3.activities;
 
+import static com.app.gmv3.utilities.Constant.GET_RECIBOS_COLECTOR;
 import static com.app.gmv3.utilities.Constant.POST_ADJUNTOS;
 import static com.app.gmv3.utilities.Constant.GET_RECIBOS_ADJUNTO;
+import static com.app.gmv3.utilities.Constant.POST_ANULAR_RECIBO;
 
 
 import androidx.appcompat.app.ActionBar;
@@ -25,6 +27,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +44,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -56,12 +60,14 @@ import com.android.volley.toolbox.Volley;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.adapters.RecibosAdapter;
+import com.app.gmv3.models.ItemHistorico;
 import com.app.gmv3.models.ItemRecibosAttach;
 import com.app.gmv3.models.ItemsAttach;
 import com.app.gmv3.utilities.Constant;
 import com.app.gmv3.utilities.ImageTransformation;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onesignal.OneSignal;
 
 import org.json.JSONArray;
 
@@ -214,7 +220,6 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 listaBase64Imagenes.clear();
-                String[] imagenesr = new String[listaImagenes.size()];
                 for(int i = 0 ; i < listaImagenes.size() ; i++) {
                     try {
                         InputStream is = getContentResolver().openInputStream(listaImagenes.get(i));
@@ -223,17 +228,14 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
                         String cadena = convertirUriToBase64(bitmap);
 
-                        imagenesr[i] = cadena;
-                        //enviarImagenes("nomIma"+i, imagenesr);
+                        enviarImagenes("nomIma"+i, cadena);
 
                         bitmap.recycle();
 
                     } catch (IOException e) { }
 
                 }
-                enviarImagenes(imagenesr);
             }
-
         });
         builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);
         builder.setCancelable(false);
@@ -264,7 +266,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-    public void enviarImagenes(final String[] imagenesr) {
+    public void enviarImagenes(final String nombre, final String cadena) {
 
 
 
@@ -272,9 +274,9 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         progressDialog.setMessage(getString(R.string.post_submit_msg));
         progressDialog.show();
 
-        final RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_ADJUNTOS,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_ADJUNTOS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -298,11 +300,11 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new Hashtable<String, String>();
-                for( int i =0; i<imagenesr.length; i++ ){
-                    params.put("params_", String.valueOf(imagenesr));
-                }
+                params.put("nom", nombre);
+                params.put("imagenes", cadena);
                 params.put("Id_Recibo", _idRecibo);
-                return (Map<String, String>) params;
+
+                return params;
             }
         };
 
@@ -317,38 +319,12 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
 
-                if (data.getClipData() != null) {
-                    int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
-                    for (int i = 0; i < count; i++) {
+            if (data.getClipData() != null) {
+                int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                for (int i = 0; i < count; i++) {
 
-                        Uri returnUri = data.getClipData().getItemAt(i).getUri();
+                    Uri returnUri = data.getClipData().getItemAt(i).getUri();
 
-                        Cursor returnCursor = getContentResolver().query(returnUri, null, null, null, null);
-                        int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                        int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
-                        returnCursor.moveToFirst();
-
-                        System.out.println("PIYUSH NAME IS" + returnCursor.getString(nameIndex));
-                        System.out.println("PIYUSH SIZE IS" + Long.toString(returnCursor.getLong(sizeIndex)));
-
-                        Log.e("TAG_", "PIYUSH NAME IS " + returnCursor.getString(nameIndex) );
-                        Log.e("TAG_", "PIYUSH SIZE IS " + Long.toString(returnCursor.getLong(sizeIndex)) );
-
-                        ItemRecibosAttach itemRecibosAttach = new ItemRecibosAttach();
-                        itemRecibosAttach.setImageName(returnCursor.getString(nameIndex));
-                        itemRecibosAttach.setImageID(returnUri.toString());
-                        itemRecibosAttach.setmDelete(true);
-                        newAttachmentList.add(itemRecibosAttach);
-
-                        listaImagenes.add(returnUri);
-
-                    }
-
-                } else if (data.getData() != null) {
-
-
-
-                    Uri returnUri = data.getData();
                     Cursor returnCursor = getContentResolver().query(returnUri, null, null, null, null);
                     int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
                     int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
@@ -369,6 +345,32 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
                     listaImagenes.add(returnUri);
 
                 }
+
+            } else if (data.getData() != null) {
+
+
+
+                Uri returnUri = data.getData();
+                Cursor returnCursor = getContentResolver().query(returnUri, null, null, null, null);
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+                returnCursor.moveToFirst();
+
+                System.out.println("PIYUSH NAME IS" + returnCursor.getString(nameIndex));
+                System.out.println("PIYUSH SIZE IS" + Long.toString(returnCursor.getLong(sizeIndex)));
+
+                Log.e("TAG_", "PIYUSH NAME IS " + returnCursor.getString(nameIndex) );
+                Log.e("TAG_", "PIYUSH SIZE IS " + Long.toString(returnCursor.getLong(sizeIndex)) );
+
+                ItemRecibosAttach itemRecibosAttach = new ItemRecibosAttach();
+                itemRecibosAttach.setImageName(returnCursor.getString(nameIndex));
+                itemRecibosAttach.setImageID(returnUri.toString());
+                itemRecibosAttach.setmDelete(true);
+                newAttachmentList.add(itemRecibosAttach);
+
+                listaImagenes.add(returnUri);
+
+            }
 
             generateNewAttachmentList(newAttachmentList);
         }
