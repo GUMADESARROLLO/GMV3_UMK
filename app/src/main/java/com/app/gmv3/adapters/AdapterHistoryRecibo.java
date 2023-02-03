@@ -251,7 +251,7 @@ public class AdapterHistoryRecibo extends RecyclerView.Adapter<AdapterHistoryRec
         holder.product_date.setText(prettyTime.format(new Date(timeAgo)));
         holder.product_autor.setText(items.getmRecibo());
         holder.txt_total_order.setText(items.getmOrderTotal());
-        holder.txt_status.setText(("Adjuntar"));
+        holder.txt_status.setText(("Adjun."));
         holder.txt_comentario.setText(items.getmComentario());
         holder.txt_coment_anulacion.setText(items.getmComment_anul());
 
