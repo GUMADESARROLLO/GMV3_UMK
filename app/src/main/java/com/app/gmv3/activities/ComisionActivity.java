@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.R;
+import com.app.gmv3.models.NotasDeCreadito;
 import com.app.gmv3.utilities.Constant;
 import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.Utils;
@@ -58,6 +59,7 @@ public class ComisionActivity extends AppCompatActivity {
     TextView comision_bono;
     TextView txtSKUs;
     TextView txtValor;
+    TextView txtNC;
     TextView txtFactor;
     TextView txtComisio;
     TextView Comision;
@@ -70,10 +72,15 @@ public class ComisionActivity extends AppCompatActivity {
     TextView cliente_prom;
     TextView txt_salario_base;
 
+    TextView txt_ttNotaCredito;
+
+
+
     String SKU_Lista_80,SKU_Lista_20;
     String TAB_lista80_valor,TAB_lista20_valor;
     String TAB_lista80_fact,TAB_lista20_fact;
     String TAB_lista80_comi,TAB_lista20_comi;
+    String TAB_NC_80,TAB_NC_20;
 
     int nMonth;
     int nYear;
@@ -116,11 +123,15 @@ public class ComisionActivity extends AppCompatActivity {
         total_comision      = findViewById(R.id.id_total_commision);
         txtSKUs             = findViewById(R.id.id_skus);
         txtValor            = findViewById(R.id.id_valor);
+        txtNC               = findViewById(R.id.id_nota_credito);
         txtFactor           = findViewById(R.id.id_factor);
         txtComisio          = findViewById(R.id.id_comision);
         Comision            = findViewById(R.id.Comisiones);
         ItemFact            = findViewById(R.id.ItemFact);
         txt_salario_base    = findViewById(R.id.id_txt_salario_base);
+        txt_ttNotaCredito   = findViewById(R.id.ttNotaCredito);
+
+
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
@@ -138,11 +149,13 @@ public class ComisionActivity extends AppCompatActivity {
                 if (tab.getPosition() == 0) {
                     txtSKUs.setText(SKU_Lista_80);
                     txtValor.setText(TAB_lista80_valor);
+                    txtNC.setText(TAB_NC_80);
                     txtFactor.setText(TAB_lista80_fact);
                     txtComisio.setText(TAB_lista80_comi);
                 } else if (tab.getPosition() == 1) {
                     txtSKUs.setText(SKU_Lista_20);
                     txtValor.setText(TAB_lista20_valor);
+                    txtNC.setText(TAB_NC_20);
                     txtFactor.setText(TAB_lista20_fact);
                     txtComisio.setText(TAB_lista20_comi);
                 }
@@ -242,6 +255,31 @@ public class ComisionActivity extends AppCompatActivity {
                         nMonth= monthOfYear + 1 ;
                         nYear = year;
 
+                        getSupportActionBar().setTitle("Calculando ...");
+
+                        Comision.setText("...");
+                        ItemFact.setText("...");
+
+                        total_comision.setText("...");
+                        comision_bono.setText("...");
+
+                        cliente_promedio.setText("...");
+                        cliente_meta.setText("...");
+                        clientes_faturados.setText("...");
+
+                        cliente_bono.setText("...");
+                        cliente_prom.setText("...");
+
+                        txtSKUs.setText("...");
+                        txtValor.setText("...");
+                        txtFactor.setText("...");
+                        txtComisio.setText("...");
+
+                        txtNC.setText("...");
+                        txt_ttNotaCredito.setText("...");
+
+                        txt_salario_base.setText(("Salario Garantizado: C$ --"));
+
                         new MyTaskLoginNormal().execute(RUTA);
                     }
                 }
@@ -276,6 +314,8 @@ public class ComisionActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String strRuta = params[0];
+
+
 
 
             JsonArrayRequest request = new JsonArrayRequest(GET_COMISION + strRuta.concat("/").concat(String.valueOf(nMonth)).concat("/").concat(String.valueOf(nYear)) , new Response.Listener<JSONArray>() {
@@ -314,6 +354,12 @@ public class ComisionActivity extends AppCompatActivity {
                             String Total_Promedio        = response.getJSONObject(0).getString("VntPromedio") ;
                             String SalarioBasico         = response.getJSONObject(0).getString("Salariobasico") ;
 
+                            Double strNotaCredito80    = response.getJSONObject(0).getDouble("NotaCredito_val80");
+                            Double strNotaCredito20        = response.getJSONObject(0).getDouble("NotaCredito_val20") ;
+                            Double strttNotaCredito80         = response.getJSONObject(0).getDouble("NotaCredito_total") ;
+
+                            getSupportActionBar().setTitle(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
+
                             total_comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Total_Compensacion))));
                             comision_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
 
@@ -328,6 +374,10 @@ public class ComisionActivity extends AppCompatActivity {
 
                             TAB_lista80_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[3].substring(1, LISTA80[3].length() - 1))));
                             TAB_lista20_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[3].substring(1, LISTA20[3].length() - 1))));
+
+                            TAB_NC_80 = (("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", strNotaCredito80)));
+                            TAB_NC_20 = (("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", strNotaCredito20)));
+                            txt_ttNotaCredito.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", strttNotaCredito80)));
 
 
                             Comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));

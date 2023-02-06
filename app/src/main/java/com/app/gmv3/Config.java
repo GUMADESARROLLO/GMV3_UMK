@@ -9,6 +9,8 @@ public class Config {
 
     public static final String API_COMMISIOENS = "http://sac.186.1.15.164.sslip.io";
 
+    //public static final String API_COMMISIOENS = "http://192.168.1.139:8448/SAC";
+
     //set false if you want price to be displayed in decimal
     public static final boolean ENABLE_DECIMAL_ROUNDING = false;
 
