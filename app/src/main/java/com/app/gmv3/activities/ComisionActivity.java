@@ -92,13 +92,9 @@ public class ComisionActivity extends AppCompatActivity {
         chart = findViewById(R.id.chart1);
         iniComponent();
 
-        sharedPref = new SharedPref(this);
-        RUTA = sharedPref.getYourName();
 
-        if (Utils.isNetworkAvailable(this)) {
 
-            new MyTaskLoginNormal().execute(RUTA);
-        }
+
     }
     private void iniComponent() {
 
@@ -107,9 +103,11 @@ public class ComisionActivity extends AppCompatActivity {
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
         sharedPref = new SharedPref(this);
+        RUTA = sharedPref.getYourName();
 
         getSupportActionBar().setTitle(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
 
@@ -138,6 +136,10 @@ public class ComisionActivity extends AppCompatActivity {
         nYear = calendar.get(Calendar.YEAR);
         nMonth = calendar.get(Calendar.MONTH) + 1;
 
+        if (Utils.isNetworkAvailable(this)) {
+
+            new MyTaskLoginNormal().execute(RUTA);
+        }
 
 
         TabLayout tab_layout = findViewById(R.id.tab_layout);
