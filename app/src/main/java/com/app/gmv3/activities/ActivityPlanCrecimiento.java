@@ -2,6 +2,7 @@ package com.app.gmv3.activities;
 
 
 import static com.app.gmv3.utilities.Constant.GET_PLAN_CRECIMIENTO;
+import static com.app.gmv3.utilities.Constant.POST_RPT_RUTA;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -61,6 +62,9 @@ public class ActivityPlanCrecimiento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_crecimiento);
+
+        sharedPref = new SharedPref(this);
+        RUTA = sharedPref.getYourName();
 
         initToolbar();
         iniComponent();
@@ -172,8 +176,7 @@ public class ActivityPlanCrecimiento extends AppCompatActivity {
             new MyTaskLoginNormal().execute(code_cliente);
         }
 
-        sharedPref = new SharedPref(this);
-        RUTA = sharedPref.getYourName();
+
     }
 
 
@@ -214,7 +217,10 @@ public class ActivityPlanCrecimiento extends AppCompatActivity {
                 String strCliente = params[0];
 
 
-                JsonArrayRequest request = new JsonArrayRequest(GET_PLAN_CRECIMIENTO + strCliente.concat("@").concat(RUTA), new Response.Listener<JSONArray>() {
+
+
+
+                JsonArrayRequest request = new JsonArrayRequest(GET_PLAN_CRECIMIENTO + strCliente + "&RUTA=" + RUTA, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         if (response == null) {
