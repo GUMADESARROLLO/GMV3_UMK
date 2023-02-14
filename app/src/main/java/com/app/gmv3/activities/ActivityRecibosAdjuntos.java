@@ -131,7 +131,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
     }
 
     private void getAdjuntos() {
-        JsonArrayRequest request = new JsonArrayRequest(GET_RECIBOS_ADJUNTO + _idRecibo, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(GET_RECIBOS_ADJUNTO + "/" + _idRecibo, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
@@ -147,7 +147,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
                     ItemRecibosAttach itemRecibosAttach = new ItemRecibosAttach();
                     itemRecibosAttach.setImageName(items.get(i).getmNombreImagen());
-                    itemRecibosAttach.setImageID(Config.ADMIN_PANEL_URL + "/upload/recibos/" + items.get(i).getmNombreImagen());
+                    itemRecibosAttach.setImageID(items.get(i).getImagen_url());
                     itemRecibosAttach.setmDelete(false);
                     newAttachmentList.add(itemRecibosAttach);
                 }
@@ -270,6 +270,7 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
 
 
+
         progressDialog.setTitle(getString(R.string.post_submit_title));
         progressDialog.setMessage(getString(R.string.post_submit_msg));
         progressDialog.show();
@@ -330,15 +331,11 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
                     int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
                     returnCursor.moveToFirst();
 
-                    System.out.println("PIYUSH NAME IS" + returnCursor.getString(nameIndex));
-                    System.out.println("PIYUSH SIZE IS" + Long.toString(returnCursor.getLong(sizeIndex)));
-
-                    Log.e("TAG_", "PIYUSH NAME IS " + returnCursor.getString(nameIndex) );
-                    Log.e("TAG_", "PIYUSH SIZE IS " + Long.toString(returnCursor.getLong(sizeIndex)) );
 
                     ItemRecibosAttach itemRecibosAttach = new ItemRecibosAttach();
                     itemRecibosAttach.setImageName(returnCursor.getString(nameIndex));
                     itemRecibosAttach.setImageID(returnUri.toString());
+
                     itemRecibosAttach.setmDelete(true);
                     newAttachmentList.add(itemRecibosAttach);
 

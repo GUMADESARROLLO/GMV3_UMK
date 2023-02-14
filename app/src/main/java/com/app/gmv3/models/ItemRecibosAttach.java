@@ -6,6 +6,16 @@ import android.os.Parcelable;
 public class ItemRecibosAttach implements Parcelable {
     private String imageName;
     private String imageID;
+    private String imagen_url;
+
+    public void setImagen_url(String imagen_url) {
+        this.imagen_url = imagen_url;
+    }
+    public String getImagen_url() {
+        return imagen_url;
+    }
+
+
 
     private boolean mDelete;
 

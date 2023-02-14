@@ -4,6 +4,11 @@ public class ItemsAttach {
     String mId;
     String mRecibo;
     String mNombreImagen;
+    private String imagen_url;
+
+    public String getImagen_url() {
+        return imagen_url;
+    }
 
     public String getmId() {
         return mId;

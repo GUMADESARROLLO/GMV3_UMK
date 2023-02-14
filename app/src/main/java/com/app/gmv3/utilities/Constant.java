@@ -37,12 +37,8 @@ public class Constant {
     public static final String POST_RPT_RUTA = BASE_URL + "/api/api.php?post_rpt_ruta=";
     public static final String POST_HISTORICO_FACTURA = BASE_URL + "/api/api.php?post_historico_factura=";
 
-    public static final String GET_PLAN_CRECIMIENTO = BASE_URL + "/api/api_dev.php?PLAN=";
-    public static final String GET_COMISION = API_COMMISIOENS + "/api/getcomision/";
 
 
-    public static final String POST_REPORT = BASE_URL + "/api/api.php?post_report=";
-    public static final String GET_COMENTARIOS_IM = BASE_URL + "/api/api.php?get_comentarios_im=";
 
     public static final String POST_UDAPTE_DATOS = BASE_URL + "/api/api.php?post_update_datos";
 
@@ -74,10 +70,19 @@ public class Constant {
     //RUTAS QUE TIENE QUE VER CON RECIBOS COLECTOR
     public static final String POST_ORDER_RECIBO = BASE_URL + "/api/api.php?post_order_recibo";
     public static final String GET_RECIBOS_COLECTOR = BASE_URL + "/api/api.php?get_recibos_colector=";
-    public static final String GET_RECIBOS_ADJUNTO = BASE_URL + "/api/api.php?get_recibos_adjuntos=";
     public static final String DEL_RECIBO_COLECTOR = BASE_URL + "/api/api.php?del_recibo_colector";
-    public static final String POST_ADJUNTOS = BASE_URL + "/api/api.php?post_adjunto=";
     public static final String POST_ANULAR_RECIBO = BASE_URL + "/api/api.php?recibo_anular=";
+
+    // RECIENTEMENTE MODIFICADAS
+    public static final String GET_PLAN_CRECIMIENTO = BASE_URL + "/api/api.php?PLAN=";
+    public static final String GET_COMISION = API_COMMISIOENS + "/api/getcomision/";
+    //public static final String POST_ADJUNTOS = BASE_URL + "/api/api.php?post_adjunto=";
+    public static final String POST_ADJUNTOS = API_COMMISIOENS + "/api/post_adjunto";
+    public static final String POST_REPORT = API_COMMISIOENS + "/api/post_report";
+
+    public static final String GET_COMENTARIOS_IM = API_COMMISIOENS + "/api/get_comentarios_im";
+    public static final String GET_RECIBOS_ADJUNTO = API_COMMISIOENS + "/api/get_recibos_adjuntos";
+
 
 
 
