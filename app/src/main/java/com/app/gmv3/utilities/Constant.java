@@ -82,7 +82,7 @@ public class Constant {
 
     public static final String GET_COMENTARIOS_IM = API_COMMISIOENS + "/api/get_comentarios_im";
     public static final String GET_RECIBOS_ADJUNTO = API_COMMISIOENS + "/api/get_recibos_adjuntos";
-
+    public static final String GET_ITEMS8020 = API_COMMISIOENS + "/api/getHistoryItems/";
 
 
 

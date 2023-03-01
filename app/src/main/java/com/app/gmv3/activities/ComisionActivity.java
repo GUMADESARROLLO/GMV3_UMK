@@ -97,6 +97,13 @@ public class ComisionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comision);
         chart = findViewById(R.id.chart1);
+        sharedPref = new SharedPref(this);
+
+        RUTA = sharedPref.getYourName();
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        nYear = calendar.get(Calendar.YEAR);
+        nMonth = calendar.get(Calendar.MONTH) + 1;
+
         iniComponent();
 
 
@@ -109,9 +116,6 @@ public class ComisionActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
-        sharedPref = new SharedPref(this);
-        RUTA = sharedPref.getYourName();
-
         getSupportActionBar().setTitle(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -149,10 +153,7 @@ public class ComisionActivity extends AppCompatActivity {
 
 
 
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        nYear = calendar.get(Calendar.YEAR);
-        nMonth = calendar.get(Calendar.MONTH) + 1;
 
         if (Utils.isNetworkAvailable(this)) {
             fetchData();
@@ -246,6 +247,16 @@ public class ComisionActivity extends AppCompatActivity {
                 break;
             case R.id.item_calendar:
                 dialogDatePickerLight();
+
+                break;
+            case R.id.item_items8020:
+                Intent intent = new Intent(ComisionActivity.this, ActivityItems8020.class);
+                intent.putExtra("RUTA",RUTA);
+                intent.putExtra("nMonth",nMonth);
+                intent.putExtra("nYear",nYear);
+
+                startActivity(intent);
+
                 break;
 
             default:

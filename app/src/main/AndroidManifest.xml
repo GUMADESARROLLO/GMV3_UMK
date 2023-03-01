@@ -79,6 +79,9 @@
             android:name=".activities.ActivityNoFacturado"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.ActivityItems8020"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.ActivitySearchLotes"
             android:screenOrientation="portrait" />
         <activity
