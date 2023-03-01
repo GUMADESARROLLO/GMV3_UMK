@@ -214,7 +214,6 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 listaBase64Imagenes.clear();
-                String[] imagenesr = new String[listaImagenes.size()];
                 for(int i = 0 ; i < listaImagenes.size() ; i++) {
                     try {
                         InputStream is = getContentResolver().openInputStream(listaImagenes.get(i));
@@ -223,17 +222,14 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
                         String cadena = convertirUriToBase64(bitmap);
 
-                        imagenesr[i] = cadena;
-                        //enviarImagenes("nomIma"+i, imagenesr);
+                        enviarImagenes("nomIma"+i, cadena);
 
                         bitmap.recycle();
 
                     } catch (IOException e) { }
 
                 }
-                enviarImagenes(imagenesr);
             }
-
         });
         builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);
         builder.setCancelable(false);
@@ -264,7 +260,8 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-    public void enviarImagenes(final String[] imagenesr) {
+    public void enviarImagenes(final String nombre, final String cadena) {
+
 
 
 
@@ -272,9 +269,9 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
         progressDialog.setMessage(getString(R.string.post_submit_msg));
         progressDialog.show();
 
-        final RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_ADJUNTOS,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_ADJUNTOS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -298,11 +295,11 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new Hashtable<String, String>();
-                for( int i =0; i<imagenesr.length; i++ ){
-                    params.put("params_", String.valueOf(imagenesr));
-                }
+                params.put("nom", nombre);
+                params.put("imagenes", cadena);
                 params.put("Id_Recibo", _idRecibo);
-                return (Map<String, String>) params;
+
+                return params;
             }
         };
 
@@ -310,7 +307,6 @@ public class ActivityRecibosAdjuntos extends AppCompatActivity {
 
 
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
