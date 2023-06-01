@@ -174,7 +174,7 @@ public class FragmentProfile extends Fragment {
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        ((TextView) dialog.findViewById(R.id.tv_version)).setText("Version " + BuildConfig.VERSION_NAME);
+        ((TextView) dialog.findViewById(R.id.tv_version)).setText( ("Versión ").concat(BuildConfig.VERSION_NAME).concat( " | ").concat(Config.SERVER));
 
         (dialog.findViewById(R.id.bt_getcode)).setOnClickListener(new View.OnClickListener() {
             @Override

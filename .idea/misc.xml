@@ -90,9 +90,11 @@
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_splash.xml" value="0.22443890274314215" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/activity_vinneta.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/content_recibos_adjuntos.xml" value="0.20885416666666667" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_about.xml" value="0.36770833333333336" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_post.xml" value="0.22146739130434784" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_recibo.xml" value="0.33" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_recibo_anular.xml" value="0.33" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_review.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_add_vineta.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/dialog_info.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/fragment_profile.xml" value="0.32155797101449274" />
@@ -128,6 +130,7 @@
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_vineta_resumen.xml" value="0.36770833333333336" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/item_voucher.xml" value="0.5" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/items_8020.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/layout/simple_spinner_item.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/menu/main.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/menu/menu_cart.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/menu/menu_comision.xml" value="0.371875" />
@@ -140,6 +143,7 @@
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/menu/menu_setting.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/menu/navigation.xml" value="0.371875" />
         <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/menu/search_no_facturado.xml" value="0.371875" />
+        <entry key="..\:/GUMA/PROYECTOS/GMV3/app/src/main/res/xml/setting_preferences.xml" value="0.36205128205128206" />
       </map>
     </option>
   </component>

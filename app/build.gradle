@@ -32,7 +32,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 32
-        versionName '3.7.10'
+        versionName '3.7.15'
     }
     buildTypes {
         release {
