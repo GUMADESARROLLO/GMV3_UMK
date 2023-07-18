@@ -236,7 +236,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             }
         });
 
-        findViewById(R.id.id_plan_crecimiento).setVisibility((StrPlan.equals("S") ? View.VISIBLE : View.GONE));
+        //findViewById(R.id.id_plan_crecimiento).setVisibility((StrPlan.equals("S") ? View.VISIBLE : View.GONE));
 
         findViewById(R.id.id_plan_crecimiento).setOnClickListener(new View.OnClickListener() {
             @Override

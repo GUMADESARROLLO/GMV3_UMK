@@ -116,8 +116,8 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/Dorado"
-                    app:srcCompat="@drawable/ic_premium" />
+                    android:tint="@color/available"
+                    app:srcCompat="@drawable/ic_stat" />
 
             </LinearLayout>
             <TextView

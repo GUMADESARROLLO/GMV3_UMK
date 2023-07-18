@@ -78,7 +78,7 @@ public class Constant {
     public static final String GET_COMISION = API_COMMISIOENS + "/api/getcomision/";
     //public static final String POST_ADJUNTOS = BASE_URL + "/api/api.php?post_adjunto=";
     public static final String POST_ADJUNTOS = Config.URL_S3 + "/api/post_adjunto";
-    public static final String POST_REPORT = Config.URL_S3 + "/api/post_report";
+    public static final String POST_REPORT = API_COMMISIOENS + "/api/post_report";
 
     public static final String GET_COMENTARIOS_IM = API_COMMISIOENS + "/api/get_comentarios_im";
     public static final String GET_RECIBOS_ADJUNTO = API_COMMISIOENS + "/api/get_recibos_adjuntos";
