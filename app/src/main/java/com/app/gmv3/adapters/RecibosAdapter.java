@@ -48,17 +48,11 @@ public class RecibosAdapter extends RecyclerView.Adapter<RecibosAdapter.Attachme
 
         final String userImage = newAttachmentList.get(position).getImageID();
 
-
-        Log.e("TAG_", "onBindViewHolder: " + userImage );
+        Log.e("TAG_error", "onBindViewHolder: " + userImage );
 
         if (userImage.isEmpty()||userImage.equals(null)||userImage.equals("")) {
 
         } else {
-          /*  Picasso.with(mActivity)
-                    .load(userImage)
-                    .placeholder(R.drawable.logo_round)
-                    .fit().centerCrop()
-                    .into(holder.attachedImageId);*/
 
 
             Picasso.with(mActivity).load(userImage)

@@ -21,10 +21,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.app.gmv3.R;
+import com.app.gmv3.models.NotasDeCreadito;
 import com.app.gmv3.utilities.Constant;
 import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.Utils;
@@ -58,10 +61,12 @@ public class ComisionActivity extends AppCompatActivity {
     TextView comision_bono;
     TextView txtSKUs;
     TextView txtValor;
-    TextView txtFactor;
-    TextView txtComisio;
+
+
+
     TextView Comision;
     TextView ItemFact;
+    TextView ttVentasValor;
 
     TextView cliente_promedio;
     TextView cliente_meta;
@@ -70,10 +75,19 @@ public class ComisionActivity extends AppCompatActivity {
     TextView cliente_prom;
     TextView txt_salario_base;
 
+    TextView txt_ttNotaCredito;
+
+    TextView txtComisio_80,txtComisio_20;
+    TextView txtFactor_80,txtFactor_20;
+    TextView txtNC_80,txtNC_20;
+    TextView Comision_cobertura_cliente;
+
+
     String SKU_Lista_80,SKU_Lista_20;
     String TAB_lista80_valor,TAB_lista20_valor;
     String TAB_lista80_fact,TAB_lista20_fact;
     String TAB_lista80_comi,TAB_lista20_comi;
+    String TAB_NC_80,TAB_NC_20;
 
     int nMonth;
     int nYear;
@@ -83,15 +97,18 @@ public class ComisionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comision);
         chart = findViewById(R.id.chart1);
+        sharedPref = new SharedPref(this);
+
+        RUTA = sharedPref.getYourName();
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        nYear = calendar.get(Calendar.YEAR);
+        nMonth = calendar.get(Calendar.MONTH) + 1;
+
         iniComponent();
 
-        sharedPref = new SharedPref(this);
-        RUTA = sharedPref.getYourName();
 
-        if (Utils.isNetworkAvailable(this)) {
 
-            new MyTaskLoginNormal().execute(RUTA);
-        }
+
     }
     private void iniComponent() {
 
@@ -99,10 +116,9 @@ public class ComisionActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
-        sharedPref = new SharedPref(this);
-
         getSupportActionBar().setTitle(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
 
@@ -116,17 +132,32 @@ public class ComisionActivity extends AppCompatActivity {
         total_comision      = findViewById(R.id.id_total_commision);
         txtSKUs             = findViewById(R.id.id_skus);
         txtValor            = findViewById(R.id.id_valor);
-        txtFactor           = findViewById(R.id.id_factor);
-        txtComisio          = findViewById(R.id.id_comision);
+
+
+
         Comision            = findViewById(R.id.Comisiones);
         ItemFact            = findViewById(R.id.ItemFact);
         txt_salario_base    = findViewById(R.id.id_txt_salario_base);
+        txt_ttNotaCredito   = findViewById(R.id.ttNotaCredito);
+        ttVentasValor       = findViewById(R.id.ttVentasValor);
 
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        nYear = calendar.get(Calendar.YEAR);
-        nMonth = calendar.get(Calendar.MONTH) + 1;
+        txtComisio_80       = findViewById(R.id.id_comision_80);
+        txtComisio_20       = findViewById(R.id.id_comision_20);
+        txtFactor_80        = findViewById(R.id.id_factor_80);
+        txtFactor_20        = findViewById(R.id.id_factor_20);
+        txtNC_80            = findViewById(R.id.id_nota_credito_80);
+        txtNC_20            = findViewById(R.id.id_nota_credito_20);
 
+        Comision_cobertura_cliente            = findViewById(R.id.id_Comision_cobertura_cliente);
+
+
+
+
+
+        if (Utils.isNetworkAvailable(this)) {
+            fetchData();
+        }
 
 
         TabLayout tab_layout = findViewById(R.id.tab_layout);
@@ -138,13 +169,9 @@ public class ComisionActivity extends AppCompatActivity {
                 if (tab.getPosition() == 0) {
                     txtSKUs.setText(SKU_Lista_80);
                     txtValor.setText(TAB_lista80_valor);
-                    txtFactor.setText(TAB_lista80_fact);
-                    txtComisio.setText(TAB_lista80_comi);
                 } else if (tab.getPosition() == 1) {
                     txtSKUs.setText(SKU_Lista_20);
                     txtValor.setText(TAB_lista20_valor);
-                    txtFactor.setText(TAB_lista20_fact);
-                    txtComisio.setText(TAB_lista20_comi);
                 }
             }
 
@@ -220,6 +247,16 @@ public class ComisionActivity extends AppCompatActivity {
                 break;
             case R.id.item_calendar:
                 dialogDatePickerLight();
+
+                break;
+            case R.id.item_items8020:
+                Intent intent = new Intent(ComisionActivity.this, ActivityItems8020.class);
+                intent.putExtra("RUTA",RUTA);
+                intent.putExtra("nMonth",nMonth);
+                intent.putExtra("nYear",nYear);
+
+                startActivity(intent);
+
                 break;
 
             default:
@@ -229,7 +266,6 @@ public class ComisionActivity extends AppCompatActivity {
     }
 
     private void dialogDatePickerLight() {
-        //Calendar cur_calender = Calendar.getInstance();
         DatePickerDialog datePicker = DatePickerDialog.newInstance(
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -242,7 +278,44 @@ public class ComisionActivity extends AppCompatActivity {
                         nMonth= monthOfYear + 1 ;
                         nYear = year;
 
-                        new MyTaskLoginNormal().execute(RUTA);
+                        getSupportActionBar().setTitle("Calculando ...");
+
+                        Comision.setText("...");
+                        ItemFact.setText("...");
+
+                        total_comision.setText("...");
+                        comision_bono.setText("...");
+
+                        cliente_promedio.setText("...");
+                        cliente_meta.setText("...");
+                        clientes_faturados.setText("...");
+
+                        cliente_bono.setText("...");
+                        cliente_prom.setText("...");
+
+                        txtSKUs.setText("...");
+                        txtValor.setText("...");
+
+
+                        ttVentasValor.setText("...");
+
+                        txt_ttNotaCredito.setText("...");
+
+                        txt_salario_base.setText(("C$ --"));
+
+
+                        txtComisio_80.setText("...");
+                        txtComisio_20.setText("...");
+                        txtFactor_80.setText("...");
+                        txtFactor_20.setText("...");
+
+                        txtNC_80.setText("...");
+                        txtNC_20.setText("...");
+                        Comision_cobertura_cliente.setText("...");
+
+
+                        fetchData();
+
                     }
                 }
         );
@@ -257,135 +330,122 @@ public class ComisionActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_comision, menu);
         return true;
     }
+    private void fetchData() {
 
-
-    private class MyTaskLoginNormal extends AsyncTask<String, Void, String> {
-
-        ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = new ProgressDialog(ComisionActivity.this);
-            progressDialog.setTitle(getResources().getString(R.string.title_please_wait));
-            progressDialog.setMessage(getResources().getString(R.string.factura_historico_process));
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            String strRuta = params[0];
-
-
-            JsonArrayRequest request = new JsonArrayRequest(GET_COMISION + strRuta.concat("/").concat(String.valueOf(nMonth)).concat("/").concat(String.valueOf(nYear)) , new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    if (response == null) {
-                        Toast.makeText(getApplicationContext(), R.string.failed_fetch_data, Toast.LENGTH_LONG).show();
-                        return;
-                    }
-
-
-                    try {
-                        if (response != null) {
-
-
-                            JSONObject Listas   = new JSONObject(response.getJSONObject(0).getString("Comision_de_venta"));
-
-                            String str01 = Listas.getString("Lista80");
-                            str01 = str01.substring(1, str01.length() - 1);
-                            String[] LISTA80      = str01.split(",");
-
-                            String str02 = Listas.getString("Lista20");
-                            str02 = str02.substring(1, str02.length() - 1);
-                            String[] LISTA20      = str02.split(",");
-
-                            String str03 = Listas.getString("Total");
-                            str03 = str03.substring(1, str03.length() - 1);
-                            String[] TTLISTA      = str03.split(",");
-
-
-                            String Totales_finales       = response.getJSONObject(0).getString("Totales_finales") ;
-                            Totales_finales              = Totales_finales.substring(1, Totales_finales.length() - 1).replace('"',' ');
-                            String[] TotalesFinales      = Totales_finales.split(",");
-
-                            String Total_Compensacion    = response.getJSONObject(0).getString("Total_Compensacion") ;
-                            String Total_Promedio        = response.getJSONObject(0).getString("VntPromedio") ;
-                            String SalarioBasico         = response.getJSONObject(0).getString("Salariobasico") ;
-
-                            total_comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Total_Compensacion))));
-                            comision_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
-
-                            SKU_Lista_80        = LISTA80[0];
-                            SKU_Lista_20        = LISTA20[0];
-
-                            TAB_lista80_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[1].substring(1, LISTA80[1].length() - 1))));
-                            TAB_lista20_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[1].substring(1, LISTA20[1].length() - 1))));
-
-                            TAB_lista80_fact    = LISTA80[2].concat(" %");
-                            TAB_lista20_fact    = LISTA20[2].concat(" %");
-
-                            TAB_lista80_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[3].substring(1, LISTA80[3].length() - 1))));
-                            TAB_lista20_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[3].substring(1, LISTA20[3].length() - 1))));
-
-
-                            Comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
-                            ItemFact.setText(TTLISTA[0]);
-
-                            cliente_promedio.setText(TotalesFinales[4].concat(" Prom."));
-                            cliente_meta.setText(TotalesFinales[5].concat(" Meta"));
-                            clientes_faturados.setText(TotalesFinales[6].concat(" Fact."));
-
-                            cliente_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TotalesFinales[2].substring(1, TotalesFinales[2].length() - 1)))));
-                            cliente_prom.setText(TotalesFinales[3].concat(" %"));
-
-                            txtSKUs.setText(SKU_Lista_80);
-                            txtValor.setText(TAB_lista80_valor);
-                            txtFactor.setText(TAB_lista80_fact);
-                            txtComisio.setText(TAB_lista80_comi);
-
-                            showPieChart(Total_Promedio);
-                            txt_salario_base.setText(("Salario Garantizado: C$ ").concat(SalarioBasico));
-
-
-
-
-                        }
-                    } catch (JSONException e) {
-                        Log.e("TAG_error", "ErrorWAY: " + e.getMessage() );
-                        e.printStackTrace();
-                    }
-
-
+        JsonArrayRequest request = new JsonArrayRequest(GET_COMISION + RUTA.concat("/").concat(String.valueOf(nMonth)).concat("/").concat(String.valueOf(nYear)) , new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response == null) {
+                    Toast.makeText(getApplicationContext(), R.string.failed_fetch_data, Toast.LENGTH_LONG).show();
+                    return;
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // error in getting json
-                    Log.e("INFO", "Error: " + error.getMessage());
-                    Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            MyApplication.getInstance().addToRequestQueue(request);
 
 
+                try {
+                    if (response != null) {
 
-            return Utils.getJSONString(params[0]);
-        }
 
-        @Override
-        protected void onPostExecute(String result) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (null != progressDialog && progressDialog.isShowing()) {
-                        progressDialog.dismiss();
+                        JSONObject Listas   = new JSONObject(response.getJSONObject(0).getString("Comision_de_venta"));
+
+                        String str01 = Listas.getString("Lista80");
+                        str01 = str01.substring(1, str01.length() - 1);
+                        String[] LISTA80      = str01.split(",");
+
+                        String str02 = Listas.getString("Lista20");
+                        str02 = str02.substring(1, str02.length() - 1);
+                        String[] LISTA20      = str02.split(",");
+
+                        String str03 = Listas.getString("Total");
+                        str03 = str03.substring(1, str03.length() - 1);
+                        String[] TTLISTA      = str03.split(",");
+
+
+                        String Totales_finales       = response.getJSONObject(0).getString("Totales_finales") ;
+                        Totales_finales              = Totales_finales.substring(1, Totales_finales.length() - 1).replace('"',' ');
+                        String[] TotalesFinales      = Totales_finales.split(",");
+
+                        String Total_Compensacion    = response.getJSONObject(0).getString("Total_Compensacion") ;
+                        String Total_Promedio        = response.getJSONObject(0).getString("VntPromedio") ;
+                        String SalarioBasico         = response.getJSONObject(0).getString("Salariobasico") ;
+
+                        Double strNotaCredito80    = response.getJSONObject(0).getDouble("NotaCredito_val80");
+                        Double strNotaCredito20        = response.getJSONObject(0).getDouble("NotaCredito_val20") ;
+                        Double strttNotaCredito80         = response.getJSONObject(0).getDouble("NotaCredito_total") ;
+
+                        getSupportActionBar().setTitle(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
+
+                        total_comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(Total_Compensacion))));
+
+                        comision_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TotalesFinales[1].substring(1, TotalesFinales[1].length() - 1)))));
+
+                        SKU_Lista_80        = LISTA80[0];
+                        SKU_Lista_20        = LISTA20[0];
+
+                        TAB_lista80_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[1].substring(1, LISTA80[1].length() - 1))));
+                        TAB_lista20_valor   = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[1].substring(1, LISTA20[1].length() - 1))));
+
+                        TAB_lista80_fact    = LISTA80[2].concat(" %");
+                        TAB_lista20_fact    = LISTA20[2].concat(" %");
+
+                        TAB_lista80_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA80[3].substring(1, LISTA80[3].length() - 1))));
+                        TAB_lista20_comi    = ("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(LISTA20[3].substring(1, LISTA20[3].length() - 1))));
+
+                        TAB_NC_80 = (("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", strNotaCredito80)));
+                        TAB_NC_20 = (("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", strNotaCredito20)));
+
+                        txt_ttNotaCredito.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", strttNotaCredito80)));
+
+
+                        Comision.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[3].substring(1, TTLISTA[3].length() - 1)))));
+                        ItemFact.setText(TTLISTA[0]);
+                        ttVentasValor.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TTLISTA[1].substring(1, TTLISTA[1].length() - 1)))));
+
+
+                        cliente_promedio.setText(TotalesFinales[4].concat(" Prom."));
+                        cliente_meta.setText(TotalesFinales[5].concat(" Meta"));
+                        clientes_faturados.setText(TotalesFinales[6].concat(" Fact."));
+
+                        cliente_bono.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TotalesFinales[2].substring(1, TotalesFinales[2].length() - 1)))));
+
+                        cliente_prom.setText(TotalesFinales[3].concat(" %"));
+
+                        txtSKUs.setText(SKU_Lista_80);
+                        txtValor.setText(TAB_lista80_valor);
+
+
+                        txtComisio_80.setText(TAB_lista80_comi);
+                        txtComisio_20.setText(TAB_lista20_comi);
+
+                        txtFactor_80.setText(TAB_lista80_fact);
+                        txtFactor_20.setText(TAB_lista20_fact);
+
+                        txtNC_80.setText(TAB_NC_80);
+                        txtNC_20.setText(TAB_NC_20);
+                        Comision_cobertura_cliente.setText(("C$ ").concat(String.format(Locale.ENGLISH, "%1$,.2f", Double.parseDouble(TotalesFinales[2].substring(1, TotalesFinales[2].length() - 1)))));
+
+                        showPieChart(Total_Promedio);
+                        txt_salario_base.setText(("C$ ").concat(SalarioBasico));
+
+
+
+
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, Constant.DELAY_PROGRESS_DIALOG);
-            super.onPostExecute(result);
-        }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+
     }
+
 }

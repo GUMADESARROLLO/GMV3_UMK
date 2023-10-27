@@ -104,13 +104,11 @@ public class AdapterInteligenciaMercado extends RecyclerView.Adapter<AdapterInte
                 .build();
 
 
-        Log.e("TAG_ERR", "onBindViewHolder: " + product.getImagen() );
-
         if (product.getImagen().equals("")){
             holder.product_image.setVisibility(View.GONE);
         }else{
             Picasso.with(context)
-                    .load(Config.ADMIN_PANEL_URL + "/upload/news/" + product.getImagen())
+                    .load(product.getImagen())
                     .placeholder(R.drawable.ic_loading)
                     .resize(250, 250)
                     .centerCrop()

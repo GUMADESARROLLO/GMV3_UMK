@@ -40,6 +40,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,6 +77,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ActivityNoFacturado"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ActivityItems8020"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ActivitySearchLotes"

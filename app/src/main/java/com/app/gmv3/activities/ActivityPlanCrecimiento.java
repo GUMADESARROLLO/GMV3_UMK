@@ -2,12 +2,14 @@ package com.app.gmv3.activities;
 
 
 import static com.app.gmv3.utilities.Constant.GET_PLAN_CRECIMIENTO;
+import static com.app.gmv3.utilities.Constant.POST_RPT_RUTA;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.R;
 import com.app.gmv3.utilities.Constant;
+import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.Utils;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -52,13 +54,17 @@ public class ActivityPlanCrecimiento extends AppCompatActivity {
     TextView OptCreci;
     TextView CompMini;
     TextView PorceCreci;
-
+    String RUTA;
+    SharedPref sharedPref;
     String code_cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_crecimiento);
+
+        sharedPref = new SharedPref(this);
+        RUTA = sharedPref.getYourName();
 
         initToolbar();
         iniComponent();
@@ -169,6 +175,8 @@ public class ActivityPlanCrecimiento extends AppCompatActivity {
 
             new MyTaskLoginNormal().execute(code_cliente);
         }
+
+
     }
 
 
@@ -209,7 +217,10 @@ public class ActivityPlanCrecimiento extends AppCompatActivity {
                 String strCliente = params[0];
 
 
-                JsonArrayRequest request = new JsonArrayRequest(GET_PLAN_CRECIMIENTO + strCliente, new Response.Listener<JSONArray>() {
+
+
+
+                JsonArrayRequest request = new JsonArrayRequest(GET_PLAN_CRECIMIENTO + strCliente + "&RUTA=" + RUTA, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         if (response == null) {

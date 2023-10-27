@@ -217,7 +217,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
     }
 
     private void fetchData() {
-        JsonArrayRequest request = new JsonArrayRequest(GET_COMENTARIOS_IM + category_id + "&OrderBy=" + OrderBY, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(GET_COMENTARIOS_IM +"/"+ category_id + "/" + OrderBY, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if (response == null) {

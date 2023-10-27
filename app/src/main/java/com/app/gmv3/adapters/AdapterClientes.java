@@ -80,13 +80,13 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Clients clients = categoryListFiltered.get(position);
 
-        holder.category_name.setText(clients.getNOMBRE());
+        holder.category_name.setText(clients.getCLIENTE().concat(" - ").concat(clients.getNOMBRE()));
         holder.cardView.setBackgroundColor(context.getResources().getColor(((clients.getMOROSO().equals("S")) ? R.color.red_light : R.color.white)));
         holder.imgPlan.setVisibility((clients.getPLAN().equals("S") ? View.VISIBLE : View.GONE));
         holder.relativeLayout.setVisibility((clients.getMOROSO().equals("S") ? View.VISIBLE : View.GONE));
         holder.lytPin.setVisibility((clients.getPIN().equals("S") ? View.VISIBLE : View.GONE));
         holder.product_count.setText(clients.getDIRECCION());
-        holder.txt_cliente_codigo.setText(clients.getCLIENTE());
+        holder.txt_cliente_codigo.setText(clients.getNIVEL_PRECIO());
         holder.ImgVerication.setVisibility((clients.getVERIFICADO().contains("S;") ? View.VISIBLE : View.GONE));
         holder.txt_cliente_limite.setText(("C$ ").concat(clients.getLIMITE()));
         holder.txt_cliente_saldo.setText(("C$ ").concat(clients.getSALDO()));
