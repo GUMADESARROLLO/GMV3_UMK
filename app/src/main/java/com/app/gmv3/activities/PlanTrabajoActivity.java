@@ -20,29 +20,28 @@ import com.google.android.material.snackbar.Snackbar;
 public class PlanTrabajoActivity extends AppCompatActivity {
     private String ruta_id;
     WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_trabajo);
+
         Intent intent = getIntent();
-        ruta_id     = intent.getStringExtra("id_Ruta");
+        ruta_id = intent.getStringExtra("id_Ruta");
+
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.title_plan_trabajo);
         }
-        webView = (WebView) findViewById(R.id.webview);
+
+        webView = findViewById(R.id.webview);
         initComponents();
-
-
-
-        Log.e("TAG_ERROR", "onCreate: " + Config.API_COMMISIOENS.concat("api/Schedule/").concat(ruta_id) );
-
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -51,12 +50,26 @@ public class PlanTrabajoActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void initComponents() {
         webView.getSettings().setJavaScriptEnabled(true);
-
         webView.getSettings().setSupportZoom(true);
         webView.setLayerType(WebView.LAYER_TYPE_HARDWARE, null);
-        webView.loadUrl(Config.API_COMMISIOENS.concat("/api/Schedule/").concat(ruta_id));
 
+        // Set WebViewClient to handle requests inside the WebView
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                // Returning false means the WebView should handle the URL, not the system browser
+                return false;
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                // Handle errors if needed
+            }
+        });
+
+        webView.loadUrl(Config.API_COMMISIOENS.concat("/api/Schedule/").concat(ruta_id));
     }
 }

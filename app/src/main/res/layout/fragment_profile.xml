@@ -351,7 +351,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/id_plan_trabajo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -365,7 +364,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_order_history"
+                        app:srcCompat="@drawable/ic_event"
                         app:tint="@color/blue_600" />
 
                     <View
