@@ -33,6 +33,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730884085346:android:602dec82f0daa1f9c9a33b",
+        "android_client_info": {
+          "package_name": "com.app.unimark.gmv_devoluciones"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730884085346-q1ck3qtss69uop23aism8gbfdkpp0iso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ3kBlBw4d3eSMJPxpVehM4Oe7IjF02jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730884085346-q1ck3qtss69uop23aism8gbfdkpp0iso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
