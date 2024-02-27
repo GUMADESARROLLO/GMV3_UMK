@@ -1,19 +1,31 @@
 package com.app.gmv3.models;
 
 public class Banner {
-    private  String banner_image;
-    private  String banner_description;
-    private  String created_at;
+    private  String titulo;
+    private  String descripcion;
+    private  String fechaInicio;
 
-    public String getBanner_description() {
-        return banner_description;
+    private  String Imagen;
+
+    public String getImagen() {
+        return Imagen;
+    }
+    public String getTitulo() {
+        return titulo;
     }
 
-    public String getBanner_image() {
-        return banner_image;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public String getFechaInicio() {
+        return fechaInicio;
     }
+
+    public String getFechaFinal() {
+        return fechaFinal;
+    }
+
+    private  String fechaFinal;
+
 }

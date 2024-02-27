@@ -1,6 +1,7 @@
 package com.app.gmv3.activities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
@@ -25,6 +26,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -102,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(1);
                         return true;
                     case R.id.nav_promo:
-                        viewPager.setCurrentItem(3);
+                        viewPager.setCurrentItem(2);
                         return true;
                     case R.id.nav_profile:
-                        viewPager.setCurrentItem(2);
+                        viewPager.setCurrentItem(3);
                         return true;
                 }
                 return false;
@@ -132,9 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
                if (viewPager.getCurrentItem() == 1) {
                     toolbar.setTitle(R.string.title_nav_category);
-                } else if (viewPager.getCurrentItem() == 3) {
-                    toolbar.setTitle(R.string.title_nav_help);
                 } else if (viewPager.getCurrentItem() == 2) {
+                    toolbar.setTitle(R.string.title_nav_help);
+                } else if (viewPager.getCurrentItem() == 3) {
                     toolbar.setTitle(R.string.title_nav_profile);
                 } else {
                     toolbar.setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
@@ -172,7 +176,11 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setRotationY(180);
         }
 
+
+
     }
+
+
 
     public class MyAdapter extends FragmentPagerAdapter {
 
@@ -188,9 +196,9 @@ public class MainActivity extends AppCompatActivity {
                     return new FragmentArticulos();
                 case 1:
                     return new FragmentClientes();
-                case 3:
-                    return new FragmentPromos();
                 case 2:
+                    return new FragmentPromos();
+                case 3:
                     return new FragmentProfile();
 
             }
@@ -268,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Method.GET, GET_TAX_CURRENCY, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("INFO", response.toString());
+
                 try {
                     final Double tax = response.getDouble("tax");
                     final String currency_code = response.getString("currency_code");

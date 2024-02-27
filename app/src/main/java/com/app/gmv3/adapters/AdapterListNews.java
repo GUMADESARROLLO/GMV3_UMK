@@ -19,6 +19,7 @@ import com.app.gmv3.models.Banner;
 import com.app.gmv3.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,20 +54,17 @@ public class AdapterListNews extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
-
-        public TextView subtitle;
+        public TextView title;
+        public TextView description;
         public TextView date;
-        public View lyt_parent;
-        public WebView txt_product_description;
+        public ImageView image;
 
         public OriginalViewHolder(View v) {
             super(v);
-            image = v.findViewById(R.id.image);
-            subtitle = v.findViewById(R.id.subtitle);
+            image = v.findViewById(R.id.image_news);
+            title = v.findViewById(R.id.title);
+            description = v.findViewById(R.id.description);
             date = v.findViewById(R.id.date);
-            lyt_parent = v.findViewById(R.id.lyt_parent);
-            txt_product_description = v.findViewById(R.id.product_description);
         }
     }
 
@@ -83,50 +81,60 @@ public class AdapterListNews extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder instanceof OriginalViewHolder) {
 
             OriginalViewHolder view = (OriginalViewHolder) holder;
-
             Banner n = items.get(position);
-            view.subtitle.setText("");
-            final String Fecha = (String) DateFormat.format("EEE dd MMM yyyy", Utils.timeStringtoMilis(n.getCreated_at()));
-            view.date.setText(Fecha);
 
+            view.title.setText(n.getTitulo());
+            view.description.setText(n.getDescripcion());
 
-            view.txt_product_description.setBackgroundColor(Color.parseColor("#ffffff"));
-            view.txt_product_description.setFocusableInTouchMode(false);
-            view.txt_product_description.setFocusable(false);
-            view.txt_product_description.getSettings().setDefaultTextEncodingName("UTF-8");
+            String dtIni = (String) DateFormat.format("EEE dd MMM yyyy", Utils.timeStringtoMilis(n.getFechaInicio()));
+            String dtEnd = (String) DateFormat.format("EEE dd MMM yyyy", Utils.timeStringtoMilis(n.getFechaFinal()));
+            view.date.setText(("Del ").concat(dtIni).concat(" al ").concat(dtEnd));
 
-            WebSettings webSettings = view.txt_product_description.getSettings();
-            webSettings.setDefaultFontSize(16);
-            webSettings.setJavaScriptEnabled(true);
-
-            String mimeType = "text/html; charset=UTF-8";
-            String encoding = "utf-8";
-            String htmlText = ((n.getBanner_description().equals("")) ? "Sin Descripcion" : n.getBanner_description());
-            htmlText = getSafeSubstring(htmlText,50).concat(" ... Leer mas.");
-            String text = "<html><head>"
-                    + "<style type=\"text/css\">body{color: #525252;}"
-                    + "</style></head>"
-                    + "<body>"
-                    + htmlText
-                    + "</body></html>";
-
-
-            view.txt_product_description.loadDataWithBaseURL(null, text, mimeType, encoding, null);
-
-
-
-            Glide.with(ctx).load(Config.ADMIN_PANEL_URL + "/upload/news/" + n.getBanner_image())
+            Glide.with(ctx).load(n.getImagen())
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(view.image);
 
-            view.lyt_parent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (mOnItemClickListener == null) return;
-                    mOnItemClickListener.onItemClick(view, items.get(position), position);
-                }
-            });
+
+
+//            view.subtitle.setText("");
+//
+//
+//
+//            view.txt_product_description.setBackgroundColor(Color.parseColor("#ffffff"));
+//            view.txt_product_description.setFocusableInTouchMode(false);
+//            view.txt_product_description.setFocusable(false);
+//            view.txt_product_description.getSettings().setDefaultTextEncodingName("UTF-8");
+//
+//            WebSettings webSettings = view.txt_product_description.getSettings();
+//            webSettings.setDefaultFontSize(16);
+//            webSettings.setJavaScriptEnabled(true);
+//
+//            String mimeType = "text/html; charset=UTF-8";
+//            String encoding = "utf-8";
+//            String htmlText = ((n.getBanner_description().equals("")) ? "Sin Descripcion" : n.getBanner_description());
+//            htmlText = getSafeSubstring(htmlText,50).concat(" ... Leer mas.");
+//            String text = "<html><head>"
+//                    + "<style type=\"text/css\">body{color: #525252;}"
+//                    + "</style></head>"
+//                    + "<body>"
+//                    + htmlText
+//                    + "</body></html>";
+//
+//
+//            view.txt_product_description.loadDataWithBaseURL(null, text, mimeType, encoding, null);
+//
+//
+//
+
+//
+//            view.lyt_parent.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if (mOnItemClickListener == null) return;
+//                    mOnItemClickListener.onItemClick(view, items.get(position), position);
+//                }
+//            });
         }
     }
 

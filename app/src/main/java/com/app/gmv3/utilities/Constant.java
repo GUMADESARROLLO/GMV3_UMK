@@ -10,7 +10,7 @@ public class Constant {
 
     public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_recent=";
     public static final String GET_BANNER = BASE_URL + "/api/api.php?get_banner";
-    public static final String GET_NEWS = BASE_URL + "/api/api.php?get_news";
+    public static final String GET_NEWS = API_COMMISIOENS + "/api/Promociones";
     public static final String GET_PRODUCT_ID = BASE_URL + "/api/api.php?product_id=";
     public static final String GET_CATEGORY = BASE_URL + "/api/api.php?get_category";
     public static final String GET_CATEGORY_DETAIL = BASE_URL + "/api/api.php?category_id=";

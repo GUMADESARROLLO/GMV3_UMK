@@ -21,43 +21,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_middle" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/pager"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:background="@color/grey_20" />
-
-                    <LinearLayout
-                        android:id="@+id/layout_dots"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xmlarge"
-                        android:background="@android:color/white"
-                        android:gravity="center"
-                        android:orientation="horizontal" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:layout_marginTop="@dimen/spacing_xlarge"

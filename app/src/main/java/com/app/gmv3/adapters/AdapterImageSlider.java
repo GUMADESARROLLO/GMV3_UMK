@@ -68,7 +68,7 @@ public class AdapterImageSlider extends PagerAdapter {
         ImageView image =  v.findViewById(R.id.image);
         MaterialRippleLayout lyt_parent = v.findViewById(R.id.lyt_parent);
 
-        Utils.displayImageOriginal(act, image, o.getBanner_image());
+        //Utils.displayImageOriginal(act, image, o.getBanner_image());
 
 
         lyt_parent.setOnClickListener(new View.OnClickListener() {
