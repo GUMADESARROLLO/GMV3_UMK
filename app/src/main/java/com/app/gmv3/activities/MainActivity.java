@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public ViewPager viewPager;
     private Toolbar toolbar;
     MenuItem prevMenuItem;
-    int pager_number = 3;
+    int pager_number = 4;
     DBHelper dbhelper;
     private long exitTime = 0;
 
@@ -131,8 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 navigation.getMenu().getItem(position).setChecked(true);
                 prevMenuItem = navigation.getMenu().getItem(position);
-
-
 
                if (viewPager.getCurrentItem() == 1) {
                     toolbar.setTitle(R.string.title_nav_category);
