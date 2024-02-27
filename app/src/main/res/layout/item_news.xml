@@ -37,7 +37,7 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textColor="@android:color/white"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     tools:text="Title" />
 
                 <TextView
@@ -45,10 +45,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="3"
+                    android:maxLines="4"
                     android:text="0.074 ETH"
                     android:textColor="@color/grey_20"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -90,7 +90,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/orange_500"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 tools:text="16 Jan 2020" />
 
         </LinearLayout>

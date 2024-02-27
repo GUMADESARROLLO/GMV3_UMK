@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
@@ -63,7 +64,6 @@ public class FragmentPromos extends Fragment {
     private List<Banner> bannerList;
     private List<Banner> NewsList;
 
-
     RelativeLayout ryt_empty_history;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,21 +91,7 @@ public class FragmentPromos extends Fragment {
         recyclerViewNews.setAdapter(mAdapter);
 
 
-//        mAdapter.setOnItemClickListener(new AdapterListNews.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, Banner obj, int position) {
-//                Intent intent = new Intent(getActivity(), ActivityDetailsPromo.class);
-//                intent.putExtra("Promo_descripcion", obj.getBanner_description());
-//                intent.putExtra("promo_imagen", obj.getBanner_image());
-//                startActivity(intent);
-//            }
-//
-//
-//        });
         onRefresh();
-
-
-
 
 
     }
@@ -135,13 +121,12 @@ public class FragmentPromos extends Fragment {
                 List<Banner> items = new Gson().fromJson(response.toString(), new TypeToken<List<Banner>>() {
                 }.getType());
 
-                Log.e("TAG_ERROR", items.get(0).getDescripcion() );
 
                 NewsList.clear();
                 NewsList.addAll(items);
 
                 if (NewsList.size() > 0 ){
-                    //ryt_empty_history.setVisibility(View.GONE);
+                    ryt_empty_history.setVisibility(View.GONE);
                     StringBuilder TituloBuilder = new StringBuilder();
                     for (int i = 0; i < items.size(); i++) {
                         String dtIni = (String) DateFormat.format("EEE dd MMM yyyy", Utils.timeStringtoMilis(items.get(i).getFechaInicio()));
@@ -158,7 +143,7 @@ public class FragmentPromos extends Fragment {
                     String Titulo = TituloBuilder.toString();
                     ShowNotifications(Titulo);
                 }else{
-                    //ryt_empty_history.setVisibility(View.VISIBLE);
+                    ryt_empty_history.setVisibility(View.VISIBLE);
 
                 }
 
