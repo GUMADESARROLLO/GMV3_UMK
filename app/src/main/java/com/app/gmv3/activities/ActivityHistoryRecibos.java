@@ -132,7 +132,6 @@ public class ActivityHistoryRecibos extends AppCompatActivity {
 
         ryt_empty_history = findViewById(R.id.lyt_empty_result);
 
-
         txt_desde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,8 +145,6 @@ public class ActivityHistoryRecibos extends AppCompatActivity {
                 dialogDatePickerLight(2);
             }
         });
-
-
 
         Calendar calendar = Calendar.getInstance();
         long date_ship_millis = calendar.getTimeInMillis();

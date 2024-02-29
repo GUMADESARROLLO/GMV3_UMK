@@ -156,8 +156,9 @@
             android:paddingRight="@dimen/spacing_large">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -213,6 +214,15 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="0dp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
             <ImageView
                 android:layout_width="@dimen/spacing_mlarge"
                 android:layout_height="@dimen/spacing_mlarge"
@@ -221,14 +231,15 @@
                 android:tint="@color/light_blue_400"
                 app:srcCompat="@drawable/ic_history"
                 tools:ignore="VectorDrawableCompat" />
+
             <TextView
                 android:id="@+id/id_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end|right"
-                android:text="7 minnutes ago"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:text="dentro de 47 minutos"
                 android:textColor="@color/grey_40" />
+            </LinearLayout>
             <View
                 android:layout_width="@dimen/spacing_large"
                 android:layout_height="0dp" />
