@@ -95,7 +95,7 @@ public class ActivityItems8020 extends AppCompatActivity implements AdapterItems
 
 
 
-        String strTitulo = ("ARTICULOS 80/20 - ").concat(Utils.getShortNameMonth(nMonth)).concat(String.valueOf(nYear)) ;
+        String strTitulo = ((RUTA).concat(" • SKUs. 80/20 - ")).concat(Utils.getShortNameMonth(nMonth)).concat(String.valueOf(nYear)) ;
 
         getSupportActionBar().setTitle(strTitulo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -116,4 +116,8 @@
 
     <color name="darkHomeLight">#38384A</color>
     <color name="darkHome">#2C2C3B</color>
+
+    <color name="powder_blue">#B8E3E9</color>
+    <color name="red_violet">#C71585</color>
+
 </resources>

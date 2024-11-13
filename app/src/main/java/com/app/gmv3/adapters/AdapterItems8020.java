@@ -27,7 +27,7 @@ public class AdapterItems8020 extends RecyclerView.Adapter<AdapterItems8020.MyVi
 
     private Context context;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView item_descripcion, item_articulo,item_meta,item_venta,item_porcent,item_lista,item_cumplio;
+        public TextView item_descripcion, item_articulo,item_meta,item_venta,item_porcent,item_lista,item_cumplio,Item_Count_Client;
         public CardView cardView;
 
         public MyViewHolder(View view) {
@@ -40,6 +40,7 @@ public class AdapterItems8020 extends RecyclerView.Adapter<AdapterItems8020.MyVi
             item_lista          = view.findViewById(R.id.item_lista);
             cardView            = view.findViewById(R.id.item_cardview);
             item_cumplio        = view.findViewById(R.id.item_cumplio);
+            Item_Count_Client   = view.findViewById(R.id.item_porcent_clientes);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,12 +83,15 @@ public class AdapterItems8020 extends RecyclerView.Adapter<AdapterItems8020.MyVi
         String venta = String.format(Locale.ENGLISH, "%1$,.0f",  Double.parseDouble(product.getVENTAUND()));
         holder.item_venta.setText(venta);
 
+        String CountCliente = String.format(Locale.ENGLISH, "%1$,.0f",  Double.parseDouble(product.getCountCliente()));
+        holder.Item_Count_Client.setText(CountCliente);
+
         String porcent = String.format(Locale.ENGLISH, "%1$,.2f",  Double.parseDouble(product.getPORCECUMP()));
         holder.item_porcent.setText(porcent.concat(" %"));
 
         holder.item_lista.setText(("SKU: ").concat(product.getLISTA().concat(" %")));
 
-        holder.cardView.setBackgroundColor(context.getResources().getColor(((product.getVENTAUND().equals("0.0")) ? R.color.white : R.color.light_green_300)));
+        holder.cardView.setBackgroundColor(context.getResources().getColor(((product.getVENTAUND().equals("0.0")) ? R.color.white : R.color.powder_blue)));
 
 
         if (product.getISCUMP().equals("SI")) {

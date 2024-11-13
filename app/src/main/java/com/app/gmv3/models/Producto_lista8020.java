@@ -10,6 +10,16 @@ public class Producto_lista8020 {
     private String Cumple;
     private String isCumpl;
 
+    private String CountCliente;
+
+    public String getCountCliente() {
+        return CountCliente;
+    }
+
+    public void setCountCliente(String countCliente) {
+        CountCliente = countCliente;
+    }
+
     public String getARTICULOS() {
         return ARTICULO;
     }
