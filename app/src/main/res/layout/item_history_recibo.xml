@@ -31,7 +31,7 @@
                 android:foreground="@color/overlay_light_20"
                 android:src="@drawable/img_person"
                 app:civ_shadow="true"
-                app:civ_shadow_radius="0"
+                app:civ_shadow_radius="0px"
                 app:civ_border="false" />
 
             <View

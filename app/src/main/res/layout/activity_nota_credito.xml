@@ -64,7 +64,7 @@
                 app:civ_border="true"
                 app:civ_border_color="@color/grey_10"
                 app:civ_shadow="true"
-                app:civ_shadow_radius="0"
+                app:civ_shadow_radius="0px"
                 app:civ_border_width="@dimen/spacing_xsmall" />
 
             <View
