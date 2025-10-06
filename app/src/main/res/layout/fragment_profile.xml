@@ -169,7 +169,7 @@
 
                 <LinearLayout
                     android:id="@+id/btn_vineta_history"
-
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
@@ -242,7 +242,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Reporte de Facturación"
+                        android:text="Facturación"
                         android:textAppearance="@style/TextAppearance.Medium.Bold"
                         android:textSize="14sp" />
                     <View
@@ -288,7 +288,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Recibo Colector"
+                        android:text="Recibos"
                         android:textAppearance="@style/TextAppearance.Medium.Bold"
                         android:textSize="14sp" />
                     <View
@@ -311,6 +311,7 @@
                     android:background="@color/grey_5" />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/id_mis_stat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -351,6 +352,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/id_plan_trabajo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -413,7 +415,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Comisiónes"
+                        android:text="Comisiónes (Beta)"
                         android:textAppearance="@style/TextAppearance.Medium.Bold"
                         android:textSize="14sp" />
                     <View
@@ -495,6 +497,7 @@
                     android:background="@color/grey_5" />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/btn_inteligencia_mercado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -611,7 +614,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Info. de la aplicación"
+                        android:text="Acerca GMV"
                         android:textAppearance="@style/TextAppearance.Medium.Bold"
                         android:textSize="14sp" />
                     <View
