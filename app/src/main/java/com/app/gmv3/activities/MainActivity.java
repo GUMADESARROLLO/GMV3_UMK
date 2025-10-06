@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public ViewPager viewPager;
     private Toolbar toolbar;
     MenuItem prevMenuItem;
-    int pager_number = 4;
+    int pager_number = 2;
     DBHelper dbhelper;
     private long exitTime = 0;
 
@@ -102,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_recent:
                         viewPager.setCurrentItem(0);
                         return true;
-                    case R.id.nav_category:
-                        viewPager.setCurrentItem(1);
-                        return true;
-                    case R.id.nav_promo:
-                        viewPager.setCurrentItem(2);
-                        return true;
+//                    case R.id.nav_category:
+//                        viewPager.setCurrentItem(1);
+//                        return true;
+//                    case R.id.nav_promo:
+//                        viewPager.setCurrentItem(2);
+//                        return true;
                     case R.id.nav_profile:
-                        viewPager.setCurrentItem(3);
+                        viewPager.setCurrentItem(1);
                         return true;
                 }
                 return false;
@@ -132,11 +132,11 @@ public class MainActivity extends AppCompatActivity {
                 navigation.getMenu().getItem(position).setChecked(true);
                 prevMenuItem = navigation.getMenu().getItem(position);
 
-               if (viewPager.getCurrentItem() == 1) {
-                    toolbar.setTitle(R.string.title_nav_category);
-                } else if (viewPager.getCurrentItem() == 2) {
-                    toolbar.setTitle(R.string.title_nav_help);
-                } else if (viewPager.getCurrentItem() == 3) {
+               if (viewPager.getCurrentItem() == 0) {
+                    toolbar.setTitle(R.string.title_nav_recent);
+//                } else if (viewPager.getCurrentItem() == 2) {
+//                    toolbar.setTitle(R.string.title_nav_help);
+                } else if (viewPager.getCurrentItem() == 1) {
                     toolbar.setTitle(R.string.title_nav_profile);
                 } else {
                     toolbar.setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
@@ -192,11 +192,11 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return new FragmentArticulos();
+//                case 1:
+//                    return new FragmentClientes();
+//                case 2:
+//                    return new FragmentPromos();
                 case 1:
-                    return new FragmentClientes();
-                case 2:
-                    return new FragmentPromos();
-                case 3:
                     return new FragmentProfile();
 
             }
