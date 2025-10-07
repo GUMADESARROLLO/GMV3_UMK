@@ -30,6 +30,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
+import com.app.gmv3.activities.ActivityCart;
+import com.app.gmv3.activities.ActivityClientes;
 import com.app.gmv3.activities.ActivityProductDetail;
 import com.app.gmv3.activities.MainActivity;
 import com.app.gmv3.activities.MyApplication;
@@ -219,7 +221,9 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
 
     @Override
     public void onContactSelected(Product product) {
-        Intent intent = new Intent(getActivity(), ActivityProductDetail.class);
+        //Intent intent = new Intent(getActivity(), ActivityProductDetail.class);
+        Intent intent = new Intent(getActivity(), ActivityClientes.class);
+
         intent.putExtra("product_id", product.getProduct_id());
         intent.putExtra("title", product.getProduct_name());
         intent.putExtra("image", product.getProduct_image());
@@ -232,8 +236,17 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         intent.putExtra("product_bonificado", product.getProduct_bonificado());
         intent.putExtra("product_lotes", product.getProduct_lotes());
         intent.putExtra("product_und", product.getProduct_und());
+//
+//
+//        startActivity(intent);
 
 
+
+        intent.putExtra("tax", 0);
+        intent.putExtra("currency_code", "NIO");
+        intent.putExtra("total_price", 900000000);
+
+        Log.i("TAG_info", "In Articulo : " + product.getProduct_quantity());
         startActivity(intent);
     }
 

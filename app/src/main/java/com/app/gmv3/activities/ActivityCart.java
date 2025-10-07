@@ -63,6 +63,7 @@ public class ActivityCart extends AppCompatActivity {
     public static ArrayList<String> product_image = new ArrayList<String>();
     List<Cart> arrayCart;
     View view;
+    String cCliente,cNombre,cDireccion;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,14 @@ public class ActivityCart extends AppCompatActivity {
         str_tax = intent.getDoubleExtra("tax", 0);
         str_currency_code = intent.getStringExtra("currency_code");
 
+        cCliente = intent.getStringExtra("cCliente");
+        cNombre = intent.getStringExtra("cNombre");
+        cDireccion = intent.getStringExtra("cDireccion");
+
+
+
+
+
         recyclerView = findViewById(R.id.recycler_view);
         lyt_empty_cart = findViewById(R.id.lyt_empty_history);
         btn_checkout = findViewById(R.id.btn_checkout);
@@ -96,8 +105,13 @@ public class ActivityCart extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //dbhelper.close();
-               Intent intent = new Intent(ActivityCart.this, ActivityCheckOutClientes.class);
-                //Intent intent = new Intent(ActivityCart.this, ActivityCheckout.class);
+               //Intent intent = new Intent(ActivityCart.this, ActivityCheckOutClientes.class);
+                Intent intent = new Intent(ActivityCart.this, ActivityCheckout.class);
+
+
+                intent.putExtra("cliente_codigo", cCliente);
+                intent.putExtra("cliente_nombre", cNombre);
+                intent.putExtra("cliente_direcc", cDireccion);
 
 
                 intent.putExtra("tax", str_tax);

@@ -97,8 +97,8 @@ public class ActivityProductDetail extends AppCompatActivity {
     Button btn_cart;
     public static DBHelper dbhelper;
     final Context context = this;
-    double resp_tax;
-    String resp_currency_code;
+    double resp_tax = 0;
+    String resp_currency_code = "NIO";
     AppCompatButton btn_checkout;
     public static ArrayList<String> lote_name = new ArrayList<String>();
     public static ArrayList<String> lote_date = new ArrayList<String>();
@@ -108,7 +108,9 @@ public class ActivityProductDetail extends AppCompatActivity {
     AdapterLotes adapterLotes;
     AdapterBonificado rcBonificado;
     List<Lotes> arrayItemLotes;
-        List<String> sList;
+    List<String> sList;
+
+    String cCliente,cNombre,cDireccion;
 
 
     @Override
@@ -128,7 +130,7 @@ public class ActivityProductDetail extends AppCompatActivity {
         initComponent();
         displayData();
         setupToolbar();
-        makeJsonObjectRequest();
+        //makeJsonObjectRequest();
 
     }
 
@@ -157,6 +159,13 @@ public class ActivityProductDetail extends AppCompatActivity {
         product_bonificado = intent.getStringExtra("product_bonificado");
         product_lotes = intent.getStringExtra("product_lotes");
         product_und = intent.getStringExtra("product_und");
+
+
+        // Datos del cliente
+        cCliente = intent.getStringExtra("cliente_codigo");
+        cNombre = intent.getStringExtra("cliente_nombre");
+        cDireccion = intent.getStringExtra("cliente_direcc");
+
     }
 
     public void initComponent() {
@@ -715,6 +724,8 @@ public class ActivityProductDetail extends AppCompatActivity {
 
         quantity = Integer.parseInt(cnt);
 
+        Log.i("TAG_info", "In Productos ADD : " + product_quantity);
+
         if (quantity <= 0) {
             ShowDialog("Alerta",
                     context.getResources().getString(R.string.msg_stock_below_0),
@@ -780,6 +791,13 @@ public class ActivityProductDetail extends AppCompatActivity {
 
             case R.id.cart:
                Intent intent = new Intent(getApplicationContext(), ActivityCart.class);
+
+
+                // Datos del cliente
+                intent.putExtra("cCliente", cCliente);
+                intent.putExtra("cNombre", cNombre);
+                intent.putExtra("cDireccion", cDireccion);
+
                 intent.putExtra("tax", resp_tax);
                 intent.putExtra("currency_code", resp_currency_code);
                 startActivity(intent);
