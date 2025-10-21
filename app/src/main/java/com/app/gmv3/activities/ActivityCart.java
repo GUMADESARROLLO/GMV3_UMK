@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
@@ -104,22 +105,41 @@ public class ActivityCart extends AppCompatActivity {
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //dbhelper.close();
-               //Intent intent = new Intent(ActivityCart.this, ActivityCheckOutClientes.class);
+
+                // Validar campos tipo String
+                if (isNullOrEmpty(cCliente) ||
+                        isNullOrEmpty(cNombre) ||
+                        isNullOrEmpty(cDireccion) ||
+                        isNullOrEmpty(str_currency_code)) {
+
+                    Toast.makeText(ActivityCart.this,
+                            "Por favor complete todos los campos antes de continuar",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validar campo numérico total_price
+                if (Double.isNaN(total_price) || total_price <= 0) {
+                    Toast.makeText(ActivityCart.this,
+                            "El total debe ser mayor a 0",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Si pasa todas las validaciones, continúa
                 Intent intent = new Intent(ActivityCart.this, ActivityCheckout.class);
-
-
                 intent.putExtra("cliente_codigo", cCliente);
                 intent.putExtra("cliente_nombre", cNombre);
                 intent.putExtra("cliente_direcc", cDireccion);
-
-
                 intent.putExtra("tax", str_tax);
                 intent.putExtra("currency_code", str_currency_code);
                 intent.putExtra("total_price", total_price);
+
                 startActivity(intent);
             }
         });
+
+
         btn_continue = findViewById(R.id.btn_continue);
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +188,10 @@ public class ActivityCart extends AppCompatActivity {
 
         new getDataTask().execute();
 
+    }
+
+    private boolean isNullOrEmpty(String value) {
+        return value == null || value.trim().isEmpty();
     }
 
     @Override
