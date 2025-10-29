@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public ViewPager viewPager;
     private Toolbar toolbar;
     MenuItem prevMenuItem;
-    int pager_number = 2;
+    int pager_number = 3;
     DBHelper dbhelper;
     private long exitTime = 0;
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.title_nav_recent);
+        toolbar.setTitle(R.string.title_nav_articulos);
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
@@ -99,17 +99,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.nav_recent:
+                    case R.id.nav_articulos:
                         viewPager.setCurrentItem(0);
                         return true;
-//                    case R.id.nav_category:
-//                        viewPager.setCurrentItem(1);
-//                        return true;
+                    case R.id.nav_clientes:
+                        viewPager.setCurrentItem(1);
+                        return true;
 //                    case R.id.nav_promo:
 //                        viewPager.setCurrentItem(2);
 //                        return true;
                     case R.id.nav_profile:
-                        viewPager.setCurrentItem(1);
+                        viewPager.setCurrentItem(2);
                         return true;
                 }
                 return false;
@@ -132,11 +132,11 @@ public class MainActivity extends AppCompatActivity {
                 navigation.getMenu().getItem(position).setChecked(true);
                 prevMenuItem = navigation.getMenu().getItem(position);
 
-               if (viewPager.getCurrentItem() == 0) {
-                    toolbar.setTitle(R.string.title_nav_recent);
-//                } else if (viewPager.getCurrentItem() == 2) {
-//                    toolbar.setTitle(R.string.title_nav_help);
+                if (viewPager.getCurrentItem() == 0){
+                    toolbar.setTitle(R.string.title_nav_articulos);
                 } else if (viewPager.getCurrentItem() == 1) {
+                    toolbar.setTitle(R.string.title_nav_clientes);
+                } else if (viewPager.getCurrentItem() == 2) {
                     toolbar.setTitle(R.string.title_nav_profile);
                 } else {
                     toolbar.setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 //        if (dbhelper.isPreviousDataExist()) {
 //            showAlertDialog();
 //        }
-        ArrayList<ArrayList<Object>>  data = dbhelper.getAllData();
+//        ArrayList<ArrayList<Object>>  data = dbhelper.getAllData();
 
         makeJsonObjectRequest();
 
@@ -192,11 +192,11 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return new FragmentArticulos();
-//                case 1:
-//                    return new FragmentClientes();
+                case 1:
+                    return new FragmentClientes();
 //                case 2:
 //                    return new FragmentPromos();
-                case 1:
+                case 2:
                     return new FragmentProfile();
 
             }

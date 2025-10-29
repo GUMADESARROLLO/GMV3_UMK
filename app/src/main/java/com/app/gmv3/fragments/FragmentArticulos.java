@@ -221,8 +221,8 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
 
     @Override
     public void onContactSelected(Product product) {
-        //Intent intent = new Intent(getActivity(), ActivityProductDetail.class);
-        Intent intent = new Intent(getActivity(), ActivityClientes.class);
+        Intent intent = new Intent(getActivity(), ActivityProductDetail.class);
+        //Intent intent = new Intent(getActivity(), ActivityClientes.class);
 
         intent.putExtra("product_id", product.getProduct_id());
         intent.putExtra("title", product.getProduct_name());

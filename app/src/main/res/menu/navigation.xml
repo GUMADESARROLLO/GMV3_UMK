@@ -2,15 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_recent"
+        android:id="@+id/nav_articulos"
         android:icon="@drawable/ic_stock"
-        android:title="@string/title_nav_recent" />
+        android:title="@string/title_nav_articulos" />
 
     <item
-        android:visible="false"
-        android:id="@+id/nav_category"
+        android:id="@+id/nav_clientes"
         android:icon="@drawable/ic_clients"
-        android:title="@string/title_nav_category" />
+        android:title="@string/title_nav_clientes" />
     <item
         android:visible="false"
         android:id="@+id/nav_promo"

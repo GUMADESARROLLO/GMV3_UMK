@@ -5,9 +5,9 @@
     <string name="app_name">GMV</string>
 
     <!--bottom navigation-->
-    <string name="title_nav_recent">ARTICULOS</string>
-    <string name="title_nav_category">CLIENTES</string>
-    <string name="title_nav_help">PROMOCIÓNES</string>
+    <string name="title_nav_articulos">ARTICULOS</string>
+    <string name="title_nav_clientes">CLIENTES</string>
+    <string name="title_nav_promoc">PROMOCIÓNES</string>
     <string name="title_nav_profile">PERFIL</string>
 
     <!--privacy policy-->

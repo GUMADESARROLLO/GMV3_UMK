@@ -240,7 +240,7 @@ public class ActivityProductDetail extends AppCompatActivity {
                     TextView edtQuantity = dialog.findViewById(R.id.id_valor_producto_2);
                     AppCompatButton AppBtn = dialog.findViewById(R.id.bt_close);
 
-                    txt_title.setText("¿Quiere agreagar un :? ");
+                    txt_title.setText("Detalles del Bonificado. ");
                     txt_msg.setText( str_bonificado);
 
                     edtQuantity.setVisibility(View.VISIBLE);
@@ -251,7 +251,7 @@ public class ActivityProductDetail extends AppCompatActivity {
 
 
 
-                    AppBtn.setText("Confirmar");
+                    //AppBtn.setText("Confirmar");
 
                     lyt.setBackgroundColor(context.getResources().getColor(R.color.light_blue_400));;
 
@@ -266,7 +266,7 @@ public class ActivityProductDetail extends AppCompatActivity {
                     AppBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            addProducto(row_arr.get(0),str_bonificado);
+                            //addProducto(row_arr.get(0),str_bonificado);
                             dialog.dismiss();
                         }
                     });

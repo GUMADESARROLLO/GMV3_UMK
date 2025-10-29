@@ -76,7 +76,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
     //List<Facturas_mora> arrayItemLotes;
     CircleImageView ImgVerication;
     String strVerificado,strPin,strDireccion, StrPlan;
-    ImageButton bLocation;
+
 
     CardView cardView ;
 
@@ -125,7 +125,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
 
         ImgVerication           = findViewById(R.id.id_btn_verificacion);
-        bLocation               = findViewById(R.id.id_btw_location);
+
 
         cardView                = findViewById(R.id.id_card_vinneta);
 
@@ -202,12 +202,15 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
         //ImgVerication.setImageDrawable(getApplicationContext().getResources().getDrawable(((strVerificado.contains("S;")) ? R.drawable.verificado :R.drawable.noverificado)));
 
-        bLocation.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_list_articulos).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityVerificacion.class);
-                intent.putExtra("Codi_cliente",code_cliente);
-                startActivity(intent);
+
+//                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityVerificacion.class);
+//                intent.putExtra("Codi_cliente",code_cliente);
+//                startActivity(intent);
+
+
             }
         });
 
@@ -485,12 +488,12 @@ public class ActivityPerfilCliente extends AppCompatActivity{
             case R.id.item_pin:
                 PushPin();
                 break;
-            case R.id.item_location:
-                List<String> row = Arrays.asList(strVerificado.split(";"));
-                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f", Double.parseDouble(row.get(1)),Double.parseDouble(row.get(2)));
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(intent);
-                break;
+//            case R.id.item_location:
+//                List<String> row = Arrays.asList(strVerificado.split(";"));
+//                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f", Double.parseDouble(row.get(1)),Double.parseDouble(row.get(2)));
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                startActivity(intent);
+//                break;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -517,14 +520,14 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
 
         // show the button when some condition is true
-        if (strVerificado.contains("S;")) {
-           // Item_rptVisita.setVisible(true);
-            Item_location.setVisible(true);
-        }else{
-            //Item_rptVisita.setVisible(false);
-            Item_location.setVisible(false);
-
-        }
+//        if (strVerificado.contains("S;")) {
+//           // Item_rptVisita.setVisible(true);
+//            Item_location.setVisible(true);
+//        }else{
+//            //Item_rptVisita.setVisible(false);
+//            Item_location.setVisible(false);
+//
+//        }
         return true;
     }
 }

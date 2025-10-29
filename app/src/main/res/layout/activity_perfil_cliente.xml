@@ -219,12 +219,12 @@
                     android:layout_height="0dp" />
 
                 <ImageButton
-                    android:id="@+id/id_btw_location"
+                    android:id="@+id/btn_list_articulos"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/available"
-                    app:srcCompat="@drawable/ic_location_on" />
+                    android:tint="@color/txt_price_color"
+                    app:srcCompat="@drawable/ic_cart" />
 
             </LinearLayout>
 

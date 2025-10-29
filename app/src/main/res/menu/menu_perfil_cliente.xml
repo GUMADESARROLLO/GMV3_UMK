@@ -16,6 +16,7 @@
         android:title="@string/action_push_pin"
         app:showAsAction="always" />
     <item
+        android:visible="false"
         android:id="@+id/item_location"
         android:icon="@drawable/ic_location_on"
         android:title="@string/action_reporte_visita"
