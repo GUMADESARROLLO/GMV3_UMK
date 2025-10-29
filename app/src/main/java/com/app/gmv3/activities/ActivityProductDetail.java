@@ -112,6 +112,8 @@ public class ActivityProductDetail extends AppCompatActivity {
 
     String cCliente,cNombre,cDireccion;
 
+    boolean isFacturable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +161,7 @@ public class ActivityProductDetail extends AppCompatActivity {
         product_bonificado = intent.getStringExtra("product_bonificado");
         product_lotes = intent.getStringExtra("product_lotes");
         product_und = intent.getStringExtra("product_und");
+        isFacturable = intent.getBooleanExtra("Facturable", false);
 
 
         // Datos del cliente
@@ -251,7 +254,11 @@ public class ActivityProductDetail extends AppCompatActivity {
 
 
 
-                    //AppBtn.setText("Confirmar");
+                    if (isFacturable){
+                        AppBtn.setText("Confirmar");
+                    } else {
+                        AppBtn.setText("Cerrar");
+                    }
 
                     lyt.setBackgroundColor(context.getResources().getColor(R.color.light_blue_400));;
 
@@ -266,7 +273,11 @@ public class ActivityProductDetail extends AppCompatActivity {
                     AppBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //addProducto(row_arr.get(0),str_bonificado);
+
+                            if (isFacturable){
+                                addProducto(row_arr.get(0),str_bonificado);
+                            }
+
                             dialog.dismiss();
                         }
                     });
@@ -308,6 +319,14 @@ public class ActivityProductDetail extends AppCompatActivity {
 
 
 
+
+
+        //VALIDA DE DONDE PROVIENE LA SOLICITUD
+        if (isFacturable){
+            fab.show();
+        }else {
+            fab.hide();
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

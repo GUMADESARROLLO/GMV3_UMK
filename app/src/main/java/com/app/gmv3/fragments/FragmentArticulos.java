@@ -236,6 +236,7 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         intent.putExtra("product_bonificado", product.getProduct_bonificado());
         intent.putExtra("product_lotes", product.getProduct_lotes());
         intent.putExtra("product_und", product.getProduct_und());
+        intent.putExtra("Facturable",false);
 //
 //
 //        startActivity(intent);

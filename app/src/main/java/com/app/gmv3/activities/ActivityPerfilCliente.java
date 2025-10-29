@@ -210,6 +210,10 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 //                intent.putExtra("Codi_cliente",code_cliente);
 //                startActivity(intent);
 
+                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityArticulos.class);
+                //intent.putExtra("Codi_cliente",code_cliente);
+                startActivity(intent);
+
 
             }
         });
