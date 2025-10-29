@@ -33,9 +33,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
     private ContactsAdapterListener listener;
 
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView product_name, product_price,product_cant,product_code,product_label_offer;
-        public ImageView product_image,product_premiun;
+        public ImageView product_image,product_lock;
+        private LinearLayout llt;
         private LinearLayout lvl_offer;
         public MyViewHolder(View view) {
             super(view);
@@ -44,9 +46,10 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
             product_cant = view.findViewById(R.id.id_Cant_item);
             product_code = view.findViewById(R.id.id_cod_articulo);
             product_image = view.findViewById(R.id.category_image);
-            product_premiun = view.findViewById(R.id.img_premiun);
+            product_lock = view.findViewById(R.id.item_lock);
             product_label_offer = view.findViewById(R.id.txt_offer);
             lvl_offer = view.findViewById(R.id.lvl_offer);
+            llt = view.findViewById(R.id.lyt_parent);
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -84,12 +87,18 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         String quantity = String.format(Locale.ENGLISH, "%1$,.2f", product.getProduct_quantity());
         holder.product_cant.setText(quantity.concat(" [" + product.getProduct_und().concat("]")));
 
+        //holder.llt.setBackgroundColor(context.getResources().getColor(((!product.isUnLock()) ? R.color.grey_20 : R.color.white)));
+
+
         holder.product_code.setText(product.getProduct_id());
 
-        if (product.getCALIFICATIVO().equals("A")) {
-            holder.product_premiun.setVisibility(View.VISIBLE);
+        if (!product.isUnLock()) {
+            //holder.product_lock.setVisibility(View.VISIBLE);
+            holder.lvl_offer.setVisibility(View.VISIBLE);
+            holder.product_label_offer.setText("BLOQUEADO");
         } else {
-            holder.product_premiun.setVisibility(View.GONE);
+            //holder.product_lock.setVisibility(View.GONE);
+            holder.lvl_offer.setVisibility(View.GONE);
         }
 
 
@@ -98,13 +107,13 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
 
         //holder.Ruta_asignada.setText(sVinneta.get(1));
 
-        if (sVinneta.get(0).equals("S")) {
-            holder.lvl_offer.setVisibility(View.VISIBLE);
-            holder.product_label_offer.setText(sVinneta.get(1));
-
-        } else {
-            holder.lvl_offer.setVisibility(View.GONE);
-        }
+//        if (sVinneta.get(0).equals("S")) {
+//            holder.lvl_offer.setVisibility(View.VISIBLE);
+//            holder.product_label_offer.setText(sVinneta.get(1));
+//
+//        } else {
+//            holder.lvl_offer.setVisibility(View.GONE);
+//        }
 
 
         Transformation transformation = new RoundedTransformationBuilder()
@@ -114,7 +123,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
 
         Picasso.with(context)
                 .load(Config.ADMIN_PANEL_URL + "/upload/product/" + product.getProduct_image())
-                .placeholder(R.drawable.ic_loading)
+                .placeholder(R.drawable.img_empty_history)
                 .resize(250, 250)
                 .centerCrop()
                 .transform(transformation)

@@ -268,8 +268,6 @@ public class ActivityProductDetail extends AppCompatActivity {
                     lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
 
-
-
                     AppBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

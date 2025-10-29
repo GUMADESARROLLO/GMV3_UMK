@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -122,9 +123,8 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
                     List<String> sVinneta = Arrays.asList(items.get(0).getISPROMO().split(":"));
                     RutaAsignada[0] = sVinneta.get(2);
 
-
                     sharedPref.setPathAssigned(RutaAsignada[0]);
-                    // ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
+                    //(this).getSupportActionBar().setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
 
 
                 } else {
@@ -184,6 +184,14 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
         intent.putExtra("currency_code", "NIO");
         intent.putExtra("total_price", 900000000);
 
-        startActivity(intent);
+        if (product.isUnLock()){
+            startActivity(intent);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.alert_title)
+                    .setMessage(R.string.alert_no_fact)
+                    .create()
+                    .show();
+        }
     }
 }

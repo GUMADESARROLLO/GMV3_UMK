@@ -222,4 +222,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="action_show_calendar">Comisiones</string>
     <string name="action_show_items">Items 80/20</string>
+    <string name="alert_title">GMV - Notificación.</string>
+    <string name="alert_no_fact">Este Articulo no puede ser Facturado para su ruta</string>
 </resources>

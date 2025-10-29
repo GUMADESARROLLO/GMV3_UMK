@@ -21,6 +21,17 @@ public class Product {
     private double tax;
     private double product_quantity;
 
+
+    public boolean isUnLock() {
+        return isUnLock;
+    }
+
+    public void setUnLock(boolean unLock) {
+        isUnLock = unLock;
+    }
+
+    private boolean isUnLock;
+
     public String getISPROMO() {
         return ISPROMO;
     }

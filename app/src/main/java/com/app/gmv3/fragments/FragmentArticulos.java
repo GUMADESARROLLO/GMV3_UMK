@@ -1,5 +1,6 @@
 package com.app.gmv3.fragments;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -143,9 +144,6 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
                         }.getType());
 
                         // adding contacts to contacts list
-
-
-
                         productList.clear();
                         productList.addAll(items);
 
@@ -247,8 +245,16 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         intent.putExtra("currency_code", "NIO");
         intent.putExtra("total_price", 900000000);
 
-        Log.i("TAG_info", "In Articulo : " + product.getProduct_quantity());
-        startActivity(intent);
+
+        if (product.isUnLock()){
+            startActivity(intent);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle(R.string.alert_title)
+                    .setMessage(R.string.alert_no_fact)
+                    .create()
+                    .show();
+        }
     }
 
 }
