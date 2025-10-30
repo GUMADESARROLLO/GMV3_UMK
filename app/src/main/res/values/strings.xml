@@ -115,6 +115,12 @@
     <string name="pref_Type">Tipo</string>
     <string name="pref_Path_Assigned">PathAssigned</string>
 
+    <string name="pref_pedido_cliente">CLIENTE</string>
+    <string name="pref_pedido_descripcion">DESCRIPCION</string>
+    <string name="pref_pedido_direccion">DIRECION</string>
+
+
+
     <string name="default_your_name">Su Nombre</string>
     <string name="default_your_email">Su.email@gmail.com</string>
     <string name="default_your_phone">+50500000000</string>

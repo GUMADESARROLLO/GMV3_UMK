@@ -40,6 +40,7 @@ import com.app.gmv3.adapters.AdapterPerfilLotes;
 import com.app.gmv3.models.Facturas_mora;
 import com.app.gmv3.models.Moras;
 import com.app.gmv3.utilities.MyDividerItemDecoration;
+import com.app.gmv3.utilities.SharedPrefCliente;
 import com.app.gmv3.utilities.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -85,6 +86,8 @@ public class ActivityPerfilCliente extends AppCompatActivity{
     List<Facturas_mora> listMora = new ArrayList<>();
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
+
+
 
 
     @Override
@@ -182,7 +185,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
         strVerificado   = intent.getStringExtra("Verificado");
         strPin          = intent.getStringExtra("pin");
-        strDireccion    =  intent.getStringExtra("Direccion");
+        strDireccion    = intent.getStringExtra("Direccion");
 
         StrPlan         = intent.getStringExtra("PLAN");
 
@@ -212,6 +215,9 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
                 Intent intent = new Intent(ActivityPerfilCliente.this, ActivityArticulos.class);
                 //intent.putExtra("Codi_cliente",code_cliente);
+
+
+
                 startActivity(intent);
 
 

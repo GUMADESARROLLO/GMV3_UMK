@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private final static String DB_NAME         = "gmv3_db";
-    public final static int DB_VERSION          = 6;
+    private final static String DB_NAME         = "gmv_db";
+    public final static int DB_VERSION          = 7;
     public static SQLiteDatabase db;
     private final Context context;
     private String DB_PATH;

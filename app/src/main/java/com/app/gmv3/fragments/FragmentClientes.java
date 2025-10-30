@@ -34,6 +34,7 @@ import com.app.gmv3.activities.ActivityPerfilCliente;
 import com.app.gmv3.adapters.AdapterClientes;
 import com.app.gmv3.models.Clients;
 import com.app.gmv3.utilities.SharedPref;
+import com.app.gmv3.utilities.SharedPrefCliente;
 import com.app.gmv3.utilities.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -224,6 +225,7 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
     @Override
     public void onContactSelected(Clients clients) {
         //Toast.makeText(getActivity(), "Selected: " + category.getCategory_name(), Toast.LENGTH_LONG).show();
+        SharedPrefCliente InfoCliente = new SharedPrefCliente(getContext());;
         Intent intent = new Intent(getActivity(), ActivityPerfilCliente.class);
         intent.putExtra("Client_Code", clients.getCLIENTE());
         intent.putExtra("CLient_name", clients.getNOMBRE());
@@ -239,6 +241,11 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
         intent.putExtra("moroso", clients.getMOROSO());
         intent.putExtra("PLAN", clients.getPLAN());
         intent.putExtra("NIVEL_PRECIO", clients.getNIVEL_PRECIO());
+
+        InfoCliente.setCliente(clients.getCLIENTE());
+        InfoCliente.setDescripcion(clients.getDIRECCION());
+        InfoCliente.setAddress(clients.getNOMBRE());
+
         startActivity(intent);
     }
 

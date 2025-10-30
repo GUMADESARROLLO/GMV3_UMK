@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.app.gmv3.utilities.SharedPrefCliente;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,7 +54,7 @@ public class ActivityCart extends AppCompatActivity {
     final int CLEAR_ONE_ORDER = 1;
     int FLAG;
     String ID;
-    double str_tax;
+    double str_tax = 0;
     String str_currency_code;
     AppCompatButton btn_checkout;
     Button  btn_continue;
@@ -88,12 +92,27 @@ public class ActivityCart extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        str_tax = intent.getDoubleExtra("tax", 0);
+        SharedPrefCliente infoCliente = new SharedPrefCliente(this);
+
+
+        //str_tax = intent.getDoubleExtra("tax", 0);
+
+//        cCliente = intent.getStringExtra("cCliente");
+//        cNombre = intent.getStringExtra("cNombre");
+//        cDireccion = intent.getStringExtra("cDireccion");
+//        str_currency_code = intent.getStringExtra("currency_code");
+
+        cCliente = infoCliente.getCliente();
+        cNombre = infoCliente.getAddress();
+        cDireccion = infoCliente.getDesripcion();
+
+        Log.i("FATAL EXCEPTION", ("Code: ").concat(cCliente).concat(" -> ").concat(cNombre).concat(" -> ").concat(cDireccion) );
+
         str_currency_code = intent.getStringExtra("currency_code");
 
-        cCliente = intent.getStringExtra("cCliente");
-        cNombre = intent.getStringExtra("cNombre");
-        cDireccion = intent.getStringExtra("cDireccion");
+
+
+
 
 
 
