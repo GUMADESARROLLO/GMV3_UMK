@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -23,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -31,10 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
-import com.app.gmv3.activities.ActivityCart;
-import com.app.gmv3.activities.ActivityClientes;
 import com.app.gmv3.activities.ActivityProductDetail;
-import com.app.gmv3.activities.MainActivity;
 import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.adapters.AdapterProduct;
 import com.app.gmv3.models.Product;
@@ -68,7 +63,7 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recent, container, false);
+        View view = inflater.inflate(R.layout.fragment_articulos, container, false);
         setHasOptionsMenu(true);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setRefreshing(true);

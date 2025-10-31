@@ -88,9 +88,6 @@ public class ActivityClientes extends AppCompatActivity implements AdapterCheckO
         product_price  = intent.getDoubleExtra("product_price",0);
         product_quantity = intent.getDoubleExtra("product_quantity",0);
 
-        Log.i("TAG_info", "In Clientes : " + product_quantity);
-
-
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();

@@ -63,7 +63,7 @@ import static com.app.gmv3.utilities.Constant.PUSH_PIN;
 public class ActivityPerfilCliente extends AppCompatActivity{
     TextView txt_perfil_name_cliente,txt_perfil_disponible,txt_perfil_saldo,txt_perfil_limite;
     TextView txt_perfil_noVencido,txt_perfil_d30,txt_perfil_d60,txt_perfil_d90,txt_perfil_d120,txt_perfil_m120;
-    TextView txt_tele,txt_condicion_pago,txt_saldo_vineta,txt_nivel_precio;
+    TextView txt_tele,txt_condicion_pago,txt_saldo_vineta,txt_nivel_precio, txt_direccion;
     String code_cliente,str_moroso;
 
     /*public static ArrayList<String> factura_id = new ArrayList<String>();
@@ -121,7 +121,8 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         txt_perfil_d90          = findViewById(R.id.id_perfil_d90);
         txt_perfil_d120         = findViewById(R.id.id_perfil_d120);
         txt_perfil_m120         = findViewById(R.id.id_perfil_m120);
-        txt_saldo_vineta         = findViewById(R.id.id_saldo_vineta);
+        txt_saldo_vineta        = findViewById(R.id.id_saldo_vineta);
+        txt_direccion           = findViewById(R.id.txt_direccion);
 
         txt_nivel_precio= findViewById(R.id.id_nivel_precio);
 
@@ -202,6 +203,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         txt_perfil_limite.setText(("C$ ").concat(intent.getStringExtra("Limite")));
 
         txt_saldo_vineta.setText(("C$ ").concat(intent.getStringExtra("vineta_saldo")));
+        txt_direccion.setText(strDireccion);
 
         //ImgVerication.setImageDrawable(getApplicationContext().getResources().getDrawable(((strVerificado.contains("S;")) ? R.drawable.verificado :R.drawable.noverificado)));
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ import com.app.gmv3.activities.MyApplication;
 import com.app.gmv3.activities.ActivityPerfilCliente;
 import com.app.gmv3.adapters.AdapterClientes;
 import com.app.gmv3.models.Clients;
+import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.SharedPrefCliente;
 import com.app.gmv3.utilities.Utils;
@@ -61,7 +63,7 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
     };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recent, container, false);
+        View view = inflater.inflate(R.layout.fragment_articulos, container, false);
         setHasOptionsMenu(true);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
@@ -76,10 +78,13 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
         categoryList = new ArrayList<>();
         mAdapter = new AdapterClientes(getActivity(), categoryList, this);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerView.setLayoutManager(mLayoutManager);
+        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
+        recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
         view.findViewById(R.id.bt_retry).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

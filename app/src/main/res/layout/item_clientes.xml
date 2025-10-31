@@ -94,7 +94,7 @@
 
                         <TextView
 
-                            android:id="@+id/category_name"
+                            android:id="@+id/client_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="ALPHACHEMI ALBERT JOHN ATHA SALINAS RUC 0012705650057S"
@@ -102,7 +102,7 @@
 
                         <TextView
 
-                            android:id="@+id/product_count"
+                            android:id="@+id/client_dir"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="DETALLE: KM 11 CARRETERA NUEVA A LEON, EMPALME DE LA CUESTA EL PLOMO 100 MTS AL O (PRADEXSA) BODEGA 1, MANAGUA."
@@ -136,10 +136,6 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                             android:textColor="@color/light_blue_400"
                             android:textStyle="bold" />
-
-
-
-
                     </LinearLayout>
 
 

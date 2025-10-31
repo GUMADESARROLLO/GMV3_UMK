@@ -3,6 +3,7 @@ package com.app.gmv3.activities;
 import static com.app.gmv3.utilities.Constant.GET_RECENT_PRODUCT;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,10 +13,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -45,6 +50,7 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
     RecyclerView rcvArticulos;
     View lyt_empty;
     SwipeRefreshLayout RefreshArticulos = null;
+    private SearchView searchView;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -145,6 +151,35 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
         });
 
         MyApplication.getInstance().addToRequestQueue(request);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        //Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+
+        return true;
     }
 
     @Override

@@ -44,8 +44,8 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
             imgPlan                 = view.findViewById(R.id.id_img_plan);
             relativeLayout          = view.findViewById(R.id.id_lyt_moroso);
             lytPin                  = view.findViewById(R.id.id_lyt_pin);
-            category_name           = view.findViewById(R.id.category_name);
-            product_count           = view.findViewById(R.id.product_count);
+            category_name           = view.findViewById(R.id.client_name);
+            product_count           = view.findViewById(R.id.client_dir);
             txt_cliente_codigo      = view.findViewById(R.id.id_cliente_codigo);
             txt_cliente_limite      = view.findViewById(R.id.id_cliente_limite);
             txt_cliente_saldo       = view.findViewById(R.id.id_cliente_saldo);
@@ -71,8 +71,8 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_clientes, parent, false);
-
+        //View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_clientes, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_client,parent,false);
         return new MyViewHolder(itemView);
     }
 
