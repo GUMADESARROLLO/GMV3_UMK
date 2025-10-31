@@ -52,6 +52,8 @@
     <!--menu, cart and order-->
     <string name="search_query_text">Buscar&#8230;</string>
     <string name="confirm">Confirmacion</string>
+    <string name="Alerta">Alerta</string>
+
     <string name="number_order">Cantidad : </string>
     <string name="clear_all_order">¿Quiere Limpiar todas las Ordenes?</string>
     <string name="clear_one_order">¿Quiere Limpiar esta orden?</string>
@@ -118,6 +120,8 @@
     <string name="pref_pedido_cliente">CLIENTE</string>
     <string name="pref_pedido_descripcion">DESCRIPCION</string>
     <string name="pref_pedido_direccion">DIRECION</string>
+    <string name="pref_pedido_disponible">ND_DISP</string>
+    <string name="pref_pedido_moroso">ND_MOROSO</string>
 
 
 

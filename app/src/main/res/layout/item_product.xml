@@ -158,6 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="C$ 150,000.00"
+                        android:textSize="17sp"
                         android:textAllCaps="true"
                         android:textColor="@color/txt_price_color"
                         app:fontFamily="sans-serif-medium" />
@@ -172,6 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="150,000.00 [CJA]"
+                        android:textSize="17sp"
                         android:textColor="@color/grey_40" />
 
                 </LinearLayout>

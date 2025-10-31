@@ -42,6 +42,23 @@ public class SharedPrefCliente {
     public String getAddress() {
         return default_prefence.getString(str(R.string.pref_pedido_direccion), str(R.string.pref_pedido_direccion));
     }
+    public void setDisponible(String name) {
+        default_prefence.edit().putString(str(R.string.pref_pedido_disponible), name).apply();
+    }
+
+    public String getDisponible() {
+        return default_prefence.getString(str(R.string.pref_pedido_disponible), "N/D");
+    }
+
+    public void setMoroso(String name) {
+        default_prefence.edit().putString(str(R.string.pref_pedido_moroso), name).apply();
+    }
+
+    public String getMoroso() {
+        return default_prefence.getString(str(R.string.pref_pedido_moroso), str(R.string.pref_pedido_moroso));
+    }
+
+
 
 
 }

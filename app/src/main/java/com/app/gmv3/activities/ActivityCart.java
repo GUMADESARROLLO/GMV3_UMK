@@ -68,7 +68,7 @@ public class ActivityCart extends AppCompatActivity {
     public static ArrayList<String> product_image = new ArrayList<String>();
     List<Cart> arrayCart;
     View view;
-    String cCliente,cNombre,cDireccion;
+    String cCliente,cNombre,cDireccion,cDisponible;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,8 +92,8 @@ public class ActivityCart extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        SharedPrefCliente infoCliente = new SharedPrefCliente(this);
-
+        final SharedPrefCliente infoCliente = new SharedPrefCliente(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
 
         //str_tax = intent.getDoubleExtra("tax", 0);
 
@@ -105,18 +105,11 @@ public class ActivityCart extends AppCompatActivity {
         cCliente = infoCliente.getCliente();
         cNombre = infoCliente.getAddress();
         cDireccion = infoCliente.getDesripcion();
-
-        Log.i("FATAL EXCEPTION", ("Code: ").concat(cCliente).concat(" -> ").concat(cNombre).concat(" -> ").concat(cDireccion) );
-
+        cDisponible = infoCliente.getDisponible();
         str_currency_code = intent.getStringExtra("currency_code");
 
 
-
-
-
-
-
-
+        //Log.i("FATAL EXCEPTION", ("total_price: ").concat(String.valueOf(total_price)).concat(" -> ").concat("Disponible").concat(" -> ").concat(String.valueOf(infoCliente.getDisponible())) );
 
         recyclerView = findViewById(R.id.recycler_view);
         lyt_empty_cart = findViewById(R.id.lyt_empty_history);
@@ -126,10 +119,8 @@ public class ActivityCart extends AppCompatActivity {
             public void onClick(View view) {
 
                 // Validar campos tipo String
-                if (isNullOrEmpty(cCliente) ||
-                        isNullOrEmpty(cNombre) ||
-                        isNullOrEmpty(cDireccion) ||
-                        isNullOrEmpty(str_currency_code)) {
+                if (isNullOrEmpty(cCliente) ||isNullOrEmpty(cNombre) || isNullOrEmpty(cDireccion) || isNullOrEmpty(str_currency_code))
+                {
 
                     Toast.makeText(ActivityCart.this,
                             "Por favor complete todos los campos antes de continuar",
@@ -145,16 +136,36 @@ public class ActivityCart extends AppCompatActivity {
                     return;
                 }
 
-                // Si pasa todas las validaciones, continúa
-                Intent intent = new Intent(ActivityCart.this, ActivityCheckout.class);
-                intent.putExtra("cliente_codigo", cCliente);
-                intent.putExtra("cliente_nombre", cNombre);
-                intent.putExtra("cliente_direcc", cDireccion);
-                intent.putExtra("tax", str_tax);
-                intent.putExtra("currency_code", str_currency_code);
-                intent.putExtra("total_price", total_price);
 
-                startActivity(intent);
+                if ( infoCliente.getMoroso().equals("S"))
+                {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCart.this);
+                    builder.setTitle(R.string.Alerta);
+                    builder.setMessage("Cliente en Estado de Morosidad, no se le permite crear pedido.");
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }else if(total_price <= Double.parseDouble(cDisponible.replaceAll(",","")) ){
+                    // Si pasa todas las validaciones, continúa
+                    Intent intent = new Intent(ActivityCart.this, ActivityCheckout.class);
+                    intent.putExtra("cliente_codigo", cCliente);
+                    intent.putExtra("cliente_nombre", cNombre);
+                    intent.putExtra("cliente_direcc", cDireccion);
+                    intent.putExtra("tax", str_tax);
+                    intent.putExtra("currency_code", str_currency_code);
+                    intent.putExtra("total_price", total_price);
+
+                    startActivity(intent);
+
+                }else{
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCart.this);
+                    builder.setTitle(R.string.Alerta);
+                    builder.setMessage("Pedido Exede el limite Disponible");
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
             }
         });
 

@@ -250,6 +250,8 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
         InfoCliente.setCliente(clients.getCLIENTE());
         InfoCliente.setDescripcion(clients.getDIRECCION());
         InfoCliente.setAddress(clients.getNOMBRE());
+        InfoCliente.setDisponible(clients.getDIPONIBLE());
+        InfoCliente.setMoroso(clients.getMOROSO());
 
         startActivity(intent);
     }
