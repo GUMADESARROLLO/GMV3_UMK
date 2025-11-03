@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -52,6 +53,8 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
     SwipeRefreshLayout RefreshArticulos = null;
     private SearchView searchView;
 
+    String CCL = "ND";
+
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +83,13 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
         getSupportActionBar().setTitle("ARTICULOS");
 
         //onRefresh();
+        Intent intent = getIntent();
+        CCL   = intent.getStringExtra("Codi_cliente");
+
         getArticulos();
+        onRefresh();
+
+
     }
 
     private void onRefresh() {
@@ -88,26 +97,32 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
             @Override
             public void onRefresh() {
                 Articulos.clear();
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (Utils.isNetworkAvailable((Activity) getApplicationContext())) {
+                        if (Utils.isNetworkAvailable(ActivityArticulos.this)) {
                             RefreshArticulos.setRefreshing(false);
                             getArticulos();
                         } else {
                             RefreshArticulos.setRefreshing(false);
-                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityArticulos.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 }, 1500);
+                mAdapter.notifyDataSetChanged();
             }
         });
     }
 
     private void getArticulos() {
         final String[] RutaAsignada = new String[1];
-        JsonArrayRequest request = new JsonArrayRequest(GET_RECENT_PRODUCT + sharedPref.getYourName(), new Response.Listener<JSONArray>() {
+
+        String CLIENTE  = CCL;
+        String URL  = GET_RECENT_PRODUCT.concat(sharedPref.getYourName()).concat("&Cliente=").concat(CLIENTE);
+
+        JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if (response == null) {
@@ -118,9 +133,6 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
                 List<Product> items = new Gson().fromJson(response.toString(), new TypeToken<List<Product>>() {
                 }.getType());
 
-                // adding contacts to contacts list
-
-
 
                 Articulos.clear();
                 Articulos.addAll(items);
@@ -130,8 +142,7 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
                     RutaAsignada[0] = sVinneta.get(2);
 
                     sharedPref.setPathAssigned(RutaAsignada[0]);
-                    //(this).getSupportActionBar().setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
-
+                    getSupportActionBar().setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
 
                 } else {
                 }
@@ -154,7 +165,7 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.menu_articulos, menu);
         //Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -189,6 +200,15 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
             case android.R.id.home:
                 onBackPressed();
                 break;
+
+            case  R.id.ic_cart:
+                Intent intent = new Intent(getApplicationContext(), ActivityCart.class);
+                intent.putExtra("tax", 0);
+                intent.putExtra("currency_code", "NIO");
+                startActivity(intent);
+                break;
+
+
 
             default:
                 return super.onOptionsItemSelected(menuItem);

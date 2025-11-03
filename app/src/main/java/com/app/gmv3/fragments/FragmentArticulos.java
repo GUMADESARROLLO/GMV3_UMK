@@ -127,7 +127,11 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
 
     private void fetchData() {
         final String[] RutaAsignada = new String[1];
-        JsonArrayRequest request = new JsonArrayRequest(GET_RECENT_PRODUCT + sharedPref.getYourName(), new Response.Listener<JSONArray>() {
+
+        String CLIENTE  = "ND";
+        String URL  = GET_RECENT_PRODUCT.concat(sharedPref.getYourName()).concat("&Cliente=").concat(CLIENTE);
+
+        JsonArrayRequest request = new JsonArrayRequest(URL , new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         if (response == null) {
@@ -230,10 +234,6 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         intent.putExtra("product_lotes", product.getProduct_lotes());
         intent.putExtra("product_und", product.getProduct_und());
         intent.putExtra("Facturable",false);
-//
-//
-//        startActivity(intent);
-
 
 
         intent.putExtra("tax", 0);

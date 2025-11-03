@@ -216,7 +216,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 //                startActivity(intent);
 
                 Intent intent = new Intent(ActivityPerfilCliente.this, ActivityArticulos.class);
-                //intent.putExtra("Codi_cliente",code_cliente);
+                intent.putExtra("Codi_cliente",code_cliente);
 
 
 
