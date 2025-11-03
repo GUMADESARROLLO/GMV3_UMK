@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -140,9 +141,13 @@ public class ActivityCart extends AppCompatActivity {
                 if ( infoCliente.getMoroso().equals("S"))
                 {
 
+                    String titleHtml = "<font color='#FF0000'>⚠ Cliente en Estado de Morosidad</font>";
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCart.this);
-                    builder.setTitle(R.string.Alerta);
-                    builder.setMessage("Cliente en Estado de Morosidad, no se le permite crear pedido.");
+                    builder.setTitle(Html.fromHtml(titleHtml, Html.FROM_HTML_MODE_LEGACY));
+                    builder.setMessage("No se le permite crear pedido.");
+                    builder.setPositiveButton("OK", null);
+
                     AlertDialog alert = builder.create();
                     alert.show();
 
@@ -160,9 +165,16 @@ public class ActivityCart extends AppCompatActivity {
 
                 }else{
 
+                    double Diff = total_price - Double.parseDouble(cDisponible.replaceAll(",", ""));
+                    String diffFormatted = String.format(Locale.ENGLISH, "%1$,.2f", Diff);
+                    String messageHtml = "Pedido excede el límite disponible: <font color='#FF0000'>C$ " + diffFormatted + "</font>";
+
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCart.this);
                     builder.setTitle(R.string.Alerta);
-                    builder.setMessage("Pedido Exede el limite Disponible");
+                    builder.setMessage(Html.fromHtml(messageHtml));
+                    builder.setPositiveButton("OK", null);
+
                     AlertDialog alert = builder.create();
                     alert.show();
                 }

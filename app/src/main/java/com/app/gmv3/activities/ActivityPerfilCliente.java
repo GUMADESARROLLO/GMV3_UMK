@@ -1,5 +1,6 @@
 package com.app.gmv3.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Html;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -215,12 +218,27 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 //                intent.putExtra("Codi_cliente",code_cliente);
 //                startActivity(intent);
 
-                Intent intent = new Intent(ActivityPerfilCliente.this, ActivityArticulos.class);
-                intent.putExtra("Codi_cliente",code_cliente);
+                if (str_moroso.equals("S")){
+
+                    String titleHtml = "<font color='#FF0000'>⚠ Cliente en Estado de Morosidad</font>";
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityPerfilCliente.this);
+                    builder.setTitle(Html.fromHtml(titleHtml, Html.FROM_HTML_MODE_LEGACY));
+                    builder.setMessage("No se le permite crear pedido.");
+                    builder.setPositiveButton("OK", null);
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                } else {
+                    Intent intent = new Intent(ActivityPerfilCliente.this, ActivityArticulos.class);
+                    intent.putExtra("Codi_cliente",code_cliente);
+                    startActivity(intent);
+                }
 
 
 
-                startActivity(intent);
+
 
 
             }
