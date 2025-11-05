@@ -311,7 +311,6 @@
                     android:background="@color/grey_5" />
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/id_mis_stat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
