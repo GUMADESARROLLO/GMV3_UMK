@@ -35,6 +35,7 @@ import com.app.gmv3.adapters.AdapterProduct;
 import com.app.gmv3.models.Product;
 import com.app.gmv3.utilities.ItemOffsetDecoration;
 import com.app.gmv3.utilities.SharedPref;
+import com.app.gmv3.utilities.SharedPrefDarkMode;
 import com.app.gmv3.utilities.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -59,6 +60,7 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
     LinearLayout lyt_root;
 
     SharedPref sharedPref;
+    SharedPrefDarkMode DarkMode ;
 
 
     @Override
@@ -69,11 +71,15 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         swipeRefreshLayout.setRefreshing(true);
         lyt_empty_history = view.findViewById(R.id.lyt_empty_history);
         sharedPref = new SharedPref(getContext());
+        DarkMode = new SharedPrefDarkMode(getContext());
 
         lyt_root = view.findViewById(R.id.lyt_root);
         if (Config.ENABLE_RTL_MODE) {
             lyt_root.setRotationY(180);
         }
+//        if (DarkMode.getModeDark()){
+//            lyt_root.setBackgroundColor(getResources().getColor((R.color.darkHomeLight)));
+//        }
 
         recyclerView = view.findViewById(R.id.recycler_view);
         productList = new ArrayList<>();

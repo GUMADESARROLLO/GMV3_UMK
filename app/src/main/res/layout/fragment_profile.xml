@@ -496,7 +496,6 @@
                     android:background="@color/grey_5" />
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/btn_inteligencia_mercado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

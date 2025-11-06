@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.app.gmv3.fragments.FragmentPromos;
 import com.app.gmv3.utilities.SharedPref;
+import com.app.gmv3.utilities.SharedPrefDarkMode;
 import com.app.gmv3.utilities.updateApplication;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.appbar.AppBarLayout;
@@ -65,12 +66,15 @@ public class MainActivity extends AppCompatActivity {
     private long exitTime = 0;
 
     SharedPref sharedPref;
+    SharedPrefDarkMode DarkMode ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         view = findViewById(android.R.id.content);
+
+        navigation = findViewById(R.id.navigation);
 
         if (Config.ENABLE_RTL_MODE) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -82,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         ((CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams()).setBehavior(new AppBarLayoutBehavior());
 
         sharedPref = new SharedPref(this);
+        DarkMode = new SharedPrefDarkMode(MainActivity.this);
 
 
 
@@ -89,11 +94,16 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.title_nav_articulos);
 
+//        if (DarkMode.getModeDark()){
+//            toolbar.setBackgroundColor(getResources().getColor((R.color.darkHomeLight)));
+//            navigation.setBackgroundColor(getResources().getColor((R.color.darkHomeLight)));
+//        }
+
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(pager_number);
 
-        navigation = findViewById(R.id.navigation);
+
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

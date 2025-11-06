@@ -3,7 +3,11 @@ package com.app.gmv3.adapters;
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.ColorStateList;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,7 @@ import android.widget.TextView;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.models.Product;
+import com.app.gmv3.utilities.SharedPrefDarkMode;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -32,6 +37,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
     private List<Product> productListFiltered;
     private ContactsAdapterListener listener;
 
+    SharedPrefDarkMode DarkMode ;
+
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -39,6 +46,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         public ImageView product_image,product_lock;
         private LinearLayout llt;
         private LinearLayout lvl_offer;
+
         public MyViewHolder(View view) {
             super(view);
             product_name = view.findViewById(R.id.product_name);
@@ -49,7 +57,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
             //product_lock = view.findViewById(R.id.item_lock);
             product_lock = view.findViewById(R.id.icon_status);
             //lvl_offer = view.findViewById(R.id.lvl_offer);
-            //llt = view.findViewById(R.id.lyt_parent);
+            llt = view.findViewById(R.id.lyt_parent);
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +66,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
                     listener.onContactSelected(productListFiltered.get(getAdapterPosition()));
                 }
             });
+
+
         }
     }
 
@@ -66,6 +76,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         this.listener = listener;
         this.productList = productList;
         this.productListFiltered = productList;
+        this.DarkMode = new SharedPrefDarkMode(context);
     }
 
     @Override
@@ -87,6 +98,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         holder.product_cant.setText(quantity.concat(" [ " + product.getProduct_und().concat(" ]")));
 
         //holder.llt.setBackgroundColor(context.getResources().getColor(((!product.isUnLock()) ? R.color.grey_20 : R.color.white)));
+
+
+//        if (DarkMode.getModeDark()){
+//            setSelectableBackground(
+//                    holder.llt,
+//                    R.color.darkHome
+//            );
+//        }
 
 
         holder.product_code.setText(product.getProduct_id());
@@ -133,6 +152,25 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
     @Override
     public int getItemCount() {
         return productListFiltered.size();
+    }
+
+    private void setSelectableBackground(View view, int baseColorResId) {
+        Context context = view.getContext();
+
+        // Color base (rojo o blanco)
+        int baseColor = context.getResources().getColor(baseColorResId);
+
+        // Color de ripple (efecto toque)
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.colorControlHighlight, typedValue, true);
+        ColorStateList rippleColor = ColorStateList.valueOf(typedValue.data);
+
+        // Capa base
+        ColorDrawable backgroundColor = new ColorDrawable(baseColor);
+
+        // Combina el ripple + color base
+        RippleDrawable rippleDrawable = new RippleDrawable(rippleColor, backgroundColor, null);
+        view.setBackground(rippleDrawable);
     }
 
     @Override
