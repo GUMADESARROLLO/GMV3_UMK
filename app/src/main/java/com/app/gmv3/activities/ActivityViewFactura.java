@@ -173,7 +173,7 @@ public class ActivityViewFactura extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_factura, menu);
-        Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
+        //Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
 
         MenuItem add_recibo = menu.findItem(R.id.item_abono);
 

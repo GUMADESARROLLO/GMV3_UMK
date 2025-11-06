@@ -46,10 +46,10 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
             product_cant = view.findViewById(R.id.id_Cant_item);
             product_code = view.findViewById(R.id.id_cod_articulo);
             product_image = view.findViewById(R.id.category_image);
-            product_lock = view.findViewById(R.id.item_lock);
-            product_label_offer = view.findViewById(R.id.txt_offer);
-            lvl_offer = view.findViewById(R.id.lvl_offer);
-            llt = view.findViewById(R.id.lyt_parent);
+            //product_lock = view.findViewById(R.id.item_lock);
+            product_lock = view.findViewById(R.id.icon_status);
+            //lvl_offer = view.findViewById(R.id.lvl_offer);
+            //llt = view.findViewById(R.id.lyt_parent);
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +70,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_product, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_course, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -85,7 +84,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
          holder.product_price.setText(("C$ ").concat(price));
 
         String quantity = String.format(Locale.ENGLISH, "%1$,.2f", product.getProduct_quantity());
-        holder.product_cant.setText(quantity.concat(" [" + product.getProduct_und().concat("]")));
+        holder.product_cant.setText(quantity.concat(" [ " + product.getProduct_und().concat(" ]")));
 
         //holder.llt.setBackgroundColor(context.getResources().getColor(((!product.isUnLock()) ? R.color.grey_20 : R.color.white)));
 
@@ -93,17 +92,17 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         holder.product_code.setText(product.getProduct_id());
 
         if (!product.isUnLock()) {
-            //holder.product_lock.setVisibility(View.VISIBLE);
-            holder.lvl_offer.setVisibility(View.VISIBLE);
-            holder.product_label_offer.setText("BLOQUEADO");
+            holder.product_lock.setVisibility(View.VISIBLE);
+            //holder.lvl_offer.setVisibility(View.VISIBLE);
+            //holder.product_label_offer.setText("FACTURADO");
         } else {
-            //holder.product_lock.setVisibility(View.GONE);
-            holder.lvl_offer.setVisibility(View.GONE);
+            holder.product_lock.setVisibility(View.GONE);
+            //holder.lvl_offer.setVisibility(View.GONE);
         }
 
 
 
-        List<String> sVinneta = Arrays.asList(product.getISPROMO().split(":"));
+        //List<String> sVinneta = Arrays.asList(product.getISPROMO().split(":"));
 
         //holder.Ruta_asignada.setText(sVinneta.get(1));
 

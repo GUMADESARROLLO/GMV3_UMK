@@ -80,8 +80,8 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerView.setLayoutManager(mLayoutManager);
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
-        recyclerView.addItemDecoration(itemDecoration);
+//        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.spacing_xsmall);
+//        recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
@@ -199,10 +199,6 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
 
                 showSingleChoiceDialog();
                 return true;
-
-
-
-
             default:
                 return super.onOptionsItemSelected(item);
         }

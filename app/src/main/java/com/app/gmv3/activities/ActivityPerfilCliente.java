@@ -80,12 +80,8 @@ public class ActivityPerfilCliente extends AppCompatActivity{
     //List<Facturas_mora> arrayItemLotes;
     CircleImageView ImgVerication;
     String strVerificado,strPin,strDireccion, StrPlan;
-
-
     CardView cardView ;
-
     private Menu menu_pin;
-
     List<Facturas_mora> listMora = new ArrayList<>();
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
@@ -220,7 +216,7 @@ public class ActivityPerfilCliente extends AppCompatActivity{
 
                 if (str_moroso.equals("S")){
 
-                    String titleHtml = "<font color='#FF0000'>⚠ Cliente en Estado de Morosidad</font>";
+                    String titleHtml = "<font color='#FF0000'>Cliente en Estado de Morosidad</font>";
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(ActivityPerfilCliente.this);
                     builder.setTitle(Html.fromHtml(titleHtml, Html.FROM_HTML_MODE_LEGACY));

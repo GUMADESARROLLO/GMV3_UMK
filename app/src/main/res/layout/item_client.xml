@@ -1,41 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:id="@+id/id_element_cardview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginLeft="@dimen/spacing_medium"
-    android:layout_marginRight="@dimen/spacing_medium"
-    android:id="@+id/id_element_cardview"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-
-
-    app:mrl_rippleHover="true"
-    app:mrl_rippleOverlay="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_margin="3dp"
+    app:cardCornerRadius="12dp"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:id="@+id/lyt_parent"
-        android:background="?attr/selectableItemBackgroundBorderless"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_medium"
+            android:layout_marginRight="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
-
-
-
             <RelativeLayout
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_width="@dimen/spacing_xxlarge"
@@ -97,6 +88,8 @@
                             android:id="@+id/client_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
                             android:text="ALPHACHEMI ALBERT JOHN ATHA SALINAS RUC 0012705650057S"
                             android:textStyle="bold" />
 
@@ -105,11 +98,13 @@
                             android:id="@+id/client_dir"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textStyle="bold"
                             android:text="DETALLE: KM 11 CARRETERA NUEVA A LEON, EMPALME DE LA CUESTA EL PLOMO 100 MTS AL O (PRADEXSA) BODEGA 1, MANAGUA."
-                            android:textSize="11sp" />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
@@ -175,6 +170,7 @@
                     android:gravity="center_vertical"
                     android:text="C$ 1,000.00"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/colorPrimary" />
 
@@ -205,6 +201,7 @@
                     android:gravity="center_vertical"
                     android:text="C$ 1,000.00"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/red" />
 
@@ -232,6 +229,7 @@
                     android:gravity="end|right"
                     android:text="C$ 1,000.00"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/txt_price_color" />
 
@@ -254,7 +252,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:orientation="horizontal"
         android:visibility="visible">
 

@@ -405,7 +405,7 @@ public class ActivityProductDetail extends AppCompatActivity {
         txt_product_price.setText(price + " " + currency_code);
 
         String product_quantity_ = String.format(Locale.ENGLISH, "%1$,.2f", product_quantity);
-        txt_product_quantity.setText(product_quantity_ + " " + product_und);
+        txt_product_quantity.setText((product_quantity_).concat(" [ ").concat(product_und).concat(" ]"));
 
         txt_product_description.setBackgroundColor(Color.parseColor("#ffffff"));
         txt_product_description.setFocusableInTouchMode(false);

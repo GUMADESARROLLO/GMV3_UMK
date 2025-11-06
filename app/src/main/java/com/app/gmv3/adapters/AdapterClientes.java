@@ -4,6 +4,10 @@ import android.content.Context;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.ColorStateList;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.RippleDrawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +38,7 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
         public CardView cardView;
         public TextView relativeLayout;
         public CircleImageView ImgVerication;
-        public LinearLayout lytPin;
+        public LinearLayout lytPin ,lyItem;
 
         public ImageView imgPlan;
 
@@ -52,6 +56,7 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
             txt_cliente_disponible  = view.findViewById(R.id.id_cliente_disponible);
             cardView                = view.findViewById(R.id.id_element_cardview);
             ImgVerication           = view.findViewById(R.id.btn_verificacion);
+            lyItem  = view.findViewById(R.id.lyt_parent);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,7 +86,11 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
         final Clients clients = categoryListFiltered.get(position);
 
         holder.category_name.setText(clients.getCLIENTE().concat(" - ").concat(clients.getNOMBRE()));
-        holder.cardView.setBackgroundColor(context.getResources().getColor(((clients.getMOROSO().equals("S")) ? R.color.red_light : R.color.white)));
+        //holder.lyItem.setBackgroundColor(context.getResources().getColor(((clients.getMOROSO().equals("S")) ? R.color.red_light : R.color.white)));
+        setSelectableBackground(
+                holder.lyItem,
+                clients.getMOROSO().equals("S") ? R.color.red_light : R.color.white
+        );
         holder.imgPlan.setVisibility((clients.getPLAN().equals("S") ? View.VISIBLE : View.GONE));
         holder.relativeLayout.setVisibility((clients.getMOROSO().equals("S") ? View.VISIBLE : View.GONE));
         holder.lytPin.setVisibility((clients.getPIN().equals("S") ? View.VISIBLE : View.GONE));
@@ -98,6 +107,25 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.MyView
     @Override
     public int getItemCount() {
         return categoryListFiltered.size();
+    }
+
+    private void setSelectableBackground(View view, int baseColorResId) {
+        Context context = view.getContext();
+
+        // Color base (rojo o blanco)
+        int baseColor = context.getResources().getColor(baseColorResId);
+
+        // Color de ripple (efecto toque)
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.colorControlHighlight, typedValue, true);
+        ColorStateList rippleColor = ColorStateList.valueOf(typedValue.data);
+
+        // Capa base
+        ColorDrawable backgroundColor = new ColorDrawable(baseColor);
+
+        // Combina el ripple + color base
+        RippleDrawable rippleDrawable = new RippleDrawable(rippleColor, backgroundColor, null);
+        view.setBackground(rippleDrawable);
     }
 
     @Override

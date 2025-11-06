@@ -68,7 +68,6 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setRefreshing(true);
         lyt_empty_history = view.findViewById(R.id.lyt_empty_history);
-
         sharedPref = new SharedPref(getContext());
 
         lyt_root = view.findViewById(R.id.lyt_root);
@@ -81,8 +80,8 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         mAdapter = new AdapterProduct(getActivity(), productList, this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
-        recyclerView.addItemDecoration(itemDecoration);
+        //ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
+       // recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 

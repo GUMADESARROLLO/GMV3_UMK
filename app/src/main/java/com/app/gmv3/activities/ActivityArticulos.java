@@ -74,8 +74,8 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
         rcvArticulos = findViewById(R.id.rcv_Articulos);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
         rcvArticulos.setLayoutManager(mLayoutManager);
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getApplicationContext(), R.dimen.item_offset);
-        rcvArticulos.addItemDecoration(itemDecoration);
+        //ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getApplicationContext(), R.dimen.item_offset);
+        //rcvArticulos.addItemDecoration(itemDecoration);
         rcvArticulos.setItemAnimator(new DefaultItemAnimator());
         rcvArticulos.setAdapter(mAdapter);
 

@@ -48,7 +48,7 @@ public class AdapterCheckoutVineta extends RecyclerView.Adapter<AdapterCheckoutV
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_producto_resumen, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_course, parent, false);
         return new ViewHolder(itemView);
     }
 
