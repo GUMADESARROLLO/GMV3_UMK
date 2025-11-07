@@ -81,4 +81,5 @@ public class ViewAnimation {
     public interface AnimListener {
         void onFinish();
     }
+
 }

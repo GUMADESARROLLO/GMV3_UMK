@@ -118,7 +118,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Inteligencia de Mercado");
@@ -541,6 +541,12 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
         intent.putExtra("id_post", comments.getIdPost());
         intent.putExtra("id_Ruta", category_id);
         intent.putExtra("Nombre_ruta", category_name);
+
+        intent.putExtra("post_title",comments.getTitulo());
+        intent.putExtra("post_comment",comments.getContenido());
+        intent.putExtra("post_date",comments.getFecha());
+        intent.putExtra("post_img",comments.getImagen());
+
         /*
         intent.putExtra("title", product.getProduct_name());
         intent.putExtra("image", product.getProduct_image());

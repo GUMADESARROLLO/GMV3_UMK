@@ -23,16 +23,16 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey_10"
             android:layout_below="@+id/appBarLayout"
+            android:layout_marginTop="1dp"
+            android:background="@color/grey_10"
             android:scrollbars="vertical"
             android:scrollingCache="true" />
-
-
 
         <include
             android:id="@+id/lyt_empty_history"

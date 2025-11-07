@@ -6,8 +6,12 @@ public class Comentarios {
     String Fecha;
     String Autor;
     String Imagen;
-
     int IdPost;
+    String Count;
+
+    public String getCount() {
+        return Count;
+    }
 
     public int getIdPost() {
         return IdPost;

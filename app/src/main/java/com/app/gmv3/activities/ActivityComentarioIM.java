@@ -39,6 +39,7 @@ import com.app.gmv3.utilities.Utils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -54,14 +55,16 @@ public class ActivityComentarioIM extends AppCompatActivity  {
     private List<PostComments> productList;
     private AdapterComentariosIM mAdapter;
     private int id_post;
-
     Dialog dialog;
     String st_comment,str_name, str_path;
+    String post_title, post_comment, post_date, post_img;
+    TextView txt_count_comments;
+    View lytEmptyHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comentarios_im);
+        setContentView(R.layout.activity_post_im);
 
         if (Config.ENABLE_RTL_MODE) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -82,6 +85,36 @@ public class ActivityComentarioIM extends AppCompatActivity  {
         str_name = intent.getStringExtra("id_Ruta");
         str_path = intent.getStringExtra("Nombre_ruta");
 
+        post_title      = intent.getStringExtra("post_title");
+        post_comment    = intent.getStringExtra("post_comment");
+        post_date       = intent.getStringExtra("post_date");
+        post_img        = intent.getStringExtra("post_img");
+
+        TextView PostTitle      = findViewById(R.id.txt_title);
+        TextView PostComment    = findViewById(R.id.txt_comment);
+        TextView PostDate       = findViewById(R.id.txt_date);
+        TextView PostCreated    = findViewById(R.id.txt_path_name);
+        TextView PostPath       = findViewById(R.id.txt_path_post);
+        ImageView PostImg       = findViewById(R.id.img_post);
+        txt_count_comments      = findViewById(R.id.txt_count_comments);
+        lytEmptyHistory    = findViewById(R.id.lyt_empty_history);
+
+        PostTitle.setText(post_title);
+        PostComment.setText(post_comment);
+        PostDate.setText(post_date);
+        PostCreated.setText(str_name);
+        PostPath.setText(str_path);
+
+        if (post_img.equals("ND")){
+            PostImg.setVisibility(View.GONE);
+        }else{
+            Picasso.with(this)
+                    .load(post_img)
+                    .placeholder(R.drawable.ic_loading)
+                    .into(PostImg);
+        }
+
+
 
         // toolbar fancy stuff
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,21 +125,17 @@ public class ActivityComentarioIM extends AppCompatActivity  {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
+//        recyclerView.addItemDecoration(itemDecoration);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
-        (findViewById(R.id.bt_add_comment)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddCommentForm();
-            }
-        });
 
         fetchData();
         onRefresh();
-        setTitle("COMENTARIO ( 0 ) ") ;
+        txt_count_comments.setText("COMENTARIO ( 0 ) ");
+
+
+
 
     }
 
@@ -143,7 +172,15 @@ public class ActivityComentarioIM extends AppCompatActivity  {
 
                 // refreshing recycler view
                 mAdapter.notifyDataSetChanged();
-                setTitle(("COMENTARIO ( " ).concat( String.valueOf(mAdapter.getItemCount())).concat(" )") ) ;
+                txt_count_comments.setText(("COMENTARIO ( " ).concat( String.valueOf(mAdapter.getItemCount())).concat(" )") ) ;
+
+                if (mAdapter.getItemCount() == 0) {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lytEmptyHistory.setVisibility(View.VISIBLE);
+                } else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    lytEmptyHistory.setVisibility(View.GONE);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -233,7 +270,8 @@ public class ActivityComentarioIM extends AppCompatActivity  {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_article_share_save, menu);
+        Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
         return true;
     }
 
@@ -243,6 +281,9 @@ public class ActivityComentarioIM extends AppCompatActivity  {
 
             case android.R.id.home:
                 onBackPressed();
+                break;
+            case R.id.action_form_add_comment:
+                AddCommentForm();
                 break;
 
             default:

@@ -38,17 +38,20 @@ public class AdapterInteligenciaMercado extends RecyclerView.Adapter<AdapterInte
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView product_title, product_date,product_comentario,product_autor;
+        public TextView product_title, product_date,product_comentario,product_autor, product_count;
         public ImageView product_image;
 
         public MyViewHolder(View view) {
             super(view);
-            product_title = (TextView) view.findViewById(R.id.id_title);
-            product_date = (TextView) view.findViewById(R.id.id_date);
-            product_comentario = (TextView) view.findViewById(R.id.id_comentario);
-            product_autor = (TextView) view.findViewById(R.id.id_autor);
-            product_autor = (TextView) view.findViewById(R.id.id_autor);
-            product_image = (ImageView) view.findViewById(R.id.id_img_news);
+
+            product_title       = view.findViewById(R.id.id_title);
+            product_date        = view.findViewById(R.id.id_date);
+            product_comentario  = view.findViewById(R.id.id_comentario);
+            product_autor       = view.findViewById(R.id.id_autor);
+            product_autor       = view.findViewById(R.id.id_autor);
+            product_image       = view.findViewById(R.id.id_img_news);
+            product_count       = view.findViewById(R.id.id_count_comments);
+
 
 
 
@@ -86,6 +89,7 @@ public class AdapterInteligenciaMercado extends RecyclerView.Adapter<AdapterInte
         holder.product_date.setText(prettyTime.format(new Date(timeAgo)));
         holder.product_comentario.setText(product.getContenido());
         holder.product_autor.setText(product.getAutor());
+        holder.product_count.setText(product.getCount());
 
 
         holder.product_image.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +108,7 @@ public class AdapterInteligenciaMercado extends RecyclerView.Adapter<AdapterInte
                 .build();
 
 
-        if (product.getImagen().equals("")){
+        if (product.getImagen().equals("ND")){
             holder.product_image.setVisibility(View.GONE);
         }else{
             Picasso.with(context)
