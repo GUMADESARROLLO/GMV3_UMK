@@ -539,6 +539,8 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
         Intent intent = new Intent(getApplicationContext(), ActivityComentarioIM.class);
 
         intent.putExtra("id_post", comments.getIdPost());
+        intent.putExtra("id_Ruta", category_id);
+        intent.putExtra("Nombre_ruta", category_name);
         /*
         intent.putExtra("title", product.getProduct_name());
         intent.putExtra("image", product.getProduct_image());
