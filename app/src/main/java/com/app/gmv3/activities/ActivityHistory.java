@@ -361,8 +361,6 @@ public class ActivityHistory extends AppCompatActivity {
         ((ImageView) view.findViewById(R.id.img_comment)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent intent = new Intent(getApplicationContext(), ActivityComentario.class);
                 intent.putExtra("Id_Orden", code.get(position));
                 startActivity(intent);

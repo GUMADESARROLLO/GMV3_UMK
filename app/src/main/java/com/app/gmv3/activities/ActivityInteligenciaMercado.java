@@ -137,14 +137,14 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
 
     private void initComponent() {
         progressDialog = new ProgressDialog(ActivityInteligenciaMercado.this);
-        ((FloatingActionButton) findViewById(R.id.fab_add)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.fab_add)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showCustomDialog();
             }
         });
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
         mAdapter = new AdapterInteligenciaMercado(this, productList, this);
 
@@ -155,11 +155,11 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        ryt_empty_history = (RelativeLayout) findViewById(R.id.id_no_feed);
+        ryt_empty_history = findViewById(R.id.id_no_feed);
 
-        txt_lbl_order_by = (TextView) findViewById(R.id.txt_lbl_order_by);
+        txt_lbl_order_by = findViewById(R.id.txt_lbl_order_by);
 
-        ((ImageButton) findViewById(R.id.bt_toggle_text)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.bt_toggle_text)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showSingleChoiceDialog();
@@ -171,6 +171,8 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
                 showSingleChoiceDialog();
             }
         });
+
+
     }
 
     private void showSingleChoiceDialog() {
@@ -228,7 +230,6 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
                 List<Comentarios> items = new Gson().fromJson(response.toString(), new TypeToken<List<Comentarios>>() {
                 }.getType());
 
-                // adding contacts to contacts list
                 productList.clear();
                 productList.addAll(items);
 
@@ -238,14 +239,12 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
                     ryt_empty_history.setVisibility(View.VISIBLE);
                 }
 
-                // refreshing recycler view
                 mAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // error in getting json
-                Log.e("INFO", "Error: " + error.getMessage());
+                //Log.e("INFO", "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -258,24 +257,20 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);
 
-        // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
-        // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // filter recycler view when query submitted
                 mAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                // filter recycler view when text is changed
                 mAdapter.getFilter().filter(query);
                 return false;
             }
@@ -302,7 +297,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         final String Fecha = (String) DateFormat.format("EEE dd MMM yyyy hh:mm aaa'", Calendar.getInstance().getTime());
         (dialog.findViewById(R.id.id_lyt_adjunto)).setVisibility(View.GONE);
-        ImageView img = (ImageView) dialog.findViewById(R.id.id_foto_adjunta);
+        ImageView img = dialog.findViewById(R.id.id_foto_adjunta);
         img.setImageResource(R.drawable.ic_loading);
 
         final AppCompatButton bt_submit = dialog.findViewById(R.id.bt_submit);
@@ -540,9 +535,11 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
         return Base64.encodeToString(imageByteArrayktp, Base64.DEFAULT);
     }
     @Override
-    public void onContactSelected(Comentarios comentarios) {
-       /* Intent intent = new Intent(getApplicationContext(), ActivityProductDetail.class);
-        intent.putExtra("product_id", product.getProduct_id());
+    public void onContactSelected(Comentarios comments) {
+        Intent intent = new Intent(getApplicationContext(), ActivityComentarioIM.class);
+
+        intent.putExtra("id_post", comments.getIdPost());
+        /*
         intent.putExtra("title", product.getProduct_name());
         intent.putExtra("image", product.getProduct_image());
         intent.putExtra("product_price", product.getProduct_price());
@@ -551,7 +548,8 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
         intent.putExtra("product_status", product.getProduct_status());
         intent.putExtra("currency_code", product.getCurrency_code());
         intent.putExtra("category_name", product.getCategory_name());
-        startActivity(intent);*/
+        */
+        startActivity(intent);
     }
 
 

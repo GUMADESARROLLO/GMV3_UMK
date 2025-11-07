@@ -7,6 +7,12 @@ public class Comentarios {
     String Autor;
     String Imagen;
 
+    int IdPost;
+
+    public int getIdPost() {
+        return IdPost;
+    }
+
     public String getTitulo() {
         return Titulo;
     }
