@@ -92,6 +92,7 @@
 
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/id_img_news"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -114,7 +115,6 @@
             android:paddingRight="@dimen/spacing_large">
 
             <LinearLayout
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -126,14 +126,14 @@
                     android:layout_marginEnd="@dimen/spacing_middle"
                     android:layout_marginRight="@dimen/spacing_middle"
                     android:tint="@color/light_green_300"
-                    app:srcCompat="@drawable/ic_history"
+                    app:srcCompat="@drawable/ic_comment"
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="1k likes"
+                    android:text="1k Comentarios"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40" />
 
