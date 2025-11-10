@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,20 +63,14 @@ public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentario
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
-                    case R.id.action_edit:
-                        // Acción para editar
-                        Toast.makeText(view.getContext(), "Editar comentario", Toast.LENGTH_SHORT).show();
-                        return true;
+
 
                     case R.id.action_delete:
                         // Acción para eliminar
                         Toast.makeText(view.getContext(), "Eliminar comentario", Toast.LENGTH_SHORT).show();
                         return true;
 
-                    case R.id.action_share:
-                        // Acción para compartir
-                        Toast.makeText(view.getContext(), "Compartir comentario", Toast.LENGTH_SHORT).show();
-                        return true;
+
 
                     default:
                         return false;
