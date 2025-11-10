@@ -22,6 +22,8 @@ public class Constant {
     public static final String GET_STAT_ARTI = BASE_URL + "/api/api.php?get_stat_articulo=";
     public static final String GET_COMENTARIOS = BASE_URL + "/api/api.php?get_comentarios=";
     public static final String GET_COMMENTS_POST_IM = BASE_URL + "/api/api.php?get_comments_post_im=";
+    public static final String POST_IM_ADD_COMMENTS = API_COMMISIOENS + "/api/post_add_comments_im";
+    public static final String POST_IM_REMOVE_COMMENTS = API_COMMISIOENS + "/api/post_remove_post_im";
 
     public static final String GET_PROFIL_USER = BASE_URL + "/api/api.php?get_perfil_user=";
     public static final String PUSH_PIN = BASE_URL + "/api/api.php?push_pin=";

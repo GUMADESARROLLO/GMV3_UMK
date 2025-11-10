@@ -92,6 +92,7 @@
     <string name="post_submit_msg">Por Favor, espere.</string>
 
 
+
     <string name="checkout_dialog_msg">¿Estás seguro de que quieres Enviarlo?</string>
     <string name="checkout_submit_title">Por favor Espere</string>
     <string name="checkout_submit_msg">Enviar su Orden&#8230;</string>
@@ -235,4 +236,5 @@
     <string name="action_show_items">Items 80/20</string>
     <string name="alert_title">GMV - Notificación.</string>
     <string name="alert_no_fact">Este artículo ya fue facturado al cliente.</string>
+    <string name="alert_remove_post">Post eliminado.</string>
 </resources>

@@ -8,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +23,8 @@ public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentario
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_title, txt_Date, txt_comentarios;
-        public ImageView product_image;
+        public ImageView product_image, iconMore;
+
 
         public MyViewHolder(View view) {
             super(view);
@@ -30,6 +32,7 @@ public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentario
             txt_Date = view.findViewById(R.id.comment_date);
             txt_comentarios = view.findViewById(R.id.txt_comment);
 
+            iconMore = itemView.findViewById(R.id.icon_delete);
 
         }
     }
@@ -52,6 +55,36 @@ public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentario
         holder.txt_title.setText(Comment.getCreated_by());
         holder.txt_Date.setText(Comment.getCreated_at());
         holder.txt_comentarios.setText(Comment.getComments());
+
+        holder.iconMore.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+            popupMenu.inflate(R.menu.menu_comment_options);
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.action_edit:
+                        // Acción para editar
+                        Toast.makeText(view.getContext(), "Editar comentario", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.action_delete:
+                        // Acción para eliminar
+                        Toast.makeText(view.getContext(), "Eliminar comentario", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.action_share:
+                        // Acción para compartir
+                        Toast.makeText(view.getContext(), "Compartir comentario", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    default:
+                        return false;
+                }
+            });
+
+            popupMenu.show();
+        });
+
 
 
 

@@ -2,8 +2,10 @@ package com.app.gmv3.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,9 +28,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.adapters.AdapterComentariosIM;
@@ -45,9 +51,13 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.app.gmv3.utilities.Constant.GET_COMMENTS_POST_IM;
+import static com.app.gmv3.utilities.Constant.POST_IM_ADD_COMMENTS;
+import static com.app.gmv3.utilities.Constant.POST_IM_REMOVE_COMMENTS;
 
 public class ActivityComentarioIM extends AppCompatActivity  {
 
@@ -60,6 +70,8 @@ public class ActivityComentarioIM extends AppCompatActivity  {
     String post_title, post_comment, post_date, post_img;
     TextView txt_count_comments;
     View lytEmptyHistory;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,9 +142,10 @@ public class ActivityComentarioIM extends AppCompatActivity  {
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        fetchData();
+        getComment();
         onRefresh();
         txt_count_comments.setText("COMENTARIO ( 0 ) ");
+        progressDialog = new ProgressDialog(ActivityComentarioIM.this);
 
 
 
@@ -145,7 +158,7 @@ public class ActivityComentarioIM extends AppCompatActivity  {
             @Override
             public void run() {
                 if (Utils.isNetworkAvailable(ActivityComentarioIM.this)) {
-                    fetchData();
+                    getComment();
                 } else {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                 }
@@ -154,7 +167,93 @@ public class ActivityComentarioIM extends AppCompatActivity  {
         }, 1500);
     }
 
-    private void fetchData() {
+    public void AddComments(final String Comment) {
+
+        progressDialog.setTitle(getString(R.string.post_submit_title));
+        progressDialog.setMessage(getString(R.string.post_submit_msg));
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_IM_ADD_COMMENTS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(final String ServerResponse) {
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        dialogSuccess();
+                    }
+                }, 2000);
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("IdPost", String.valueOf(id_post));
+                params.put("Comment", Comment);
+                params.put("CeatedBy", str_name);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ActivityComentarioIM.this);
+        requestQueue.add(stringRequest);
+    }
+
+    public void RemoveComments() {
+
+        progressDialog.setTitle(getString(R.string.alert_title));
+        progressDialog.setMessage(getString(R.string.post_submit_msg));
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_IM_REMOVE_COMMENTS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(final String ServerResponse) {
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        dialogSuccess();
+                    }
+                }, 2000);
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("IdPost", String.valueOf(id_post));
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ActivityComentarioIM.this);
+        requestQueue.add(stringRequest);
+    }
+
+
+
+    private void getComment() {
         JsonArrayRequest request = new JsonArrayRequest(GET_COMMENTS_POST_IM + id_post, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -192,6 +291,19 @@ public class ActivityComentarioIM extends AppCompatActivity  {
 
         MyApplication.getInstance().addToRequestQueue(request);
     }
+    public void dialogSuccess() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.alert_title);
+        builder.setMessage(R.string.alert_remove_post);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.checkout_option_ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
     private void AddCommentForm() {
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -210,13 +322,6 @@ public class ActivityComentarioIM extends AppCompatActivity  {
         lb_date.setText(Fecha);
         et_Name.setText(str_name);
         et_Path.setText(str_path);
-
-
-
-
-
-
-
 
         ((EditText) dialog.findViewById(R.id.et_post)).addTextChangedListener(new TextWatcher() {
             @Override
@@ -252,7 +357,7 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                     builder.setPositiveButton(getResources().getString(R.string.dialog_option_yes), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //requestAction();
+                            AddComments(st_comment);
                         }
                     });
                     builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);
@@ -271,7 +376,16 @@ public class ActivityComentarioIM extends AppCompatActivity  {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_article_share_save, menu);
+
+        // Aplica color gris a todos los íconos
         Utils.changeMenuIconColor(menu, getResources().getColor(R.color.grey_60));
+
+        // Luego selecciona solo el ítem "delete" y cámbiale el color individualmente
+        MenuItem deleteItem = menu.findItem(R.id.action_form_delete);
+        if (deleteItem != null && deleteItem.getIcon() != null) {
+            deleteItem.getIcon().mutate()
+                    .setColorFilter(getResources().getColor(R.color.red_light), PorterDuff.Mode.SRC_IN);
+        }
         return true;
     }
 
@@ -284,6 +398,22 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                 break;
             case R.id.action_form_add_comment:
                 AddCommentForm();
+                break;
+            case R.id.action_form_delete:
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityComentarioIM.this);
+                builder.setTitle(R.string.alert_title);
+                builder.setMessage("¿Deseas eliminar este post?");
+                builder.setCancelable(false);
+                builder.setPositiveButton(getResources().getString(R.string.dialog_option_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        RemoveComments();
+                    }
+                });
+                builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);
+                builder.setCancelable(false);
+                builder.show();
                 break;
 
             default:
