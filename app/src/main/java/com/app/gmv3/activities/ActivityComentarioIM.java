@@ -182,7 +182,10 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                     @Override
                     public void run() {
                         progressDialog.dismiss();
-                        dialogSuccess();
+                        getComment();
+                        onRefresh();
+                        dialog.hide();
+                        //dialogSuccess();
                     }
                 }, 2000);
 
@@ -299,6 +302,7 @@ public class ActivityComentarioIM extends AppCompatActivity  {
         builder.setPositiveButton(R.string.checkout_option_ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 finish();
+
             }
         });
         AlertDialog alert = builder.create();
