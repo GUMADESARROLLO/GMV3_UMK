@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "552100835955",
+    "project_id": "gmvb-5bd60",
+    "storage_bucket": "gmvb-5bd60.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552100835955:android:fd1d3dd3b114fd8047b006",
+        "android_client_info": {
+          "package_name": "com.app.unimark.gmvb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVwYccbGSXjmTRnJOEpVX4IKeVRuB1gyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
