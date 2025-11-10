@@ -272,10 +272,6 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                 productList.clear();
                 productList.addAll(items);
 
-                // refreshing recycler view
-                mAdapter.notifyDataSetChanged();
-                txt_count_comments.setText(("COMENTARIO ( " ).concat( String.valueOf(mAdapter.getItemCount())).concat(" )") ) ;
-
                 if (mAdapter.getItemCount() == 0) {
                     recyclerView.setVisibility(View.INVISIBLE);
                     lytEmptyHistory.setVisibility(View.VISIBLE);
@@ -283,6 +279,10 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                     recyclerView.setVisibility(View.VISIBLE);
                     lytEmptyHistory.setVisibility(View.GONE);
                 }
+
+                // refreshing recycler view
+                mAdapter.notifyDataSetChanged();
+                txt_count_comments.setText(("COMENTARIO ( " ).concat( String.valueOf(mAdapter.getItemCount())).concat(" )") ) ;
             }
         }, new Response.ErrorListener() {
             @Override
@@ -355,8 +355,8 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                     Snackbar.make(view, R.string.checkout_fill_form, Snackbar.LENGTH_SHORT).show();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(ActivityComentarioIM.this);
-                    builder.setTitle(R.string.post_dialog_title);
-                    builder.setMessage(R.string.post_dialog_msg);
+                    builder.setTitle(R.string.alert_title);
+                    builder.setMessage(R.string.alert_add_comments);
                     builder.setCancelable(false);
                     builder.setPositiveButton(getResources().getString(R.string.dialog_option_yes), new DialogInterface.OnClickListener() {
                         @Override
@@ -413,11 +413,13 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         RemoveComments();
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.dialog_option_no), null);
                 builder.setCancelable(false);
                 builder.show();
+
                 break;
 
             default:
