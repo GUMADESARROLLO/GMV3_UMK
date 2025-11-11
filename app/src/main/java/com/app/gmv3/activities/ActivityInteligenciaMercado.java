@@ -83,6 +83,7 @@ import static com.app.gmv3.utilities.Constant.GET_COMENTARIOS_IM;
 import static com.app.gmv3.utilities.Constant.POST_REPORT;
 
 import com.app.gmv3.R;
+import com.onesignal.OneSignal;
 
 public class ActivityInteligenciaMercado extends AppCompatActivity implements AdapterInteligenciaMercado.ContactsAdapterListener{
 
@@ -101,6 +102,8 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
     RelativeLayout ryt_empty_history;
     Bitmap  decodedktp;
     byte[]  imageByteArrayktp;
+
+    String strIdOneSignal;
     private static final String[] ANIMATION_TYPE = new String[]{
             "Mas Recientes", "Mas Antiguos"
     };
@@ -171,6 +174,8 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
                 showSingleChoiceDialog();
             }
         });
+
+        strIdOneSignal = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
 
 
     }
@@ -442,6 +447,7 @@ public class ActivityInteligenciaMercado extends AppCompatActivity implements Ad
                 params.put("sndNombre", category_name);
                 params.put("snd_comentario", st_comment);
                 params.put("snd_image", Foto_a_enviar);
+                params.put("IdOneSignal", strIdOneSignal);
                 return params;
             }
 

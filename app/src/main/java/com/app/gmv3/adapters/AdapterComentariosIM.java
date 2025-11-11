@@ -1,20 +1,30 @@
 package com.app.gmv3.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.gmv3.utilities.ApiClient;
 import com.app.gmv3.utilities.CommentApi;
 import com.app.gmv3.R;
 import com.app.gmv3.models.PostComments;
+import com.app.gmv3.utilities.Utils;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,25 +35,32 @@ import retrofit2.Call;
 public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentariosIM.MyViewHolder>  {
 
     private List<PostComments> productList;
+    private String userId;
+    private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_title, txt_Date, txt_comentarios;
         public ImageView product_image, iconMore;
-
+        public LinearLayout lyt_parent;
+        public CardView lyt_thread;
 
         public MyViewHolder(View view) {
             super(view);
             txt_title = view.findViewById(R.id.txt_title);
             txt_Date = view.findViewById(R.id.comment_date);
             txt_comentarios = view.findViewById(R.id.txt_comment);
-
             iconMore = itemView.findViewById(R.id.icon_delete);
+            lyt_parent = view.findViewById(R.id.lyt_parent);
+            lyt_thread = view.findViewById(R.id.lyt_thread);
+
 
         }
     }
 
-    public AdapterComentariosIM(List<PostComments> productList) {
+    public AdapterComentariosIM(Context context,List<PostComments> productList, String userId) {
         this.productList = productList;
+        this.userId = userId;
+        this.context = context;
     }
 
     @Override
@@ -57,9 +74,27 @@ public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentario
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final PostComments Comment = productList.get(position);
+        PrettyTime prettyTime = new PrettyTime();
+
+        long timeAgo = Utils.timeStringtoMilis(Comment.getCreated_at());
+
+
+
         holder.txt_title.setText(Comment.getCreated_by());
-        holder.txt_Date.setText(Comment.getCreated_at());
+        holder.txt_Date.setText(prettyTime.format(new Date(timeAgo)));
         holder.txt_comentarios.setText(Comment.getComments());
+
+        if(userId.equals(Comment.getCreated_by()) ){
+            holder.lyt_parent.setPadding(100, 10, 15, 10);
+            holder.lyt_parent.setGravity(Gravity.RIGHT);
+            holder.lyt_thread.setCardBackgroundColor(context.getResources().getColor(R.color.teal_50));
+        }else{
+            holder.lyt_parent.setPadding(15, 10, 100, 10);
+            holder.lyt_parent.setGravity(Gravity.LEFT);
+            holder.lyt_thread.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
+
+        holder.iconMore.setVisibility(userId.equals(Comment.getCreated_by()) ? View.VISIBLE : View.INVISIBLE);
 
         holder.iconMore.setOnClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
@@ -68,7 +103,7 @@ public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentario
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
-                        Toast.makeText(view.getContext(), "Eliminar comentario #" + (Comment.getId_comments()), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(view.getContext(), "Eliminar comentario #" + (Comment.getId_comments()), Toast.LENGTH_SHORT).show();
                         deleteCommentApi(view,Comment.getId_comments(),position);
                         return true;
                     default:

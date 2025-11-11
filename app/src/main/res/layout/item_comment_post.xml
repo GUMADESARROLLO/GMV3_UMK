@@ -1,89 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:id="@+id/lyt_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/spacing_large">
+    android:orientation="vertical"
+    android:padding="5dp">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/lyt_thread"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:gravity="center_vertical|center_horizontal"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
 
-        <!-- Fila superior con título, fecha e icono delete -->
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="vertical"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp">
 
-            <!-- Título, círculo y fecha -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/txt_title"
+                <!-- Título, círculo y fecha -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Susan Lee"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:fontFamily="serif" />
+
+                </LinearLayout>
+
+                <!-- Ícono Delete alineado a la derecha -->
+                <ImageView
+                    android:id="@+id/icon_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Susan Lee"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    app:fontFamily="serif" />
+                    android:src="@drawable/ic_more_vert"
+                    android:tint="@color/grey_40"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txt_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Messsage content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/app_chat_grey_text"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="2dp"
+                android:gravity="right|center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_medium"
-                    android:layout_height="@dimen/spacing_medium"
-                    android:layout_marginStart="@dimen/spacing_middle"
-                    android:layout_marginEnd="@dimen/spacing_middle"
-                    android:layout_marginTop="1dp"
-                    android:src="@drawable/shape_circle"
-                    android:tint="@color/grey_40" />
+                    android:id="@+id/image_status"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginRight="5dp" />
 
                 <TextView
                     android:id="@+id/comment_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="3 hour ago"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/grey_40"
-                    app:fontFamily="serif" />
+                    android:text="02:30"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/app_chat_grey_text" />
             </LinearLayout>
-
-            <!-- Ícono Delete alineado a la derecha -->
-            <ImageView
-                android:id="@+id/icon_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_more_vert"
-                android:tint="@color/grey_40"
-                android:clickable="true"
-                android:focusable="true" />
 
         </LinearLayout>
 
-        <!-- Comentario -->
-        <TextView
-            android:id="@+id/txt_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:gravity="center_vertical"
-            android:lineSpacingExtra="@dimen/spacing_small"
-            android:text="Cursus convallis dolor. Etiam vel lacinia nibh. Donec sollicitudin fermentum"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/grey_60"
-            app:fontFamily="serif" />
-
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

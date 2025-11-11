@@ -45,12 +45,15 @@ import com.app.gmv3.utilities.Utils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +73,8 @@ public class ActivityComentarioIM extends AppCompatActivity  {
     String post_title, post_comment, post_date, post_img;
     TextView txt_count_comments;
     View lytEmptyHistory;
+
+    String strIdOneSignal;
 
     ProgressDialog progressDialog;
 
@@ -92,6 +97,9 @@ public class ActivityComentarioIM extends AppCompatActivity  {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        PrettyTime prettyTime = new PrettyTime();
+
+
         Intent intent = getIntent();
         id_post = intent.getIntExtra("id_post",0);
         str_name = intent.getStringExtra("id_Ruta");
@@ -109,11 +117,12 @@ public class ActivityComentarioIM extends AppCompatActivity  {
         TextView PostPath       = findViewById(R.id.txt_path_post);
         ImageView PostImg       = findViewById(R.id.img_post);
         txt_count_comments      = findViewById(R.id.txt_count_comments);
-        lytEmptyHistory    = findViewById(R.id.lyt_empty_history);
+        lytEmptyHistory         = findViewById(R.id.lyt_empty_history);
+        long timeAgo            = Utils.timeStringtoMilis(post_date);
 
         PostTitle.setText(post_title);
         PostComment.setText(post_comment);
-        PostDate.setText(post_date);
+        PostDate.setText(prettyTime.format(new Date(timeAgo)));
         PostCreated.setText(str_name);
         PostPath.setText(str_path);
 
@@ -133,7 +142,7 @@ public class ActivityComentarioIM extends AppCompatActivity  {
 
         recyclerView = findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
-        mAdapter = new AdapterComentariosIM(productList);
+        mAdapter = new AdapterComentariosIM(ActivityComentarioIM.this,productList,str_name);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -146,6 +155,8 @@ public class ActivityComentarioIM extends AppCompatActivity  {
         onRefresh();
         txt_count_comments.setText("COMENTARIO ( 0 ) ");
         progressDialog = new ProgressDialog(ActivityComentarioIM.this);
+
+        strIdOneSignal = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
 
 
 
@@ -204,6 +215,7 @@ public class ActivityComentarioIM extends AppCompatActivity  {
                 params.put("IdPost", String.valueOf(id_post));
                 params.put("Comment", Comment);
                 params.put("CeatedBy", str_name);
+                params.put("IdOneSignal", strIdOneSignal);
                 return params;
             }
 
