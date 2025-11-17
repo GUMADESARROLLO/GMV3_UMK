@@ -104,7 +104,6 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         fetchData();
         onRefresh();
 
-
         return view;
     }
 

@@ -79,11 +79,6 @@ public class MyApplication extends Application {
     }
     public void saveLogin(String user_id, String user_name,String strFullName,String strTelefono, String strUserEmail) {
 
-      /*  preferences = this.getSharedPreferences(prefName, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("user_id", user_id);
-        editor.putString("user_name", user_name);
-        editor.commit();*/
 
         SharedPref  sharedPref = new SharedPref(this);
         sharedPref.setYourName(user_name);
