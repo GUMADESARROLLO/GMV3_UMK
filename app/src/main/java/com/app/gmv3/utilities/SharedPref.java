@@ -70,4 +70,12 @@ public class SharedPref {
         default_prefence.edit().putString(str(R.string.pref_Path_Assigned), path).apply();
     }
 
+    public String getNvPrecio() {
+        return default_prefence.getString(str(R.string.pref_NvPrecio), str(R.string.pref_NvPrecio));
+    }
+    public void setNvPrecio(String path) {
+        default_prefence.edit().putString(str(R.string.pref_NvPrecio), path).apply();
+    }
+
+
 }

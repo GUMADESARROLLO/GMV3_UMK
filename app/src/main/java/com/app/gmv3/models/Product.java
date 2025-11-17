@@ -20,6 +20,7 @@ public class Product {
     private String ISPROMO;
     private double tax;
     private double product_quantity;
+    private String ListaPrecio;
 
 
     public boolean isUnLock() {
@@ -35,6 +36,11 @@ public class Product {
     public String getISPROMO() {
         return ISPROMO;
     }
+
+    public String getNvPrecio() {
+        return ListaPrecio;
+    }
+
 
     public String getCALIFICATIVO() {
         return CALIFICATIVO;

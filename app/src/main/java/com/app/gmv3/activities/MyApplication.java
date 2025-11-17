@@ -90,6 +90,7 @@ public class MyApplication extends Application {
         sharedPref.setYourEmail(strUserEmail);
         sharedPref.setYourPhone(strTelefono);
         sharedPref.setYourAddress(strFullName);
+        sharedPref.setNvPrecio("Nv. Prec. N/D");
 
 
 

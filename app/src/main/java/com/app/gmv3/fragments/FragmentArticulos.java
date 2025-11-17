@@ -152,13 +152,11 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
                         productList.addAll(items);
 
                         if (productList.size() > 0) {
+
                             List<String> sVinneta = Arrays.asList(items.get(0).getISPROMO().split(":"));
                             RutaAsignada[0] = sVinneta.get(2);
-
-
                             sharedPref.setPathAssigned(RutaAsignada[0]);
                             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ARTICULOS ( "+ sharedPref.getPathAssigned() +" )");
-
 
                             lyt_empty_history.setVisibility(View.GONE);
                         } else {

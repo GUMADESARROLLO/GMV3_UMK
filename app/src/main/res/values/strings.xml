@@ -118,6 +118,7 @@
     <string name="pref_Type">Tipo</string>
     <string name="pref_DarkMode">Dark</string>
     <string name="pref_Path_Assigned">PathAssigned</string>
+    <string name="pref_NvPrecio">Nv. Prec. N/D</string>
 
     <string name="pref_pedido_cliente">CLIENTE</string>
     <string name="pref_pedido_descripcion">DESCRIPCION</string>

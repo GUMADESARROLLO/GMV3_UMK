@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.models.Product;
+import com.app.gmv3.utilities.SharedPref;
 import com.app.gmv3.utilities.SharedPrefDarkMode;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -36,10 +37,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
     private List<Product> productList;
     private List<Product> productListFiltered;
     private ContactsAdapterListener listener;
-
     SharedPrefDarkMode DarkMode ;
-
-
+    SharedPref infoRuta;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView product_name, product_price,product_cant,product_code,product_label_offer;
@@ -77,6 +76,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         this.productList = productList;
         this.productListFiltered = productList;
         this.DarkMode = new SharedPrefDarkMode(context);
+        this.infoRuta = new SharedPref(context);
     }
 
     @Override
@@ -97,6 +97,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
         String quantity = String.format(Locale.ENGLISH, "%1$,.2f", product.getProduct_quantity());
         holder.product_cant.setText(quantity.concat(" [ " + product.getProduct_und().concat(" ]")));
 
+        infoRuta.setNvPrecio(product.getNvPrecio());
+
         //holder.llt.setBackgroundColor(context.getResources().getColor(((!product.isUnLock()) ? R.color.grey_20 : R.color.white)));
 
 
@@ -106,6 +108,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.MyViewHo
 //                    R.color.darkHome
 //            );
 //        }
+
+
 
 
         holder.product_code.setText(product.getProduct_id());

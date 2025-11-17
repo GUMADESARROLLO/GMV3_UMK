@@ -36,6 +36,7 @@ public class FragmentProfile extends Fragment {
     TextView txt_user_email;
     TextView txt_user_phone;
     TextView txt_user_address;
+    TextView txt_nv_precio;
     LinearLayout btn_edit_user;
     LinearLayout lyt_root;
     MyApplication MyApp;
@@ -52,9 +53,11 @@ public class FragmentProfile extends Fragment {
         }
         MyApp = MyApplication.getInstance();
 
-        txt_user_email = view.findViewById(R.id.txt_user_email);
-        txt_user_phone = view.findViewById(R.id.txt_user_phone);
-        txt_user_address = view.findViewById(R.id.txt_user_address);
+        txt_user_email      = view.findViewById(R.id.txt_user_email);
+        txt_user_phone      = view.findViewById(R.id.txt_user_phone);
+        txt_user_address    = view.findViewById(R.id.txt_user_address);
+        txt_nv_precio       = view.findViewById(R.id.nv_precio);
+
 
         btn_edit_user = view.findViewById(R.id.btn_edit_user);
         btn_edit_user.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +213,7 @@ public class FragmentProfile extends Fragment {
         txt_user_email.setText(sharedPref.getYourEmail());
         txt_user_phone.setText(sharedPref.getYourPhone());
         txt_user_address.setText(sharedPref.getYourName().concat(" - ").concat(sharedPref.getYourAddress()));
+        txt_nv_precio.setText(sharedPref.getNvPrecio());
         super.onResume();
     }
 
