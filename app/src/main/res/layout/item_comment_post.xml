@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/lyt_thread"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
         app:cardCornerRadius="5dp"
@@ -18,7 +18,7 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="3dp"
@@ -68,12 +68,13 @@
 
             <TextView
                 android:id="@+id/txt_comment"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Messsage content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/app_chat_grey_text"
                 android:textStyle="normal" />
+
 
             <LinearLayout
                 android:layout_width="wrap_content"

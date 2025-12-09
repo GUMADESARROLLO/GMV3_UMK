@@ -82,7 +82,15 @@ public class AdapterComentariosIM extends RecyclerView.Adapter<AdapterComentario
 
         holder.txt_title.setText(Comment.getCreated_by());
         holder.txt_Date.setText(prettyTime.format(new Date(timeAgo)));
-        holder.txt_comentarios.setText(Comment.getComments());
+
+        String commentContent = Comment.getComments();
+        if (commentContent == null) commentContent = "";
+        
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            holder.txt_comentarios.setText(android.text.Html.fromHtml(commentContent, android.text.Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            holder.txt_comentarios.setText(android.text.Html.fromHtml(commentContent));
+        }
 
         if(userId.equals(Comment.getCreated_by()) ){
             holder.lyt_parent.setPadding(100, 10, 15, 10);
