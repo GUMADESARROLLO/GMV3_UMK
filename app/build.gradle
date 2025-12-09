@@ -6,7 +6,10 @@ buildscript {
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.1'
     }
 }
+
+apply plugin: 'com.android.application'
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
 
 repositories {
     maven { url 'https://jitpack.io' }
@@ -17,6 +20,7 @@ repositories {
 apply plugin: 'com.android.application'
 
 android {
+
     lintOptions {
         checkReleaseBuilds false
     }
