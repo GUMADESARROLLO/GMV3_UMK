@@ -15,7 +15,9 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+def appKey = localProperties.getProperty("APP_KEY", "")
 
 apply plugin: 'com.android.application'
 
@@ -41,9 +43,13 @@ android {
         versionName '3.21.1'
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "APP_KEY", "\"${appKey}\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_KEY", "\"${appKey}\""
         }
     }
     productFlavors {

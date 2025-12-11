@@ -36,7 +36,7 @@ public class Activitysplash extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
 
-        ((TextView) findViewById(R.id.app_version)).setText(("v")+BuildConfig.VERSION_NAME);
+        ((TextView) findViewById(R.id.app_version)).setText(("v")+ BuildConfig.VERSION_NAME);
 
         if (getIntent().hasExtra("nid")) {
             id = getIntent().getLongExtra("nid", 0);

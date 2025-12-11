@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.app.gmv3.BuildConfig;
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.activities.MyApplication;
@@ -58,6 +59,8 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
     LinearLayout lyt_root;
     View lyt_empty_history;
     SharedPref sharedPref;
+
+    String APP_KEY = BuildConfig.APP_KEY;
     private static final String[] ANIMATION_TYPE = new String[]{
             "Todos","Ver Solo Moroso"
     };
@@ -123,7 +126,7 @@ public class FragmentClientes extends Fragment implements AdapterClientes.Contac
     }
 
     private void fetchContacts() {
-        JsonArrayRequest request = new JsonArrayRequest(GET_CLIENTS + sharedPref.getYourName(), new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(GET_CLIENTS + sharedPref.getYourName().concat("&APP_KEY=").concat(APP_KEY), new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         if (response == null) {

@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.app.gmv3.BuildConfig;
 import com.app.gmv3.R;
 import com.app.gmv3.adapters.AdapterProduct;
 import com.app.gmv3.models.Product;
@@ -52,6 +53,7 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
     View lyt_empty;
     SwipeRefreshLayout RefreshArticulos = null;
     private SearchView searchView;
+    String APP_KEY = BuildConfig.APP_KEY;
 
     String CCL = "ND";
 
@@ -120,7 +122,7 @@ public class ActivityArticulos extends AppCompatActivity implements AdapterProdu
         final String[] RutaAsignada = new String[1];
 
         String CLIENTE  = CCL;
-        String URL  = GET_RECENT_PRODUCT.concat(sharedPref.getYourName()).concat("&Cliente=").concat(CLIENTE);
+        String URL  = GET_RECENT_PRODUCT.concat(sharedPref.getYourName()).concat("&Cliente=").concat(CLIENTE).concat("&APP_KEY=").concat(APP_KEY);
 
         JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override

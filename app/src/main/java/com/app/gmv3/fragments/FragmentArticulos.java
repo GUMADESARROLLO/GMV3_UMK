@@ -45,6 +45,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.app.gmv3.BuildConfig;
 
 import static com.app.gmv3.utilities.Constant.GET_RECENT_PRODUCT;
 
@@ -61,6 +62,8 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
 
     SharedPref sharedPref;
     SharedPrefDarkMode DarkMode ;
+
+    String APP_KEY = BuildConfig.APP_KEY;
 
 
     @Override
@@ -122,7 +125,6 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
                             swipeRefreshLayout.setRefreshing(false);
                             Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 }, 1500);
             }
@@ -133,7 +135,7 @@ public class FragmentArticulos extends Fragment implements AdapterProduct.Contac
         final String[] RutaAsignada = new String[1];
 
         String CLIENTE  = "ND";
-        String URL  = GET_RECENT_PRODUCT.concat(sharedPref.getYourName()).concat("&Cliente=").concat(CLIENTE);
+        String URL  = GET_RECENT_PRODUCT.concat(sharedPref.getYourName()).concat("&Cliente=").concat(CLIENTE).concat("&APP_KEY=").concat(APP_KEY);
 
         JsonArrayRequest request = new JsonArrayRequest(URL , new Response.Listener<JSONArray>() {
                     @Override
