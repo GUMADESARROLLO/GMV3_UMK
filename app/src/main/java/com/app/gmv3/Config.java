@@ -1,12 +1,12 @@
 package com.app.gmv3;
 
 public class Config {
-    //PRODUCCION
-    //public static final String ADMIN_PANEL_URL = "http://192.168.1.139/GMV_B";
-    //public static final String API_COMMISIOENS = "http://192.168.1.139/SAC";
+    //DEVELOPER
+//    public static final String ADMIN_PANEL_URL = "http://192.168.1.139/GMV_B";
+//    public static final String API_COMMISIOENS = "http://192.168.1.139/SAC";
 
-    //public static final String SERVER = "://186.1.15.166:83";
-    //public static final String SERVER = "://192.168.1.139";
+
+    //PRODUCCTION
     public static final String SERVER = "apps";
     public static final String ADMIN_PANEL_URL = "https://" + SERVER + ".gumacorp.com/GMV";
     public static final String API_COMMISIOENS = "https://" + SERVER + ".gumacorp.com/SAC";

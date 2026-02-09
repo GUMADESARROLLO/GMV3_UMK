@@ -187,6 +187,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
                             Constant.GET_SUCCESS_MSG = objJson.getInt(Constant.SUCCESS);
                         } else {
                             Constant.GET_SUCCESS_MSG = objJson.getInt(Constant.SUCCESS);
+
                             strNombre = objJson.getString(Constant.USER_NAME);
                             strFullName = objJson.getString(Constant.USER_FULL_NAME);
                             strTelefono = objJson.getString(Constant.USER_TELEFONO);
