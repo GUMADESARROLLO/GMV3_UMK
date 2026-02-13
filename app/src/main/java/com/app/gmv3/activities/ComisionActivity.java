@@ -99,7 +99,7 @@ public class ComisionActivity extends AppCompatActivity {
         chart = findViewById(R.id.chart1);
         sharedPref = new SharedPref(this);
 
-        RUTA = sharedPref.getYourName();
+        RUTA = sharedPref.getYourName().substring(0,3);
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         nYear = calendar.get(Calendar.YEAR);
         nMonth = calendar.get(Calendar.MONTH) + 1;

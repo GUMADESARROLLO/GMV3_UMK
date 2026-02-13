@@ -165,7 +165,7 @@
     <string name="failed_fetch_data">¡No se pudieron recuperar los datos! Inténtalo de nuevo.</string>
     <string name="btn_edit_profile">SALIR</string>
     <string name="txt_profile_history">Pedidos</string>
-    <string name="txt_profile_history_vineta">Historial de recibos Viñetas</string>
+    <string name="txt_profile_history_vineta">Viñetas</string>
     <string name="txt_inteligencia_mercado">Inteligencia de mercado</string>
     <string name="txt_profile_rate">Nos califica</string>
     <string name="txt_profile_privacy">Política de privacidad</string>

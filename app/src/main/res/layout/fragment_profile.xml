@@ -194,7 +194,6 @@
 
                 <LinearLayout
                     android:id="@+id/btn_vineta_history"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
@@ -418,7 +417,6 @@
                 </LinearLayout>
                 <LinearLayout
 
-                    android:visibility="gone"
                     android:id="@+id/id_fragment_comisiones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

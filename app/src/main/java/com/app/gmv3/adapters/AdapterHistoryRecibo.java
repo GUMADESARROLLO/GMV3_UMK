@@ -242,7 +242,14 @@ public class AdapterHistoryRecibo extends RecyclerView.Adapter<AdapterHistoryRec
         PrettyTime prettyTime = new PrettyTime();
         long timeAgo = Utils.timeStringtoMilis(items.getmFecha());
 
-        holder.img_delete_liq.setVisibility((items.getmStatus().equals("0") ? View.VISIBLE : View.GONE));
+
+        String status = items.getmStatus();
+
+        holder.img_delete_liq.setVisibility(
+                ("0".equals(status) || "4".equals(status))
+                        ? View.VISIBLE
+                        : View.GONE
+        );
 
         holder.txt_status.setTextColor(context.getResources().getColor(((items.getmStatus().equals("1")) ? R.color.txt_price_color : R.color.grey_40)));
 
