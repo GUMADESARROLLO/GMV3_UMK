@@ -94,6 +94,20 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_cliente);
         initToolbar();
+
+        boolean isOTC = false;
+
+        if (isOTC) {
+            findViewById(R.id.id_search_lotes).setVisibility(View.GONE);
+            findViewById(R.id.id_history_last_3m).setVisibility(View.GONE);
+            findViewById(R.id.id_plan_crecimiento).setVisibility(View.GONE);
+
+            findViewById(R.id.id_card_disp).setVisibility(View.GONE);
+            findViewById(R.id.id_card_stas).setVisibility(View.GONE);
+            findViewById(R.id.id_lyt_Moras).setVisibility(View.GONE);
+        }
+
+
     }
 
     private void initToolbar() {
@@ -103,6 +117,8 @@ public class ActivityPerfilCliente extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         lyt_empty_history = findViewById(R.id.lyt_empty_result);
 

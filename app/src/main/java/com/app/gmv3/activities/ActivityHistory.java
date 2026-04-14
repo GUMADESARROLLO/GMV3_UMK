@@ -1,8 +1,6 @@
 package com.app.gmv3.activities;
 
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,8 +15,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -31,14 +27,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.gmv3.Config;
 import com.app.gmv3.R;
 import com.app.gmv3.adapters.AdapterHistory;
 import com.app.gmv3.models.History;
 import com.app.gmv3.utilities.DBHelper;
-import com.app.gmv3.utilities.MyDividerItemDecoration;
 import com.app.gmv3.utilities.Utils;
 
 import java.util.ArrayList;
@@ -351,10 +345,11 @@ public class ActivityHistory extends AppCompatActivity {
         ((ImageView) view.findViewById(R.id.img_copy)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Order Id", code.get(position));
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(ActivityHistory.this, R.string.msg_copy, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), PreviewActivity.class);
+
+                intent.putExtra("num_pedido", code.get(position));
+                startActivity(intent);
+
             }
         });
 

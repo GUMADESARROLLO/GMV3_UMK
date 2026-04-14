@@ -25,6 +25,9 @@
             android:name=".activities.PlanTrabajoActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.PreviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ComisionActivity"
             android:exported="false" />
         <activity

@@ -239,5 +239,6 @@
     <string name="alert_no_fact">Este artículo ya fue facturado al cliente.</string>
     <string name="alert_remove_post">Post eliminado.</string>
     <string name="alert_add_comments">¿Seguro ?.</string>
+    <string name="action_print_resumen">Imprimir</string>
 
 </resources>

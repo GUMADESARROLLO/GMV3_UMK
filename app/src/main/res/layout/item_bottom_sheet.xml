@@ -67,25 +67,50 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:background="@color/grey_soft"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:paddingBottom="@dimen/spacing_middle"
+        android:paddingLeft="@dimen/spacing_large"
+        android:paddingRight="@dimen/spacing_large"
+        android:paddingTop="@dimen/spacing_middle">
 
-        <TextView
-            android:id="@+id/sheet_code"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center_vertical"
-            android:text="AXJKH8732"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/green" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/sheet_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="AXJKH8732"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/green" />
+
+            <TextView
+
+                android:id="@+id/id_cliente_pedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Codigo y Nombre de Cliente"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_40"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@color/grey_80" />
 
         <ImageView
             android:id="@+id/img_copy"
@@ -93,19 +118,11 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:src="@drawable/ic_copy"
+            android:src="@drawable/ic_print"
             android:tint="@color/green" />
 
     </LinearLayout>
-    <TextView
-        android:id="@+id/id_cliente_pedido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_xmedium"
-        android:layout_marginRight="@dimen/spacing_xmedium"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/grey_40" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

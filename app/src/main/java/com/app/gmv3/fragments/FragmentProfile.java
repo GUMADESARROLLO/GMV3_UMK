@@ -58,6 +58,19 @@ public class FragmentProfile extends Fragment {
         txt_user_address    = view.findViewById(R.id.txt_user_address);
         txt_nv_precio       = view.findViewById(R.id.nv_precio);
 
+        boolean isOTC = false;
+
+        if (isOTC) {
+
+            view.findViewById(R.id.id_mis_stat).setVisibility(View.GONE);
+            view.findViewById(R.id.id_fragment_comisiones).setVisibility(View.GONE);
+            view.findViewById(R.id.Reportes).setVisibility(View.GONE);
+            view.findViewById(R.id.btn_inteligencia_mercado).setVisibility(View.GONE);
+            view.findViewById(R.id.btn_vineta_history).setVisibility(View.GONE);
+            view.findViewById(R.id.btn_recibos_history).setVisibility(View.GONE);
+
+        }
+
 
         btn_edit_user = view.findViewById(R.id.btn_edit_user);
         btn_edit_user.setOnClickListener(new View.OnClickListener() {
