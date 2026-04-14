@@ -8,8 +8,8 @@ public class Constant {
     private static final String BASE_URL = Config.ADMIN_PANEL_URL;
     private static final String API_COMMISIOENS= Config.API_COMMISIOENS;
 
-    //public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_recent=";
-    public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_detalle_otc=";
+    public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_recent=";
+    //public static final String GET_RECENT_PRODUCT = BASE_URL + "/api/api.php?get_detalle_otc=";
     public static final String GET_DETALLE_PEDIDO = BASE_URL + "/api/api.php?get_detalle_pedido=";
     public static final String GET_BANNER = BASE_URL + "/api/api.php?get_banner";
     public static final String GET_NEWS = API_COMMISIOENS + "/api/Promociones";
